@@ -1,5 +1,5 @@
 # Compiled Dirs
-client/bundle.js
+client/build
 
 # Dependency directories
 node_modules

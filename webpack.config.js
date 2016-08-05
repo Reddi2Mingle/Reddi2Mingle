@@ -1,14 +1,14 @@
 module.exports = {
-  entry: './client/app.js',
+  entry: './client/entry.jsx',
   output: {
-    path: __dirname,
-    filename: 'client/bundle.js'
+    path: './client/build',
+    filename: 'bundle.js'
   },
   devtool: 'source-map',
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
@@ -18,6 +18,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx']
   },
 };

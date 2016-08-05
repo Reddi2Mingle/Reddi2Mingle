@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
   }
@@ -10,10 +10,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Reddi to Mingle</h1>
-        On the page, ooooooooooh yeah baby!
+        On the page, hell yeah baby!
       </div>
     );
   }
 }
-
-ReactDOM.render(<App />, document.getElementById('app'));
