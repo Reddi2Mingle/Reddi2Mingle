@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const db = require('../db/config.js');
 
 
+
 module.exports = (socket, io, app) => {
 	
 	// Test from front end
@@ -12,13 +13,10 @@ module.exports = (socket, io, app) => {
 		console.log('!!!!!!', message);
 	});
 
-	socket.on('request login', () => {
-		redditController.getSignupPage();
-	})
 
 	// GET /auth/reddit
 	//   Use passport.authenticate() as route middleware to authenticate the
-	//   request.  The first step in Reddit authentication will involve
+	//     request.  The first step in Reddit authentication will involve
 	//   redirecting the user to reddit.com.  After authorization, Reddit
 	//   will redirect the user back to this application at /auth/reddit/callback
 	//
