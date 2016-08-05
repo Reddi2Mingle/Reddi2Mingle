@@ -1,8 +1,8 @@
 module.exports = {
-  entry: './client/app.js',
+  entry: './client/entry.js',
   output: {
-    path: __dirname,
-    filename: 'client/bundle.js'
+    path: './client/build',
+    filename: 'bundle.js'
   },
   devtool: 'source-map',
   module: {
@@ -18,6 +18,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.jsx']
   },
 };
