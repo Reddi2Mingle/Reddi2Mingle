@@ -1,0 +1,5 @@
+# Compiled Dirs
+client/bundle.js
+
+# Dependency directories
+node_modules
