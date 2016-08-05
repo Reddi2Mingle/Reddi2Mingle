@@ -1,5 +1,9 @@
+<<<<<<< 61c4e2e4d8a19370c1e11eac8b1e1cc366b088d0
 # Compiled Dirs
 client/bundle.js
 
 # Dependency directories
+=======
+#ignore all dependencies
+>>>>>>> node modules removed
 node_modules
