@@ -6,6 +6,7 @@ node_modules
 
 # Api Keys
 api_keys.js
+
 # API Key (these are placed in shell environment run by docker compose file)
 env.sh
 
