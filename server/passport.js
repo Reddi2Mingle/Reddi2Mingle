@@ -1,7 +1,13 @@
 const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
+<<<<<<< cd3cf536128cb0bb64d6a92679fe1777adad8a57
 const db = require('./db/config.js');
+=======
+const REDDIT_CONSUMER_KEY = require('../../api_keys.js').REDDIT_CONSUMER_KEY;
+const REDDIT_CONSUMER_SECRET = require('../../api_keys.js').REDDIT_CONSUMER_SECRET;
+const sequelize = require('./db/config.js');
+>>>>>>> merge commit
 
 var REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
 var REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
