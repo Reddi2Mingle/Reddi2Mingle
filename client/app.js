@@ -10,7 +10,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Reddi to Mingle</h1>
-        On the page, yeah baby!
+        On the page, ooooooooooh yeah baby!
       </div>
     );
   }
