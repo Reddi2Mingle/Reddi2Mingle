@@ -17,4 +17,4 @@ io.on('connection', (socket) => routers(socket, io, app));
 // App now listening on port 3000
 server.listen(3000, (err) => {
 	err ? console.log('server error', err) : console.log('server listening on 3000')
-})
+});
