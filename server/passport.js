@@ -1,9 +1,14 @@
 const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
+<<<<<<< cb6b959de2e5b8311f3a7162be04562dc2f39e5a
 <<<<<<< abc1b29aa571f25ed8f84e36cf6c22f2434f01ce
 const REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
 const REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
+=======
+const REDDIT_CONSUMER_KEY = require('../../api_keys.js').REDDIT_CONSUMER_KEY;
+const REDDIT_CONSUMER_SECRET = require('../../api_keys.js').REDDIT_CONSUMER_SECRET;
+>>>>>>> merge commit
 =======
 const REDDIT_CONSUMER_KEY = require('../../api_keys.js').REDDIT_CONSUMER_KEY;
 const REDDIT_CONSUMER_SECRET = require('../../api_keys.js').REDDIT_CONSUMER_SECRET;
