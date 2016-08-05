@@ -1,8 +1,13 @@
 const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
+<<<<<<< abc1b29aa571f25ed8f84e36cf6c22f2434f01ce
 const REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
 const REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
+=======
+const REDDIT_CONSUMER_KEY = require('../../api_keys.js').REDDIT_CONSUMER_KEY;
+const REDDIT_CONSUMER_SECRET = require('../../api_keys.js').REDDIT_CONSUMER_SECRET;
+>>>>>>> merge commit
 const sequelize = require('./db/config.js');
 
 // Passport session setup:
@@ -40,4 +45,8 @@ passport.use(new RedditStrategy({
       return done(err, user);
     });
   }
+<<<<<<< abc1b29aa571f25ed8f84e36cf6c22f2434f01ce
 ));
+=======
+));
+>>>>>>> merge commit

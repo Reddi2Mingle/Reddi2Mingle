@@ -5,7 +5,11 @@ client/build
 node_modules
 
 # Api Keys
+<<<<<<< abc1b29aa571f25ed8f84e36cf6c22f2434f01ce
 api_keys.js
 # API Key (these are placed in shell environment run by docker compose file)
 env.sh
 
+=======
+api_keys.js
+>>>>>>> merge commit

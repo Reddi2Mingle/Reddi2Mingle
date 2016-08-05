@@ -4,10 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< abc1b29aa571f25ed8f84e36cf6c22f2434f01ce
     "start": "webpack -p && node server/server.js",
     "watch": "webpack --progress --colors --watch",
     "server": "nodemon server/server.js",
     "build": "webpack-dev-server --inline --hot --content-base client",
+=======
+    "start": "webpack --progress --colors --watch & nodemon server/server.js --watch",
+    "dev": "webpack-dev-server --inline --progress --colors",
+>>>>>>> merge commit
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -48,9 +53,12 @@
     "path": "^0.12.7",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+<<<<<<< abc1b29aa571f25ed8f84e36cf6c22f2434f01ce
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "redux": "^3.5.2",
+=======
+>>>>>>> merge commit
     "sequelize": "^3.23.6",
     "socket.io": "^1.4.8"
   }
