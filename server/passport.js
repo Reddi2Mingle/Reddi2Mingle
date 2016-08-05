@@ -1,8 +1,8 @@
 const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
-const REDDIT_CONSUMER_KEY = require('../../api_keys.js').REDDIT_CONSUMER_KEY;
-const REDDIT_CONSUMER_SECRET = require('../../api_keys.js').REDDIT_CONSUMER_SECRET;
+const REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
+const REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
 const sequelize = require('./db/config.js');
 
 // Passport session setup:
