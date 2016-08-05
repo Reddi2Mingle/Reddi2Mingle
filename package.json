@@ -1,0 +1,27 @@
+{
+  "name": "Reddi2Mingle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "mysql": "^2.11.1",
+    "nodemon": "^1.9.2",
+    "parser": "^0.1.4",
+    "passport": "^0.3.2",
+    "path": "^0.12.7",
+    "request": "^2.72.0",
+    "sequelize": "^3.23.4",
+    "socket.io": "^1.4.8"
+  }
+}
