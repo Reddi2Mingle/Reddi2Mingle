@@ -19,7 +19,6 @@ export default class App extends React.Component {
           <li><Link to="/matched">Matched</Link></li>
           <li><Link to="/profile">Profile</Link></li>
         </ul>
-        {this.props.children}
       </div>
     );
   }

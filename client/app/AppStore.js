@@ -1,5 +1,9 @@
 import { createStore } from 'redux';
 
+var actions = {};
+
+var state = {};
+
 /** Takes in a redux action and modifies the state based upon action
   * Actions are defined previously from stateful component models
   */
