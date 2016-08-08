@@ -12,10 +12,6 @@ module.exports = (socket, io, app) => {
 		console.log('!!!!!!', message);
 	});
 
-	socket.on('userSignUp', () => {
-		console.log('user clicked the button');
-	});
-
 	socket.on('request login', () => {
 		redditController.getSignupPage();
 	})
