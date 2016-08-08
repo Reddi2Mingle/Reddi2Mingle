@@ -14,9 +14,17 @@ module.exports = (socket, io, app) => {
 	});
 
 
+
 	// GET /auth/reddit
 	//   Use passport.authenticate() as route middleware to authenticate the
 	//     request.  The first step in Reddit authentication will involve
+	socket.on('request login', () => {
+		redditController.getSignupPage();
+	})
+
+	// GET /auth/reddit
+	//   Use passport.authenticate() as route middleware to authenticate the
+	//   request.  The first step in Reddit authentication will involve
 	//   redirecting the user to reddit.com.  After authorization, Reddit
 	//   will redirect the user back to this application at /auth/reddit/callback
 	//
