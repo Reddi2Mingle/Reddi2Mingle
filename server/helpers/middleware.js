@@ -2,6 +2,7 @@ const path = require('path');
 const morgan = require('morgan');
 const express = require('express');
 const passport = require('passport');
+const session = require('express-session');
 
 // const webpackDevMiddleware = require('webpack-dev-middleware');
 // const webpack = require('webpack');
@@ -13,7 +14,11 @@ const passport = require('passport');
 
 module.exports = (app) => {
   app.use(morgan('dev'));
+  app.use(session({
+  	secret: 'keyboard cat'
+  }));
   app.use(passport.initialize());
+  app.use(passport.session());
   app.use(express.static(path.join(__dirname, '/../../client')));
   // app.use(webpackDevMiddleware(compiler, {
   //   publicPath: config.output.path,
