@@ -10,7 +10,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Reddi2Mingle</h1>
+        <h1>Reddi 2 Mingle!!!! </h1>
         <ul role="nav">
           <li><Link to="/" onlyActiveOnIndex>Home</Link></li>
           <li><Link to="/login">Login</Link></li>
