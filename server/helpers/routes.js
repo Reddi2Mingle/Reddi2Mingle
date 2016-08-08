@@ -9,6 +9,10 @@ module.exports = (socket, io, app) => {
 		console.log('!!!!!!', message);
 	});
 
+	socket.on('userSignUp', () => {
+		console.log('user clicked the button');
+	});
+
 	app.get('/auth/reddit', function(req, res, next) {
 		req.session.state = crypto.randomBytes(32).toString('hex');
 		passport.authenticate('reddit', {

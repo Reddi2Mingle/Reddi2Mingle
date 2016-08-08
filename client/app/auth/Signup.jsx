@@ -1,7 +1,19 @@
 import React from 'react';
+import io from 'socket.io-client';
 
-export const Signup (props) => {
-  <div> 
-    <h1> Sign-up Here </h1> 
-  </div>
+const socket = io('http://localhost:3000');
+
+export default class Signup extends React.Component {
+  handleClick() {
+    socket.emit('userSignUp');
+  }
+
+  render() {
+    return (
+      <div> 
+        <h1> Sign Up with your Reddit Account </h1> 
+        <button onClick={this.handleClick}> Click Here </button>
+      </div>
+    );
+  }
 }
