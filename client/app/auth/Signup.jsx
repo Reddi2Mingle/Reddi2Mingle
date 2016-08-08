@@ -1,5 +1,7 @@
 import React from 'react';
-import socket from 'socket.io-client';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3000');
 
 export default class Signup extends React.Component {
   handleClick() {
@@ -9,8 +11,8 @@ export default class Signup extends React.Component {
   render() {
     return (
       <div> 
-        <h1> Sign-up Here </h1> 
-        <button onClick={this.handleClick}> Click here </button>
+        <h1> Sign Up with your Reddit Account </h1> 
+        <button onClick={this.handleClick}> Click Here </button>
       </div>
     );
   }
