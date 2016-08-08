@@ -31,7 +31,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new RedditStrategy({
     clientID: REDDIT_CONSUMER_KEY,
     clientSecret: REDDIT_CONSUMER_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/reddit/callback"
+    callbackURL: "http://localhost:3000/"
   },
   function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...

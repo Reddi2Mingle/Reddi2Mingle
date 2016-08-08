@@ -51,4 +51,8 @@ module.exports = (socket, io, app) => {
 	    next( new Error(403) );
 	  }
 	});
+
+	app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/index.html'));
+  });
 }

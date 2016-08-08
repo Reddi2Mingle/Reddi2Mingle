@@ -8,7 +8,6 @@ REDDIT_CONSUMER_SECRET:
 var get = 
 https://ssl.reddit.com/api/v1/authorize?state='uniquestring'&duration=permanent&response_type=code&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=https://github.com/Reddi2Mingle/Reddi2MingleMVP
 
-
 -LClI7rjt6HmF0D9eZ5zdazIdbg
 
 
