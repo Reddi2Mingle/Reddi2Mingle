@@ -15,6 +15,6 @@ const routers = require('./helpers/routes.js');
 io.on('connection', (socket) => routers(socket, io, app));
 
 // App now listening on port 80
-server.listen(80, (err) => {
+server.listen(3000, (err) => {
 	err ? console.log('server error', err) : console.log('Server listening on',process.env.PORT)
 });

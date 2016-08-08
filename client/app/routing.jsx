@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 // import Store from './AppStore.js';
-import App from './App.js';
+import App from './App';
 // import WelcomeView from './auth/WelcomeView';
 // import MatchmakerView from './matches/Matchmaker';
 // import MatchedView from './matches/Matched';
