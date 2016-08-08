@@ -1,4 +1,4 @@
-import Routes from './app/routing.js';
+import Routes from './app/routing';
 import React from "react";
 import ReactDOM from "react-dom";
 
