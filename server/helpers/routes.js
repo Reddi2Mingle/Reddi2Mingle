@@ -1,6 +1,8 @@
 const path = require('path');
 const passport = require('passport');
-// const sequelize = require('../db/config.js');
+
+const db = require('../db/config.js');
+
 
 module.exports = (socket, io, app) => {
 	
@@ -19,7 +21,12 @@ module.exports = (socket, io, app) => {
 			state: req.session.state,
 			duration: 'permanent'
 		})(req, res, next);
-	});
+
+	socket.on('request login', () => {
+		redditController.getSignupPage();
+	})
+
+	app.get('/auth/reddit', passport.authenticate('reddit'));
 
 	app.get('/auth/reddit/callback', function(req, res, next) {
 		// Check for origin via state token

@@ -57,7 +57,11 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "redux": "^3.5.2",
+<<<<<<< 3986907c02009385d58059dd49365d2c7ab60cd7
 =======
+>>>>>>> merge commit
+=======
+    "request": "^2.74.0",
 >>>>>>> merge commit
     "sequelize": "^3.23.6",
     "socket.io": "^1.4.8"
