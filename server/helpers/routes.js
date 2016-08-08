@@ -45,7 +45,8 @@ module.exports = (socket, io, app) => {
 	  // }
 	});
 
-	app.get('*', (req, res) => {
+	// send all requests to index.html so browserHistory in React Router works
+  app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
-}
+};
