@@ -12,7 +12,11 @@ export default class Signup extends React.Component {
     return (
       <div> 
         <h1> Sign Up with your Reddit Account </h1> 
-        <button onClick={this.handleClick}> Click Here </button>
+        <button> 
+          <a href="auth/reddit">
+            Login with Reddit
+          </a>
+        </button>
       </div>
     );
   }

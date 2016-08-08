@@ -1,43 +1,48 @@
 const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
-const REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
-const REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
-const sequelize = require('./db/config.js');
+const db = require('./db/config.js');
 
-// Passport session setup:
+var REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
+var REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
 
-// (1) Passport needs to serialize user into the session
-// In this case we are not storing the userId when serializing
-// ... we could refactor to store the ID in the database
-// ... in this example, the complete Reddit profile is serialized
+// Passport session setup.
+//   To support persistent login sessions, Passport needs to be able to
+//   serialize users into and deserialize users out of the session.  Typically,
+//   this will be as simple as storing the user ID when serializing, and finding
+//   the user by ID when deserializing.  However, since this example does not
+//   have a database of user records, the complete Reddit profile is
+//   serialized and deserialized.
 passport.serializeUser(function(user, done) {
-  console.log('serializeUser: ' + user.id);
-  done(null, user.id);
+  console.log('serialized user')
+  done(null, user);
 });
 
-// (2) Passport needs to deserialize user out of the session
-// Retrieving from database
-passport.deserializeUser(function(id, done) {
-  db.UserTest.findOne({where: {redditId: id, username: name, displayName: name}})
-    .then(user => {
-      done(null, user);
-    })
+passport.deserializeUser(function(obj, done) {
+  console.log('deserialized user')
+  done(null, obj);
 });
 
 
-// Using the RedditStrategy within Passport
+// Use the RedditStrategy within Passport.
+//   Strategies in Passport require a `verify` function, which accept
+//   credentials (in this case, an accessToken, refreshToken, and Reddit
+//   profile), and invoke a callback with a user object.
 passport.use(new RedditStrategy({
     clientID: REDDIT_CONSUMER_KEY,
     clientSecret: REDDIT_CONSUMER_SECRET,
-    callbackURL: "http://localhost:3000/auth/reddit/callback"
+    callbackURL: "http://localhost:3000/"
   },
   function(accessToken, refreshToken, profile, done) {
-  	console.log('accessToken: ', accessToken);
-    console.log('profile ', profile);
-    // Add the user to the database and return the user
-    Users.findOrCreate({ redditId: profile.id }, function (err, user) {
-      return done(err, user);
+    // asynchronous verification, for effect...
+    console.log('it gets this far now')
+    process.nextTick(function () {
+
+      // To keep the example simple, the user's Reddit profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Reddit account with a user record in your database,
+      // and return that user instead.
+      return done(null, profile);
     });
   }
 ));

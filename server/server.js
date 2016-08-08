@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-// require('./passport.js');
+require('./passport.js');
 
 module.exports = io;
 
