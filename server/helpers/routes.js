@@ -2,9 +2,6 @@ const path = require('path');
 const passport = require('passport');
 const crypto = require('crypto');
 
-const db = require('../db/config.js');
-
-
 module.exports = (socket, io, app) => {
 	// Test from front end
   socket.on('test message', (message) => {
