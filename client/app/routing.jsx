@@ -2,10 +2,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-// import Store from './AppStore.js';
 import App from './App';
 import Signup from './auth/Signup';
 import Login from './auth/Login';
+import MatchMaker from './matches/Matchmaker';
 // import WelcomeView from './auth/WelcomeView';
 // import MatchmakerView from './matches/Matchmaker';
 // import MatchedView from './matches/Matched';
@@ -27,5 +27,6 @@ export default () => (
     <Route path="/" component={App} />
     <Route path="/signup" component={Signup} />
     <Route path="/login" component={Login} />
+    <Route path="/matchMaker" component={MatchMaker} />
   </Router>
 );

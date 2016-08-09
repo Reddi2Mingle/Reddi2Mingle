@@ -3,8 +3,8 @@ const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
 // const db = require('./db/config.js');
 
-const REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
-const REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
+const REDDIT_CONSUMER_KEY = require('../api_keys').REDDIT_CONSUMER_KEY;
+const REDDIT_CONSUMER_SECRET = require('../api_keys').REDDIT_CONSUMER_SECRET;
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
