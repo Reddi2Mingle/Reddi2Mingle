@@ -5,11 +5,10 @@ const crypto = require('crypto');
 const db = require('../db/config.js');
 
 module.exports = (socket, io, app) => {
-	
 	// Test from front end
-	socket.on('test message', (message) => {
-		console.log('!!!!!!', message);
-	});
+  socket.on('test message', (message) => {
+    console.log('!!!!!!', message);
+  });
 
 	// GET /auth/reddit
 	//   Use passport.authenticate() as route middleware to authenticate the
@@ -46,7 +45,7 @@ module.exports = (socket, io, app) => {
 	});
 
 	// send all requests to index.html so browserHistory in React Router works
-  app.get('*', function (req, res) {
+  app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
 };

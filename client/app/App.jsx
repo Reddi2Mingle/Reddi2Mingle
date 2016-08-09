@@ -1,25 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
 import { Link } from 'react-router';
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Reddi 2 Mingle!!!! </h1>
-        <ul role="nav">
-          <li><Link to="/" onlyActiveOnIndex>Home</Link></li>
-          <li><Link to="/login">Login!!!</Link></li>
-          <li><Link to="/signup">SignUp</Link></li>
-          <li><Link to="/matchmaker">Matchmaker</Link></li>
-          <li><Link to="/matched">Matched</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
-        </ul>
-      </div>
-    );
-  }
-}
+export default () => (
+  <div>
+    <h1>Reddi 2 Mingle</h1>
+    <ul>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/login">Login</Link></li>
+      <li><Link to="/signup">SignUp</Link></li>
+      <li><Link to="/matchmaker">Matchmaker</Link></li>
+      <li><Link to="/matched">Matched</Link></li>
+      <li><Link to="/profile">Profile</Link></li>
+    </ul>
+  </div>
+);

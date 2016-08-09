@@ -24,4 +24,3 @@ module.exports = (app) => {
   //   publicPath: config.output.path,
   // }));
 };
-

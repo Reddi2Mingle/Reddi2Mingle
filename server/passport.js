@@ -3,9 +3,8 @@ const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
 const db = require('./db/config.js');
 
-
-var REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
-var REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
+const REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
+const REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -15,7 +14,7 @@ var REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
 //   have a database of user records, the complete Reddit profile is
 //   serialized and deserialized.
 passport.serializeUser(function(user, done) {
-  console.log('serialized user')
+  console.log('serialized user');
   done(null, user);
 });
 
@@ -34,11 +33,11 @@ passport.deserializeUser(function(id, done) {
 passport.use(new RedditStrategy({
     clientID: REDDIT_CONSUMER_KEY,
     clientSecret: REDDIT_CONSUMER_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/reddit/callback"
+    callbackURL: "http://127.0.0.1:3000/auth/reddit/callback",
   },
   function(accessToken, refreshToken, profile, done) {
     // Authentication finished, find/add the user from/to the database
-    console.log('profile name here!!!!', profile.name)
+    console.log('profile name here!!!!', profile.name);
     db.Users.findOrCreate({where: { username: profile.name, redditId: profile.id }}).then(function(data) {
       done(null, profile);
     });
