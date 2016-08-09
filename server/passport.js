@@ -31,8 +31,8 @@ passport.deserializeUser((obj, done) => {
 //   credentials (in this case, an accessToken, refreshToken, and Reddit
 //   profile), and invoke a callback with a user object.
 passport.use(new RedditStrategy({
-  clientID: process.env.REDDIT_KEY,
-  clientSecret: process.env.REDDIT_SECRET,
+  clientID: REDDIT_CONSUMER_KEY,
+  clientSecret: REDDIT_CONSUMER_SECRET,
   callbackURL: 'http://127.0.0.1:80/auth/reddit/callback',
 },
   (accessToken, refreshToken, profile, done) => {
