@@ -4,17 +4,12 @@ const crypto = require('crypto');
 
 const db = require('../db/config.js');
 
-
 module.exports = (socket, io, app) => {
 	
 	// Test from front end
 	socket.on('test message', (message) => {
 		console.log('!!!!!!', message);
 	});
-
-	socket.on('request login', () => {
-		redditController.getSignupPage();
-	})
 
 	// GET /auth/reddit
 	//   Use passport.authenticate() as route middleware to authenticate the
@@ -25,8 +20,11 @@ module.exports = (socket, io, app) => {
 	//   Note that the 'state' option is a Reddit-specific requirement.
 	app.get('/auth/reddit', function(req, res, next){
 	  req.session.state = crypto.randomBytes(32).toString('hex');
-	  passport.authenticate('reddit', {
+    console.log('first session state is...:', req.session);
+    passport.authenticate('reddit', {
 	    state: req.session.state,
+      duration: 'permanent',
+      scope: 'identity mysubreddits',
 	  })(req, res, next);
 	});
 
@@ -36,16 +34,15 @@ module.exports = (socket, io, app) => {
 	//   login page.  Otherwise, the primary route function function will be called,
 	//   which, in this example, will redirect the user to the home page.
 	app.get('/auth/reddit/callback', function(req, res, next){
-	  // Check for origin via state token
-	  if (req.query.state == req.session.state){
-	    passport.authenticate('reddit', {
-	      successRedirect: '/',
-	      failureRedirect: '/'
-	    })(req, res, next);
-	  }
-	  else {
-	    next( new Error(403) );
-	  }
+	  // Check for origin via state token (currently commented as session.state is undefined)
+    // if (req.query.state == req.session.state){
+      passport.authenticate('reddit', {
+        successRedirect: '/',
+        failureRedirect: '/signup'
+      })(req, res, next);
+	  // } else {
+	  //   next( new Error(403) );
+	  // }
 	});
 
 	app.get('*', (req, res) => {
