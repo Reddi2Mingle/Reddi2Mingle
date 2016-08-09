@@ -22,15 +22,10 @@ import Login from './auth/Login';
 //     </Router>
 //   </Provider>
 
-export default class Routes extends React.Component {
-
-  render() {
-    return (
-      <Router history={browserHistory}>
-        <Route path="/" component={App} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/login" component={Login} />
-      </Router>
-    );
-  }
-}
+export default () => (
+  <Router history={browserHistory}>
+    <Route path="/" component={App} />
+    <Route path="/signup" component={Signup} />
+    <Route path="/login" component={Login} />
+  </Router>
+);
