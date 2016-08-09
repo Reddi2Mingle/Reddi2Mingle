@@ -2,7 +2,7 @@ const path = require('path');
 const passport = require('passport');
 const crypto = require('crypto');
 
-// const db = require('../db/config.js');
+const db = require('../db/config.js');
 
 
 module.exports = (socket, io, app) => {
@@ -19,7 +19,6 @@ module.exports = (socket, io, app) => {
 	//
 	//   Note that the 'state' option is a Reddit-specific requirement.
   app.get('/auth/reddit', (req, res, next) => {
-    console.log('oh hayyyyyyyy Im in the /auth/reddit route');
     req.session.state = crypto.randomBytes(32).toString('hex');
     console.log('first session state is...:', req.session);
     passport.authenticate('reddit', {
