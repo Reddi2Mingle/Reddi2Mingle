@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import Store from './app/AppStore.js';
 import Routes from './app/routing';
+// import { Provider } from 'react-redux';
+// import Store from './app/AppStore.js';
+import io from 'socket.io-client';
 
-const Entry = () => (
-  <Provider store={Store}>
-    <Routes />
-  </Provider>
-);
+const socket = io('http://localhost:3000');
 
-ReactDOM.render(<Entry />, document.getElementById('app'));
+// const Entry = () => (
+//   <Provider store={Store}>
+//     <Routes />
+//   </Provider>
+// );
+
+ReactDOM.render(<Routes />, document.getElementById('app'));

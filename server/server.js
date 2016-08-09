@@ -10,7 +10,10 @@ require('./passport');
 middleware(app);
 
 // Invoke routers function on app to provide access to all routes defined
-io.on('connection', (socket) => routers(socket, io, app));
+io.on('connection', (socket) => {
+  console.log('connected to socket!');
+  routers(socket, io, app);
+});
 
 // App now listening on port 80
 server.listen(3000, (err) => {
