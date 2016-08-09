@@ -13,17 +13,45 @@ CREATE (cc:Person { name: "Christine", from: "San Francisco" });
 CREATE (jc:Person { name: "Jen", from: "Cupertino" });
 CREATE (nw:Person { name: "Neil", from: "New York" });
 
+CREATE (:Subreddit { subreddit: "aww" });
+CREATE (:Subreddit { subreddit: "JusticePorn" });
+CREATE (:Subreddit { subreddit: "MorbidReality" });
+CREATE (:Subreddit { subreddit: "fatpeoplestories" });
 
--- MATCH (tb:Person) WHERE tb.name = "Tyler"
--- CREATE (js:Person { name: "Johan", from: "Sweden", learn: "surfing" }),
--- (ir:Person { name: "Ian", from: "England", title: "author" }),
--- (rvb:Person { name: "Rik", from: "Belgium", pet: "Orval" }),
--- (ally:Person { name: "Allison", from: "California", hobby: "surfing" }),
--- (ee)-[:KNOWS {since: 2001}]->(js),(ee)-[:KNOWS {rating: 5}]->(ir),
--- (js)-[:KNOWS]->(ir),(js)-[:KNOWS]->(rvb),
--- (ir)-[:KNOWS]->(js),(ir)-[:KNOWS]->(ally),
--- (rvb)-[:KNOWS]->(ally)
+-- Neil and Tyler are both interested in fatpeoplestories subreddit
+-- Tyler, Neil and Jen are  interested in aww subreddit
 
+MATCH (n:Person {name:"Tyler"})
+MERGE (s:Subreddit {subreddit:"aww"})
+MERGE (n)-[r:INTERESTED_IN {alias: ['aww']} ]->(s)
+RETURN  n,r, s;
 
--- Find Node representing Emil
--- MATCH (ee:Person) WHERE ee.name = "Emil" RETURN ee;
+MATCH (n:Person {name:"Neil"})
+MERGE (s:Subreddit {subreddit:"aww"})
+MERGE (n)-[r:INTERESTED_IN {alias: ['aww']} ]->(s)
+RETURN  n,r, s;
+
+MATCH (n:Person {name:"Jen"})
+MERGE (s:Subreddit {subreddit:"aww"})
+MERGE (n)-[r:INTERESTED_IN {alias: ['aww']} ]->(s)
+RETURN  n,r, s;
+
+MATCH (n:Person {name:"Christine"})
+MERGE (s:Subreddit {subreddit:"JusticePorn"})
+MERGE (n)-[r:INTERESTED_IN {alias: ['JusticePorn']} ]->(s)
+RETURN  n,r, s;
+
+MATCH (n:Person {name:"Jen"})
+MERGE (s:Subreddit {subreddit:"MorbidReality"})
+MERGE (n)-[r:INTERESTED_IN {alias: ['MorbidReality']} ]->(s)
+RETURN  n,r, s;
+
+MATCH (n:Person {name:"Neil"})
+MERGE (s:Subreddit {subreddit:"fatpeoplestories"})
+MERGE (n)-[r:INTERESTED_IN {alias: ['fatpeoplestories']} ]->(s)
+RETURN  n,r, s;
+
+MATCH (n:Person {name:"Tyler"})
+MERGE (s:Subreddit {subreddit:"fatpeoplestories"})
+MERGE (n)-[r:INTERESTED_IN {alias: ['fatpeoplestories']} ]->(s)
+RETURN  n,r, s;

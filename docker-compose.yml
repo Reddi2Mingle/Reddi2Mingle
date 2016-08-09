@@ -21,6 +21,8 @@ services:
       - ./docker:/docker-entrypoint-initdb.d
       # - $HOME/neo4j/data:/data \
     command: /docker-entrypoint.sh neo4j
+    environment: 
+     - NEO4J_AUTH=none
     ports:
       - "7475:7474"
      
