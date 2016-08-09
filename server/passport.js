@@ -1,13 +1,8 @@
 const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
-<<<<<<< cd3cf536128cb0bb64d6a92679fe1777adad8a57
 const db = require('./db/config.js');
-=======
-const REDDIT_CONSUMER_KEY = require('../../api_keys.js').REDDIT_CONSUMER_KEY;
-const REDDIT_CONSUMER_SECRET = require('../../api_keys.js').REDDIT_CONSUMER_SECRET;
-const sequelize = require('./db/config.js');
->>>>>>> merge commit
+
 
 var REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
 var REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
@@ -24,9 +19,11 @@ passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser(function(id, done) {
   console.log('deserialized user')
-  done(null, obj);
+  done(null, id);
+  // db.Users.findOne({where: {redditId: id}})
+  //   .then(user => done(null, user));
 });
 
 
@@ -37,18 +34,13 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new RedditStrategy({
     clientID: REDDIT_CONSUMER_KEY,
     clientSecret: REDDIT_CONSUMER_SECRET,
-    callbackURL: "http://localhost:3000/"
+    callbackURL: "http://127.0.0.1:3000/auth/reddit/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-    // asynchronous verification, for effect...
-    console.log('it gets this far now')
-    process.nextTick(function () {
-
-      // To keep the example simple, the user's Reddit profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Reddit account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
+    // Authentication finished, find/add the user from/to the database
+    console.log('profile name here!!!!', profile.name)
+    db.Users.findOrCreate({where: { username: profile.name, redditId: profile.id }}).then(function(data) {
+      done(null, profile);
     });
   }
 ));

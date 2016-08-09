@@ -1,11 +1,11 @@
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('reddi2mingle', 'root', 'cake');
 
-var User = sequelize.define('User', {
+var Users = sequelize.define('User', {
 	username: Sequelize.STRING,
 	redditId: Sequelize.STRING
 });
 
-User.sync();
+Users.sync();
 
-exports.User = User;
+exports.Users = Users;
