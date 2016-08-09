@@ -1,11 +1,10 @@
 const app = require('express')();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-require('./passport.js');
 const middleware = require('./helpers/middleware.js');
 const routers = require('./helpers/routes.js');
+require('./passport.js');
 
-module.exports = io;
 
 // Invoke middleware function on app to 'use' all the middleware functions
 middleware(app);
@@ -18,3 +17,5 @@ server.listen(3000, (err) => {
   err ? console.log('server error', err) :
   console.log('Server listening on', process.env.PORT || 3000);
 });
+
+module.exports = io;

@@ -1,7 +1,7 @@
 const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
-const db = require('./db/config.js');
+// const db = require('./db/config.js');
 
 const REDDIT_CONSUMER_KEY = require('../api_keys.js').REDDIT_CONSUMER_KEY;
 const REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
@@ -13,14 +13,14 @@ const REDDIT_CONSUMER_SECRET = require('../api_keys.js').REDDIT_CONSUMER_SECRET;
 //   the user by ID when deserializing.  However, since this example does not
 //   have a database of user records, the complete Reddit profile is
 //   serialized and deserialized.
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   console.log('serialized user');
   done(null, user);
 });
 
-passport.deserializeUser(function(id, done) {
-  console.log('deserialized user')
-  done(null, id);
+passport.deserializeUser((obj, done) => {
+  console.log('deserialized user');
+  done(null, obj);
   // db.Users.findOne({where: {redditId: id}})
   //   .then(user => done(null, user));
 });
@@ -43,4 +43,3 @@ passport.use(new RedditStrategy({
     });
   }
 ));
-
