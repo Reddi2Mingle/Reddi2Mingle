@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -p && node server/server.js",
+    "start": "webpack -p && nodemon server/server.js",
     "watch": "webpack --progress --colors --watch",
     "server": "nodemon server/server.js",
     "build": "webpack-dev-server --inline --hot --content-base client",
