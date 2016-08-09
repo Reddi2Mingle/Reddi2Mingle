@@ -1,25 +1,19 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+import promise from 'redux-promise-middleware';
+import reducer from './reducers';
+import { updateUsername } from './actions/potentialActions';
 
-const actions = {};
+const middleware = applyMiddleware(promise(), thunk, logger());
 
-const state = {};
+let store = createStore(reducer, middleware);
+console.log(store.getState());
 
-/** Takes in a redux action and modifies the state based upon action
-  * Actions are defined previously from stateful component models
-  */
-const reducer = (prevState = state, action) => {
-  if (actions[action.type]) {
-    // Creates a new state object from action
-    return actions[action.type](prevState, action.data);
-  } else {
-    console.warn(`Action ${action.type} doesn't exist.`);
-    return prevState;
-  }
-};
+let unsubscribe = store.subscribe(() =>
+  console.log(store.getState())
+);
 
-/** Creates Store object using reducer function
-  * Refer to redux docs for further information
-  */
-const Store = createStore(reducer);
+store.dispatch(updateUsername('Christine'));
 
-export default Store;
+export default store;

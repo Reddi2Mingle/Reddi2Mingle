@@ -1,25 +1,10 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import App from './App';
-import Signup from './auth/Signup';
-import Login from './auth/Login';
-import MatchMaker from './matches/Matchmaker';
-// import WelcomeView from './auth/WelcomeView';
-// import MatchmakerView from './matches/Matchmaker';
-// import MatchedView from './matches/Matched';
-// import ProfileView from './profile/Profile';
-
-//   <Provider store={Store}>
-//     <Router history={browserHistory}>
-//       <Route path='/' component={App}>
-//         <IndexRoute component={WelcomeView}/>
-//         <Route path='/matchmaker' component={MatchmakerView}/>
-//         <Route path='/matched' component={MatchedView} />
-//         <Route path='/profile' component={ProfileView}/>
-//       </Route>
-//     </Router>
-//   </Provider>
+import App from './components/App';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import MatchMaker from './components/Matchmaker';
 
 export default () => (
   <Router history={browserHistory}>
