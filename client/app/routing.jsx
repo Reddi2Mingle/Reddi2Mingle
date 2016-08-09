@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 // import Store from './AppStore.js';
 import App from './App';
 import Signup from './auth/Signup';
+import Login from './auth/Login';
 // import WelcomeView from './auth/WelcomeView';
 // import MatchmakerView from './matches/Matchmaker';
 // import MatchedView from './matches/Matched';
@@ -22,17 +22,10 @@ import Signup from './auth/Signup';
 //     </Router>
 //   </Provider>
 
-export default class Routes extends React.Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <Router history={browserHistory}>
-        <Route path='/' component={App} />
-        <Route path="/signup" component={Signup} /> 
-      </Router>
-    );
-  }
-}
+export default () => (
+  <Router history={browserHistory}>
+    <Route path="/" component={App} />
+    <Route path="/signup" component={Signup} />
+    <Route path="/login" component={Login} />
+  </Router>
+);

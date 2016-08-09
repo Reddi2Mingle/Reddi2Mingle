@@ -1,7 +1,8 @@
 import React from 'react';
 
-export const Login (props) => {
-  <div> 
-    <h1> Login Here </h1> 
+export default () => (
+  <div>
+    <h1>Login with your Reddit Account</h1>
+    <button onClick={this.handleClick}>Login with Reddit</button>
   </div>
-}
+);
