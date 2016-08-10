@@ -6,6 +6,7 @@ const RedditStrategy = require('passport-reddit').Strategy;
 const REDDIT_CONSUMER_KEY = require('../api_keys').REDDIT_CONSUMER_KEY;
 const REDDIT_CONSUMER_SECRET = require('../api_keys').REDDIT_CONSUMER_SECRET;
 
+
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -33,7 +34,7 @@ passport.deserializeUser((obj, done) => {
 passport.use(new RedditStrategy({
   clientID: REDDIT_CONSUMER_KEY,
   clientSecret: REDDIT_CONSUMER_SECRET,
-  callbackURL: 'http://127.0.0.1:3000/auth/reddit/callback',
+  callbackURL: 'http://127.0.0.1:80/auth/reddit/callback',
 },
   (accessToken, refreshToken, profile, done) => {
     // Authentication finished, find/add the user from/to the database

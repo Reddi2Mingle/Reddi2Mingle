@@ -5,7 +5,7 @@ import Routes from './app/routing';
 // import Store from './app/AppStore.js';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3000');
+const socket = io('http://localhost');
 
 // const Entry = () => (
 //   <Provider store={Store}>

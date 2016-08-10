@@ -16,9 +16,9 @@ io.on('connection', (socket) => {
 });
 
 // App now listening on port 80
-server.listen(3000, (err) => {
+server.listen(80, (err) => {
   err ? console.log('server error', err) :
-  console.log('Server listening on', process.env.PORT || 3000);
+  console.log('Server listening on', process.env.PORT || 80);
 });
 
 module.exports = io;
