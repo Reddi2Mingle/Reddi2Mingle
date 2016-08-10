@@ -27,7 +27,7 @@ const common = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loaders: ['babel?cacheDirectory'],
+        loaders: ['babel'],
         include: PATHS.app,
       },
     ],
