@@ -12,7 +12,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    onClick: () => {
+    changeName: () => {
       dispatch(updateUsername('Tyler'));
     },
   }

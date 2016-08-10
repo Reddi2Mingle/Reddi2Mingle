@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 
-const Potential = ({ username, picUrl, subreddits, onClick }) => (
+const Potential = ({ username, picUrl, subreddits, changeName }) => (
   <div>
     <h1>Think {username}'s hot?</h1>
     <img src={picUrl} style={{ display: 'block' }} />
     <button type="submit" style={{ border: 0, background: 'transparent', display: 'inline-block' }}>
-      <img src="http://www.iconsdb.com/icons/preview/red/x-mark-3-xxl.png" width="50" height="50" />
+      <img src="http://www.clker.com/cliparts/0/7/e/a/12074327311562940906milker_X_icon.svg.med.png" width="50" height="50" />
     </button>
     <button type="submit" style={{ border: 0, background: 'transparent', display: 'inline-block' }}>
       <img src="http://www.clker.com/cliparts/k/m/w/n/Q/D/green-heart-md.png" width="50" height="50" />
@@ -18,7 +18,7 @@ const Potential = ({ username, picUrl, subreddits, onClick }) => (
     <button
       onClick={e => {
         e.preventDefault();
-        onClick();
+        changeName();
       }}
     >Change name to Tyler</button>
   </div>
@@ -28,7 +28,7 @@ Potential.propTypes = {
   username: PropTypes.string,
   picUrl: PropTypes.string,
   subreddits: PropTypes.array,
-  onClick: PropTypes.func,
+  changeName: PropTypes.func,
 };
 
 export default Potential;
