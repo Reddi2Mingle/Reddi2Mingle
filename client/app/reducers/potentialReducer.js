@@ -8,7 +8,13 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_USERNAME': {
-      return { ...state, username: action.username };
+      return { ...state, username: action.payload };
+    }
+    case 'ADD_SUBREDDIT': {
+      return {
+        ...state,
+        subreddits: [...state.subreddits, action.payload],
+      };
     }
     default:
       return state;

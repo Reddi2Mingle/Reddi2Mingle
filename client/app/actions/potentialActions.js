@@ -1,16 +1,13 @@
-export function fetchUser() {
+export function addSubreddit(subreddit) {
   return {
-    type: 'FETCH_USER_FULFILLED',
-    payload: {
-      name: 'Will',
-      age: 35,
-    },
+    type: 'ADD_SUBREDDIT',
+    payload: subreddit,
   };
 }
 
 export function updateUsername(name) {
   return {
     type: 'UPDATE_USERNAME',
-    username: name,
+    payload: name,
   };
 }

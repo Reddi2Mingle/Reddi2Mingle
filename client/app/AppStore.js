@@ -3,17 +3,14 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 import reducer from './reducers';
-import { updateUsername } from './actions/potentialActions';
+import { updateUsername, addSubreddit } from './actions/potentialActions';
 
 const middleware = applyMiddleware(promise(), thunk, logger());
 
 let store = createStore(reducer, middleware);
-console.log(store.getState());
-
-let unsubscribe = store.subscribe(() =>
-  console.log(store.getState())
-);
 
 store.dispatch(updateUsername('Christine'));
+store.dispatch(addSubreddit('yomamajokes'));
+store.dispatch(addSubreddit('aww'));
 
 export default store;
