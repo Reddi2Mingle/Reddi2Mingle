@@ -9,8 +9,8 @@ const middleware = applyMiddleware(promise(), thunk, logger());
 
 let store = createStore(reducer, middleware);
 
-store.dispatch(updateUsername('Christine'));
-store.dispatch(addSubreddit('yomamajokes'));
-store.dispatch(addSubreddit('aww'));
+// store.dispatch(updateUsername('Christine'));
+// store.dispatch(addSubreddit('yomamajokes'));
+// store.dispatch(addSubreddit('aww'));
 
 export default store;
