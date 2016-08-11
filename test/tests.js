@@ -1,32 +1,23 @@
-const expect = require('chai').expect;
-// import React from 'react/addons';
-import * as potentialActions from '../client/app/actions/potentialActions';
-import * as potentialTypes from '../client/app/reducers/potentialReducer';
+import { addSubreddit, updateUsername } from '../client/app/potential/PotentialActions';
+import expect from 'expect';
+// const expect = require('chai').expect;
 
 
 describe('Default Test', () => {
-  it('Hooray, you passed a test! You are now rocking the power of mocha and chai', function() {
-    expect(true).to.be.true;
+  it('Hooray, you passed a test! You are now rocking all the coffee power', () => {
+    expect(true).toBe(true);
   });
 });
 
 describe('Client Components', () => {
-  // beforeEach(function() {
-  //   this.examplePeople = [
-  //     { id: 1, name: "Waldo" },
-  //     { id: 2, name: "Hercules" }
-  //   ];
-
-  //   let { TestUtils } = React.addons;
-  // });
   describe('Potential Components', () => {
     it ('should change username of potential person', () => {
       const payload = 'John Smith';
       const expectedAction = {
-        type: potentialTypes.UPDATE_USERNAME,
-        payload
-      }
-      expect(potentialActions.updateUsername(payload)).to.equal(expectedAction);
+        type: 'UPDATE_USERNAME',
+        payload: payload,
+      };
+      expect(updateUsername(payload)).toEqual(expectedAction);
     });
   });
 });
