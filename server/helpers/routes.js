@@ -4,6 +4,7 @@ const crypto = require('crypto');
 
 // const db = require('../db/config.js');
 
+
 module.exports = (socket, io, app) => {
 	// Test from front end
   socket.on('test message', (message) => {
@@ -44,6 +45,7 @@ module.exports = (socket, io, app) => {
     //   next( new Error(403) );
     // }
   });
+
 
 	// send all requests to index.html so browserHistory in React Router works
   app.get('*', (req, res) => {
