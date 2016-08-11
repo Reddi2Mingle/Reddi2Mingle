@@ -4,6 +4,28 @@ const crypto = require('crypto');
 
 // const db = require('../db/config.js');
 
+
+//need functions for:
+
+// Users
+  //search for user (authenticate)
+  //add new user
+  //delete user (and remove existing connections)
+
+// Potential matches
+  //'get': returns array of potential matches || return one potential match
+      //search db for user's subreddits.
+      //for each subreddit, add users who are also interested into object (key, to account for dupes)
+
+      //sidenote: implement a worker that adds to person's potential match list as new people join
+
+  //'post': user selects 'like' or 'do not like' 
+      //updates one-directional relationship to that person indicating like/do not like
+ 
+// Matchmaker
+  //'get': returns list of matches
+  //search db for user's match
+
 module.exports = (socket, io, app) => {
 	// Test from front end
   socket.on('test message', (message) => {
@@ -44,6 +66,11 @@ module.exports = (socket, io, app) => {
     //   next( new Error(403) );
     // }
   });
+
+  ///////
+  app.get('/db/data', (req, res, next) => {
+    console.log('extracting data from db. working!');
+  })
 
 	// send all requests to index.html so browserHistory in React Router works
   app.get('*', (req, res) => {
