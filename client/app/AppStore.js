@@ -3,14 +3,14 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 // import { updateUsername, addSubreddit } from './potential/PotentialActions';
-import potential from './potential/PotentialReducer';
-import user from './user/UserReducer';
+import potentialReducer from './potential/PotentialReducer';
+import userReducer from './user/UserReducer';
 
 const middleware = applyMiddleware(promise(), thunk, logger());
 
 const reducer = combineReducers({
-  potential,
-  user,
+  potentialReducer,
+  userReducer,
 });
 
 let store = createStore(reducer, middleware);
