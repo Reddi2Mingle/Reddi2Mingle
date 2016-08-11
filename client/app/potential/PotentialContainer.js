@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { updateUsername } from '../actions/potentialActions';
-import Potential from '../components/Potential';
+import { updateUsername } from './PotentialActions';
+import Potential from './Potential';
 
 const mapStateToProps = (state) => (
   {

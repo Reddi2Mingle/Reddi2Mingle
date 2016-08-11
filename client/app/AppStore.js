@@ -1,11 +1,17 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
-import reducer from './reducers';
-import { updateUsername, addSubreddit } from './actions/potentialActions';
+// import { updateUsername, addSubreddit } from './potential/PotentialActions';
+import potential from './potential/PotentialReducer';
+import user from './user/UserReducer';
 
 const middleware = applyMiddleware(promise(), thunk, logger());
+
+const reducer = combineReducers({
+  potential,
+  user,
+});
 
 let store = createStore(reducer, middleware);
 

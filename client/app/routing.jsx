@@ -1,11 +1,11 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 
-import App from './components/App';
-import Signup from './components/Signup';
-import Login from './components/Login';
-import PotentialContainer from './containers/PotentialContainer';
-import MatchesContainer from './containers/MatchesContainer';
+import App from './stateless/App';
+import Signup from './stateless/Signup';
+import Login from './stateless/Login';
+import PotentialContainer from './potential/PotentialContainer';
+import MatchesContainer from './matches/MatchesContainer';
 
 export default () => (
   <Router history={browserHistory}>
