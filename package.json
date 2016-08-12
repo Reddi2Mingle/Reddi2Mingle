@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -p && nodemon server/server.js",
+    "start": "webpack -p && nodemon -L server/server.js",
     "watch": "webpack --progress --colors --watch",
     "server": "nodemon server/server.js",
     "build": "webpack-dev-server --inline --hot --content-base client",
@@ -68,7 +68,10 @@
     "redux-promise-middleware": "^3.3.2",
     "redux-thunk": "^2.1.0",
     "sequelize": "^3.23.6",
+    "seraph": "^0.15.2",
+    "seraph-model": "^0.9.0",
     "socket.io": "^1.4.8",
-    "socket.io-client": "^1.4.8"
+    "socket.io-client": "^1.4.8",
+    "webpack-merge": "^0.14.1"
   }
 }

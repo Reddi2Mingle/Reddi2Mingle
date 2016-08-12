@@ -7,13 +7,14 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 # Install project dependencies
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-COPY package.json /usr/src/app/package.json
+# Copy all files directory in host machine into location in container
+COPY . /usr/src/app/
 
 # Install Node and project dependencies
-RUN npm install -g nodemon \ 
-  && npm install \
-  && npm install -g webpack \
-  && npm install -g mocha
+RUN npm install -gq nodemon \ 
+  && npm install -qqq \
+  && npm install -gq webpack \
+  && npm install -gq mocha
 
 # Expose port 80 (http) 
 EXPOSE 80
