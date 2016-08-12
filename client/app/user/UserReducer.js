@@ -28,12 +28,11 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  // switch (action.type) {
-  //   case 'DO_SOMETHING': {
-  //     return { ...state, fetching: true };
-  //   }
-  //   default:
-  //     return state;
-  // }
-  return state;
+  switch (action.type) {
+    case 'UPDATE_PIC_URL': {
+      return { ...state, picUrl: action.payload };
+    }
+    default:
+      return state;
+  }
 };

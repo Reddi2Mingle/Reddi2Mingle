@@ -13,10 +13,10 @@ const reducer = combineReducers({
   user,
 });
 
-let store = createStore(reducer, middleware);
+export default createStore(reducer, middleware);
 
-store.dispatch(updateUsername('Christine'));
+// store.dispatch(updateUsername('Christine'));
 // store.dispatch(addSubreddit('yomamajokes'));
 // store.dispatch(addSubreddit('aww'));
 
-export default store;
+// export default store;

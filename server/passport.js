@@ -3,7 +3,7 @@ const RedditStrategy = require('passport-reddit').Strategy;
 require('../api_keys');
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
-const redditController = require('./controllers/redditController.js')
+const redditController = require('./controllers/redditController.js');
 
 
 // Passport session setup.
