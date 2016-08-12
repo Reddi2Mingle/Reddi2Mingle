@@ -1,4 +1,3 @@
-const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
 // const db = require('./db/config.js');
