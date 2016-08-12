@@ -3,11 +3,9 @@ const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
 const neo4j = require('neo4j');
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
-const request = require('request'); 
 
 module.exports = {
   createNewUser: (profile, accessToken, refreshToken) => {
-  	console.log('394812394813', profile);
     db.cypher({
   	    query: 'CREATE (person:Person { name: {username}, redditId: {redditId}, accessToken: {accessToken}, refreshToken: {refreshToken}});',
   	    params: {
