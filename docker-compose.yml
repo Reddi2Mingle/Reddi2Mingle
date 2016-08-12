@@ -5,6 +5,10 @@ services:
     ports:
       - "80:80"
     volumes:
+<<<<<<< c0d2f67ae7bb9270f13efafd3074df7142c067fa
+=======
+      # - /usr/src/app/node_modules
+>>>>>>> functionality added: base algorithm for matching users, saving user to database, query 'potentials'
       - .:/usr/src/app
     depends_on:
       - neo4j
@@ -21,7 +25,7 @@ services:
       # - $HOME/neo4j/data:/data \
     # command: /docker-entrypoint.sh neo4j
     environment: 
-     - NEO4J_AUTH=none
+     - NEO4J_AUTH=neo4j/123456
     ports:
       - "7474:7474"
      

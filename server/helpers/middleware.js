@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
+// const parser = require('body-parser')
 
 // const webpackDevMiddleware = require('webpack-dev-middleware');
 // const webpack = require('webpack');
@@ -18,6 +19,7 @@ module.exports = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(express.static(path.join(__dirname, '/../../client')));
+  // app.use(parser('dev'));
   // app.use(webpackDevMiddleware(compiler, {
   //   publicPath: config.output.path,
   // }));

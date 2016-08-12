@@ -14,9 +14,9 @@ io.on('connection', (socket) => {
 });
 
 // App now listening on port 80
-server.listen(80, (err) => {
+server.listen(3000, (err) => {
   err ? console.log('server error', err) :
-  console.log('Server listening on', process.env.PORT || 80);
+  console.log('Server listening on', process.env.PORT || 3000);
 });
 
 require('./helpers/seed');

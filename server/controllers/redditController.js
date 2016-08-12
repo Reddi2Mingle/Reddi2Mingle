@@ -1,13 +1,72 @@
 const request = require('request');
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
+const neo4j = require('neo4j');
+const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
+const request = require('request'); 
 
 module.exports = {
-  getSignupPage: () => {
-    request.get("https://ssl.reddit.com/api/v1/authorize?state='uniquestring'&duration=permanent&response_type=code&scope=identity&client_id=" + REDDIT_CONSUMER_KEY + "&redirect_uri=https://github.com/Reddi2Mingle/Reddi2MingleMVP")
-    .on('response', (response) => {
-      console.log(response);
-      res.send(response);
-    });
+  createNewUser: (profile, accessToken, refreshToken) => {
+  	console.log('394812394813', profile);
+    db.cypher({
+  	    query: 'CREATE (person:Person { name: {username}, redditId: {redditId}, accessToken: {accessToken}, refreshToken: {refreshToken}});',
+  	    params: {
+  	    	username: profile.name,
+  	    	redditId: profile.id,
+  	    	accessToken: accessToken,
+  	    	refreshToken: refreshToken,
+  	    }
+  	}, function (err, results) {
+  		  if (err) {
+  		    console.log("issue with adding " + profile.name + ": ",err)
+  		  } else {
+  		    console.log('user is saved to database', results);
+  		  }
+  	});
   },
-};
+
+  // Get the user's temporary access token
+  grabAccessToken: (username) => {
+  	db.cyper({
+  		query: 'MATCH (n:Person) WHERE n.name={username} return n.accessToken;',
+  		params: {
+  			username: username,
+  		}
+  	}, function (err, results) {
+  		if (err) {
+  			console.log('issue with retrieving', err);
+  		} else {
+  			console.log('here is the accessToken', results);
+  		}
+  	})
+  },
+
+  // query database for Reddit refreshToken
+  grabRefreshToken: (username) => {
+  	db.cyper({
+  		query: 'MATCH (n:Person) WHERE n.name={username} return n.refreshToken;',
+  		params: {
+  			username: username,
+  		}
+  	}, function (err, results) {
+  		if (err) {
+  			console.log('issue with retrieving', err);
+  		} else {
+  			console.log('here is the accessToken', results);
+  		}
+  	})
+  },
+
+  // Request list of user's subscribed subreddits
+  grabSubredditList: (accessToken) => {
+    request({
+        url: 'https://@oauth.reddit.com/subreddits/mine',
+        method: 'GET',
+        headers: { 
+            'Authorization': 'bearer ' + accessToken
+        }
+      }, function(err, response) {
+        console.log('it worked!', response.body);
+      })
+  },
+};  

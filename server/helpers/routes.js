@@ -3,10 +3,6 @@ const passport = require('passport');
 const crypto = require('crypto');
 
 module.exports = (socket, io, app) => {
-	// Test from front end
-  socket.on('test message', (message) => {
-    console.log('!!!!!!', message);
-  });
 
 	// GET /auth/reddit
 	//   Use passport.authenticate() as route middleware to authenticate the
@@ -17,7 +13,6 @@ module.exports = (socket, io, app) => {
 	//   Note that the 'state' option is a Reddit-specific requirement.
   app.get('/auth/reddit', (req, res, next) => {
     req.session.state = crypto.randomBytes(32).toString('hex');
-    console.log('first session state is...:', req.session);
     passport.authenticate('reddit', {
       state: req.session.state,
       duration: 'permanent',
@@ -28,19 +23,11 @@ module.exports = (socket, io, app) => {
 	// GET /auth/reddit/callback
 	//   Use passport.authenticate() as route middleware to authenticate the
 	//   request.  If authentication fails, the user will be redirected back to the
-	//   login page.  Otherwise, the primary route function function will be called,
-	//   which, in this example, will redirect the user to the home page.
-  app.get('/auth/reddit/callback', (req, res, next) => {
-  // Check for origin via state token (currently commented as session.state is undefined)
-  // if (req.query.state == req.session.state){
-    passport.authenticate('reddit', {
-      successRedirect: '/',
-      failureRedirect: '/signup',
-    })(req, res, next);
-    // } else {
-    //   next( new Error(403) );
-    // }
-  });
+	//   login page.  Otherwise, the primary route function function will be called and
+  //   will redirect the user to the home page.
+  app.get('/auth/reddit/callback', passport.authenticate('reddit', { failureRedirect: '/signup'}), (req, res) => {
+      res.redirect('/?userLoggedIn=true&username=' + req.user.name + '&redditId=' + req.user.id)
+    });
 
 
 	// send all requests to index.html so browserHistory in React Router works
