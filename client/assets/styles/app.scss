@@ -24,6 +24,14 @@ a {
   letter-spacing: 0.1em;
 }
 
+button:hover {
+  background-color: #EF6124;
+}
+
+.app { // to be delete later
+  background: black;
+}
+
 .signup-view {
   @include background('/assets/img/bonfire.jpg');
   display: flex;
@@ -37,12 +45,19 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  align-content: space-between;
     h1 {
-    text-transform: uppercase;
-    font-weight:300;
-    line-height:1;
-    font-size: 6em;
-    color: white;
-    padding: 100px;
-  }
+      text-transform: uppercase;
+      font-weight:300;
+      line-height:1;
+      font-size: 7em;
+      color: white;
+      padding-bottom: 250px;
+    }
+    button {
+      width: 80%;
+      margin: 10px;
+    }
 }
+
+

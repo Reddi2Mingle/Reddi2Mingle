@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 export default () => (
-  <div>
+  <div className="app">
     <h1 >Reddi2Mingle</h1>
     <ul>
       <li><Link to="/">Homeyio</Link></li>
