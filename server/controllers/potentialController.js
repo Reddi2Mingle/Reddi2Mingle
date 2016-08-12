@@ -6,7 +6,7 @@ module.exports = {
 
 	createPotentials: (redditId) => {
   	db.cypher({
-  	    query: 'MATCH (user:Person)-[r:INTERESTED_IN]->(subreddit)<-[:INTERESTED_IN]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r;',
+  	    query: 'MATCH (user:Person)-[r:POTENTIAL]->(subreddit)<-[:POTENTIAL]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r;',
   	    params: {
   	    	redditId: redditId,
   	    }

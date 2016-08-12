@@ -10,7 +10,7 @@ Person.setUniqueKey('redditId');
 
 const peopleSubs = [
   {
-    redditId: 0,
+    redditId: "0",
     name: 'Neil Whitehead',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -19,7 +19,7 @@ const peopleSubs = [
       { name: '/r/malefashionadvice', readers: 579003 },
     ],
   },
-  { redditId: 1,
+  { redditId: "1",
     name: 'Jeremy Toce',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -28,7 +28,7 @@ const peopleSubs = [
       { name: '/r/glutenfree', readers: 94592 },
     ],
   },
-  { redditId: 2,
+  { redditId: "2",
     name: 'Tyler Becks',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -36,7 +36,7 @@ const peopleSubs = [
       { name: '/r/malefashionadvice', readers: 579003 },
     ],
   },
-  { redditId: 3,
+  { redditId: "3",
     name: 'Sunny Singh',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -45,7 +45,7 @@ const peopleSubs = [
       { name: '/r/LifeProTips', readers: 8230648 },
     ],
   },
-  { redditId: 4,
+  { redditId: "4",
     name: 'Casper Holgreen',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -53,7 +53,7 @@ const peopleSubs = [
       { name: '/r/EvolveSustain', readers: 1345 },
     ],
   },
-  { redditId: 5,
+  { redditId: "5",
     name: 'Trevor Healy',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -61,14 +61,14 @@ const peopleSubs = [
       { name: '/r/Shirtoftheday', readers: 2315 },
     ],
   },
-  { redditId: 6,
+  { redditId: "6",
     name: 'Sompop Corn',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/dadjokes', readers: 274865 },
     ],
   },
-  { redditId: 7,
+  { redditId: "7",
     name: 'Jay Arella',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -76,7 +76,7 @@ const peopleSubs = [
       { name: '/r/dadjokes', readers: 274865 },
     ],
   },
-  { redditId: 8,
+  { redditId: "8",
     name: 'David Ludgren',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -85,7 +85,7 @@ const peopleSubs = [
       { name: '/r/dadjokes', readers: 274865 },
     ],
   },
-  { redditId: 9,
+  { redditId: "9",
     name: 'Shea Hawkins',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
