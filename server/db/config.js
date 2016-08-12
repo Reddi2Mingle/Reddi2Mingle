@@ -6,7 +6,6 @@ const db = seraph({
   server: 'http://localhost:7474',
   user: 'neo4j',
   pass: 'cake',
-});
 const Person = model(db, 'person');
 const Subreddit = model(db, 'subreddit');
 
