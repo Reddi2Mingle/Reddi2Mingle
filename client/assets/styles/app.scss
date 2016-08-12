@@ -1,28 +1,48 @@
-@import "variables.import.scss";
 @import "reset.import.scss";
+@import "variables.import.scss";
+@import "mixins.import.scss";
+
+/***** App-wide Styles *****/
 
 h1 {
   font-family: $accentFont;
 }
 
 button {
-  border: 1px solid white;
-  background-color: white;
-  margin: 0 10px 25px 10px;
-  padding: 10px;
-  opacity: 0.5;
-
+  border: 2px solid white;
+  background: none;
+  padding: 10px 30px;
 }
 
-@mixin background($image, $color: transparent) {
-  background: $color url($image) center/cover no-repeat; 
+a {
+  font-family: $font;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: white;
+  font-size: 1.5em;
+  text-decoration: none;
+  letter-spacing: 0.1em;
 }
 
 .signup-view {
   @include background('/assets/img/bonfire.jpg');
-  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .info-box {
-  
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    h1 {
+    text-transform: uppercase;
+    font-weight:300;
+    line-height:1;
+    font-size: 6em;
+    color: white;
+    padding: 100px;
+  }
 }
