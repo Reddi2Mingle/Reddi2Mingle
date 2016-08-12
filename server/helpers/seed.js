@@ -3,91 +3,91 @@ const model = require('seraph-model');
 
 const db = require('../db/config').db;
 
-const Person = model(db, 'person');
-const Subreddit = model(db, 'subreddit');
+const Person = model(db, 'Person');
+const Subreddit = model(db, 'Subreddit');
 
-Person.setUniqueKey('redditID');
+Person.setUniqueKey('redditId');
 
 const peopleSubs = [
   {
-    redditID: 0,
+    redditId: "0",
     name: 'Neil Whitehead',
-    picture: 'insertpicofneil.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/fatpeoplestories', readers: 1000000 },
       { name: '/r/BlackPeopleTwitter', readers: 123 },
       { name: '/r/malefashionadvice', readers: 579003 },
     ],
   },
-  { redditID: 1,
+  { redditId: "1",
     name: 'Jeremy Toce',
-    picture: 'insertpicofjeremy.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/LucidDreaming', readers: 49301 },
       { name: '/r/malefashionadvice', readers: 579003 },
       { name: '/r/glutenfree', readers: 94592 },
     ],
   },
-  { redditID: 2,
+  { redditId: "2",
     name: 'Tyler Becks',
-    picture: 'insertpicoftyler.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/LifeProTips', readers: 8230648 },
       { name: '/r/malefashionadvice', readers: 579003 },
     ],
   },
-  { redditID: 3,
+  { redditId: "3",
     name: 'Sunny Singh',
-    picture: 'insertpicofsunny.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/fatpeoplestories', readers: 1000000 },
       { name: '/r/malefashionadvice', readers: 579003 },
       { name: '/r/LifeProTips', readers: 8230648 },
     ],
   },
-  { redditID: 4,
+  { redditId: "4",
     name: 'Casper Holgreen',
-    picture: 'insertpicofcasper.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/PacificCrestTrail', readers: 1432 },
       { name: '/r/EvolveSustain', readers: 1345 },
     ],
   },
-  { redditID: 5,
+  { redditId: "5",
     name: 'Trevor Healy',
-    picture: 'insertpicofhealy.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/glutenfree', readers: 94592 },
       { name: '/r/Shirtoftheday', readers: 2315 },
     ],
   },
-  { redditID: 6,
+  { redditId: "6",
     name: 'Sompop Corn',
-    picture: 'insertpicofpoppop.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/dadjokes', readers: 274865 },
     ],
   },
-  { redditID: 7,
+  { redditId: "7",
     name: 'Jay Arella',
-    picture: 'insertpicofjay.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/photography', readers: 94592 },
       { name: '/r/dadjokes', readers: 274865 },
     ],
   },
-  { redditID: 8,
+  { redditId: "8",
     name: 'David Ludgren',
-    picture: 'insertpicofdavid.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/Zimbabwe', readers: 960 },
       { name: '/r/Cricket', readers: 6133 },
       { name: '/r/dadjokes', readers: 274865 },
     ],
   },
-  { redditID: 9,
+  { redditId: "9",
     name: 'Shea Hawkins',
-    picture: 'insertpicofshea.gif',
+    photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: '/r/Zimbabwe', readers: 960 },
       { name: '/r/glutenfree', readers: 94592 },

@@ -13,6 +13,7 @@ module.exports = {
   	    	redditId: profile.id,
   	    	accessToken: accessToken,
   	    	refreshToken: refreshToken,
+          photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
   	    }
   	}, function (err, results) {
   		  if (err) {
@@ -56,7 +57,23 @@ module.exports = {
   },
 
   // Request list of user's subscribed subreddits
-  grabSubredditList: (accessToken) => {
+  queryUserSubreddits: (redditId) => {
+    db.cyper({
+      query: 'MATCH (user:Person)-[r:FOLLOWS]->(subreddit) WHERE user.redditID=4 RETURN subreddit;',
+      params: {
+        username: username,
+      }
+    }, function (err, results) {
+      if (err) {
+        console.log('issue with retrieving', err);
+      } else {
+        console.log('here is the accessToken', results);
+      }
+    })
+  },
+
+  // Get list of subscribed subreddits from reddit and add to the database
+  addUserSubreddits: (accessToken) => {
     request({
         url: 'https://@oauth.reddit.com/subreddits/mine',
         method: 'GET',
