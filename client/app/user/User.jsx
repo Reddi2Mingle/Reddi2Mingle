@@ -8,7 +8,7 @@ export default class User extends Component {
       <div>
         {username}'s Profile
         <Dropzone onDrop={(files) => {
-          console.log(files[0]);
+          console.log(files);
           updatePicUrl(files[0].preview);
         } }>
           <div>Drag and drop your image here, or click to select files to upload.</div>

@@ -3,7 +3,7 @@ const RedditStrategy = require('passport-reddit').Strategy;
 require('../api_keys');
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
-const redditController = require('./controllers/redditController.js')
+const redditController = require('./controllers/redditController.js');
 
 
 // Passport session setup.
@@ -29,8 +29,8 @@ passport.deserializeUser((obj, done) => {
 //   credentials (in this case, an accessToken, refreshToken, and Reddit
 //   profile), and invoke a callback with a user object.
 passport.use(new RedditStrategy({
-  clientID: REDDIT_CONSUMER_KEY,
-  clientSecret: REDDIT_CONSUMER_SECRET,
+  clientID: 'T3zDXS9GxKukbA',
+  clientSecret: 'TAKMSJzrlZPzTWxK5O3w7OglWA8',
   callbackURL: 'http://127.0.0.1:3000/auth/reddit/callback',
 },
   (accessToken, refreshToken, profile, done) => {

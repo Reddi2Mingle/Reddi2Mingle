@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import io from 'socket.io-client';
 import Routes from './app/routing';
 import Store from './app/AppStore';
+import './assets/styles/app.scss';
 
 const socket = io('http://localhost:3000');
 

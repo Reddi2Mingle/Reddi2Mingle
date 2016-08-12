@@ -30,6 +30,10 @@ const common = {
         loaders: ['babel'],
         include: PATHS.app,
       },
+      {
+        test: /\.scss$/,
+        loaders: ['sytle', 'css', 'autoprefixer', 'sass'],
+      },
     ],
   },
   resolve: {
