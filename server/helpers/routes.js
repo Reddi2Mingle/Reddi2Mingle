@@ -23,6 +23,9 @@ module.exports = (socket, io, app) => {
   app.get('/auth/reddit/callback', passport.authenticate('reddit', { failureRedirect: '/signup'}), (req, res) => {
       res.redirect('/?userLoggedIn=true&username=' + req.user.name + '&redditId=' + req.user.id)
     });
+	//   login page.  Otherwise, the primary route function function will be called,
+	//   which, in this example, will redirect the user to the home page.
+  app.get('/auth/reddit/callback', auth.cb);
 
 
 	// send all requests to index.html so browserHistory in React Router works
