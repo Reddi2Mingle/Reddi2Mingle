@@ -19,4 +19,5 @@ server.listen(3000, (err) => {
   console.log('Server listening on', process.env.PORT || 3000);
 });
 
+require('./helpers/seed');
 module.exports = io;
