@@ -101,7 +101,7 @@ Person.findAll(function(err, allPeople) {
     //populate local machine database if empty
     if (allPeople.length === 0) {
 
-      Person.compose(Subreddit, 'subs', 'interested_in', {many: true})
+      Person.compose(Subreddit, 'subs', 'FOLLOWS', {many: true})
       Subreddit.setUniqueKey('name', true, function() {
         
         for (var i = 0; i < peopleSubs.length; i++) {
