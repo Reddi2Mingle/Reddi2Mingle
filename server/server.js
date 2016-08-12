@@ -5,20 +5,18 @@ const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
 require('./passport');
 
-
 // Invoke middleware function on app to 'use' all the middleware functions
 middleware(app);
 
 // Invoke routers function on app to provide access to all routes defined
 io.on('connection', (socket) => {
-  console.log('connected to socket!');
   routers(socket, io, app);
 });
 
 // App now listening on port 80
-server.listen(80, (err) => {
+server.listen(3000, (err) => {
   err ? console.log('server error', err) :
-  console.log('Server listening on', process.env.PORT || 80);
+  console.log('Server listening on', process.env.PORT || 3000);
 });
 
 module.exports = io;
