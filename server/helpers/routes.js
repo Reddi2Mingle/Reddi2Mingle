@@ -1,6 +1,7 @@
 const path = require('path');
 const passport = require('passport');
 const crypto = require('crypto');
+const auth = require('../controllers/authController');
 
 module.exports = (socket, io, app) => {
 
@@ -11,14 +12,8 @@ module.exports = (socket, io, app) => {
 	//   will redirect the user back to this application at /auth/reddit/callback
 	//
 	//   Note that the 'state' option is a Reddit-specific requirement.
-  app.get('/auth/reddit', (req, res, next) => {
-    req.session.state = crypto.randomBytes(32).toString('hex');
-    passport.authenticate('reddit', {
-      state: req.session.state,
-      duration: 'permanent',
-      scope: 'identity mysubreddits',
-    })(req, res, next);
-  });
+
+  app.get('/auth/reddit', auth.crypto);
 
 	// GET /auth/reddit/callback
 	//   Use passport.authenticate() as route middleware to authenticate the
