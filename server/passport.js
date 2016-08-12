@@ -1,4 +1,3 @@
-const path = require('path');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
 // const db = require('./db/config.js');
@@ -32,8 +31,8 @@ passport.deserializeUser((obj, done) => {
 //   credentials (in this case, an accessToken, refreshToken, and Reddit
 //   profile), and invoke a callback with a user object.
 passport.use(new RedditStrategy({
-  clientID: REDDIT_CONSUMER_KEY,
-  clientSecret: REDDIT_CONSUMER_SECRET,
+  clientID: 'T3zDXS9GxKukbA',
+  clientSecret: 'TAKMSJzrlZPzTWxK5O3w7OglWA8',
   callbackURL: 'http://127.0.0.1:80/auth/reddit/callback',
 },
   (accessToken, refreshToken, profile, done) => {

@@ -1,6 +1,5 @@
-import { addSubreddit, updateUsername } from '../client/app/potential/PotentialActions';
 import expect from 'expect';
-// const expect = require('chai').expect;
+import { addSubreddit, updateUsername } from '../client/app/potential/PotentialActions';
 
 
 describe('Default Test', () => {
