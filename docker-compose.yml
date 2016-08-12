@@ -5,10 +5,6 @@ services:
     ports:
       - "80:80"
     volumes:
-<<<<<<< c0d2f67ae7bb9270f13efafd3074df7142c067fa
-=======
-      # - /usr/src/app/node_modules
->>>>>>> functionality added: base algorithm for matching users, saving user to database, query 'potentials'
       - .:/usr/src/app
     depends_on:
       - neo4j
