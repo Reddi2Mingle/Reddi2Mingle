@@ -59,7 +59,7 @@ module.exports = {
   // Request list of user's subscribed subreddits
   queryUserSubreddits: (redditId) => {
     db.cyper({
-      query: '',
+      query: 'MATCH (user:Person)-[r:FOLLOWS]->(subreddit) WHERE user.redditID=4 RETURN subreddit;',
       params: {
         username: username,
       }
