@@ -23,35 +23,35 @@ CREATE (:Subreddit { subreddit: "fatpeoplestories" });
 
 MATCH (n:Person {name:"Tyler"})
 MERGE (s:Subreddit {subreddit:"aww"})
-MERGE (n)-[r:INTERESTED_IN {alias: ['aww']} ]->(s)
+MERGE (n)<-[r:FOLLOW {alias: ['aww']} ]->(s)
 RETURN  n,r, s;
 
 MATCH (n:Person {name:"Neil"})
 MERGE (s:Subreddit {subreddit:"aww"})
-MERGE (n)-[r:INTERESTED_IN {alias: ['aww']} ]->(s)
+MERGE (n)<-[r:FOLLOW {alias: ['aww']} ]->(s)
 RETURN  n,r, s;
 
 MATCH (n:Person {name:"Jen"})
 MERGE (s:Subreddit {subreddit:"aww"})
-MERGE (n)-[r:INTERESTED_IN {alias: ['aww']} ]->(s)
+MERGE (n)<-[r:FOLLOW {alias: ['aww']} ]->(s)
 RETURN  n,r, s;
 
 MATCH (n:Person {name:"Christine"})
 MERGE (s:Subreddit {subreddit:"JusticePorn"})
-MERGE (n)-[r:INTERESTED_IN {alias: ['JusticePorn']} ]->(s)
+MERGE (n)<-[r:FOLLOW {alias: ['JusticePorn']} ]->(s)
 RETURN  n,r, s;
 
 MATCH (n:Person {name:"Jen"})
 MERGE (s:Subreddit {subreddit:"MorbidReality"})
-MERGE (n)-[r:INTERESTED_IN {alias: ['MorbidReality']} ]->(s)
+MERGE (n)<-[r:FOLLOW {alias: ['MorbidReality']} ]->(s)
 RETURN  n,r, s;
 
 MATCH (n:Person {name:"Neil"})
 MERGE (s:Subreddit {subreddit:"fatpeoplestories"})
-MERGE (n)-[r:INTERESTED_IN {alias: ['fatpeoplestories']} ]->(s)
+MERGE (n)<-[r:FOLLOW {alias: ['fatpeoplestories']} ]->(s)
 RETURN  n,r, s;
 
 MATCH (n:Person {name:"Tyler"})
 MERGE (s:Subreddit {subreddit:"fatpeoplestories"})
-MERGE (n)-[r:INTERESTED_IN {alias: ['fatpeoplestories']} ]->(s)
+MERGE (n)<-[r:FOLLOW {alias: ['fatpeoplestories']} ]->(s)
 RETURN  n,r, s;

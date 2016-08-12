@@ -1,9 +1,9 @@
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
-// const db = require('./db/config.js');
-
+require('../api_keys');
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
+const redditController = require('./controllers/redditController.js')
 
 
 // Passport session setup.
@@ -21,8 +21,6 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((obj, done) => {
   console.log('deserialized user');
   done(null, obj);
-  // db.Users.findOne({where: {redditId: id}})
-  //   .then(user => done(null, user));
 });
 
 
@@ -31,19 +29,14 @@ passport.deserializeUser((obj, done) => {
 //   credentials (in this case, an accessToken, refreshToken, and Reddit
 //   profile), and invoke a callback with a user object.
 passport.use(new RedditStrategy({
-  clientID: 'T3zDXS9GxKukbA',
-  clientSecret: 'TAKMSJzrlZPzTWxK5O3w7OglWA8',
-  callbackURL: 'http://127.0.0.1:80/auth/reddit/callback',
+  clientID: REDDIT_CONSUMER_KEY,
+  clientSecret: REDDIT_CONSUMER_SECRET,
+  callbackURL: 'http://127.0.0.1:3000/auth/reddit/callback',
 },
   (accessToken, refreshToken, profile, done) => {
-    // Authentication finished, find/add the user from/to the database
-    console.log('profile name here!!!!', profile.name);
-    db.Users.findOrCreate({
-      where: {
-        username: profile.name,
-        redditId: profile.id },
-    }).then((data) => {
-      done(null, profile);
-    });
+    // Direct reddit controller to save user to database
+    redditController.createNewUser(profile, accessToken, refreshToken);
+    // Authentication finished
+    done(null, profile);
   }
 ));
