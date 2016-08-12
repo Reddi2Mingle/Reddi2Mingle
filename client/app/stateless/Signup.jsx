@@ -2,12 +2,14 @@ import React from 'react';
 import io from 'socket.io-client';
 
 export default () => (
-  <div>
-    <h1>Sign Up with your Reddit Account</h1>
-    <button>
-      <a href="auth/reddit">
-        Signup with Reddit
-      </a>
-    </button>
+  <div className="signup-view">
+    <div className="info-box">
+      <h1>REDDI2MINGLE?</h1>
+      <button>
+        <a href="auth/reddit">
+          Signup with Reddit
+        </a>
+      </button>
+    </div>
   </div>
 );

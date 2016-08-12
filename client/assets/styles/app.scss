@@ -1,9 +1,28 @@
 @import "variables.import.scss";
+@import "reset.import.scss";
 
 h1 {
-  font-family: $primaryFont;
+  font-family: $accentFont;
 }
 
-.app {
-  background-color: red;
+button {
+  border: 1px solid white;
+  background-color: white;
+  margin: 0 10px 25px 10px;
+  padding: 10px;
+  opacity: 0.5;
+
+}
+
+@mixin background($image, $color: transparent) {
+  background: $color url($image) center/cover no-repeat; 
+}
+
+.signup-view {
+  @include background('/assets/img/bonfire.jpg');
+  height:100vh;
+}
+
+.info-box {
+  
 }
