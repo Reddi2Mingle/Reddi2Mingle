@@ -1,8 +1,10 @@
 const seraph = require("seraph");
 const model = require('seraph-model');
-const db = require('../db').db
+const db = require('../db/config').db
 const Person = model(db, 'person');
 const Subreddit = model(db, 'subreddit');
+
+console.log("SEED IS WORKING")
 
 Person.setUniqueKey('redditID');
 

@@ -12,4 +12,4 @@ const Subreddit = model(db, 'subreddit');
 
 exports.db = db;
 
-require('./helpers/seed');
+
