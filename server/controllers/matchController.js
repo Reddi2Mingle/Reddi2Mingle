@@ -26,30 +26,16 @@ module.exports = {
     });
     // Example response:
     // [
-    //   {
-    //     "matched": {
-    //       "_id": 16,
-    //       "labels": [
-    //         "Person"
-    //       ],
-    //       "properties": {
-    //         "name": "Sompop Corn",
-    //         "photo": "https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png",
-    //         "redditId": "6"
-    //       }
+    //    {
+    //       "name": "Sompop Corn",
+    //       "photo": "https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png",
+    //       "redditId": "6"
     //     }
     //   },
     //   {
-    //     "matched": {
-    //       "_id": 15,
-    //       "labels": [
-    //         "Person"
-    //       ],
-    //       "properties": {
-    //         "name": "Trevor Healy",
-    //         "photo": "https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png",
-    //         "redditId": "5"
-    //       }
+    //      "name": "Trevor Healy",
+    //      "photo": "https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png",
+    //      "redditId": "5"
     //     }
     //   }
     // ]
