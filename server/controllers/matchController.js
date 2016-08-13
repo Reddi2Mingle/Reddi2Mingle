@@ -2,23 +2,21 @@ const neo4j = require('neo4j');
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 
 module.exports = {
+  //returns array of matches for user
+	showMatches: (req, res) => {
+	// params: redditId
+	let r = req.query;
+	let user = r.redditId;
 
-	createMatch: (username) => {
-  	db.cypher({
-  	    query: 'MATCH (user:Person)-[r:FOLLOWS]->(subreddit)<-[:FOLLOWS]-(potential:Person) WHERE user.name = {username} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r;',
-  	    params: {
-  	    	username: username,
-  	    }
-  	}, function (err, results) {
-  		  if (err) {
-  		    console.log("issue with: ", err)
-  		  } else {
-  		    console.log('list of potentials', results);
-  		  }
-  	});
-  },
-  showMatches: () => {
-    
+	db.cypher({
+	  query: `MATCH (user:Person {redditId: ${user}})-[r:MATCH]-(matched:Person) RETURN matched`
+	}, function(err, matched) {
+	  if (err) {
+		console.log('Error in finding potential interest for user:',err);
+	  } else {
+			var matched = matched.map(function(v){return v.matched.properties})
+			res.send(matched)
+		}
+	});
   }
-
 }

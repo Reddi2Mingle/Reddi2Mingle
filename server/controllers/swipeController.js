@@ -17,7 +17,7 @@ module.exports = {
     //Potential's response check
     db.cypher({
       query: `MATCH (potential:Person {redditId: ${potential}})-[r:INTEREST]-> (user:Person {redditId: ${user}}) RETURN r`
-    }, function(err, potentialswipe) {
+    }, (err, potentialswipe) => {
       if (err) {
         console.log('Error in finding potential interest for user');
       } else {
@@ -30,12 +30,25 @@ module.exports = {
               MERGE (potential:Person { redditId: ${potential} })
               CREATE UNIQUE (user)-[r:INTEREST {LIKE: ${swipe}}]->(potential)
               RETURN r;`
-          }, function(err, relationship) {
+          }, (err, relationship) => {
             if (err) {
               console.log('Error in creating swipe response relationship:',err);
             } else {
               console.log('Interest relationship was created/returned:',relationship);
-              res.send(relationship)
+              res.send(relationship);
+              // [
+              //   {
+              //     "r": {
+              //       "_id": 87,
+              //       "type": "INTEREST",
+              //       "properties": {
+              //         "LIKE": "yes"
+              //       },
+              //       "_fromId": 73,
+              //       "_toId": 65
+              //     }
+              //   }
+              // ]
             }
           });
         } 
@@ -54,49 +67,27 @@ module.exports = {
               query: `MATCH (user:Person { redditId: ${user} })-[r:INTEREST|POTENTIAL]-(potential:Person {redditId: ${potential}})
                 DELETE r
                 MERGE (user)-[f: ${rel}]-(potential)
-                RETURN f, user, potential;`
-          }, function(err, results) {
+                RETURN f;`
+          }, (err, relationshipMatchOrNever) => {
             if (err) {
               console.log('Error in liking response:',err);
             } else {
-              console.log('Interest relationship was deleted. Created new:',results);
-              res.send(results);
+              console.log('Interest relationship was deleted. Created new:',relationshipMatchOrNever);
+              res.send(relationshipMatchOrNever);
             }
           });
         }
       }
     })
-    //Example response for 'NEVER' match
+    //Example response for 'MATCH' match
     // [
     //   {
     //     "f": {
-    //       "_id": 36,
-    //       "type": "NEVER",
+    //       "_id": 88,
+    //       "type": "MATCH",
     //       "properties": {},
-    //       "_fromId": 18,
-    //       "_toId": 15
-    //     },
-    //     "user": {
-    //       "_id": 18,
-    //       "labels": [
-    //         "Person"
-    //       ],
-    //       "properties": {
-    //         "name": "Jay Arella",
-    //         "photo": "https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png",
-    //         "redditId": "7"
-    //       }
-    //     },
-    //     "potential": {
-    //       "_id": 15,
-    //       "labels": [
-    //         "Person"
-    //       ],
-    //       "properties": {
-    //         "name": "Trevor Healy",
-    //         "photo": "https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png",
-    //         "redditId": "5"
-    //       }
+    //       "_fromId": 65,
+    //       "_toId": 73
     //     }
     //   }
     // ]
