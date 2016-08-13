@@ -7,7 +7,7 @@ module.exports = {
 
 	createPotentials: (redditId) => {
   	db.cypher({
-  	    query: 'MATCH (user:Person)-[r:POTENTIAL]->(subreddit)<-[:POTENTIAL]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r;',
+  	    query: 'MATCH (user:Person)-[r:FOLLOWS]->(subreddit)<-[:FOLLOWS]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r;',
   	    params: {
   	    	redditId: redditId,
   	    }
@@ -20,18 +20,21 @@ module.exports = {
   	});
   },
 
-  queryPotentials: (redditId, socket) => {
-  	db.cypher({
+  queryPotentials: (req, res) => {
+  	redditId = "8"
+    db.cypher({
   	    query: 'MATCH (user:Person)<-[r:POTENTIAL]->(potential:Person) WHERE user.redditId={redditId} RETURN potential LIMIT 20;',
   	    params: {
   	    	redditId: redditId,
   	    }
-  	}, function (err, potentials) {
+  	}, function (err, results) {
   		  if (err) {
   		    console.log("issue with: ", err)
   		  } else {
-  		    console.log('list of 10 existing potentials', potentials);
-  		    socket.emit('send potentials', potentials);
+          var potentials = results.map(function(item) {
+            return item.potential.properties;
+          })
+  		    res.send(potentials);
   		  }
   	});
   }
