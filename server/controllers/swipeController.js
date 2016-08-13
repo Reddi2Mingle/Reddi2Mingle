@@ -5,7 +5,7 @@ module.exports = {
   likeResponse: (req, res) => {
 
     // params: redditId, potentialId, swipe (need from client)
-    console.log('request body in likeResponse', req.body); 
+    console.log('request body in likeResponse', req.body);
     // const r = req.query;
 
     const user = req.body.redditId;
@@ -23,10 +23,10 @@ module.exports = {
       if (err) {
         console.log('Error in finding potential interest for user');
       } else {
-        console.log('potentialswipe',potentialswipe)
+        console.log('potentialswipe', potentialswipe);
         //if there is no existing INTEREST relationship, create one way user-> INTEREST {LIKES:yes||no}->potential relationship
         if (potentialswipe.length === 0) {
-          console.log('relationship does not yet exist. Creating now.')
+          console.log('relationship does not yet exist. Creating now.');
           db.cypher({
               query: `MATCH (user:Person { redditId: ${user} })
               MERGE (potential:Person { redditId: ${potential} })
@@ -34,9 +34,9 @@ module.exports = {
               RETURN r;`
           }, (err, relationship) => {
             if (err) {
-              console.log('Error in creating swipe response relationship:',err);
+              console.log('Error in creating swipe response relationship:', err);
             } else {
-              console.log('Interest relationship was created/returned:',relationship);
+              console.log('Interest relationship was created/returned:', relationship);
               res.send(relationship);
               // [
               //   {
@@ -63,7 +63,7 @@ module.exports = {
           const matched = u2swipe === 'yes' && swipe === "'yes'";
           const rel = matched ? 'MATCH' : 'NEVER';
           
-          console.log('Interest relationship for potential->user returns:',u2swipe,'MATCHED?',matched);
+          console.log('Interest relationship for potential->user returns:', u2swipe,'MATCHED?',matched);
           // erase relationships and replace with two-way relationship to indicate they MATCHed or will NEVER match
           db.cypher({
               query: `MATCH (user:Person { redditId: ${user} })-[r:INTEREST|POTENTIAL]-(potential:Person {redditId: ${potential}})
@@ -72,9 +72,9 @@ module.exports = {
                 RETURN f;`
           }, (err, relationshipMatchOrNever) => {
             if (err) {
-              console.log('Error in liking response:',err);
+              console.log('Error in liking response:', err);
             } else {
-              console.log('Interest relationship was deleted. Created new:',relationshipMatchOrNever);
+              console.log('Interest relationship was deleted. Created new:', relationshipMatchOrNever);
               res.send(relationshipMatchOrNever);
             }
           });

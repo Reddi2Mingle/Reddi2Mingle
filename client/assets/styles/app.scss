@@ -124,6 +124,11 @@ button:hover {
     }
 }
 
+.dropzone:hover {
+  @extend .dropzone;
+  background-color: rgba(222, 222, 222, .1);
+}
+
 /***** Potentials View *****/
 
 .potential-view { // will need to change for different background later
