@@ -6,7 +6,7 @@ export function incrementIndex() {
   };
 }
 
-function requestUser() {
+function requestPotentials() {
   return {
     type: 'FETCH_POTENTIALS',
   };
@@ -14,7 +14,7 @@ function requestUser() {
 
 export function fetchPotentials(redditId) {
   return dispatch => {
-    dispatch(requestUser());
+    dispatch(requestPotentials());
     axios.get('/potentials?redditId=' + redditId)
       .then((response) => {
         dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });
