@@ -42,9 +42,11 @@ export default class Potential extends Component {
               </div>
             </div>
             <div className="like-dislike-group">
-              <button> <i className="material-icons md-48 white"> sentiment_dissatisfied </i>
+              <button>
+                <img src="../../../assets/img/reddit-sad.png" alt="Reddit Logo with Sad Smile" style={{height: 50}}/>
               </button>
-              <button> <i className="material-icons md-48 white"> sentiment_satisfied </i>
+              <button>
+                <img src="../../../assets/img/reddit-love.png" alt="Reddit Logo with Heart Eyes" style={{height: 50}}/>
               </button>
             </div>
           </div>
