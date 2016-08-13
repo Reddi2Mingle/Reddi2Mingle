@@ -1,20 +1,23 @@
 const path = require('path');
 const passport = require('passport');
 const crypto = require('crypto');
-const auth = require('../controllers/authController');
-const userController = require('../controllers/userController')
-const potentialController = require('../controllers/potentialController')
-
+const authController = require('../controllers/authController.js');
+const userController = require('../controllers/userController.js');
+const potentialController = require('../controllers/potentialController.js');
 
 module.exports = (socket, io, app) => {
-  app.get('/auth/reddit', auth.crypto);
-  app.get('/auth/reddit/callback', passport.authenticate('reddit', { failureRedirect: '/signup'}), auth.login);
+
+  app.get('/auth/reddit', authController.crypto);
+  app.get('/auth/reddit/callback', passport.authenticate('reddit', { failureRedirect: '/signup'}), authController.login);
   app.get('/userInfo', userController.queryUserInfo);
-  app.get('/subreddits', userController.addUserSubreddits);
+  app.get('/subreddits', userController.createUserSubreddits);
   app.get('/potentials', potentialController.queryPotentials);
+
+  app.get('/dummyData', userController.sendDummyData);
 
 	// send all requests to index.html so browserHistory in React Router works
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/index.html'));
   });
+
 };

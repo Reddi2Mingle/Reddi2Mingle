@@ -37,7 +37,6 @@ passport.use(new RedditStrategy({
     // Direct reddit controller to save user to database
     redditController.createNewUser(profile, accessToken, refreshToken);
     // Authentication finished
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', accessToken);
     done(null, profile);
   }
 ));
