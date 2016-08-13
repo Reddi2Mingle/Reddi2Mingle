@@ -154,7 +154,11 @@ button:hover {
 
 .subreddit-list {
   color: black;
-  flex-wrap: wrap;
+  width: 100%;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
   span {
     font-family: $font;
     font-size: 1em;
