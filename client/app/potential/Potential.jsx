@@ -41,7 +41,7 @@ export default class Potential extends Component {
                 </div>
               </div>
             </div>
-            <div className="like-dislike-group">
+            <div className="swipe">
               <button>
                 <img src="../../../assets/img/reddit-sad.png" alt="Reddit Logo with Sad Smile" style={{height: 50}}/>
               </button>

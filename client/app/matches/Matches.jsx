@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import Match from './Match';
 
 const Matches = ({ matches }) => (
-  <div>
+  <div className="matches-view">
    <h1>Matches</h1>
     {matches.map((match) => (
       <Match
