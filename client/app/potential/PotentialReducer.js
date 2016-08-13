@@ -1,6 +1,8 @@
 const initialState = {
   index: 0,
   fetching: false,
+  fetched: false,
+  error: null,
   people: [
     {
       redditID: 'e3e2k235ei3',
@@ -30,6 +32,17 @@ export default (state = initialState, action) => {
         ...state,
         feching: true,
       };
+    }
+    case 'FETCH_POTENTIALS_FULFILLED': {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        people: action.payload,
+      };
+    }
+    case 'FETCH_POTENTIALS_REJECTED': {
+      return { ...state, fetching: false, error: action.payload };
     }
     default:
       return state;

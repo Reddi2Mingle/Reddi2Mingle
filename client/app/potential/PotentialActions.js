@@ -17,6 +17,7 @@ export function fetchPotentials(redditId) {
     dispatch(requestPotentials());
     axios.get('/potentials?redditId=' + redditId)
       .then((response) => {
+        console.log('fetchPotentials response.data: ', response.data);
         dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });
       })
       .catch((err) => {

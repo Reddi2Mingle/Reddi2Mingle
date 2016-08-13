@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { fetchUser } from '../user/UserActions';
+import { fetchPotentials } from './PotentialActions';
 
 export default class Potential extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ export default class Potential extends Component {
   componentWillMount() {
     const { dispatch, location: { query }, userLoggedIn } = this.props;
     const redditId = query.redditId;
+    dispatch(fetchPotentials(redditId));
     console.log('UserLogginIn: ', userLoggedIn);
     if (!userLoggedIn) {
       dispatch(fetchUser(redditId));
@@ -33,11 +35,7 @@ export default class Potential extends Component {
                 <i className="material-icons md-48 orange">favorite</i>
                 <span className="heart-text"> r/ </span>
                 <div className="subreddit-list">
-                  <ul>
-                    {subreddits.map((subreddit) => (
-                      <span>{subreddit}</span>
-                    ))}
-                  </ul>
+ 
                 </div>
               </div>
             </div>
@@ -76,4 +74,5 @@ Potential.propTypes = {
   dispatch: PropTypes.func,
   showNextUser: PropTypes.func,
   isFetching: PropTypes.bool,
+  userLoggedIn: PropTypes.bool,
 };
