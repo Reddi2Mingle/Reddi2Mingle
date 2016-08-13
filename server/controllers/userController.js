@@ -140,7 +140,7 @@ module.exports = {
   },
 
   queryUserInfo: (req, res) => {
-    const redditId = "4"
+    const redditId = req.query.redditId
     var subreddits = [];
     // First query database for subreddit connections
     queryUserSubreddits(redditId).then(function(subreddits) {
@@ -227,7 +227,17 @@ module.exports = {
                       console.log("issue with adding " + profile.name + ": ",err)
                     } else {
                       console.log('user is saved to database', results);
-                      res.send(saveFollows);
+                           
+                        // DELETE THIS TEMPORARY REQUEST TO LINK UP POTENTIAL CREATION
+                        request({
+                          url: 'http://localhost:3000/createPotentials?redditId=104r17',
+                          method: 'GET',
+                        }, function(err, response) {
+                          if (err) throw err;
+                        });
+
+                      // UNCOMMENT THIS
+                      // res.send(saveFollows);
                     }
                 });
               }
