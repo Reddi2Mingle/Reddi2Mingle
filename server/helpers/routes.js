@@ -14,9 +14,8 @@ module.exports = (socket, io, app) => {
   app.get('/subreddits', userController.createUserSubreddits);
   app.get('/potentials', potentialController.queryPotentials);
   app.get('/createPotentials', potentialController.createPotentials);
-  app.post('/swipe', swipeController.likeResponse)
+  app.post('/swipe', swipeController.likeResponse);
   app.get('/dummyData', userController.sendDummyData);
-  app.post('/swipe', swipeController.likeResponse)
   // app.get('/match', swipe.showMatches)
 
 	// send all requests to index.html so browserHistory in React Router works
