@@ -96,8 +96,8 @@ queryAccessToken = (redditId) => {
         console.log('issue with retrieving', err);
         reject(err);
       } else {
-        console.log('here is the accessToken', results[0]);
-        resolve(results[0]);
+        console.log('here is the accessToken', results[0]['n.accessToken']);
+        resolve(results[0]['n.accessToken']);
       }
     })
   })
@@ -188,7 +188,7 @@ module.exports = {
   	    }
   	}, function (err, results) {
   		  if (err) {
-  		    console.log("issue with adding " + profile.name + ": ",err)
+  		    console.log("issue with adding " + profile.name + ": ", err);
   		  } else {
   		    console.log('user is saved to database', results);
 
