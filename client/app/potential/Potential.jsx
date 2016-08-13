@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { fetchUser } from '../user/UserActions';
-import { fetchPotentials } from './PotentialActions';
+import { fetchPotentials, handleSwipe } from './PotentialActions';
 
 export default class Potential extends Component {
   constructor(props) {
@@ -18,10 +18,21 @@ export default class Potential extends Component {
   }
 
   render() {
-    const { name, photo, subreddits, isFetching, showNextUser } = this.props;
+    const {
+      name,
+      potentialId,
+      userId,
+      photo,
+      subreddits,
+      fetchingUser,
+      fetchingPotentials,
+      dispatch,
+      index,
+      lastPotential,
+    } = this.props;
     return (
       <div>
-      {isFetching ?
+      {fetchingUser || fetchingPotentials ?
         <div>
           <h2>Loading...</h2>
         </div>
@@ -35,7 +46,6 @@ export default class Potential extends Component {
                 <i className="material-icons md-48 orange">favorite</i>
                 <span className="heart-text"> r/ </span>
                 <div className="subreddit-list">
- 
                 </div>
               </div>
             </div>
@@ -43,18 +53,18 @@ export default class Potential extends Component {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  showNextUser();
+                  dispatch(handleSwipe(userId, index, lastPotential));
                 }}
               >
-                <img src="../../../assets/img/reddit-sad.png" alt="Reddit Logo with Sad Smile" style={{height: 50}}/>
+                <img src="../../../assets/img/reddit-sad.png" alt="Reddit Logo with Sad Smile" style={{ height: 50 }}/>
               </button>
               <button
                 onClick={e => {
                   e.preventDefault();
-                  showNextUser();
+                  dispatch(handleSwipe(userId, index, lastPotential));
                 }}
               >
-                <img src="../../../assets/img/reddit-love.png" alt="Reddit Logo with Heart Eyes" style={{height: 50}}/>
+                <img src="../../../assets/img/reddit-love.png" alt="Reddit Logo with Heart Eyes" style={{ height: 50 }}/>
               </button>
             </div>
           </div>
@@ -67,12 +77,15 @@ export default class Potential extends Component {
 
 Potential.propTypes = {
   name: PropTypes.string,
-  redditId: PropTypes.string,
+  potentialId: PropTypes.string,
+  userId: PropTypes.string,
   photo: PropTypes.string,
   subreddits: PropTypes.array,
   changeName: PropTypes.func,
   dispatch: PropTypes.func,
-  showNextUser: PropTypes.func,
-  isFetching: PropTypes.bool,
+  fetchingUser: PropTypes.bool,
+  fetchingPotentials: PropTypes.bool,
   userLoggedIn: PropTypes.bool,
+  index: PropTypes.number,
+  lastPotential: PropTypes.number,
 };

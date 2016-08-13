@@ -13,6 +13,7 @@ function requestPotentials() {
 }
 
 export function fetchPotentials(redditId) {
+  console.log('Fetching potentials!');
   return dispatch => {
     dispatch(requestPotentials());
     axios.get('/potentials?redditId=' + redditId)
@@ -23,5 +24,15 @@ export function fetchPotentials(redditId) {
       .catch((err) => {
         dispatch({ type: 'FETCH_POTENTIALS_REJECTED', payload: err });
       });
+  };
+}
+
+export function handleSwipe(userId, index, lastPotential) {
+  return dispatch => {
+    if (index === lastPotential) {
+      dispatch(fetchPotentials(userId));
+    } else {
+      dispatch(incrementIndex());
+    }
   };
 }

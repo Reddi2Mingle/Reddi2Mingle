@@ -23,7 +23,7 @@ module.exports = {
   queryPotentials: (req, res) => {
   	redditId = req.query.redditId;
     db.cypher({
-  	    query: 'MATCH (user:Person)<-[r:POTENTIAL]->(potential:Person) WHERE user.redditId={redditId} RETURN potential LIMIT 20;',
+  	    query: 'MATCH (user:Person)<-[r:POTENTIAL]->(potential:Person) WHERE user.redditId={redditId} RETURN potential LIMIT 2;',
   	    params: {
   	    	redditId: redditId,
   	    }

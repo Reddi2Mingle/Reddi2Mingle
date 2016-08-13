@@ -1,5 +1,5 @@
 const initialState = {
-  redditID: null,
+  redditId: null,
   name: '',
   photo: '',
   matches: [],
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     case 'FETCH_USER_FULFILLED': {
       return {
         ...state,
-        redditID: action.payload.redditID,
+        redditId: action.payload.redditId,
         name: action.payload.name,
         photo: action.payload.photo,
         matches: action.payload.matches,
