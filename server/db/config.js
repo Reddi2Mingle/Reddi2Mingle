@@ -5,7 +5,7 @@ const model = require('seraph-model');
 const db = seraph({
   server: 'http://localhost:7474',
   user: 'neo4j',
-  pass: 'cake',
+  pass: 'neo4j',
 });
 const Person = model(db, 'Person');
 const Subreddit = model(db, 'Subreddit');

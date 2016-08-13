@@ -54,13 +54,13 @@ module.exports = {
               query: `MATCH (user:Person { redditId: ${user} })-[r:INTEREST|POTENTIAL]-(potential:Person {redditId: ${potential}})
                 DELETE r
                 MERGE (user)-[f: ${rel}]-(potential)
-                RETURN f, user, potential;`
-          }, function(err, results) {
+                RETURN f;`
+          }, function(err, relationshipMatchOrNever) {
             if (err) {
               console.log('Error in liking response:',err);
             } else {
-              console.log('Interest relationship was deleted. Created new:',results);
-              res.send(results);
+              console.log('Interest relationship was deleted. Created new:',relationshipMatchOrNever.f);
+              res.send(relationshipMatchOrNever.f);
             }
           });
         }
