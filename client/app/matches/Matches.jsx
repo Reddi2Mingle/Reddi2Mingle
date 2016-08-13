@@ -3,7 +3,6 @@ import Match from './Match';
 
 const Matches = ({ matches }) => (
   <div className="matches-view">
-   <h1>Matches</h1>
     {matches.map((match) => (
       <Match
         username={match.username}
