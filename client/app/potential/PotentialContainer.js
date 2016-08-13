@@ -4,9 +4,11 @@ import Potential from './Potential';
 
 const mapStateToProps = (state) => (
   {
-    username: state.potential.username,
-    picUrl: state.potential.picUrl,
+    name: state.potential.name,
+    photo: state.potential.photo,
     subreddits: state.potential.subreddits,
+    isFetching: state.user.fetching,
+    userLoggedIn: !!state.user.redditId,
   }
 );
 
@@ -14,6 +16,9 @@ const mapDispatchToProps = (dispatch) => (
   {
     changeName: () => {
       dispatch(updateUsername('Tyler'));
+    },
+    dispatch: (action) => {
+      dispatch(action);
     },
   }
 );

@@ -14,6 +14,7 @@ export default () => (
     <Route path="/signup" component={Signup} />
     <Route path="/login" component={Login} />
     <Route path="/potential" component={PotentialContainer} />
+    <Route path="/potential:redditId" component={PotentialContainer} />
     <Route path="/matches" component={MatchesContainer} />
     <Route path="/profile" component={UserContainer} />
   </Router>

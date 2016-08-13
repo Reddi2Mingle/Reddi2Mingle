@@ -1,4 +1,3 @@
-const path = require('path');
 const passport = require('passport');
 const crypto = require('crypto');
 
@@ -28,6 +27,6 @@ module.exports = {
     //   will redirect the user to the home page.
 
   login: (req, res) => {
-    res.redirect('/?userLoggedIn=true&username=' + req.user.name + '&redditId=' + req.user.id)
-  }
-}
+    res.redirect('/potential?userLoggedIn=true&username=' + req.user.name + '&redditId=' + req.user.id);
+  },
+};

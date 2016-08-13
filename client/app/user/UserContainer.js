@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import User from './User';
-import { updatePicUrl } from './UserActions';
+import { updatePicUrl, fetchUser } from './UserActions';
 
 const mapStateToProps = (state) => (
   {
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => (
   {
     updatePicUrl: () => {
       dispatch(updatePicUrl('Tyler'));
+    },
+    fetchUser: () => {
+      dispatch(fetchUser('Tyler'));
     },
   }
 );
