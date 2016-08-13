@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
-const parser = require('body-parser')
+const parser = require('body-parser');
 
 // const webpackDevMiddleware = require('webpack-dev-middleware');
 // const webpack = require('webpack');
