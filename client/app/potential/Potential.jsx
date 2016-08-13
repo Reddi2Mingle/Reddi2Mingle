@@ -26,9 +26,9 @@ export default class Potential extends Component {
            :
         <div className="potential-view">
           <div className="potential-card">
-            <img src={picUrl} className="full-profile-image" />
+            <img src={photo} className="full-profile-image" />
             <div className="potential-info">
-              <h3>{username}</h3>
+              <h3>{name}</h3>
               <div className="potential-more-info">
                 <i className="material-icons md-48 orange">favorite</i>
                 <span className="heart-text"> r/ </span>
