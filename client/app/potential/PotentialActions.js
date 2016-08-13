@@ -1,13 +1,26 @@
-export function addSubreddit(subreddit) {
+import axios from 'axios';
+
+export function incrementIndex() {
   return {
-    type: 'ADD_SUBREDDIT',
-    payload: subreddit,
+    type: 'INCREMENT_INDEX',
   };
 }
 
-export function updateUsername(name) {
+function requestPotentials() {
   return {
-    type: 'UPDATE_USERNAME',
-    payload: name,
+    type: 'FETCH_POTENTIALS',
+  };
+}
+
+export function fetchPotentials(redditId) {
+  return dispatch => {
+    dispatch(requestPotentials());
+    axios.get('/potentials?redditId=' + redditId)
+      .then((response) => {
+        dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });
+      })
+      .catch((err) => {
+        dispatch({ type: 'FETCH_POTENTIALS_REJECTED', payload: err });
+      });
   };
 }

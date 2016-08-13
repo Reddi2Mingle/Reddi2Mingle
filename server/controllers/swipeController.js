@@ -4,11 +4,11 @@ const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 module.exports = {
   likeResponse: (req, res) => {
     // params: redditId, potentialId, swipe (need from client)
-    let r = req.query;
+    const r = req.query;
 
-    let user = r.redditId;
-    let potential = r.potentialId;
-    let swipe = r.swipe;
+    const user = r.redditId;
+    const potential = r.potentialId;
+    const swipe = r.swipe;
 
     //check potentialid's response to user. Swipe will either be [r: INTEREST {SWIPE: 'yes' || 'no'} ] 
     //if swipe left, designate two-way relationship of NOT_INTERESTED
@@ -45,8 +45,8 @@ module.exports = {
         else { //potential has already responded
           var u2swipe = potentialswipe[0].r.properties.LIKE;
           
-          let matched = u2swipe === 'yes' && swipe === "'yes'";
-          let rel = matched ? 'MATCH' : 'NEVER';
+          const matched = u2swipe === 'yes' && swipe === "'yes'";
+          const rel = matched ? 'MATCH' : 'NEVER';
           
           console.log('Interest relationship for potential->user returns:',u2swipe,'MATCHED?',matched);
           // erase relationships and replace with two-way relationship to indicate they MATCHed or will NEVER match
