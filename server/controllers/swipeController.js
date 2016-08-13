@@ -5,9 +5,6 @@ module.exports = {
   likeResponse: (req, res) => {
 
     // params: redditId, potentialId, swipe (need from client)
-    console.log('request body in likeResponse', req.body);
-    // const r = req.query;
-
     const user = req.body.redditId;
     const potential = req.body.potentialId;
     const swipe = req.body.swipe;
