@@ -6,6 +6,12 @@ export function incrementIndex() {
   };
 }
 
+function resetIndex() {
+  return {
+    type: 'RESET_INDEX',
+  };
+}
+
 function requestPotentials() {
   return {
     type: 'FETCH_POTENTIALS',
@@ -16,6 +22,7 @@ export function fetchPotentials(redditId) {
   console.log('Fetching potentials!');
   return dispatch => {
     dispatch(requestPotentials());
+    dispatch(resetIndex());
     axios.get('/potentials?redditId=' + redditId)
       .then((response) => {
         console.log('fetchPotentials response.data: ', response.data);

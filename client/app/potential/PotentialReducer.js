@@ -27,6 +27,12 @@ export default (state = initialState, action) => {
         index: state.index + 1,
       };
     }
+    case 'RESET_INDEX': {
+      return {
+        ...state,
+        index: 0,
+      };
+    }
     case 'FETCH_POTENTIALS': {
       return {
         ...state,
