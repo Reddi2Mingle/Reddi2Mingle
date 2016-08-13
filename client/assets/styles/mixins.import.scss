@@ -1,6 +1,7 @@
 @mixin background($image, $color: transparent) {
   background: $color url($image) center/cover no-repeat; 
   height: 100vh;
+  width: 100vw;
 }
 
 @mixin absolute-center {

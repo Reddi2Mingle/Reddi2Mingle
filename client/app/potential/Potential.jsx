@@ -24,27 +24,35 @@ export default class Potential extends Component {
           <h2>Loading...</h2>
         </div>
            :
-        <div>
-          <h1>Think {name}'s hot?</h1>
-          <img src={photo} style={{ display: 'block' }} />
-          <button type="submit" style={{ border: 0, background: 'transparent', display: 'inline-block' }}>
-            <img src="http://www.clker.com/cliparts/0/7/e/a/12074327311562940906milker_X_icon.svg.med.png" width="50" height="50" />
-          </button>
-          <button type="submit" style={{ border: 0, background: 'transparent', display: 'inline-block' }}>
-            <img src="http://www.clker.com/cliparts/k/m/w/n/Q/D/green-heart-md.png" width="50" height="50" />
-          </button>
-          <ul>
-            {subreddits.map((subreddit) => (
-              <li>{subreddit}</li>
-            ))}
-          </ul>
+        <div className="potential-view"> 
+          <div className="potential-card">
+            <img src={picUrl} className="full-profile-image" />
+            <div className="potential-info">
+              <h3>{username}</h3>
+              <div className="potential-more-info">
+                <i className="material-icons md-48">favorite</i>
+                <div className="subreddit-list">
+                  <ul>
+                    {subreddits.map((subreddit) => (
+                      <span>{subreddit}</span>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="like-dislike-group">
+              <button> <i className="material-icons md-48 md-light"> sentiment_dissatisfied </i>
+              </button>
+              <button> <i className="material-icons md-48 md-light"> sentiment_satisfied </i>
+              </button>
+            </div>
+          </div>
         </div>
       }
       </div>
     );
   }
 }
-
 
 Potential.propTypes = {
   name: PropTypes.string,

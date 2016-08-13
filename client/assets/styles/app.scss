@@ -19,6 +19,24 @@ h2 {
   color: white;
 }
 
+
+h3 {
+  font-family: $font;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+  color: black;
+}
+
+p {
+  font-family: $font;
+  font-size: 1em;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: black;
+}
+
 a {
   font-family: $font;
   text-transform: uppercase;
@@ -43,10 +61,11 @@ button:hover {
   background: black;
 }
 
+/***** Sign-Up View *****/
+
 .signup-view {
   @include background('/assets/img/bonfire.jpg');
   @include absolute-center;
-  width: 100vw;
 }
 
 .signup-info {
@@ -73,8 +92,9 @@ button:hover {
   display: flex;
   flex-flow: column nowrap; 
   align-items: center;
-
 }
+
+/***** Photo-Drop View *****/
 
 .photo-drop-view {
   @include background('/assets/img/shooting-photo.jpg');
@@ -94,14 +114,62 @@ button:hover {
     }
 }
 
+/***** Potentials View *****/
 
 .potential-view {
   @include absolute-center;
   background-color: #1a1a1a;
-  
+  height: 100vh;
+  width: 100vw;
+}
+
+.potential-card {
+  width: 30%;
+}
+
+.full-profile-image {
+  border: 4px solid white;
+  flex: 0.75;
+  max-width: 100%;
+  height: auto;
 }
 
 .potential-info {
-
+  background: white;
+  padding: 15px;
+  width: 95%;
+  h3 {
+    padding-bottom: 10px;
+  }
 }
 
+.potential-more-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  i {
+    width: 100px;
+  }
+}
+
+.subreddit-list {
+  color: black;
+  flex-wrap: wrap;
+  span {
+    font-family: $font;
+    font-size: 1em;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: black;
+    padding: 0 10px;
+  }
+}
+
+.like-dislike-group {
+  display: flex;
+  justify-content: space-around;
+  button {
+    width: 100%;
+    margin: 10px;
+  }
+}
