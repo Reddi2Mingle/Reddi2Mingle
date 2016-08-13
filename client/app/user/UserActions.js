@@ -8,11 +8,9 @@ function requestUser() {
 
 export function fetchUser(redditId) {
   return dispatch => {
-    console.log('dispatching fetchUser!');
     dispatch(requestUser());
     axios.get('/userInfo?redditId=' + redditId)
       .then((response) => {
-        console.log('Response received! ', response.data);
         dispatch({ type: 'FETCH_USER_FULFILLED', payload: response.data });
       })
       .catch((err) => {

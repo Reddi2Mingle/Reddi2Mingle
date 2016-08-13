@@ -1,5 +1,6 @@
 const initialState = {
   index: 0,
+  fetching: false,
   people: [
     {
       redditID: 'e3e2k235ei3',
@@ -19,11 +20,15 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'INCREMENT_INDEX': {
-      var index = state.index;
-      console.log('index in reducer: ', index);
       return {
         ...state,
-        index: index + 1,
+        index: state.index + 1,
+      };
+    }
+    case 'FETCH_POTENTIALS': {
+      return {
+        ...state,
+        feching: true,
       };
     }
     default:
