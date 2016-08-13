@@ -1,37 +1,7 @@
-const request = require('request');
+const bluebird = require('bluebird');
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
-
-const db = require('../../db/config').db;
-
-const dummyData = {
-  redditID: 'e4e3k6i4em3k',
-  name: 'Jen',
-  photo: 'https://scontent.xx.fbcdn.net/v/t1.0-9/13438871_10208696268978453_1392015277595705466_n.jpg?oh=ca631ff0a564a0b32a4359777894a0d1&oe=585F0466',
-  matches: [
-    {
-      redditID: 'rshiei4n4',
-      name: 'Casper Holmgreen',
-      photo: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAhtAAAAJDNkM2M5YjdmLWYxZTUtNDg1MS04N2EwLTYyYjlmYTYxYzY1ZQ.jpg',
-      subreddits: ['Office Depot', 'Dog Mania', 'Math all over me'],
-      messageUrl: 'https://www.linkedin.com/msgToConns?displayCreate=&connId=127002602&goback=%2Enpv_AAkAAAeR5*5oBj6QjZ0FlpDYyszbSd1d*4GTkKsik_*1_*1_NAME*4SEARCH_D3Ov_*1_en*4US_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_tyah_*1_*1&trk=prof-0-sb-message-button',
-    },
-    {
-      redditID: 'rsie34',
-      name: 'Jeremy Toce',
-      photo: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/005/07d/3ed/24801ee.jpg',
-      subreddits: ['Lydia', 'LeatherDaddyLand', 'Growth Spurts'],
-      messageUrl: 'https://www.linkedin.com/msgToConns?displayCreate=&connId=70699564&goback=%2Enpv_AAkAAAQ2yiwBGi9YkWLvYwSkfG*5uihI7x1J8jyk_*1_*1_NAME*4SEARCH_OhvK_*1_en*4US_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_tyah_*1_*1&trk=prof-0-sb-message-button',
-    },
-    {
-      redditID: '12en2e32e',
-      name: 'Sunny Virk',
-      photo: 'https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAMAAAAAJGVlNzYyYzMxLTllYmUtNDFlNy04ZTVmLWEzZmEyNzZjN2Q1MA.jpg',
-      subreddits: ['curry kitchen', 'webpack nerds', 'pedicures'],
-      messageUrl: 'https://www.linkedin.com/msgToConns?displayCreate=&connId=401581374&goback=%2Enpv_AAkAABfvpT4BAJPbMq0DeYUI7iwpuHAAZqlWYwY_*1_*1_NAME*4SEARCH_aJ8d_*1_en*4US_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_*1_tyah_*1_*1&trk=prof-0-sb-message-button',
-    },
-  ],
-};
+const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 
 const matches = [
   {
@@ -114,17 +84,26 @@ const createUserSubreddits = (redditId) => {
     }, (err, response) => {
       // Create array of the subreddits
       const rawData = JSON.parse(response.body).data.children;
-      const subredditList = rawData.map(item => (item.data.display_name));
+      const subredditList = rawData.map(item => ({name: item.data.display_name, subscribers: item.data.subscribers}));
+
       // Build cypher query to save new subreddits to database
       var mergeArray = [];
       var returnArray = [' RETURN '];
 
       subredditList.forEach((item, index) => {
-        mergeArray.push(` MERGE (${String.fromCharCode(97 + index)}:Subreddit { name: '${item}' })`);
-        returnArray.push(`${String.fromCharCode(97 + index).toString()}, `);
+        mergeArray.push(` MERGE (${item.name}:Subreddit { name: '${item.name}' }) 
+          ON CREATE SET ${item.name}.subscribers = ${item.subscribers} 
+          ON MATCH SET ${item.name}.subscribers = ${item.subscribers} `)
+         // Example of result from above line:
+         // "MERGE (sanfrancisco:Subreddit { name: 'sanfrancisco', subscribers: 108}) MERGE ... "
+        returnArray.push(`${item.name}, `);
+        // Example of result from above line:
+        // "RETURN sanfrancisco, ..."
       });
 
+      // Join the two arrays together into one cypher query to save subreddits to Neo4j
       var saveSubreddits = mergeArray.join('') + returnArray.join('');
+      // Replace last comma character with a semicolon
       saveSubreddits = saveSubreddits.slice(0, saveSubreddits.length - 2) + ';';
 
       // Build cypher query to save follows relationship
@@ -134,8 +113,8 @@ const createUserSubreddits = (redditId) => {
       var followsArray = [];
 
       subredditList.forEach((item, index) => {
-        matchArray.push(` MATCH (${String.fromCharCode(97 + index)}:Subreddit { name: '${item}' })`);
-        followsArray.push(` MERGE (user)-[:FOLLOWS]->(${String.fromCharCode(97 + index).toString()})`);
+        matchArray.push(` MATCH (${item}:Subreddit { name: '${item}' })`);
+        followsArray.push(` MERGE (user)-[:FOLLOWS]->(${item})`);
       });
 
       var saveFollows = matchArray.join('') + followsArray.join('');
@@ -167,9 +146,6 @@ const createUserSubreddits = (redditId) => {
 };
 
 module.exports = {
-  sendDummyData: (req, res) => {
-    res.send(dummyData);
-  },
 
   createNewUser: (profile, accessToken, refreshToken) => {
     db.cypher({
@@ -223,7 +199,8 @@ module.exports = {
         } else {
           console.log(`server/userController.js 224: results: ${results}`);
           var aggregateInfo = results[0].user.properties;
-          aggregateInfo['subreddits'] = subreddits;
+          aggregateInfo.subreddits = subreddits;
+          aggregateInfo.matches = matches;
           res.send(aggregateInfo);
         }
       });
