@@ -2,6 +2,7 @@ const request = require('request');
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
 const bluebird = require('bluebird');
+const potentialController = require('./potentialController');
 const neo4j = require('neo4j');
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 
@@ -101,7 +102,73 @@ queryAccessToken = (redditId) => {
   })
 },
 
-// query: 'CREATE (person:Person { name: {username}, redditId: {redditId}, accessToken: {accessToken}, refreshToken: {refreshToken}});',
+// Get list of subscribed subreddits from reddit and add to the database
+createUserSubreddits = (redditId) => {
+  // var redditId = req.query.redditId;
+  // Request list of subscribed subreddits from Reddit
+  queryAccessToken(redditId).then(function(accessToken) {
+    request({
+        url: 'https://@oauth.reddit.com/subreddits/mine',
+        method: 'GET',
+        headers: { 
+            "authorization": "bearer " + accessToken,
+            'User-Agent': 'javascript:reddi2mingle:v1.0.0 (by /u/neil_white)'
+        }
+      }, function(err, response) {
+        // Create array of the subreddits
+        var rawData = JSON.parse(response.body).data.children;
+        var subredditList = rawData.map(function(item) {
+          return item.data.display_name;
+        })
+        // Build cypher query to save new subreddits to database
+        var mergeArray = [];
+        var returnArray = [' RETURN '];
+
+        subredditList.forEach(function(item, index) {
+          mergeArray.push(" MERGE ("+String.fromCharCode(97 + index)+":Subreddit { name: '"+item+"' })")
+          returnArray.push(String.fromCharCode(97 + index).toString() + ", ");
+        })
+
+        var saveSubreddits = mergeArray.join("") + returnArray.join("");
+        saveSubreddits = saveSubreddits.slice(0, saveSubreddits.length - 2) + ";";
+
+        // Build cypher query to save follows relationship between new user and their subscribed subreddits
+
+        var matchArray = ['MATCH (user:Person {redditId:"'+redditId+'"}) '];
+        var followsArray = []
+
+        subredditList.forEach(function(item, index) {
+          matchArray.push(" MATCH ("+String.fromCharCode(97 + index)+":Subreddit { name: '"+item+"' })")
+          followsArray.push(" MERGE (user)-[:FOLLOWS]->("+String.fromCharCode(97 + index).toString() + ")");
+        })
+
+        var saveFollows = matchArray.join("") + followsArray.join("");
+        saveFollows = saveFollows + ";";
+
+        // Save the subreddits database
+        db.cypher({
+            query: saveSubreddits
+        }, function (err, results) {
+            if (err) {
+              console.log("issue with adding " + profile.name + ": ",err)
+            } else {
+              console.log('user is saved to database', results);
+              // Save the follow relationships for (user)->(subreddits) to the database
+              db.cypher({
+                  query: saveFollows
+              }, function (err, results) {
+                  if (err) {
+                    console.log("issue with adding " + profile.name + ": ",err)
+                  } else {
+                    console.log('user is saved to database', results);
+                      potentialController.createPotentials(redditId);
+                  }
+              });
+            }
+        });
+      })
+  })
+},
 
 module.exports = {
 
@@ -126,12 +193,14 @@ module.exports = {
   		    console.log('user is saved to database', results);
 
           // Temporary fix to create relationships to the new user
-          request({
-            url: 'http://localhost:3000/subreddits?redditId=' + profile.id,
-            method: 'GET',
-          }, function(err, response) {
-            if (err) throw err;
-          });
+          // request({
+          //   url: 'http://localhost:3000/subreddits?redditId=' + profile.id,
+          //   method: 'GET',
+          // }, function(err, response) {
+          //   if (err) throw err;
+          // });
+
+          createUserSubreddits(profile.id);
 
   		  }
   	});
@@ -159,84 +228,6 @@ module.exports = {
         }
       });
     });
-  },
-
-  // Get list of subscribed subreddits from reddit and add to the database
-  createUserSubreddits: (req, res) => {
-    var redditId = req.query.redditId;
-    // Request list of subscribed subreddits from Reddit
-    queryAccessToken(redditId).then(function(accessToken) {
-      request({
-          url: 'https://@oauth.reddit.com/subreddits/mine',
-          method: 'GET',
-          headers: { 
-              "authorization": "bearer " + accessToken,
-              'User-Agent': 'javascript:reddi2mingle:v1.0.0 (by /u/neil_white)'
-          }
-        }, function(err, response) {
-          // Create array of the subreddits
-          var rawData = JSON.parse(response.body).data.children;
-          var subredditList = rawData.map(function(item) {
-            return item.data.display_name;
-          })
-          // Build cypher query to save new subreddits to database
-          var mergeArray = [];
-          var returnArray = [' RETURN '];
-
-          subredditList.forEach(function(item, index) {
-            mergeArray.push(" MERGE ("+String.fromCharCode(97 + index)+":Subreddit { name: '"+item+"' })")
-            returnArray.push(String.fromCharCode(97 + index).toString() + ", ");
-          })
-
-          var saveSubreddits = mergeArray.join("") + returnArray.join("");
-          saveSubreddits = saveSubreddits.slice(0, saveSubreddits.length - 2) + ";";
-
-          // Build cypher query to save follows relationship between new user and their subscribed subreddits
-
-          var matchArray = ['MATCH (user:Person {redditId:"'+redditId+'"}) '];
-          var followsArray = []
-
-          subredditList.forEach(function(item, index) {
-            matchArray.push(" MATCH ("+String.fromCharCode(97 + index)+":Subreddit { name: '"+item+"' })")
-            followsArray.push(" MERGE (user)-[:FOLLOWS]->("+String.fromCharCode(97 + index).toString() + ")");
-          })
-
-          var saveFollows = matchArray.join("") + followsArray.join("");
-          saveFollows = saveFollows + ";";
-
-          // Save the subreddits database
-          db.cypher({
-              query: saveSubreddits
-          }, function (err, results) {
-              if (err) {
-                console.log("issue with adding " + profile.name + ": ",err)
-              } else {
-                console.log('user is saved to database', results);
-                // Save the follow relationships for (user)->(subreddits) to the database
-                db.cypher({
-                    query: saveFollows
-                }, function (err, results) {
-                    if (err) {
-                      console.log("issue with adding " + profile.name + ": ",err)
-                    } else {
-                      console.log('user is saved to database', results);
-                           
-                        // DELETE THIS TEMPORARY REQUEST TO LINK UP POTENTIAL CREATION
-                        request({
-                          url: 'http://localhost:3000/createPotentials?redditId=' + redditId,
-                          method: 'GET',
-                        }, function(err, response) {
-                          if (err) throw err;
-                        });
-
-                      // UNCOMMENT THIS
-                      // res.send(saveFollows);
-                    }
-                });
-              }
-          });
-        })
-    })
   },
 
   // Query database for Reddit refreshToken
