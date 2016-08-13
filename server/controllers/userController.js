@@ -166,12 +166,11 @@ module.exports = {
     var redditId = req.query.redditId;
     // Request list of subscribed subreddits from Reddit
     queryAccessToken(redditId).then(function(accessToken) {
-      var token = accessToken;
       request({
           url: 'https://@oauth.reddit.com/subreddits/mine',
           method: 'GET',
           headers: { 
-              "authorization": "bearer " + token,
+              "authorization": "bearer " + accessToken,
               'User-Agent': 'javascript:reddi2mingle:v1.0.0 (by /u/neil_white)'
           }
         }, function(err, response) {
