@@ -11,40 +11,32 @@ h1 {
 }
 
 h2 {
+  @include font-default;
   font-family: $font;
   text-transform: uppercase;
-  font-weight: 300;
-  font-size: 1.5em;
-  letter-spacing: 0.1em;
   color: white;
 }
 
 
 h3 {
+  @include font-default;
   font-family: $font;
   text-transform: uppercase;
-  font-weight: 300;
-  font-size: 1.5em;
-  letter-spacing: 0.1em;
   color: black;
 }
 
 p {
+  @include font-default;
   font-family: $font;
-  font-size: 1em;
-  font-weight: 300;
-  letter-spacing: 0.1em;
   color: black;
 }
 
 a {
+  @include font-default;
   font-family: $font;
   text-transform: uppercase;
-  font-weight: 300;
   color: white;
-  font-size: 1.5em;
   text-decoration: none;
-  letter-spacing: 0.1em;
 }
 
 button {
@@ -55,10 +47,6 @@ button {
 
 button:hover {
   background-color: $accentColor;
-}
-
-.material-icons.md-light { 
-  color: rgba(255, 255, 255, 0.8); 
 }
 
 .material-icons.md-48 { 
@@ -136,7 +124,7 @@ button:hover {
 
 /***** Potentials View *****/
 
-.potential-view {
+.potential-view { // will need to change for different background later
   @include absolute-center;
   background-color: #1a1a1a;
   height: 100vh;
@@ -158,6 +146,7 @@ button:hover {
   background: white;
   padding: 15px;
   width: 95%;
+  margin-top: -5px;
   h3 {
     padding-bottom: 10px;
   }
@@ -170,14 +159,20 @@ button:hover {
   i {
     width: 75px;
   }
-  span {
-    margin-top: .3em; 
-  }
+}
+
+.heart-text {
+  @include font-default;
+  @extend .white;
+  font-family: $font;
+  margin-left: -50px;
+  margin-top: 10px;
 }
 
 .subreddit-list {
   color: black;
   width: 100%;
+  margin-left: 20px;
   ul {
     display: flex;
     flex-wrap: wrap;

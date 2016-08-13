@@ -10,3 +10,9 @@
   justify-content: center;
   flex-direction: column;
 }
+
+@mixin font-default {
+  font-weight: 300;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+}
