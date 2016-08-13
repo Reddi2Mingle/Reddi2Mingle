@@ -66,6 +66,8 @@ button:hover {
 }
 
 .app { // to be delete later
+  @include absolute-center;
+  height: 100vh;
   background: black;
 }
 
@@ -191,6 +193,7 @@ button:hover {
 .swipe {
   display: flex;
   justify-content: space-between;
+  width: 107%;
   button {
     width: 100%;
     margin: 10px;
