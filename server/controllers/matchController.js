@@ -5,8 +5,8 @@ module.exports = {
   //returns array of matches for user
 	showMatches: (req, res) => {
 	// params: redditId
-	let r = req.query;
-	let user = r.redditId;
+	const r = req.query;
+	const user = r.redditId;
 
 	db.cypher({
 	  query: `MATCH (user:Person {redditId: ${user}})-[r:MATCH]-(matched:Person) RETURN matched`

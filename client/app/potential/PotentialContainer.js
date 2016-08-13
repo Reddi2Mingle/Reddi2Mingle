@@ -7,16 +7,18 @@ const mapStateToProps = (state) => (
     name: state.potentials.people[state.potentials.index].name,
     photo: state.potentials.people[state.potentials.index].photo,
     subreddits: state.potentials.people[state.potentials.index].subreddits,
-    isFetching: state.user.fetching,
+    potentialId: state.potentials.people[state.potentials.index].redditId,
+    userId: state.user.redditId,
+    fetchingUser: state.user.fetching,
     userLoggedIn: !!state.user.redditId,
+    fetchingPotentials: state.potentials.fetching,
+    index: state.potentials.index,
+    lastPotential: state.potentials.people.length - 1,
   }
 );
 
 const mapDispatchToProps = (dispatch) => (
   {
-    showNextUser: () => {
-      dispatch(incrementIndex());
-    },
     dispatch: (action) => {
       dispatch(action);
     },
