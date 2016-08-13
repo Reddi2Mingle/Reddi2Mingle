@@ -16,7 +16,7 @@ module.exports = (socket, io, app) => {
   app.get('/createPotentials', potentialController.createPotentials);
   app.post('/swipe', swipeController.likeResponse)
   app.get('/dummyData', userController.sendDummyData);
-  app.post('/swipe', swipe.likeResponse)
+  app.post('/swipe', swipeController.likeResponse)
   // app.get('/match', swipe.showMatches)
 
 	// send all requests to index.html so browserHistory in React Router works
