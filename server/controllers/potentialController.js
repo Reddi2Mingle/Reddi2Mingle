@@ -13,7 +13,7 @@ module.exports = {
   	    }
   	}, function (err, results) {
   		  if (err) {
-  		    console.log("issue with: ", err)
+  		    console.log("issue with: ", err);
   		  } else {
   		    console.log('list of potentials', results);
   		  }
@@ -21,7 +21,7 @@ module.exports = {
   },
 
   queryPotentials: (req, res) => {
-  	redditId = req.query.redditId
+  	redditId = req.query.redditId;
     db.cypher({
   	    query: 'MATCH (user:Person)<-[r:POTENTIAL]->(potential:Person) WHERE user.redditId={redditId} RETURN potential LIMIT 20;',
   	    params: {
@@ -29,7 +29,7 @@ module.exports = {
   	    }
   	}, function (err, results) {
   		  if (err) {
-  		    console.log("issue with: ", err)
+  		    console.log("issue with: ", err);
   		  } else {
           var potentials = results.map(function(item) {
             return item.potential.properties;
@@ -37,6 +37,6 @@ module.exports = {
   		    res.send(potentials);
   		  }
   	});
-  }
+  },
 
-}
+};

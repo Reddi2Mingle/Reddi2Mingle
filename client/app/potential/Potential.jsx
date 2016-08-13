@@ -16,7 +16,7 @@ export default class Potential extends Component {
   }
 
   render() {
-    const { name, photo, subreddits, isFetching } = this.props;
+    const { name, photo, subreddits, isFetching, showNextUser } = this.props;
     return (
       <div>
       {isFetching ?
@@ -42,10 +42,20 @@ export default class Potential extends Component {
               </div>
             </div>
             <div className="swipe">
-              <button>
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  showNextUser();
+                }}
+              >
                 <img src="../../../assets/img/reddit-sad.png" alt="Reddit Logo with Sad Smile" style={{height: 50}}/>
               </button>
-              <button>
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  showNextUser();
+                }}
+              >
                 <img src="../../../assets/img/reddit-love.png" alt="Reddit Logo with Heart Eyes" style={{height: 50}}/>
               </button>
             </div>
@@ -64,5 +74,6 @@ Potential.propTypes = {
   subreddits: PropTypes.array,
   changeName: PropTypes.func,
   dispatch: PropTypes.func,
+  showNextUser: PropTypes.func,
   isFetching: PropTypes.bool,
 };

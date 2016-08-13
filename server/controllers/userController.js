@@ -216,12 +216,13 @@ module.exports = {
         query: 'MATCH (user:Person) WHERE user.redditId={redditId} RETURN user;',
         params: {
           redditId: redditId,
-        }
+        },
       }, function (err, results) {
         if (err) {
           console.log('issue with retrieving', err);
         } else {
           var aggregateInfo = results[0].user.properties;
+          console.log('aggregateInfo', aggregateInfo);
           aggregateInfo['subreddits'] = subreddits;
           aggregateInfo['matches'] = matches;
           res.send(aggregateInfo);

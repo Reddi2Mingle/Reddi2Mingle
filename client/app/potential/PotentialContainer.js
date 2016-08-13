@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { updateUsername } from './PotentialActions';
+import { incrementIndex } from './PotentialActions';
 import Potential from './Potential';
 
 const mapStateToProps = (state) => (
   {
-    name: state.potential.name,
-    photo: state.potential.photo,
-    subreddits: state.potential.subreddits,
+    name: state.potentials.people[state.potentials.index].name,
+    photo: state.potentials.people[state.potentials.index].photo,
+    subreddits: state.potentials.people[state.potentials.index].subreddits,
     isFetching: state.user.fetching,
     userLoggedIn: !!state.user.redditId,
   }
@@ -14,8 +14,8 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    changeName: () => {
-      dispatch(updateUsername('Tyler'));
+    showNextUser: () => {
+      dispatch(incrementIndex());
     },
     dispatch: (action) => {
       dispatch(action);
