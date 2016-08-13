@@ -1,5 +1,16 @@
-$primaryColor: #EAEAEA;
+/* ----- Color Variables ----- */
+
+$primaryColor: #EF6124;
 $secondaryColor: #383838;
-$accentColor: #7AD05D;
+$accentColor: #EF6124;
+
+/* ----- Fonts ----- */
+
 $accentFont: 'Crushed', cursive;
 $font: 'Open Sans', sans-serif;
+
+/* ----- Z-Indexes ----- */
+
+$zindex-top:         10;
+$zindex-top-higher:  100;
+$zindex-top-highest: 1000;

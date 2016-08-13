@@ -45,6 +45,7 @@ export default class Potential extends Component {
   }
 }
 
+
 Potential.propTypes = {
   name: PropTypes.string,
   redditId: PropTypes.string,

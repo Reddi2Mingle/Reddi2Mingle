@@ -2,3 +2,10 @@
   background: $color url($image) center/cover no-repeat; 
   height: 100vh;
 }
+
+@mixin absolute-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
