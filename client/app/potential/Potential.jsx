@@ -53,7 +53,7 @@ export default class Potential extends Component {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  dispatch(handleSwipe(userId, index, lastPotential));
+                  dispatch(handleSwipe(userId, potentialId, 'no', index, lastPotential));
                 }}
               >
                 <img src="../../../assets/img/reddit-sad.png" alt="Reddit Logo with Sad Smile" style={{ height: 50 }}/>
@@ -61,7 +61,7 @@ export default class Potential extends Component {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  dispatch(handleSwipe(userId, index, lastPotential));
+                  dispatch(handleSwipe(userId, potentialId, 'yes', index, lastPotential));
                 }}
               >
                 <img src="../../../assets/img/reddit-love.png" alt="Reddit Logo with Heart Eyes" style={{ height: 50 }}/>

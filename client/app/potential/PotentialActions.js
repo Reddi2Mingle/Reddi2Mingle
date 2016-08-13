@@ -18,12 +18,12 @@ function requestPotentials() {
   };
 }
 
-export function fetchPotentials(redditId) {
+export function fetchPotentials(userId) {
   console.log('Fetching potentials!');
   return dispatch => {
     dispatch(requestPotentials());
     dispatch(resetIndex());
-    axios.get('/potentials?redditId=' + redditId)
+    axios.get('/potentials?redditId=' + userId)
       .then((response) => {
         console.log('fetchPotentials response.data: ', response.data);
         dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });
@@ -34,12 +34,28 @@ export function fetchPotentials(redditId) {
   };
 }
 
-export function handleSwipe(userId, index, lastPotential) {
+function sendSwipe(userId, potentialId, swipe) {
+  console.log('userId', userId, 'potentialId', potentialId, 'swipe', swipe);
+  axios.post('/swipe', {
+    redditId: userId,
+    potentialId: potentialId,
+    swipe: swipe,
+  })
+  .then((response) => {
+    console.log('sendSwipe response is:', response);
+  })
+  .catch((err) => {
+    console.log('sendSwipe error', err);
+  });
+}
+
+export function handleSwipe(userId, potentialId, swipe, index, lastPotential) {
   return dispatch => {
     if (index === lastPotential) {
       dispatch(fetchPotentials(userId));
     } else {
       dispatch(incrementIndex());
     }
+    sendSwipe(userId, potentialId, swipe);
   };
 }

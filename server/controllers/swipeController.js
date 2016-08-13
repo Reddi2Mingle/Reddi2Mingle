@@ -3,12 +3,14 @@ const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 
 module.exports = {
   likeResponse: (req, res) => {
-    // params: redditId, potentialId, swipe (need from client)
-    const r = req.query;
 
-    const user = r.redditId;
-    const potential = r.potentialId;
-    const swipe = r.swipe;
+    // params: redditId, potentialId, swipe (need from client)
+    console.log('request body in likeResponse', req.body); 
+    // const r = req.query;
+
+    const user = req.body.redditId;
+    const potential = req.body.potentialId;
+    const swipe = req.body.swipe;
 
     //check potentialid's response to user. Swipe will either be [r: INTEREST {SWIPE: 'yes' || 'no'} ] 
     //if swipe left, designate two-way relationship of NOT_INTERESTED
