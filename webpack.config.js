@@ -34,7 +34,7 @@ const common = {
       },
       {
         test: /\.scss$/,
-        loaders: ['sytle', 'css', 'autoprefixer', 'sass'],
+        loaders: ['style', 'css', 'autoprefixer', 'sass'],
       },
     ],
   },

@@ -1,15 +1,27 @@
 import React, { PropTypes } from 'react';
 
 const Match = ({ username, picUrl, subreddits, messageUrl }) => (
-  <div>
-    <h1>Think {username}'s hot?</h1>
-    <img src={picUrl} style={{ display: 'block' }} />
-    <button><a href={messageUrl}>Message Me!</a></button>
-    <ul>
-      {subreddits.map((subreddit) => (
-        <li>{subreddit}</li>
-      ))}
-    </ul>
+  <div className="match-card">
+    <img src={picUrl} className="small-profile-image" />
+    <div className="match-info">
+      <h3>{username}</h3>
+      <div className="potential-more-info">
+        <i className="material-icons md-48 orange">favorite</i>
+        <span className="heart-text"> r/ </span>
+        <div className="small-subreddit-list">
+          <ul>
+            {subreddits.map((subreddit) => (
+              <span>{subreddit}</span>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <button className="message">
+      <a href={messageUrl}>
+        Direct Message
+      </a>
+    </button>
   </div>
 );
 

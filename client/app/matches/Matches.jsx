@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react';
 import Match from './Match';
 
 const Matches = ({ matches }) => (
-  <div>
-   <h1>Matches</h1>
+  <div className="matches-view">
     {matches.map((match) => (
       <Match
         username={match.username}

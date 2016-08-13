@@ -1,0 +1,242 @@
+@import "reset.import.scss";
+@import "variables.import.scss";
+@import "mixins.import.scss";
+
+/***** App-wide Styles *****/
+
+h1 {
+  font-family: $accentFont;
+  font-size: 3em;
+  color: white;
+}
+
+h2 {
+  @include font-default;
+  font-family: $font;
+  text-transform: uppercase;
+  color: white;
+}
+
+
+h3 {
+  @include font-default;
+  font-family: $font;
+  text-transform: uppercase;
+  color: black;
+}
+
+p {
+  @include font-default;
+  font-family: $font;
+  color: black;
+}
+
+a {
+  @include font-default;
+  font-family: $font;
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+}
+
+button {
+  border: 2px solid white;
+  background: none;
+  padding: 10px 30px;
+}
+
+button:hover {
+  background-color: $accentColor;
+}
+
+.material-icons.md-48 { 
+  font-size: 48px; 
+}
+
+.material-icons.orange { 
+  color: $accentColor; 
+}
+
+.white {
+  color: white;
+}
+
+.black {
+  color: black;
+}
+
+.app { // to be delete later
+  background: black;
+}
+
+/***** Sign-Up View *****/
+
+.signup-view {
+  @include background('/assets/img/bonfire.jpg');
+  @include absolute-center;
+}
+
+.signup-info {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 75px 0;
+    h1 {
+      text-transform: uppercase;
+      font-weight:300;
+      line-height:1;
+      font-size: 7em;
+      color: white;
+    }
+    button {
+      width: 100%;
+      margin-top: 10px;
+    }
+}
+
+.button-group {
+  display: flex;
+  flex-flow: column nowrap; 
+  align-items: center;
+}
+
+/***** Photo-Drop View *****/
+
+.photo-drop-view {
+  @include background('/assets/img/shooting-photo.jpg');
+  @include absolute-center;
+  align-content: space-around;
+}
+
+.dropzone {
+  margin-top: 20px;
+  padding: 50px; 
+  text-align: center;
+  border: 5px dashed white;
+  width: 500px;
+  height: 250px;
+    &-active {
+      background: rbga(255, 255, 255, 0.5);
+    }
+}
+
+/***** Potentials View *****/
+
+.potential-view { // will need to change for different background later
+  @include absolute-center;
+  background-color: #1a1a1a;
+  height: 100vh;
+  width: 100vw;
+}
+
+.potential-card {
+  width: 30%;
+}
+
+.full-profile-image {
+  border: 15px solid white;
+  flex: 0.75;
+  max-width: 100%;
+  height: auto;
+  // box-shadow: 5px 0 50px 5px $accentColor;
+}
+
+.potential-info {
+  background: white;
+  padding: 0px 15px 15px 15px;
+  width: 100%;
+  margin-top: -5px;
+  h3 {
+    padding-bottom: 10px;
+  }
+}
+
+.potential-more-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  i {
+    width: 75px;
+  }
+}
+
+.heart-text {
+  @include font-default;
+  @extend .white;
+  font-family: $font;
+  margin-left: -50px;
+  margin-top: 10px;
+}
+
+.subreddit-list {
+  color: black;
+  width: 100%;
+  margin-left: 20px;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  span {
+    @extend .black;
+    font-family: $font;
+    font-size: 1em;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    padding: 5px 5px;
+  }
+}
+
+.swipe {
+  display: flex;
+  justify-content: space-between;
+  button {
+    width: 100%;
+    margin: 10px;
+  }
+}
+
+/***** Matches View *****/
+
+.match-card {
+  width: 30%;
+}
+
+.matches-view { // will need to change for different background later
+  background-color: #1a1a1a;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: space-around;
+  justify-content: center;
+  flex-flow: row wrap;
+  padding-top: 100px;
+}
+
+.small-profile-image {
+  border: 15px solid white;
+  flex: 0.75;
+  max-width: 275px;
+  height: auto;
+}
+
+.match-info {
+  background: white;
+  padding: 0px 15px 15px 15px;
+  width: 275px;
+  margin-top: -5px;
+  h3 {
+    padding-bottom: 10px;
+  }
+}
+
+.small-subreddit-list {
+  @extend .subreddit-list;
+  font-size: 0.9em;
+}
+
+.message {
+  margin-top: 10px;
+  margin-left: 40px;
+}

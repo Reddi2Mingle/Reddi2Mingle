@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 
 export default () => (
-  <div>
-    <h1>Reddi 2 Mingle</h1>
+  <div className="app">
+    <h1 >Reddi2Mingle</h1>
     <ul>
       <li><Link to="/">Homeyio</Link></li>
       <li><Link to="/login">Login</Link></li>
