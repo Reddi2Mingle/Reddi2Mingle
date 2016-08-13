@@ -5,8 +5,6 @@ const bluebird = require('bluebird');
 const neo4j = require('neo4j');
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 
-// MATCH (user:Person {redditId:"104r17"}) MATCH (a:Subreddit {name:"Welcome to Fat People Stories. "}) MERGE (user)-[:FOLLOWS]->(a) RETURN user, a;
-
 const dummyData = {
   redditID: 'e4e3k6i4em3k',
   name: 'Jen',
@@ -113,7 +111,7 @@ module.exports = {
 
   createNewUser: (profile, accessToken, refreshToken) => {
     db.cypher({
-  	    query: "MERGE (user:Person { redditId: '104r17' }) ON CREATE SET user.name = {username} ON CREATE SET user.redditId = {redditId} ON CREATE SET user.refreshToken = {refreshToken} ON CREATE SET user.accessToken = {accessToken} ON MATCH SET user.accessToken = {accessToken} RETURN user;",
+  	    query: "MERGE (user:Person { redditId: {redditId} }) ON CREATE SET user.name = {username} ON CREATE SET user.redditId = {redditId} ON CREATE SET user.refreshToken = {refreshToken} ON CREATE SET user.accessToken = {accessToken} ON MATCH SET user.accessToken = {accessToken} RETURN user;",
   	    params: {
   	    	username: profile.name,
   	    	redditId: profile.id,
@@ -129,7 +127,7 @@ module.exports = {
 
           // Temporary fix to create relationships to the new user
           request({
-            url: 'http://localhost:3000/subreddits',
+            url: 'http://localhost:3000/subreddits?redditId=' + profile.id,
             method: 'GET',
           }, function(err, response) {
             if (err) throw err;
@@ -165,7 +163,7 @@ module.exports = {
 
   // Get list of subscribed subreddits from reddit and add to the database
   createUserSubreddits: (req, res) => {
-    var redditId = '104r17'
+    var redditId = req.query.redditId;
     // Request list of subscribed subreddits from Reddit
     queryAccessToken(redditId).then(function(accessToken) {
       var token = accessToken;
@@ -207,10 +205,6 @@ module.exports = {
           var saveFollows = matchArray.join("") + followsArray.join("");
           saveFollows = saveFollows + ";";
 
-
-          //MATCH (user:Person {redditId:"104r17"}) MATCH (a:Subreddit {name:"test1"}) MATCH (b:Subreddit {name:"test2"}) 
-          //... MERGE (user)-[:FOLLOWS]->(a) MERGE (user)-[:FOLLOWS]->(b) RETURN user, a, b;
-
           // Save the subreddits database
           db.cypher({
               query: saveSubreddits
@@ -230,7 +224,7 @@ module.exports = {
                            
                         // DELETE THIS TEMPORARY REQUEST TO LINK UP POTENTIAL CREATION
                         request({
-                          url: 'http://localhost:3000/createPotentials?redditId=104r17',
+                          url: 'http://localhost:3000/createPotentials?redditId=' + redditId,
                           method: 'GET',
                         }, function(err, response) {
                           if (err) throw err;
