@@ -25,18 +25,19 @@ export default class Potential extends Component {
         </div>
            :
         <div className="potential-view"> 
-          <div className="potential-card">
-            <img src={picUrl} className="full-profile-image" />
-            <div className="potential-info">
-              <h3>{username}</h3>
-              <div className="potential-more-info">
-                <i className="material-icons md-48">favorite</i>
-                <div className="subreddit-list">
-                  <ul>
-                    {subreddits.map((subreddit) => (
-                      <span>{subreddit}</span>
-                    ))}
-                  </ul>
+            <div className="potential-card">
+              <img src={picUrl} className="full-profile-image" />
+              <div className="potential-info">
+                <h3>{username}</h3>
+                <div className="potential-more-info">
+                  <i className="material-icons md-48 orange">favorite</i>
+                  <span> r/ </span>
+                  <div className="subreddit-list">
+                    <ul>
+                      {subreddits.map((subreddit) => (
+                        <span>{subreddit}</span>
+                      ))}
+                    </ul>
                 </div>
               </div>
             </div>
