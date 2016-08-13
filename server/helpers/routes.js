@@ -12,6 +12,7 @@ module.exports = (socket, io, app) => {
   app.get('/userInfo', userController.queryUserInfo);
   app.get('/subreddits', userController.createUserSubreddits);
   app.get('/potentials', potentialController.queryPotentials);
+  app.get('/createPotentials', potentialController.createPotentials);
 
   app.get('/dummyData', userController.sendDummyData);
 
