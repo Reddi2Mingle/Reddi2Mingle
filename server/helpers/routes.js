@@ -11,7 +11,7 @@ module.exports = (socket, io, app) => {
   app.get('/auth/reddit', authController.crypto);
   app.get('/auth/reddit/callback', passport.authenticate('reddit', { failureRedirect: '/signup'}), authController.login);
   app.get('/userInfo', userController.queryUserInfo);
-  app.get('/subreddits', userController.createUserSubreddits);
+  // app.get('/subreddits', userController.createUserSubreddits);
   app.get('/potentials', potentialController.queryPotentials);
   app.get('/createPotentials', potentialController.createPotentials);
   app.post('/swipe', swipeController.likeResponse);

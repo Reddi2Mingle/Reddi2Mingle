@@ -5,8 +5,7 @@ const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 
 module.exports = {
 
-	createPotentials: (req, res) => {
-  	redditId = req.query.redditId
+	createPotentials: (redditId) => {
     db.cypher({
   	    query: 'MATCH (user:Person)-[r:FOLLOWS]->(subreddit)<-[:FOLLOWS]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r;',
   	    params: {
@@ -17,7 +16,6 @@ module.exports = {
   		    console.log("issue with: ", err)
   		  } else {
   		    console.log('list of potentials', results);
-          res.send(results);
   		  }
   	});
   },
