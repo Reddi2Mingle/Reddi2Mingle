@@ -27,20 +27,7 @@ module.exports = {
     //   login page.  Otherwise, the primary route function function will be called and
     //   will redirect the user to the home page.
 
-  cb: (req, res, next) => {
-  // Check for origin via state token (currently commented as session.state is undefined)
-  // if (req.query.state == req.session.state){
-    passport.authenticate('reddit', {
-      successRedirect: '/',
-      failureRedirect: '/signup',
-    })(req, res, next);
-    // } else {
-    //   next( new Error(403) );
-    // }
-  },
-  //   Login page.  Otherwise, the primary route function function will be called,
-  //   which, in this example, will redirect the user to the home page.
   login: (req, res) => {
-        res.redirect('/?userLoggedIn=true&username=' + req.user.name + '&redditId=' + req.user.id)
-      }
+    res.redirect('/?userLoggedIn=true&username=' + req.user.name + '&redditId=' + req.user.id)
+  }
 }
