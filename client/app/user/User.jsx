@@ -3,10 +3,10 @@ import Dropzone from 'react-dropzone';
 
 export default class User extends Component {
   render() {
-    const { username, picUrl, updatePicUrl } = this.props;
+    const { name, picUrl, updatePicUrl } = this.props;
     return (
       <div>
-        {username}'s Profile
+        {name}'s Profile
         <Dropzone onDrop={(files) => {
           console.log(files);
           updatePicUrl(files[0].preview);
@@ -20,6 +20,6 @@ export default class User extends Component {
 }
 
 User.propTypes = {
-  username: PropTypes.string,
+  name: PropTypes.string,
   updatePicUrl: PropTypes.func,
 };

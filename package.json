@@ -7,7 +7,7 @@
     "start": "webpack -p && nodemon -L server/server.js",
     "watch": "webpack --progress --colors --watch",
     "server": "nodemon server/server.js",
-    "build": "webpack-dev-server --inline --hot --content-base client",
+    "build": "webpack-dev-server --inline --hot --content-base client/build/",
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch"
   },
@@ -51,6 +51,7 @@
     "webpack-validator": "^2.2.7"
   },
   "dependencies": {
+    "axios": "^0.13.1",
     "babel-eslint": "^6.1.2",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",

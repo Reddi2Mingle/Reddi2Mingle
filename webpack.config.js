@@ -11,6 +11,7 @@ const PATHS = {
   app: path.join(__dirname, 'client'),
   entry: path.join(__dirname, 'client/entry'),
   build: path.join(__dirname, 'client/build'),
+  public: '/assets/',
 };
 
 const common = {
@@ -19,6 +20,7 @@ const common = {
   },
   output: {
     path: PATHS.build,
+    publicPath: PATHS.public,
     filename: 'bundle.js',
   },
   devtool: 'source-map',

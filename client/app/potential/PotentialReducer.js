@@ -1,14 +1,14 @@
 const initialState = {
   redditID: 'e3e2k235ei3',
-  username: 'Neil',
-  picUrl: 'https://scontent.xx.fbcdn.net/v/t1.0-9/621_587359599669_2374_n.jpg?oh=d27ee8341201840fab85bd7e9fafe8df&oe=58554BA7',
+  name: 'Neil',
+  photo: 'https://scontent.xx.fbcdn.net/v/t1.0-9/11047927_10153655602919178_241309560116044723_n.jpg?oh=7a50c394dd2027315f4b6d2ad9d85364&oe=5816B760',
   subreddits: ['blackPeopleTwitter', 'NSFW', 'leatherDaddyLand'],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_USERNAME': {
-      return { ...state, username: action.payload };
+      return { ...state, name: action.payload };
     }
     case 'ADD_SUBREDDIT': {
       return {
