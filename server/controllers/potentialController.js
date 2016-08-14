@@ -23,24 +23,20 @@ module.exports = {
   queryPotentials: (req, res) => {
   	redditId = req.query.redditId;
     db.cypher({
-  	    query: 'MATCH (user:Person)<-[r:POTENTIAL]->(potential:Person) WHERE user.redditId={redditId} RETURN potential LIMIT 2;',
+  	    query: `MATCH (user:Person {redditId: "${redditId}" })-[f:FOLLOWS]->(s:Subreddit)<-[:FOLLOWS]-(potential:Person) RETURN potential,user,s LIMIT 2;`,
   	    params: {
   	    	redditId: redditId,
   	    }
-  	}, (err, results) => {
+  	}, (err, potentials) => {
   		  if (err) {
   		    console.log("issue with: ", err);
   		  } else {
             if (err) {
               console.log("issue with: ", err);
             } else {
-              // console.log('list of potentials', potentials);
 
-              var arrayOfPotentials = []; //{ "name": "David Ludgren, 
-              // "photo": "https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png",
-              // "redditId": "8" 
-              // "common_subreddits": [] }
-              var finalPotentials = [];  //['Casper']
+              var arrayOfPotentials = []; 
+              var finalPotentials = [];  
 
               for (var i = 0; i < potentials.length; i++) {
                 var personObj = {};
