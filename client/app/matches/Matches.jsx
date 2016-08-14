@@ -23,6 +23,14 @@ export default class Matches extends Component {
             subreddits={match.subreddits}
           />
         ))}
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <Link to="/potential">
+            <i className="material-icons md-48 black">keyboard_arrow_left</i>
+          </Link>
+          <Link to="/matches">
+            <i className="material-icons md-48 black">keyboard_arrow_right</i>
+          </Link>
+        </div>
       </div>
     );
   }
