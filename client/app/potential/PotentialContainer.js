@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { incrementIndex } from './PotentialActions';
 import Potential from './Potential';
 
 const mapStateToProps = (state) => (

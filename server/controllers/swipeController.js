@@ -77,7 +77,7 @@ module.exports = {
           });
         }
       }
-    })
+    });
     //Example response for 'MATCH' match
     // [
     //   {

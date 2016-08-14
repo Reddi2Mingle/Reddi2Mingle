@@ -3,13 +3,16 @@ import Matches from './Matches';
 
 const mapStateToProps = (state) => (
   {
-    matches: state.user.matches,
+    matches: state.matches,
+    userId: state.user.redditId,
   }
 );
 
 const mapDispatchToProps = (dispatch) => (
   {
-    
+    dispatch: (action) => {
+      dispatch(action);
+    },
   }
 );
 

@@ -11,7 +11,7 @@ module.exports = {
   	    params: {
   	    	redditId: redditId,
   	    }
-  	}, function (err, results) {
+  	}, (err, results) => {
   		  if (err) {
   		    console.log("issue with: ", err);
   		  } else {
@@ -30,19 +30,19 @@ module.exports = {
   	}, (err, potentials) => {
   		  if (err) {
   		    console.log("issue with: ", err);
+       res.send([]);
   		  } else {
             if (err) {
               console.log("issue with: ", err);
             } else {
-
               var arrayOfPotentials = []; 
               var finalPotentials = [];  
 
               for (var i = 0; i < potentials.length; i++) {
                 var personObj = {};
-                let potential = potentials[i].potential.properties.name;
-                let repeatPotential = arrayOfPotentials.indexOf(potential);
-                let sub = potentials[i].s.properties.name;
+                const potential = potentials[i].potential.properties.name;
+                const repeatPotential = arrayOfPotentials.indexOf(potential);
+                const sub = potentials[i].s.properties.name;
                 personObj = potentials[i].potential.properties;
                 if (repeatPotential === -1) {
                   personObj['common_subreddits'] = [sub];
