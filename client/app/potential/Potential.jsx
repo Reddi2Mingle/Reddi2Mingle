@@ -50,7 +50,7 @@ export default class Potential extends Component {
                 </div>
               </div>
             </div>
-            <Link to="/matches">Matches</Link>
+            
             <div className="swipe">
               <button
                 onClick={e => {
@@ -69,6 +69,14 @@ export default class Potential extends Component {
                 <img src="../../../assets/img/reddit-love.png" alt="Reddit Logo with Heart Eyes" style={{ height: 50 }}/>
               </button>
             </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <Link to="/potential">
+              <i className="material-icons md-48 black">keyboard_arrow_left</i>
+            </Link>
+            <Link to="/matches">
+              <i className="material-icons md-48 black">keyboard_arrow_right</i>
+            </Link>
           </div>
         </div>
       }

@@ -16,9 +16,10 @@ const Match = ({ name, photo }) => (
       </div>
     </div>
     <button className="message">
-        Direct Message
+      <a href="http://www.google.com">  Direct Message </a>
     </button>
   </div>
+  
 );
 
 Match.propTypes = {
