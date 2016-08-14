@@ -7,7 +7,7 @@ module.exports = {
 
 	createPotentials: (redditId) => {
     db.cypher({
-  	    query: 'MATCH (user:Person)-[r:FOLLOWS]->(subreddit)<-[:FOLLOWS]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r;',
+  	    query: 'MATCH (user:Person)-[r:FOLLOWS]->(s: subreddit)<-[:FOLLOWS]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r, s;',
   	    params: {
   	    	redditId: redditId,
   	    }
@@ -27,14 +27,43 @@ module.exports = {
   	    params: {
   	    	redditId: redditId,
   	    }
-  	}, function (err, results) {
+  	}, (err, results) => {
   		  if (err) {
   		    console.log("issue with: ", err);
   		  } else {
-          var potentials = results.map(function(item) {
-            return item.potential.properties;
-          })
-  		    res.send(potentials);
+            if (err) {
+              console.log("issue with: ", err);
+            } else {
+              // console.log('list of potentials', potentials);
+
+              var arrayOfPotentials = []; //{ "name": "David Ludgren, 
+              // "photo": "https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png",
+              // "redditId": "8" 
+              // "common_subreddits": [] }
+              var finalPotentials = [];  //['Casper']
+
+              for (var i = 0; i < potentials.length; i++) {
+                var personObj = {};
+                let potential = potentials[i].potential.properties.name;
+                let repeatPotential = arrayOfPotentials.indexOf(potential);
+                let sub = potentials[i].s.properties.name;
+                personObj = potentials[i].potential.properties;
+                if (repeatPotential === -1) {
+                  personObj['common_subreddits'] = [sub];
+                  arrayOfPotentials.push(potential)
+                  finalPotentials.push(personObj);
+                } else {
+                  //for multiple subreddit commonalities: 
+                  for (var j=0; j < finalPotentials.length; j++) {
+                    //if potential is in potentials array, push it to existing potential's subreddit array
+                    if (finalPotentials[j].name === potential) {
+                      finalPotentials[j].common_subreddits.push(sub);
+                    }
+                  }
+                }
+              }
+              res.send(finalPotentials);
+            }
   		  }
   	});
   },

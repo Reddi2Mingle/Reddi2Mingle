@@ -209,6 +209,7 @@ module.exports = {
   queryUserInfo: (req, res) => {
     const redditId = req.query.redditId
     var subreddits = [];
+    console.log('my reddit id:',redditId);
     // First query database for subreddit connections
     queryUserSubreddits(redditId).then(function(subreddits) {
       // Query database for the user's name, photo, etc.
@@ -221,8 +222,8 @@ module.exports = {
         if (err) {
           console.log('issue with retrieving', err);
         } else {
+          console.log('results:',results);
           var aggregateInfo = results[0].user.properties;
-          console.log('aggregateInfo', aggregateInfo);
           aggregateInfo['subreddits'] = subreddits;
           aggregateInfo['matches'] = matches;
           res.send(aggregateInfo);

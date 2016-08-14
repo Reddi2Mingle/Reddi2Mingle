@@ -11,6 +11,7 @@ module.exports = {
   //
   //   Note that the 'state' option is a Reddit-specific requirement.
   crypto: (req, res, next) => {
+    console.log('in crypto auth controller')
     req.session.state = crypto.randomBytes(32).toString('hex');
     passport.authenticate('reddit', {
       state: req.session.state,
