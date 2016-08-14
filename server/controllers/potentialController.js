@@ -11,7 +11,7 @@ module.exports = {
   	    params: {
   	    	redditId: redditId,
   	    }
-  	}, function (err, results) {
+  	}, (err, results) => {
   		  if (err) {
   		    console.log("issue with: ", err);
   		  } else {
@@ -30,6 +30,7 @@ module.exports = {
   	}, (err, potentials) => {
   		  if (err) {
   		    console.log("issue with: ", err);
+       res.send([]);
   		  } else {
             if (err) {
               console.log("issue with: ", err);

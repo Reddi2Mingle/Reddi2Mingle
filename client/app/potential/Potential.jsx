@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { fetchUser } from '../user/UserActions';
 import { fetchPotentials, handleSwipe } from './PotentialActions';
+import { Link } from 'react-router';
 
 export default class Potential extends Component {
   constructor(props) {
@@ -49,6 +50,7 @@ export default class Potential extends Component {
                 </div>
               </div>
             </div>
+            <Link to="/matches">Matches</Link>
             <div className="swipe">
               <button
                 onClick={e => {
