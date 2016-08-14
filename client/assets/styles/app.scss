@@ -66,6 +66,8 @@ button:hover {
 }
 
 .app { // to be delete later
+  @include absolute-center;
+  height: 100vh;
   background: black;
 }
 
@@ -120,6 +122,11 @@ button:hover {
     &-active {
       background: rbga(255, 255, 255, 0.5);
     }
+}
+
+.dropzone:hover {
+  @extend .dropzone;
+  background-color: rgba(222, 222, 222, .2);
 }
 
 /***** Potentials View *****/
@@ -191,6 +198,7 @@ button:hover {
 .swipe {
   display: flex;
   justify-content: space-between;
+  width: 107%;
   button {
     width: 100%;
     margin: 10px;
