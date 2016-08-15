@@ -1,11 +1,9 @@
 import React, { PropTypes, Component } from 'react';
+import { Link } from 'react-router';
 import Match from './Match';
 import { fetchMatches } from './MatchesActions';
 
 export default class Matches extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
     const { dispatch, userId } = this.props;
@@ -24,7 +22,7 @@ export default class Matches extends Component {
           />
         ))}
         <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <Link to="/potential">
+          <Link to="/matchMaker">
             <i className="material-icons md-48 black">keyboard_arrow_left</i>
           </Link>
           <Link to="/matches">
@@ -46,5 +44,3 @@ Matches.propTypes = {
   dispatch: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
 };
-
-export default Matches;

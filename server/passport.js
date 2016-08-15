@@ -4,8 +4,7 @@ require('../api_keys');
 
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
-const redditController = require('./controllers/userController.js')
-
+const redditController = require('./controllers/userController');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -15,12 +14,12 @@ const redditController = require('./controllers/userController.js')
 //   have a database of user records, the complete Reddit profile is
 //   serialized and deserialized.
 passport.serializeUser((user, done) => {
-  console.log('serialized user');
+  console.log('server/passport.js 18: serialized user');
   done(null, user);
 });
 
 passport.deserializeUser((obj, done) => {
-  console.log('deserialized user');
+  console.log('server/passport.js 23: deserialized user');
   done(null, obj);
 });
 

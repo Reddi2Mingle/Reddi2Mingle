@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Potential from './Potential';
+import MatchMaker from './MatchMaker.jsx';
 
 const mapStateToProps = (state) => (
   {
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    dispatch: (action) => {
+    dispatch: action => {
       dispatch(action);
     },
   }
@@ -27,6 +27,6 @@ const mapDispatchToProps = (dispatch) => (
 const PotentialContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Potential);
+)(MatchMaker);
 
 export default PotentialContainer;

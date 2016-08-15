@@ -2,7 +2,6 @@ const passport = require('passport');
 const crypto = require('crypto');
 
 module.exports = {
-
   // GET /auth/reddit
   //   Use passport.authenticate() as route middleware to authenticate the
   //   request.  The first step in Reddit authentication will involve
@@ -11,7 +10,6 @@ module.exports = {
   //
   //   Note that the 'state' option is a Reddit-specific requirement.
   crypto: (req, res, next) => {
-    
     req.session.state = crypto.randomBytes(32).toString('hex');
     passport.authenticate('reddit', {
       state: req.session.state,
@@ -26,6 +24,6 @@ module.exports = {
     //   will redirect the user to the home page.
 
   login: (req, res) => {
-    res.redirect('/potential?userLoggedIn=true&username=' + req.user.name + '&redditId=' + req.user.id);
+    res.redirect(`/matchMaker?userLoggedIn=true&username=${req.user.name}&redditId=${req.user.id}`);
   },
 };
