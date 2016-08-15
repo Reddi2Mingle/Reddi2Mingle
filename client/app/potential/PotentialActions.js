@@ -23,7 +23,7 @@ export function fetchPotentials(userId) {
   return dispatch => {
     dispatch(requestPotentials());
     dispatch(resetIndex());
-    axios.get('/potentials?redditId=' + userId)
+    axios.get(`/potentials?redditId=${userId}`)
       .then((response) => {
         console.log('fetchPotentials response.data: ', response.data);
         dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });

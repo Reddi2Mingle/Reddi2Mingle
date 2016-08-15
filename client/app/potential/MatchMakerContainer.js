@@ -5,7 +5,7 @@ const mapStateToProps = (state) => (
   {
     name: state.potentials.people[state.potentials.index].name,
     photo: state.potentials.people[state.potentials.index].photo,
-    subreddits: state.potentials.people[state.potentials.index].subreddits,
+    common_subreddits: state.potentials.people[state.potentials.index].common_subreddits,
     potentialId: state.potentials.people[state.potentials.index].redditId,
     userId: state.user.redditId,
     fetchingUser: state.user.fetching,

@@ -21,7 +21,7 @@ export default class MatchMaker extends Component {
       potentialId,
       userId,
       photo,
-      subreddits,
+      common_subreddits,
       fetchingUser,
       fetchingPotentials,
       dispatch,
@@ -48,11 +48,13 @@ export default class MatchMaker extends Component {
                 <i className="material-icons md-48 orange">favorite</i>
                 <span className="heart-text"> r/ </span>
                 <div className="subreddit-list">
-
+                  {common_subreddits.map(sub => (
+                    <li>{sub}</li>
+                  ))}
                 </div>
               </div>
             </div>
-            
+
             <div className="swipe">
               <button
                 onClick={e => {
@@ -100,7 +102,7 @@ MatchMaker.propTypes = {
   potentialId: PropTypes.string,
   userId: PropTypes.string,
   photo: PropTypes.string,
-  subreddits: PropTypes.array,
+  common_subreddits: PropTypes.array,
   changeName: PropTypes.func,
   dispatch: PropTypes.func,
   fetchingUser: PropTypes.bool,
