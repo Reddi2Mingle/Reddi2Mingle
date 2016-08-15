@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import Potential from './Potential';
+import MatchMaker from './MatchMaker.jsx';
 
 const mapStateToProps = (state) => (
   {
     name: state.potentials.people[state.potentials.index].name,
     photo: state.potentials.people[state.potentials.index].photo,
-    subreddits: state.potentials.people[state.potentials.index].subreddits,
+    common_subreddits: state.potentials.people[state.potentials.index].common_subreddits,
     potentialId: state.potentials.people[state.potentials.index].redditId,
     userId: state.user.redditId,
     fetchingUser: state.user.fetching,
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    dispatch: (action) => {
+    dispatch: action => {
       dispatch(action);
     },
   }
@@ -27,6 +27,6 @@ const mapDispatchToProps = (dispatch) => (
 const PotentialContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Potential);
+)(MatchMaker);
 
 export default PotentialContainer;

@@ -8,7 +8,7 @@ const initialState = {
       redditId: '',
       name: '',
       photo: '',
-      subreddits: ['', '', ''],
+      common_subreddits: ['', '', ''],
     },
   ],
 };

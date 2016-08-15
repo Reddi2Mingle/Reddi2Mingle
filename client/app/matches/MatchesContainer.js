@@ -10,7 +10,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    dispatch: (action) => {
+    dispatch: action => {
       dispatch(action);
     },
   }

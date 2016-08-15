@@ -4,6 +4,7 @@ const io = require('socket.io')(server);
 const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
 require('./passport');
+require('./helpers/seed');
 
 // Invoke middleware function on app to 'use' all the middleware functions
 middleware(app);
@@ -15,9 +16,8 @@ io.on('connection', (socket) => {
 
 // App now listening on port 80
 server.listen(3000, (err) => {
-  err ? console.log('server error', err) :
-  console.log('Server listening on', process.env.PORT || 3000);
+  err ? console.log(`server/server.js 19: server error: ${err}`) :
+  console.log(`Server listening on ${process.env.PORT || 3000}`);
 });
 
-require('./helpers/seed');
 module.exports = io;

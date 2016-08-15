@@ -1,7 +1,6 @@
 const request = require('request');
-const bluebird = require('bluebird');
-const potentialController = require('./potentialController');
 const neo4j = require('neo4j');
+const potentialController = require('./potentialController');
 
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
@@ -60,116 +59,114 @@ const matches = [
   },
 ];
 
-
 // Request list of user's subscribed subreddits
-queryUserSubreddits = (redditId) => {
-  return new Promise(function(resolve, reject) {
+const queryUserSubreddits = (redditId) => (
+  new Promise((resolve, reject) => {
     db.cypher({
-      query: 'MATCH (user:Person)-[r:FOLLOWS]->(subreddit) WHERE user.redditId={redditId} RETURN subreddit;',
+      query: 'MATCH (user:Person)-[r:FOLLOWS]->(subreddit) \
+              WHERE user.redditId={redditId} \
+              RETURN subreddit;',
       params: {
-        redditId: redditId,
+        redditId,
       },
-    }, function (err, subreddits) {
+    }, (err, subreddits) => {
       if (err) {
-        console.log('error');
+        console.log('server/userController.js 74: error');
         reject(err);
       } else {
-        var subredditList = subreddits.map(function (item) {
-          return item.subreddit.properties.name;
-        });
+        const subredditList = subreddits.map(item => (item.subreddit.properties.name));
         resolve(subredditList);
       }
     });
-  });
-};
+  })
+);
 
 // Get the user's temporary access token
-queryAccessToken = (redditId) => {
-  return new Promise(function(resolve, reject) {
+const queryAccessToken = (redditId) => (
+  new Promise((resolve, reject) => {
     db.cypher({
       query: 'MATCH (n:Person) WHERE n.redditId={redditId} return n.accessToken;',
       params: {
-        redditId: redditId,
+        redditId,
       },
-    }, function (err, results) {
+    }, (err, results) => {
       if (err) {
-        console.log('issue with retrieving', err);
+        console.log(`server/userController.js 94: issue with retrieving ${err}`);
         reject(err);
       } else {
-        console.log('here is the accessToken', results[0]['n.accessToken']);
+        console.log(`server/userController.js 97: here is the accessToken ${results[0]['n.accessToken']}`);
         resolve(results[0]['n.accessToken']);
       }
-    })
+    });
   })
-},
+);
 
 // Get list of subscribed subreddits from reddit and add to the database
-createUserSubreddits = (redditId) => {
+const createUserSubreddits = (redditId) => {
   // var redditId = req.query.redditId;
   // Request list of subscribed subreddits from Reddit
-  queryAccessToken(redditId).then(function(accessToken) {
+  queryAccessToken(redditId).then((accessToken) => {
     request({
-        url: 'https://@oauth.reddit.com/subreddits/mine',
-        method: 'GET',
-        headers: { 
-            "authorization": "bearer " + accessToken,
-            'User-Agent': 'javascript:reddi2mingle:v1.0.0 (by /u/neil_white)'
-        }
-      }, function(err, response) {
-        // Create array of the subreddits
-        var rawData = JSON.parse(response.body).data.children;
-        var subredditList = rawData.map(function(item) {
-          return item.data.display_name;
-        })
-        // Build cypher query to save new subreddits to database
-        var mergeArray = [];
-        var returnArray = [' RETURN '];
+      url: 'https://@oauth.reddit.com/subreddits/mine',
+      method: 'GET',
+      headers: {
+        'authorization': `bearer ${accessToken}`,
+        'User-Agent': 'javascript:reddi2mingle:v1.0.0 (by /u/neil_white)',
+      },
+    }, (err, response) => {
+      // Create array of the subreddits
+      const rawData = JSON.parse(response.body).data.children;
+      const subredditList = rawData.map(item => (item.data.display_name));
+      // Build cypher query to save new subreddits to database
+      var mergeArray = [];
+      var returnArray = [' RETURN '];
 
-        subredditList.forEach(function(item, index) {
-          mergeArray.push(" MERGE ("+String.fromCharCode(97 + index)+":Subreddit { name: '"+item+"' })")
-          returnArray.push(String.fromCharCode(97 + index).toString() + ", ");
-        })
+      subredditList.forEach((item, index) => {
+        mergeArray.push(` MERGE (${String.fromCharCode(97 + index)}:Subreddit { name: '${item}' })`);
+        returnArray.push(`${String.fromCharCode(97 + index).toString()}, `);
+      });
 
-        var saveSubreddits = mergeArray.join("") + returnArray.join("");
-        saveSubreddits = saveSubreddits.slice(0, saveSubreddits.length - 2) + ";";
+      var saveSubreddits = mergeArray.join('') + returnArray.join('');
+      saveSubreddits = saveSubreddits.slice(0, saveSubreddits.length - 2) + ';';
 
-        // Build cypher query to save follows relationship between new user and their subscribed subreddits
+      // Build cypher query to save follows relationship
+      // between new user and their subscribed subreddits
 
-        var matchArray = ['MATCH (user:Person {redditId:"'+redditId+'"}) '];
-        var followsArray = []
+      var matchArray = [`MATCH (user:Person {redditId:"${redditId}"}) `];
+      var followsArray = [];
 
-        subredditList.forEach(function(item, index) {
-          matchArray.push(" MATCH ("+String.fromCharCode(97 + index)+":Subreddit { name: '"+item+"' })")
-          followsArray.push(" MERGE (user)-[:FOLLOWS]->("+String.fromCharCode(97 + index).toString() + ")");
-        })
+      subredditList.forEach((item, index) => {
+        matchArray.push(` MATCH (${String.fromCharCode(97 + index)}:Subreddit { name: '${item}' })`);
+        followsArray.push(` MERGE (user)-[:FOLLOWS]->(${String.fromCharCode(97 + index).toString()})`);
+      });
 
-        var saveFollows = matchArray.join("") + followsArray.join("");
-        saveFollows = saveFollows + ";";
+      var saveFollows = matchArray.join('') + followsArray.join('');
+      saveFollows += ';';
 
-        // Save the subreddits database
-        db.cypher({
-            query: saveSubreddits
-        }, function (err, results) {
+      // Save the subreddits database
+      db.cypher({
+          query: saveSubreddits,
+      }, (err, results) => {
+        if (err) {
+          console.log(`server/userController.js 150: issue with adding ${results}: ${err}`);
+        } else {
+          console.log(`server/userController.js 152: subreddits saved to database, results: ${results}`);
+          // Save the follow relationships for (user)->(subreddits) to the database
+          db.cypher({
+              query: saveFollows,
+          }, (err, results) => {
             if (err) {
-              console.log("issue with adding " + profile.name + ": ",err)
-            } else {
-              console.log('user is saved to database', results);
-              // Save the follow relationships for (user)->(subreddits) to the database
-              db.cypher({
-                  query: saveFollows
-              }, function (err, results) {
-                  if (err) {
-                    console.log("issue with adding " + profile.name + ": ",err)
-                  } else {
-                    console.log('user is saved to database', results);
-                      potentialController.createPotentials(redditId);
-                  }
-              });
-            }
-        });
-      })
-  })
-},
+              console.log(`server/userController.js 158: issue with adding ${results}: ${err}`);
+            } else {
+              console.log(`server/userController.js 160: subreddit relationships saved to database, results:  ${results}`);
+              potentialController.createPotentials(redditId);
+            }
+          });
+        }
+      });
+    });
+  });
+};
 
 module.exports = {
   sendDummyData: (req, res) => {
@@ -178,51 +175,54 @@ module.exports = {
 
   createNewUser: (profile, accessToken, refreshToken) => {
     db.cypher({
-  	    query: "MERGE (user:Person { redditId: {redditId} }) ON CREATE SET user.name = {username} ON CREATE SET user.redditId = {redditId} ON CREATE SET user.refreshToken = {refreshToken} ON CREATE SET user.accessToken = {accessToken} ON MATCH SET user.accessToken = {accessToken} RETURN user;",
-  	    params: {
-  	    	username: profile.name,
-  	    	redditId: profile.id,
-  	    	accessToken: accessToken,
-  	    	refreshToken: refreshToken,
-          photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
-  	    }
-  	}, function (err, results) {
-  		  if (err) {
-  		    console.log("issue with adding " + profile.name + ": ", err);
-  		  } else {
-  		    console.log('user is saved to database', results);
-
-          // Temporary fix to create relationships to the new user
-          // request({
-          //   url: 'http://localhost:3000/subreddits?redditId=' + profile.id,
-          //   method: 'GET',
-          // }, function(err, response) {
-          //   if (err) throw err;
-          // });
-
-          createUserSubreddits(profile.id);
-
-  		  }
-  	});
+      query: 'MERGE (user:Person { redditId: {redditId} }) \
+              ON CREATE SET user.name = {username} \
+              ON CREATE SET user.redditId = {redditId} \
+              ON CREATE SET user.refreshToken = {refreshToken} \
+              ON CREATE SET user.accessToken = {accessToken} \
+              ON MATCH SET user.accessToken = {accessToken} \
+              RETURN user;',
+      params: {
+        username: profile.name,
+        redditId: profile.id,
+        accessToken,
+        refreshToken,
+        photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
+      },
+    }, (err, results) => {
+      if (err) {
+        console.log(`server/userController.js 193: issue with adding ${profile.name}: ${err}`);
+      } else {
+        console.log(`server/userController.js 195: user is actually saved to database, results: ${results}`);
+        // Temporary fix to create relationships to the new user
+        // request({
+        //   url: 'http://localhost:3000/subreddits?redditId=' + profile.id,
+        //   method: 'GET',
+        // }, function(err, response) {
+        //   if (err) throw err;
+        // });
+        createUserSubreddits(profile.id);
+      }
+    });
   },
 
   queryUserInfo: (req, res) => {
-    const redditId = req.query.redditId
-    var subreddits = [];
-    console.log('my reddit id:',redditId);
+    const redditId = req.query.redditId;
+    // var subreddits = [];
+    console.log(`server/userController.js 211: my reddit id: ${redditId}`);
     // First query database for subreddit connections
-    queryUserSubreddits(redditId).then(function(subreddits) {
+    queryUserSubreddits(redditId).then((subreddits) => {
       // Query database for the user's name, photo, etc.
       db.cypher({
         query: 'MATCH (user:Person) WHERE user.redditId={redditId} RETURN user;',
         params: {
-          redditId: redditId,
+          redditId,
         },
-      }, function (err, results) {
+      }, (err, results) => {
         if (err) {
-          console.log('issue with retrieving', err);
+          console.log(`server/userController.js 222: issue with retrieving, err: ${err}`);
         } else {
-          console.log('results:',results);
+          console.log(`server/userController.js 224: results: ${results}`);
           var aggregateInfo = results[0].user.properties;
           aggregateInfo['subreddits'] = subreddits;
           aggregateInfo['matches'] = matches;
@@ -237,14 +237,14 @@ module.exports = {
     db.cypher({
       query: 'MATCH (n:Person) WHERE n.redditId={redditId} return n.refreshToken;',
       params: {
-        redditId: redditId,
-      }
-    }, function (err, results) {
+        redditId,
+      },
+    }, (err, results) => {
       if (err) {
-        console.log('issue with retrieving', err);
+        console.log(`server/userController.js 243: issue with retrieving, err: ${err}`);
       } else {
-        console.log('here is the accessToken', results);
+        console.log(`server/userController.js 245: here is the accessToken: ${results}`);
       }
-    })
-  }
+    });
+  },
 };

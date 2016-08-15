@@ -14,8 +14,8 @@ const peopleSubs = [
     name: 'Neil Whitehead',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
-      { name: 'fatpeoplestories', readers: 1000000 },
-      { name: 'BlackPeopleTwitter', readers: 123 },
+      { name: 'funny', readers: 1000000 },
+      { name: 'showerthoughts', readers: 123 },
       { name: 'malefashionadvice', readers: 579003 },
     ],
   },
@@ -40,7 +40,7 @@ const peopleSubs = [
     name: 'Sunny Singh',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
-      { name: 'fatpeoplestories', readers: 1000000 },
+      { name: 'funny', readers: 1000000 },
       { name: 'malefashionadvice', readers: 579003 },
       { name: 'LifeProTips', readers: 8230648 },
     ],
