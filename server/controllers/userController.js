@@ -2,8 +2,6 @@ const request = require('request');
 const neo4j = require('neo4j');
 const potentialController = require('./potentialController');
 
-const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
-const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 
 const dummyData = {
