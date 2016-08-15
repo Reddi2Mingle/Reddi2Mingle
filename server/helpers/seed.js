@@ -1,3 +1,4 @@
+const seraph = require('seraph');
 const model = require('seraph-model');
 
 const db = require('../db/config').db;
@@ -9,16 +10,16 @@ Person.setUniqueKey('redditId');
 
 const peopleSubs = [
   {
-    redditId: '0',
+    redditId: "0",
     name: 'Neil Whitehead',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
-      { name: 'fatpeoplestories', readers: 1000000 },
-      { name: 'BlackPeopleTwitter', readers: 123 },
+      { name: 'funny', readers: 1000000 },
+      { name: 'showerthoughts', readers: 123 },
       { name: 'malefashionadvice', readers: 579003 },
     ],
   },
-  { redditId: '1',
+  { redditId: "1",
     name: 'Jeremy Toce',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -27,7 +28,7 @@ const peopleSubs = [
       { name: 'glutenfree', readers: 94592 },
     ],
   },
-  { redditId: '2',
+  { redditId: "2",
     name: 'Tyler Becks',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -35,16 +36,16 @@ const peopleSubs = [
       { name: 'malefashionadvice', readers: 579003 },
     ],
   },
-  { redditId: '3',
+  { redditId: "3",
     name: 'Sunny Singh',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
-      { name: 'fatpeoplestories', readers: 1000000 },
+      { name: 'funny', readers: 1000000 },
       { name: 'malefashionadvice', readers: 579003 },
       { name: 'LifeProTips', readers: 8230648 },
     ],
   },
-  { redditId: '4',
+  { redditId: "4",
     name: 'Casper Holgreen',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -52,7 +53,7 @@ const peopleSubs = [
       { name: 'EvolveSustain', readers: 1345 },
     ],
   },
-  { redditId: '5',
+  { redditId: "5",
     name: 'Trevor Healy',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -60,14 +61,14 @@ const peopleSubs = [
       { name: 'Shirtoftheday', readers: 2315 },
     ],
   },
-  { redditId: '6',
+  { redditId: "6",
     name: 'Sompop Corn',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
       { name: 'dadjokes', readers: 274865 },
     ],
   },
-  { redditId: '7',
+  { redditId: "7",
     name: 'Jay Arella',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -75,7 +76,7 @@ const peopleSubs = [
       { name: 'dadjokes', readers: 274865 },
     ],
   },
-  { redditId: '8',
+  { redditId: "8",
     name: 'David Ludgren',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -84,7 +85,7 @@ const peopleSubs = [
       { name: 'dadjokes', readers: 274865 },
     ],
   },
-  { redditId: '9',
+  { redditId: "9",
     name: 'Shea Hawkins',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
     subs: [
@@ -94,6 +95,7 @@ const peopleSubs = [
     ],
   },
 ];
+
 
 Person.findAll((err, allPeople) => {
   if (err) {
@@ -114,7 +116,9 @@ Person.findAll((err, allPeople) => {
         //     }
         //   });
         // }
-        for (const per of peopleSubs) {
+        for (var i = 0; i < peopleSubs.length; i++) {
+          var per = peopleSubs[i];
+
           Person.save(per, (err, saved) => {
             if (err) {
               console.log('error in saving: ', per, 'because of ERROR:', err);
