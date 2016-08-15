@@ -148,7 +148,7 @@ const createUserSubreddits = (redditId) => {
           query: saveSubreddits,
       }, (err, results) => {
         if (err) {
-          console.log(`server/userController.js 150: issue with adding ${profile.name}: ${err}`);
+          console.log(`server/userController.js 150: issue with adding ${results}: ${err}`);
         } else {
           console.log(`server/userController.js 152: subreddits saved to database, results: ${results}`);
           // Save the follow relationships for (user)->(subreddits) to the database
@@ -156,7 +156,7 @@ const createUserSubreddits = (redditId) => {
               query: saveFollows,
           }, (err, results) => {
             if (err) {
-              console.log(`server/userController.js 158: issue with adding ${profile.name}: ${err}`);
+              console.log(`server/userController.js 158: issue with adding ${results}: ${err}`);
             } else {
               console.log(`server/userController.js 160: subreddit relationships saved to database, results:  ${results}`);
               potentialController.createPotentials(redditId);
