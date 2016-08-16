@@ -3,7 +3,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
-require('./passport');
+require('./components/auth/passport');
 require('./helpers/seed');
 
 // Invoke middleware function on app to 'use' all the middleware functions

@@ -23,7 +23,7 @@ export function fetchPotentials(userId) {
   return dispatch => {
     dispatch(requestPotentials());
     dispatch(resetIndex());
-    axios.get(`/potentials?redditId=${userId}`)
+    axios.get(`/api/potentials?redditId=${userId}`)
       .then((response) => {
         console.log('fetchPotentials response.data: ', response.data);
         dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });
@@ -35,7 +35,7 @@ export function fetchPotentials(userId) {
 }
 
 function sendSwipe(userId, potentialId, swipe) {
-  axios.post('/swipe', {
+  axios.post('/api/swipe', {
     redditId: JSON.stringify(userId),
     potentialId: JSON.stringify(potentialId),
     swipe: JSON.stringify(swipe),

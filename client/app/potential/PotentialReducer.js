@@ -14,6 +14,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  console.log('STATE IS:',state)
   switch (action.type) {
     case 'INCREMENT_INDEX': {
       return {
