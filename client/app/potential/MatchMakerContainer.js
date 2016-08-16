@@ -7,16 +7,7 @@ import * as PotentialActions from './PotentialActions';
 const mapStateToProps = state => {
   if (state.potentials.people.length === 0) {
     return {
-      name: '',
-      photo: '',
-      common_subreddits: [],
-      potentialId: '',
-      userId: '',
-      fetchingUser: state.user.fetching,
-      userLoggedIn: !!state.user.redditId,
-      fetchingPotentials: state.potentials.fetching,
-      index: 0,
-      lastPotential: 0,
+      noMatches: true,
     };
   }
 
@@ -31,6 +22,7 @@ const mapStateToProps = state => {
     fetchingPotentials: state.potentials.fetching,
     index: state.potentials.index,
     lastPotential: state.potentials.people.length - 1,
+    peopleArray: state.potentials.people,
   };
 };
 

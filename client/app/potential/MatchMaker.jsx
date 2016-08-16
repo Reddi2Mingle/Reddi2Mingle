@@ -27,7 +27,15 @@ export default class MatchMaker extends Component {
       potentialActions,
       index,
       lastPotential,
+      noMatches,
     } = this.props;
+    if (noMatches) {
+      return (
+        <div>
+          <h2>No more people...</h2>
+        </div>
+      );
+    }
     return (
       <div>
       {(fetchingUser || fetchingPotentials) ?
