@@ -5,8 +5,8 @@ import * as UserActions from '../UserActions';
 
 const mapStateToProps = (state) => (
   {
-    username: state.user.username,
-    picUrl: state.user.picUrl,
+    gender: state.user.username,
+    preference: state.user.picUrl,
   }
 );
 
