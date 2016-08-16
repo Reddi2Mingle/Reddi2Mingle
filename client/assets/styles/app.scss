@@ -167,18 +167,6 @@ button:hover {
   span:hover {
     background-color: $accentColor;
   }
-  span:active{
-    background-color: $accentColor;
-  }
-  a {
-    background-color: rgba(255, 255, 255, 0.2); 
-    padding: 30px 30px 100px 30px;
-    margin: 10px 30px 30px 30px;
-    border: 0;
-  }
-  a:visited, a:hover, a:active, a:focus {
-    background-color: $accentColor;
-  }
 }
 /***** Potentials View *****/
 

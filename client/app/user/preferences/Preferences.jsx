@@ -11,12 +11,12 @@ export default class Preferences extends Component {
             I am a
           </h2>
           <div className="preferences-options">
-            <a>
+            <span>
               <img
                 src="../../../assets/img/mustache.png"
                 alt="mustache"
               />
-            </a>
+            </span>
             <span>
               <img
                 src="../../../assets/img/lips.png"
