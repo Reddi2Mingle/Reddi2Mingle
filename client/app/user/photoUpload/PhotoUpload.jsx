@@ -10,7 +10,6 @@ export default class PhotoUpload extends Component {
         <div>
           <Dropzone
             onDrop={(files) => {
-              console.log('files', files);
               userActions.handleImageUpload(files[0]);
             }}
             multiple={false}
