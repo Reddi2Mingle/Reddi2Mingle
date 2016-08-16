@@ -22,6 +22,13 @@ export default class PhotoUpload extends Component {
               Drag and drop your favorite selfie here
             </h2>
           </Dropzone>
+          <div>
+            {picUrl === '' ? null :
+              <div>
+                <img src={picUrl} />
+              </div>
+            }
+          </div>
         </div>
       </div>
     );
