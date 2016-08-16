@@ -1,21 +1,23 @@
 const path = require('path');
-const passport = require('passport');
-const authController = require('../controllers/authController');
+
+const authRouter = require('../controllers/auth/authRouter');
+// const authController = require('../controllers/auth/authController');
 const userController = require('../controllers/userController');
-const potentialController = require('../controllers/potentialController');
-const swipeController = require('../controllers/swipeController');
-const matchController = require('../controllers/matchController');
+const potentialRouter = require('../controllers/potentialMatch/potentialRouter');
+const swipeRouter = require('../controllers/swipe/swipeRouter');
 
 module.exports = (socket, io, app) => {
-  app.get('/auth/reddit', authController.crypto);
-  app.get('/auth/reddit/callback', passport.authenticate('reddit', { failureRedirect: '/signup' }), authController.login);
+  app.use('/auth', authRouter);
+  app.use('/api/potentials', potentialRouter);
+  app.use('/api/swipe', swipeRouter);
+  app.get('/api/userInfo', userController.queryUserInfo); //change
+
+
   app.get('/dummyData', userController.sendDummyData);
-  app.get('/userInfo', userController.queryUserInfo);
+
+  // app.get('/auth/reddit', authController.crypto);
+  // app.get('/auth/reddit/callback', passport.authenticate('reddit', { failureRedirect: '/signup' }), authController.login);
   // app.get('/subreddits', userController.createUserSubreddits);
-  app.get('/potentials', potentialController.queryPotentials);
-  app.get('/createPotentials', potentialController.createPotentials);
-  app.post('/swipe', swipeController.likeResponse);
-  app.get('/dbmatches', matchController.showMatches);
 
 	// send all requests to index.html so browserHistory in React Router works
   app.get('*', (req, res) => {

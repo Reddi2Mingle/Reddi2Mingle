@@ -3,7 +3,7 @@ import axios from 'axios';
 export function fetchMatches(userId) {
   console.log('Fetching matches!');
   return dispatch => {
-    axios.get(`/dbmatches?redditId=${userId}`)
+    axios.get(`/api/swipe/matches?redditId=${userId}`)
       .then((response) => {
         console.log(`fetchMatches response.data: ${response.data}`);
         dispatch({ type: 'FETCH_MATCHES_FULFILLED', payload: response.data });
