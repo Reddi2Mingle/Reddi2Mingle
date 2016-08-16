@@ -2,6 +2,27 @@ import React, { Component } from 'react';
 
 
 export default class Preferences extends Component {
+  constructor() {
+    super(props);
+    this.state = {
+      genderMale: false,
+      genderFemale: false,
+      preferenceMale: false,
+      preferenceFemale: false,
+      active: false,
+    };
+  }
+
+  onClick(option, selection) {
+    this.setState({
+
+    })
+  }
+
+  handleSubmit() {
+
+  }
+
   render() {
     return (
       <div className="preferences-view">
@@ -42,6 +63,7 @@ export default class Preferences extends Component {
             </span>
           </div>
         </div>
+        <button> Submit </button>
       </div>
     );
   }
