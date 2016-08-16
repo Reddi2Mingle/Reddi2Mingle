@@ -144,13 +144,42 @@ button:hover {
 }
 
 .preferences-container {
+  @include absolute-center;
   padding: 50px;
   border: 3px solid white;
-  width: 500px;
-  height: 500px; 
-  justify-content: center;
+  width: 600px;
+  height: 400px; 
+  margin-top: 20px;
 }
 
+.preferences-options {
+  display: flex;
+  flex-direction: row;
+  img {
+    width: 150px;
+    height: auto;
+  }
+  span {
+    background-color: rgba(255, 255, 255, 0.2); 
+    padding: 30px 30px 100px 30px;
+    margin: 10px 30px 30px 30px;
+  }
+  span:hover {
+    background-color: $accentColor;
+  }
+  span:active{
+    background-color: $accentColor;
+  }
+  a {
+    background-color: rgba(255, 255, 255, 0.2); 
+    padding: 30px 30px 100px 30px;
+    margin: 10px 30px 30px 30px;
+    border: 0;
+  }
+  a:visited, a:hover, a:active, a:focus {
+    background-color: $accentColor;
+  }
+}
 /***** Potentials View *****/
 
 .potential-view { // will need to change for different background later
