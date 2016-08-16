@@ -24,6 +24,7 @@ export function fetchUser(redditId) {
 }
 
 export function updatePicUrl(url) {
+  console.log('updatePicUrl', url);
   return {
     type: 'UPDATE_PIC_URL',
     payload: url,

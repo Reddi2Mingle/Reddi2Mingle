@@ -9,9 +9,9 @@ export default class PhotoUpload extends Component {
         <h1> Show Off Your Best Shot </h1>
         <div>
           <Dropzone
-            onDrop={(file) => {
-              console.log('files', file);
-              userActions.handleImageUpload(file);
+            onDrop={(files) => {
+              console.log('files', files);
+              userActions.handleImageUpload(files[0]);
             }}
             multiple={false}
             accept="image/*"
