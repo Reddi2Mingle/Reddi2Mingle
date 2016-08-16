@@ -135,6 +135,22 @@ button:hover {
   background-color: rgba(222, 222, 222, .2);
 }
 
+/***** Preferences View *****/
+
+.preferences-view {
+  @include background('/assets/img/holding-hands.jpg');
+  @include absolute-center;
+  align-content: center;
+}
+
+.preferences-container {
+  padding: 50px;
+  border: 3px solid white;
+  width: 500px;
+  height: 500px; 
+  justify-content: center;
+}
+
 /***** Potentials View *****/
 
 .potential-view { // will need to change for different background later
