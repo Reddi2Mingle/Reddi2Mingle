@@ -1,17 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
 
-export default class User extends Component {
+export default class PhotoUpload extends Component {
   render() {
-    const { name, picUrl, updatePicUrl } = this.props;
+    const { name, picUrl } = this.props;
     return (
       <div className="photo-drop-view">
         <h1> Show Off Your Best Shot </h1>
         <div>
-          <Dropzone onDrop={(files) => {
-            console.log(files);
-            updatePicUrl(files[0].preview);
-          }} className="dropzone" activeClassName="dropzone-active">
+          <Dropzone
+            onDrop={(files) => {
+              console.log(files);
+            }}
+            className="dropzone"
+            activeClassName="dropzone-active"
+          >
             <h2>
               Drag and drop your favorite selfie here
             </h2>
@@ -22,7 +25,7 @@ export default class User extends Component {
   }
 }
 
-User.propTypes = {
+PhotoUpload.propTypes = {
   name: PropTypes.string,
-  updatePicUrl: PropTypes.func,
+  userActions: PropTypes.object,
 };

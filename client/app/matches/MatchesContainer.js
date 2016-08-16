@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Matches from './Matches';
+import * as MatchesActions from './MatchesActions';
 
 const mapStateToProps = (state) => (
   {
@@ -10,9 +12,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    dispatch: action => {
-      dispatch(action);
-    },
+    matchesActions: bindActionCreators(MatchesActions, dispatch),
   }
 );
 

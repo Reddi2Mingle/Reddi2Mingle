@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
-import User from './User';
-import { updatePicUrl, fetchUser } from './UserActions';
+import { bindActionCreators } from 'redux';
+import PhotoUpload from './PhotoUpload';
+import * as UserActions from './UserActions';
 
 const mapStateToProps = (state) => (
   {
@@ -11,18 +12,13 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => (
   {
-    updatePicUrl: () => {
-      dispatch(updatePicUrl('Tyler'));
-    },
-    fetchUser: () => {
-      dispatch(fetchUser('Tyler'));
-    },
+    userActions: bindActionCreators(UserActions, dispatch),
   }
 );
 
 const UserContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(User);
+)(PhotoUpload);
 
 export default UserContainer;

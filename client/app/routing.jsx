@@ -6,7 +6,7 @@ import Signup from './stateless/Signup';
 import Login from './stateless/Login';
 import MatchMakerContainer from './potential/MatchMakerContainer';
 import MatchesContainer from './matches/MatchesContainer';
-import UserContainer from './user/UserContainer';
+import PhotoUploadContainer from './user/PhotoUploadContainer';
 
 export default () => (
   <Router history={browserHistory}>
@@ -16,6 +16,6 @@ export default () => (
     <Route path="/matchMaker" component={MatchMakerContainer} />
     <Route path="/matchMaker:redditId" component={MatchMakerContainer} />
     <Route path="/matches" component={MatchesContainer} />
-    <Route path="/profile" component={UserContainer} />
+    <Route path="/photoUpload" component={PhotoUploadContainer} />
   </Router>
 );

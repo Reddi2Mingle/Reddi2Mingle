@@ -1,17 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { fetchUser } from '../user/UserActions';
-import { fetchPotentials, handleSwipe } from './PotentialActions';
 
 export default class MatchMaker extends Component {
 
   componentWillMount() {
-    const { dispatch, location: { query }, userLoggedIn } = this.props;
+    const { potentialActions, userActions, location: { query }, userLoggedIn } = this.props;
     const redditId = query.redditId;
-    dispatch(fetchPotentials(redditId));
+    // dispatch(fetchPotentials(redditId));
+    potentialActions.fetchPotentials(redditId);
     console.log('UserLogginIn: ', userLoggedIn);
     if (!userLoggedIn) {
-      dispatch(fetchUser(redditId));
+      userActions.fetchUser(redditId);
     }
   }
 
@@ -24,13 +23,13 @@ export default class MatchMaker extends Component {
       common_subreddits,
       fetchingUser,
       fetchingPotentials,
-      dispatch,
+      potentialActions,
       index,
       lastPotential,
     } = this.props;
     return (
       <div>
-      {fetchingUser || fetchingPotentials ?
+      {(fetchingUser || fetchingPotentials) ?
         <div>
           <h2>Loading...</h2>
         </div>
@@ -47,11 +46,11 @@ export default class MatchMaker extends Component {
               <div className="potential-more-info">
                 <i className="material-icons md-48 orange">favorite</i>
                 <span className="heart-text"> r/ </span>
-                <div className="subreddit-list">
+                <ul className="subreddit-list">
                   {common_subreddits.map(sub => (
-                    <li>{sub}</li>
+                    <span>{sub}</span>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
 
@@ -59,7 +58,7 @@ export default class MatchMaker extends Component {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  dispatch(handleSwipe(userId, potentialId, 'no', index, lastPotential));
+                  potentialActions.handleSwipe(userId, potentialId, 'no', index, lastPotential);
                 }}
               >
                 <img
@@ -71,7 +70,7 @@ export default class MatchMaker extends Component {
               <button
                 onClick={e => {
                   e.preventDefault();
-                  dispatch(handleSwipe(userId, potentialId, 'yes', index, lastPotential));
+                  potentialActions.handleSwipe(userId, potentialId, 'yes', index, lastPotential);
                 }}
               >
                 <img
@@ -104,10 +103,12 @@ MatchMaker.propTypes = {
   photo: PropTypes.string,
   common_subreddits: PropTypes.array,
   changeName: PropTypes.func,
-  dispatch: PropTypes.func,
   fetchingUser: PropTypes.bool,
   fetchingPotentials: PropTypes.bool,
   userLoggedIn: PropTypes.bool,
   index: PropTypes.number,
   lastPotential: PropTypes.number,
+  userActions: PropTypes.object,
+  potentialActions: PropTypes.object,
+  location: PropTypes.object,
 };
