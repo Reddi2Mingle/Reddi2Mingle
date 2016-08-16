@@ -1,12 +1,11 @@
 const swipeRouter = require('express').Router();
-// const authModel = require('./authModel');
+// const swipeModel = require('./swipeModel');
 const swipeController = require('./swipeController');
-const matchController = require('./matchController');
 
 // Define API routes to /swipe
 
 swipeRouter.post('/', swipeController.likeResponse);
-swipeRouter.get('/matches', matchController.showMatches);
+swipeRouter.get('/matches', swipeController.showMatches);
 
 module.exports = swipeRouter;
 

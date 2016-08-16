@@ -1,6 +1,6 @@
 const request = require('request');
 const neo4j = require('neo4j');
-const potentialController = require('./potentialMatch/potentialController');
+const potentialController = require('../potentialMatch/potentialController');
 
 const db = new neo4j.GraphDatabase('http://neo4j:neo4j@localhost:7474');
 
