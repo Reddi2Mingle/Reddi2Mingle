@@ -3,15 +3,18 @@ import Dropzone from 'react-dropzone';
 
 export default class PhotoUpload extends Component {
   render() {
-    const { name, picUrl } = this.props;
+    const { name, picUrl, userActions } = this.props;
     return (
       <div className="photo-drop-view">
         <h1> Show Off Your Best Shot </h1>
         <div>
           <Dropzone
-            onDrop={(files) => {
-              console.log(files);
+            onDrop={(file) => {
+              console.log('files', file);
+              userActions.handleImageUpload(file);
             }}
+            multiple={false}
+            accept="image/*"
             className="dropzone"
             activeClassName="dropzone-active"
           >
@@ -27,5 +30,6 @@ export default class PhotoUpload extends Component {
 
 PhotoUpload.propTypes = {
   name: PropTypes.string,
+  picUrl: PropTypes.string,
   userActions: PropTypes.object,
 };
