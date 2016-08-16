@@ -8,6 +8,7 @@ import MatchesContainer from './matches/MatchesContainer';
 import PhotoUploadContainer from './user/photoUpload/PhotoUploadContainer';
 import requireAuthorization from './auth/RequireAuthorization';
 import CreatePassword from './auth/CreatePassword';
+import PreferencesContainer from './user/preferences/PreferencesContainer';
 
 export default () => (
   <Router history={browserHistory}>
@@ -17,5 +18,6 @@ export default () => (
     <Route path="/login" component={Login} />
     <Route path="/matches" component={requireAuthorization(MatchesContainer)} />
     <Route path="/photoUpload" component={PhotoUploadContainer} />
+    <Route path="/preferences" component={PreferencesContainer} />
   </Router>
 );
