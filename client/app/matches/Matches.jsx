@@ -1,13 +1,12 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import Match from './Match';
-import { fetchMatches } from './MatchesActions';
 
 export default class Matches extends Component {
 
   componentWillMount() {
-    const { dispatch, userId } = this.props;
-    dispatch(fetchMatches(userId));
+    const { matchesActions, userId } = this.props;
+    matchesActions.fetchMatches(userId);
   }
 
   render() {
@@ -41,6 +40,6 @@ Matches.propTypes = {
     messageUrl: PropTypes.string.isRequired,
     subreddits: PropTypes.array.isRequired,
   }).isRequired),
-  dispatch: PropTypes.func.isRequired,
+  matchesActions: PropTypes.object.isRequired,
   userId: PropTypes.string.isRequired,
 };
