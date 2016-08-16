@@ -9,6 +9,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  console.log('state', state, 'action', action.type);
   switch (action.type) {
     case 'UPDATE_PIC_URL': {
       return { ...state, photo: action.payload };

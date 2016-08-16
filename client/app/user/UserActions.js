@@ -23,26 +23,29 @@ export function fetchUser(redditId) {
   };
 }
 
-export function updatePicUrl(url) {
-  console.log('updatePicUrl', url);
-  return {
-    type: 'UPDATE_PIC_URL',
-    payload: url,
-  };
-}
+// function updatePicUrl(url) {
+//   console.log('updatePicUrl', url);
+//   return {
+//     type: 'UPDATE_PIC_URL',
+//     payload: url,
+//   };
+// }
 
 export function handleImageUpload(file) {
   const upload = request.post(CLOUDINARY_UPLOAD_URL)
                         .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
                         .field('file', file);
-  upload.end((err, response) => {
-    if (err) {
-      console.error(err);
-    }
+  return dispatch => {
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
 
-    if (response.body.secure_url !== '') {
-      console.log('url', response.body.secure_url);
-      updatePicUrl(response.body.secure_url);
-    }
-  });
+      if (response.body.secure_url !== '') {
+        console.log('url', response.body.secure_url);
+        // updatePicUrl(response.body.secure_url);
+        dispatch({ type: 'UPDATE_PIC_URL', payload: response.body.secure_url });
+      }
+    });
+  };
 }

@@ -6,7 +6,7 @@ import Signup from './stateless/Signup';
 import Login from './stateless/Login';
 import MatchMakerContainer from './potential/MatchMakerContainer';
 import MatchesContainer from './matches/MatchesContainer';
-import PhotoUploadContainer from './user/PhotoUploadContainer';
+import PhotoUploadContainer from './user/photoUpload/PhotoUploadContainer';
 
 export default () => (
   <Router history={browserHistory}>
