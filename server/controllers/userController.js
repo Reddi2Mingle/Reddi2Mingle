@@ -2,7 +2,7 @@ const request = require('request');
 const neo4j = require('neo4j');
 const potentialController = require('./potentialMatch/potentialController');
 
-const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
+const db = new neo4j.GraphDatabase('http://neo4j:neo4j@localhost:7474');
 
 const dummyData = {
   redditID: 'e4e3k6i4em3k',
@@ -178,6 +178,7 @@ module.exports = {
               ON CREATE SET user.redditId = {redditId} \
               ON CREATE SET user.refreshToken = {refreshToken} \
               ON CREATE SET user.accessToken = {accessToken} \
+              ON CREATE SET user.photo = {photo} \
               ON MATCH SET user.accessToken = {accessToken} \
               RETURN user;',
       params: {
