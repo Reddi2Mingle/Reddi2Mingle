@@ -1,4 +1,8 @@
 import axios from 'axios';
+import request from 'superagent';
+
+const CLOUDINARY_UPLOAD_PRESET = 'snuivfbx';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dkzcwlehr/image/upload';
 
 function requestUser() {
   return {
@@ -19,9 +23,18 @@ export function fetchUser(redditId) {
   };
 }
 
-export function updatePicUrl(url) {
-  return {
-    type: 'UPDATE_PIC_URL',
-    payload: url,
+export function handleImageUpload(file) {
+  const upload = request.post(CLOUDINARY_UPLOAD_URL)
+                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+                        .field('file', file);
+  return dispatch => {
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+      if (response.body.secure_url !== '') {
+        dispatch({ type: 'UPDATE_PIC_URL', payload: response.body.secure_url });
+      }
+    });
   };
 }
