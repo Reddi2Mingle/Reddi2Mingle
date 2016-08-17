@@ -1,12 +1,27 @@
-const initialState = {
-  redditId: null,
-  name: '',
-  photo: '',
-  matches: [],
-  fetching: false,
-  fetched: false,
-  error: null,
-};
+const token = localStorage.getItem('token');
+let initialState;
+
+if (token) {
+  initialState = {
+    redditId: token,
+    name: '',
+    photo: '',
+    fetching: false,
+    fetched: false,
+    isAuthenticated: true,
+    error: null,
+  };
+} else {
+  initialState = {
+    redditId: null,
+    name: '',
+    photo: '',
+    fetching: false,
+    fetched: false,
+    isAuthenticated: false,
+    error: null,
+  };
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -25,10 +40,11 @@ export default (state = initialState, action) => {
         matches: action.payload.matches,
         fetching: false,
         fetched: true,
+        isAuthenticated: true,
       };
     }
     case 'FETCH_USER_REJECTED': {
-      return { ...state, fetching: false, error: action.payload };
+      return { ...state, fetching: false, fetched: false, error: action.payload };
     }
     default:
       return state;

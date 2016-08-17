@@ -1,3 +1,4 @@
+"use strict";
 const neo4j = require('neo4j');
 
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
@@ -20,10 +21,15 @@ module.exports = {
   },
 
   queryPotentials: (req, res) => {
-    redditId = req.query.redditId;
+    console.log('queryPotentials req.query: ', req.query);
+    const redditId = req.query.redditId;
     db.cypher({
-      query: `MATCH (user:Person {redditId: "${redditId}" })-[f:FOLLOWS]->(s:Subreddit)
-      <-[:FOLLOWS]-(potential:Person) RETURN potential,user,s LIMIT 2;`,
+      query: `MATCH (user:Person)
+      -[f:FOLLOWS]->(s:Subreddit)
+      <-[:FOLLOWS]-(potential:Person) 
+      WHERE user.redditId="${redditId}"
+      AND NOT (user)-[:INTEREST]->(potential)
+      RETURN potential,user,s LIMIT 2;`,
     }, (err, potentials) => {
       if (err) {
         console.log('issue with: ', err);

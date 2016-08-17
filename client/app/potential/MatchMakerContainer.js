@@ -7,16 +7,9 @@ import * as PotentialActions from './PotentialActions';
 const mapStateToProps = state => {
   if (state.potentials.people.length === 0) {
     return {
-      name: '',
-      photo: '',
-      common_subreddits: [],
-      potentialId: '',
-      userId: '',
-      fetchingUser: state.user.fetching,
-      userLoggedIn: !!state.user.redditId,
-      fetchingPotentials: state.potentials.fetching,
-      index: 0,
-      lastPotential: 0,
+      noMatches: true,
+      userId: state.user.redditId,
+      userInfoFetched: state.user.fetched,
     };
   }
 
@@ -27,8 +20,8 @@ const mapStateToProps = state => {
     potentialId: state.potentials.people[state.potentials.index].redditId,
     userId: state.user.redditId,
     fetchingUser: state.user.fetching,
-    userLoggedIn: !!state.user.redditId,
     fetchingPotentials: state.potentials.fetching,
+    userInfoFetched: state.user.fetched,
     index: state.potentials.index,
     lastPotential: state.potentials.people.length - 1,
   };
@@ -41,9 +34,9 @@ const mapDispatchToProps = (dispatch) => (
   }
 );
 
-const PotentialContainer = connect(
+const MatchMakerContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MatchMaker);
 
-export default PotentialContainer;
+export default MatchMakerContainer;

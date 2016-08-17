@@ -25,6 +25,6 @@ module.exports = {
     //   will redirect the user to the home page.
 
   login: (req, res) => {
-    res.redirect(`/matchMaker?userLoggedIn=true&username=${req.user.name}&redditId=${req.user.id}`);
+    res.redirect(`/photoUpload?redditId=${req.user.id}`);
   },
 };

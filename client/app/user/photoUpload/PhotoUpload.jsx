@@ -1,12 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
 
-
 export default class PhotoUpload extends Component {
+
+  componentWillMount() {
+    const { potentialActions, userActions, location: { query } } = this.props;
+    const redditId = query.redditId;
+    localStorage.setItem('token', redditId);
+    potentialActions.fetchPotentials(redditId);
+    userActions.fetchUser(redditId);
+  }
 
   submitAction(event) {
     event.preventDefault();
-    this.props.history.push('/matchMaker');
+    this.props.history.push('/');
+  }
+
+  saveToken(redditId) {
+    localStorage.setItem('token', redditId);
   }
 
   render() {
@@ -43,4 +54,6 @@ PhotoUpload.propTypes = {
   name: PropTypes.string,
   picUrl: PropTypes.string,
   userActions: PropTypes.object,
+  potentialActions: PropTypes.object,
+  location: PropTypes.object,
 };

@@ -17,7 +17,7 @@ module.exports = {
     // Potential's response check
     db.cypher({
       query: `MATCH (potential:Person {redditId: ${potential}})-[r:INTEREST]->
-      (user:Person {redditId: ${user}}) 
+      (user:Person {redditId: ${user}})
       RETURN r;`,
     }, (err, potentialswipe) => {
       if (err) {
@@ -30,7 +30,7 @@ module.exports = {
           console.log('relationship does not yet exist. Creating now.');
           db.cypher({
             query: `MATCH (user:Person { redditId: ${user} })
-            MERGE (potential:Person { redditId: ${potential} })
+            MATCH (potential:Person { redditId: ${potential} })
             CREATE UNIQUE (user)-[r:INTEREST {LIKE: ${swipe}}]->(potential)
             RETURN r;`,
           }, (error, relationship) => {
@@ -39,6 +39,7 @@ module.exports = {
             } else {
               console.log('Interest relationship was created/returned:', relationship);
               res.send(relationship);
+              // Here's an example of the relationship created from the second query: r
               // [
               //   {
               //     "r": {
