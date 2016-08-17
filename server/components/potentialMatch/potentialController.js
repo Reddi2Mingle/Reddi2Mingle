@@ -29,7 +29,7 @@ module.exports = {
       <-[:FOLLOWS]-(potential:Person) 
       WHERE user.redditId="${redditId}"
       AND NOT (user)-[:INTEREST]->(potential)
-      RETURN potential,user,s LIMIT 2;`,
+      RETURN potential,user,s LIMIT 10;`,
     }, (err, potentials) => {
       if (err) {
         console.log('issue with: ', err);
