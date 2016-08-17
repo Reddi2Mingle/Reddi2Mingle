@@ -1,7 +1,9 @@
 const bluebird = require('bluebird');
+const potentialController = require('../potentialMatch/potentialController');
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
+const request = require('request');
 
 const matches = [
   {
@@ -82,6 +84,8 @@ const createUserSubreddits = (redditId) => {
         'User-Agent': 'javascript:reddi2mingle:v1.0.0 (by /u/neil_white)',
       },
     }, (err, response) => {
+
+
       // Create array of the subreddits
       const rawData = JSON.parse(response.body).data.children;
       const subredditList = rawData.map(item => ({name: item.data.display_name, subscribers: item.data.subscribers}));
@@ -169,13 +173,6 @@ module.exports = {
         console.log(`server/userController.js 193: issue with adding ${profile.name}: ${err}`);
       } else {
         console.log(`server/userController.js 195: user is actually saved to database, results: ${results}`);
-        // Temporary fix to create relationships to the new user
-        // request({
-        //   url: 'http://localhost:3000/subreddits?redditId=' + profile.id,
-        //   method: 'GET',
-        // }, function(err, response) {
-        //   if (err) throw err;
-        // });
         createUserSubreddits(profile.id);
       }
     });

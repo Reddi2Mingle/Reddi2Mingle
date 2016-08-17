@@ -13,7 +13,7 @@ const redditController = require('../user/userController');
 //   have a database of user records, the complete Reddit profile is
 //   serialized and deserialized.
 passport.serializeUser((user, done) => {
-  console.log('server/passport.js 18: serialized user', user);
+  // console.log('server/passport.js 18: serialized user', user);
   done(null, user.id);
 });
 
