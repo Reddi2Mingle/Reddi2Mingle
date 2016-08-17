@@ -1,5 +1,4 @@
 const bluebird = require('bluebird');
-const potentialController = require('../potentialMatch/potentialController');
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
@@ -117,8 +116,8 @@ const createUserSubreddits = (redditId) => {
       var followsArray = [];
 
       subredditList.forEach((item, index) => {
-        matchArray.push(` MATCH (${item}:Subreddit { name: '${item}' })`);
-        followsArray.push(` MERGE (user)-[:FOLLOWS]->(${item})`);
+        matchArray.push(` MATCH (${item.name}:Subreddit { name: '${item.name}' })`);
+        followsArray.push(` MERGE (user)-[:FOLLOWS]->(${item.name})`);
       });
 
       var saveFollows = matchArray.join('') + followsArray.join('');
