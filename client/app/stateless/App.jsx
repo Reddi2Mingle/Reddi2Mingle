@@ -6,6 +6,7 @@ export default () => (
     <h1 >Reddi2Mingle</h1>
     <ul>
       <li><Link to="/">Home</Link></li>
+      <li><Link to="/navigation">Navigation</Link></li>
       <li><Link to="/signup">SignUp</Link></li>
       <li><Link to="/profile">Profile</Link></li>
       <li><Link to="/photoUpload">Photo Upload</Link></li>

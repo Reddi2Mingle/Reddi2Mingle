@@ -71,6 +71,11 @@ button:hover {
   background: black;
 }
 
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
 /***** Sign-Up View *****/
 
 .signup-view {
