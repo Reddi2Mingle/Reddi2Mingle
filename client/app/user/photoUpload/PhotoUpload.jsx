@@ -14,7 +14,7 @@ export default class PhotoUpload extends Component {
 
   submitAction(event) {
     event.preventDefault();
-    this.props.history.push('/matchMaker');
+    this.props.history.push('/');
   }
 
   saveToken(redditId) {

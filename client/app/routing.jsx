@@ -3,7 +3,6 @@ import { Router, Route, browserHistory } from 'react-router';
 
 import Signup from './stateless/Signup';
 import Login from './stateless/Login';
-import Navigation from './stateless/Navigation';
 import MatchMakerContainer from './potential/MatchMakerContainer';
 import MatchesContainer from './matches/MatchesContainer';
 import PhotoUploadContainer from './user/photoUpload/PhotoUploadContainer';
