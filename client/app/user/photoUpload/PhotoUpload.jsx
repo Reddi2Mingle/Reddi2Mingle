@@ -1,7 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
 
+
 export default class PhotoUpload extends Component {
+
+  submitAction(event) {
+    event.preventDefault();
+    this.props.history.push('/matchMaker');
+  }
+
   render() {
     const { name, picUrl, userActions } = this.props;
     return (
@@ -22,11 +29,9 @@ export default class PhotoUpload extends Component {
             </h2>
           </Dropzone>
           <div>
-            {picUrl === '' ? null :
-              <div>
-                <img src={picUrl} />
-              </div>
-            }
+            <button onClick={this.submitAction.bind(this)}>
+              <h2> Redirect to MatchMaker </h2>
+            </button>
           </div>
         </div>
       </div>

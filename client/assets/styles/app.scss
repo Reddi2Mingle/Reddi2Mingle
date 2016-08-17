@@ -65,10 +65,16 @@ button:hover {
   color: black;
 }
 
-.app { // to be delete later
-  @include absolute-center;
-  height: 100vh;
-  background: black;
+// .app { // to be delete later
+//   @include absolute-center;
+//   height: 100vh;
+//   background: black;
+// }
+
+.navigation {
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
 }
 
 /***** Sign-Up View *****/
