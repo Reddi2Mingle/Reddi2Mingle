@@ -2,7 +2,7 @@ const request = require('request');
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
 
-const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
+const db = require('../../db/config').db;
 
 const dummyData = {
   redditID: 'e4e3k6i4em3k',
@@ -224,7 +224,6 @@ module.exports = {
           console.log(`server/userController.js 224: results: ${results}`);
           var aggregateInfo = results[0].user.properties;
           aggregateInfo['subreddits'] = subreddits;
-          aggregateInfo['matches'] = matches;
           res.send(aggregateInfo);
         }
       });
