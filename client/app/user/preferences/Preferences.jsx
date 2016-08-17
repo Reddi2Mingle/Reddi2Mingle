@@ -46,6 +46,11 @@ export default class Preferences extends Component {
     }
   }
 
+  isActive() {
+    console.log('isActive');
+    return 'spanActive';
+  }
+
   submitAction(event) {
     if (this.state.genderActive === true && this.state.preferenceActive === true) {
       console.log(this.state);
@@ -63,13 +68,13 @@ export default class Preferences extends Component {
             I am a
           </h2>
           <div className="preferences-options">
-            <span onClick={this.setOptions.bind(this, 'gender', 'Male')}>
+            <span className={} onClick={this.setOptions.bind(this, 'gender', 'Male')}>
               <img
                 src="../../../assets/img/mustache.png"
                 alt="mustache"
               />
             </span>
-            <span onClick={this.setOptions.bind(this, 'gender', 'Female')}>
+            <span className={this.isActive()} onClick={this.setOptions.bind(this, 'gender', 'Female')}>
               <img
                 src="../../../assets/img/lips.png"
                 alt="lips"
