@@ -65,16 +65,13 @@ button:hover {
   color: black;
 }
 
-// .app { // to be delete later
-//   @include absolute-center;
-//   height: 100vh;
-//   background: black;
-// }
-
 .navigation {
   background-color: black;
   display: flex;
   justify-content: space-between;
+  h2 {
+    font-size: 20px;
+  }
 }
 
 /***** Sign-Up View *****/

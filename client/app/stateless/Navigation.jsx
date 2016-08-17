@@ -11,6 +11,9 @@ export default class NavBar extends Component {
         <Link to="/createPassword">
           <h2> createPassword </h2>
         </Link>
+        <Link to="/preferences">
+          <h2> preferences </h2>
+        </Link>
         <Link to="/profile">
           <h2> profile </h2>
         </Link>
