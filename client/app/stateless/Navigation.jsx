@@ -14,7 +14,7 @@ export default class NavBar extends Component {
         <Link to="/profile">
           <h2> profile </h2>
         </Link>
-        <Link to="/matchMaker">
+        <Link to="/">
           <h2> potential </h2>
         </Link>
         <Link to="/matches">

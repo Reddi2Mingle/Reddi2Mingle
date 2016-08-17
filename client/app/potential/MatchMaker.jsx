@@ -8,9 +8,9 @@ export default class MatchMaker extends Component {
     const { potentialActions, userActions, userInfoFetched } = this.props;
     const token = localStorage.getItem('token');
     if (!userInfoFetched) {
-      userActions.fetchUser(token.redditId);
+      userActions.fetchUser(token);
     }
-    potentialActions.fetchPotentials(token.redditId);
+    potentialActions.fetchPotentials(token);
   }
 
   render() {
