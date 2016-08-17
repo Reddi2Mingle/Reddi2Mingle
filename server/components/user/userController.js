@@ -196,7 +196,6 @@ module.exports = {
           console.log(`server/userController.js 224: results: ${results}`);
           var aggregateInfo = results[0].user.properties;
           aggregateInfo.subreddits = subreddits;
-          aggregateInfo.matches = matches;
           res.send(aggregateInfo);
         }
       });
