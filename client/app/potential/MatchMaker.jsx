@@ -30,16 +30,20 @@ export default class MatchMaker extends Component {
     if (noMatches) {
       return (
         <div>
-          <h2>Oh no! You're out of potential matches.</h2>
-        </div>
-      );
-    } else if (fetchingUser) {
-      return (
-        <div>
-          <h2>Grabbing your information...</h2>
+          <Navbar />
+          <div className="potential-view">
+            <h2>Oh no! You're out of potential matches.</h2>
+          </div>
         </div>
       );
     }
+    // } else if (fetchingUser) {
+    //   return (
+    //     <div>
+    //       <h2>Grabbing your information...</h2>
+    //     </div>
+    //   );
+    // }
     return (
       <div>
         <Navbar />
