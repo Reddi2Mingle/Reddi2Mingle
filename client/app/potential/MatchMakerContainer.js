@@ -18,11 +18,11 @@ const mapStateToProps = state => {
     potentialId: state.potentials.people[state.potentials.index].redditId,
     userId: state.user.redditId,
     fetchingUser: state.user.fetching,
-    userLoggedIn: !!state.user.redditId,
     fetchingPotentials: state.potentials.fetching,
     index: state.potentials.index,
     lastPotential: state.potentials.people.length - 1,
     peopleArray: state.potentials.people,
+    isAuthenticated: state.user.isAuthenticated,
   };
 };
 

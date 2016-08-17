@@ -5,13 +5,11 @@ import Navbar from '../stateless/Navigation';
 export default class MatchMaker extends Component {
 
   componentWillMount() {
-    const { potentialActions, userActions, location: { query }, userLoggedIn } = this.props;
-    const redditId = query.redditId;
-    // dispatch(fetchPotentials(redditId));
-    potentialActions.fetchPotentials(redditId);
-    console.log('UserLogginIn: ', userLoggedIn);
-    if (!userLoggedIn) {
-      userActions.fetchUser(redditId);
+    const { potentialActions, userActions, isAuthenticated } = this.props;
+    const token = localStorage.getItem('token');
+    potentialActions.fetchPotentials(token.redditId);
+    if (!isAuthenticated) {
+      userActions.fetchUser(token.redditId);
     }
   }
 
@@ -117,7 +115,6 @@ MatchMaker.propTypes = {
   changeName: PropTypes.func,
   fetchingUser: PropTypes.bool,
   fetchingPotentials: PropTypes.bool,
-  userLoggedIn: PropTypes.bool,
   index: PropTypes.number,
   lastPotential: PropTypes.number,
   userActions: PropTypes.object,
