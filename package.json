@@ -1,7 +1,7 @@
 {
   "name": "Reddi2Mingle",
   "version": "1.0.0",
-  "description": "",
+  "description": "#How to start this application 1. `npm install` 2. `npm run server` (one tab) 3. `npm run watch` (another tab)",
   "main": "index.js",
   "scripts": {
     "start": "webpack -p && nodemon -L server/server.js",
@@ -87,5 +87,8 @@
     "socket.io-client": "^1.4.8",
     "superagent": "^2.2.0",
     "webpack-merge": "^0.14.1"
+  },
+  "directories": {
+    "test": "test"
   }
 }

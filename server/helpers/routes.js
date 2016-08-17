@@ -1,5 +1,4 @@
 const path = require('path');
-
 const authRouter = require('../components/auth/authRouter');
 // const authController = require('../components/auth/authController');
 const userRouter = require('../components/user/userRouter');
