@@ -1,16 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
 import Navbar from '../stateless/Navigation';
+import RejectButton from './RejectButton';
+import InterestButton from './InterestButton';
 
 export default class MatchMaker extends Component {
 
   componentWillMount() {
-    const { potentialActions, userActions, userInfoFetched } = this.props;
-    const token = localStorage.getItem('token');
+    const { potentialActions, userActions, userInfoFetched, userId } = this.props;
+    // const token = localStorage.getItem('token');
     if (!userInfoFetched) {
-      userActions.fetchUser(token);
+      userActions.fetchUser(userId);
     }
-    potentialActions.fetchPotentials(token);
+    potentialActions.fetchPotentials(userId);
   }
 
   render() {
@@ -29,16 +30,20 @@ export default class MatchMaker extends Component {
     if (noMatches) {
       return (
         <div>
-          <h2>Oh no! You're out of potential matches.</h2>
-        </div>
-      );
-    } else if (fetchingUser) {
-      return (
-        <div>
-          <h2>Grabbing your information...</h2>
+          <Navbar />
+          <div className="potential-view">
+            <h2>Oh no! You're out of potential matches.</h2>
+          </div>
         </div>
       );
     }
+    // } else if (fetchingUser) {
+    //   return (
+    //     <div>
+    //       <h2>Grabbing your information...</h2>
+    //     </div>
+    //   );
+    // }
     return (
       <div>
         <Navbar />
@@ -63,39 +68,22 @@ export default class MatchMaker extends Component {
             </div>
 
             <div className="swipe">
-              <button
-                onClick={e => {
-                  e.preventDefault();
-                  potentialActions.handleSwipe(userId, potentialId, 'no', index, lastPotential);
-                }}
-              >
-                <img
-                  src="../../../assets/img/reddit-sad.png"
-                  alt="Reddit Logo with Sad Smile"
-                  style={{ height: 50 }}
-                />
-              </button>
-              <button
-                onClick={e => {
-                  e.preventDefault();
-                  potentialActions.handleSwipe(userId, potentialId, 'yes', index, lastPotential);
-                }}
-              >
-                <img
-                  src="../../../assets/img/reddit-love.png"
-                  alt="Reddit Logo with Heart Eyes"
-                  style={{ height: 50 }}
-                />
-              </button>
+              <RejectButton
+                handleSwipe={potentialActions.handleSwipe}
+                userId={userId}
+                potentialId={potentialId}
+                index={index}
+                lastPotential={lastPotential}
+              />
+              <InterestButton
+                handleSwipe={potentialActions.handleSwipe}
+                userId={userId}
+                potentialId={potentialId}
+                index={index}
+                lastPotential={lastPotential}
+              />
             </div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <Link to="/matchMaker">
-              <i className="material-icons md-48 black">keyboard_arrow_left</i>
-            </Link>
-            <Link to="/matches">
-              <i className="material-icons md-48 black">keyboard_arrow_right</i>
-            </Link>
+
           </div>
         </div>
       </div>

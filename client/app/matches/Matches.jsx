@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import Match from './Match';
+import Navbar from '../stateless/Navigation';
 
 export default class Matches extends Component {
 
@@ -12,21 +13,16 @@ export default class Matches extends Component {
   render() {
     const { matches } = this.props;
     return (
-      <div className="matches-view">
-        {matches.map((match) => (
-          <Match
-            name={match.name}
-            photo={match.photo}
-            subreddits={match.subreddits}
-          />
-        ))}
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <Link to="/matchMaker">
-            <i className="material-icons md-48 black">keyboard_arrow_left</i>
-          </Link>
-          <Link to="/matches">
-            <i className="material-icons md-48 black">keyboard_arrow_right</i>
-          </Link>
+      <div>
+        <Navbar />
+        <div className="matches-view">
+          {matches.map((match) => (
+            <Match
+              name={match.name}
+              photo={match.photo}
+              subreddits={match.subreddits}
+            />
+          ))}
         </div>
       </div>
     );
