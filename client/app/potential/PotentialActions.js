@@ -19,7 +19,7 @@ function requestPotentials() {
 }
 
 export function fetchPotentials(userId) {
-  console.log('Fetching potentials!');
+  console.log('Fetching potentials! userId:',userId);
   return dispatch => {
     dispatch(requestPotentials());
     dispatch(resetIndex());

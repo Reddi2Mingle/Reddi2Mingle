@@ -21,7 +21,7 @@ services:
       # - $HOME/neo4j/data:/data \
     # command: /docker-entrypoint.sh neo4j
     environment: 
-     - NEO4J_AUTH=neo4j/123456
+     - NEO4J_AUTH=neo4j/neo4j
     ports:
-      - "7474:7474"
+      - "7475:7474"
      

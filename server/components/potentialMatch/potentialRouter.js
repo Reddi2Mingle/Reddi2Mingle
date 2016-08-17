@@ -1,5 +1,4 @@
 const potentialRouter = require('express').Router();
-console.log('potentialRouter:', potentialRouter);
 // const potentialModel = require('./potentialModel');
 const potentialController = require('./potentialController');
 

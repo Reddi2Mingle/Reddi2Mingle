@@ -1,6 +1,5 @@
 const neo4j = require('neo4j');
-
-const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
+const db = require('../../db/config').db;
 
 module.exports = {
   likeResponse: (req, res) => {
@@ -8,6 +7,7 @@ module.exports = {
     const user = req.body.redditId;
     const potential = req.body.potentialId;
     const swipe = req.body.swipe;
+    console.log('req.body',req.body,'user:',user,'potential',potential,'swipe',swipe);
 
     // check potentialid's response to user.
     // Swipe will either be [r: INTEREST {SWIPE: 'yes' || 'no'} ]
