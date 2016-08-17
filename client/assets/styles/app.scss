@@ -160,11 +160,8 @@ button:hover {
     background-color: rgba(255, 255, 255, 0.2); 
     padding: 30px 30px 100px 30px;
     margin: 10px 30px 30px 30px;
-    &Active{
-      background-color: $accentColor;
-    }
   }
-  span:hover {
+  .active, span:hover {
     background-color: $accentColor;
   }
 }

@@ -68,13 +68,13 @@ export default class Preferences extends Component {
             I am a
           </h2>
           <div className="preferences-options">
-            <span className={} onClick={this.setOptions.bind(this, 'gender', 'Male')}>
+            <span onClick={this.setOptions.bind(this, 'gender', 'Male')}>
               <img
                 src="../../../assets/img/mustache.png"
                 alt="mustache"
               />
             </span>
-            <span className={this.isActive()} onClick={this.setOptions.bind(this, 'gender', 'Female')}>
+            <span onClick={this.setOptions.bind(this, 'gender', 'Female')}>
               <img
                 src="../../../assets/img/lips.png"
                 alt="lips"
