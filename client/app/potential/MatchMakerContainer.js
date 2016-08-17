@@ -8,6 +8,8 @@ const mapStateToProps = state => {
   if (state.potentials.people.length === 0) {
     return {
       noMatches: true,
+      userId: state.user.redditId,
+      userInfoFetched: state.user.fetched,
     };
   }
 
@@ -19,10 +21,9 @@ const mapStateToProps = state => {
     userId: state.user.redditId,
     fetchingUser: state.user.fetching,
     fetchingPotentials: state.potentials.fetching,
+    userInfoFetched: state.user.fetched,
     index: state.potentials.index,
     lastPotential: state.potentials.people.length - 1,
-    peopleArray: state.potentials.people,
-    isAuthenticated: state.user.isAuthenticated,
   };
 };
 
@@ -33,9 +34,9 @@ const mapDispatchToProps = (dispatch) => (
   }
 );
 
-const PotentialContainer = connect(
+const MatchMakerContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(MatchMaker);
 
-export default PotentialContainer;
+export default MatchMakerContainer;

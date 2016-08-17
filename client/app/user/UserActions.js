@@ -13,7 +13,7 @@ function requestUser() {
 export function fetchUser(redditId) {
   return dispatch => {
     dispatch(requestUser());
-    axios.get(`/userInfo?redditId=${redditId}`)
+    axios.get(`/api/userInfo?redditId=${redditId}`)
       .then((response) => {
         dispatch({ type: 'FETCH_USER_FULFILLED', payload: response.data });
       })
