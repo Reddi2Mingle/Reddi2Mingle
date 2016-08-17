@@ -63,7 +63,7 @@ module.exports = {
         } else {
           const u2swipe = potentialswipe[0].r.properties.LIKE;
 
-          const matched = u2swipe === 'yes' && swipe === "'yes'";
+          const matched = u2swipe === 'yes' && swipe === '"yes"';
           const rel = matched ? 'MATCH' : 'NEVER';
 
           // erase relationships and replace with two-way relationship to indicate they MATCHed

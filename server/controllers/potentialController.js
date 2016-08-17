@@ -5,7 +5,7 @@ module.exports = {
 
   createPotentials: (redditId) => {
     db.cypher({
-      query: 'MATCH (user:Person)-[r:FOLLOWS]->(s: subreddit)<-[:FOLLOWS]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r, s;',
+      query: 'MATCH (user:Person)-[r:FOLLOWS]->(s: Subreddit)<-[:FOLLOWS]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, r, s;',
       params: {
         redditId,
       },
@@ -13,7 +13,7 @@ module.exports = {
       if (err) {
         console.log('issue with: ', err);
       } else {
-        console.log('list of potentials', results);
+        console.log('potentials created');
       }
     });
   },

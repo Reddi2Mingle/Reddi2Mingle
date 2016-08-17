@@ -1,7 +1,6 @@
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
 require('../../helpers/api_keys');
-
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
 const redditController = require('../user/userController');
@@ -14,13 +13,12 @@ const redditController = require('../user/userController');
 //   have a database of user records, the complete Reddit profile is
 //   serialized and deserialized.
 passport.serializeUser((user, done) => {
-  console.log('server/passport.js 18: serialized user');
-  done(null, user);
+  console.log('server/passport.js 18: serialized user', user);
+  done(null, user.id);
 });
 
-passport.deserializeUser((obj, done) => {
-  console.log('server/passport.js 23: deserialized user');
-  done(null, obj);
+passport.deserializeUser((id, done) => {
+  done(null, id);
 });
 
 
