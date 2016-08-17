@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Navbar from '../stateless/Navigation';
 
 const Match = ({ name, photo }) => (
   <div>
