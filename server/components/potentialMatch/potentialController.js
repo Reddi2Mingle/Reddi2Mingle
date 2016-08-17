@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 const neo4j = require('neo4j');
 const db = require('../../db/config').db;
 
