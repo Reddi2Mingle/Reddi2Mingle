@@ -188,10 +188,10 @@ module.exports = {
     const redditId = req.body.redditId;
 
     db.cypher({
-      query: `MATCH (user:Person) WHERE user.redditId=${redditId}
-      ON MATCH SET user.gender = ${gender}
-      ON MATCH SET user.preference = ${preference}
-      RETURN user;'`
+      query: `MERGE (user:Person {redditId: "${redditId}"})
+      ON MATCH SET user.gender = "${gender}"
+      ON MATCH SET user.preference = "${preference}"
+      RETURN user;`,
     }, (err, results) => {
       if (err) {
         console.log(`server/userController.js: issue with updating preference and gender, err ${err}`)

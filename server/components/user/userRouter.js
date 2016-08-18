@@ -6,5 +6,6 @@ const userController = require('./userController');
 
 userRouter.get('/', userController.queryUserInfo);
 userRouter.post('/updatePassword', userController.updatePassword);
+userRouter.post('/addPreference', userController.addPreference);
 
 module.exports = userRouter;
