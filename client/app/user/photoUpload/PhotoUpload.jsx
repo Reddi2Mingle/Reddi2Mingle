@@ -4,14 +4,6 @@ import axios from 'axios';
 
 export default class PhotoUpload extends Component {
 
-  componentWillMount() {
-    const { potentialActions, userActions, location: { query } } = this.props;
-    const redditId = query.redditId;
-    localStorage.setItem('token', redditId);
-    potentialActions.fetchPotentials(redditId);
-    userActions.fetchUser(redditId);
-  }
-
   submitAction(event) {
     const { photo, location: { query } } = this.props;
     event.preventDefault();
@@ -62,6 +54,5 @@ PhotoUpload.propTypes = {
   name: PropTypes.string,
   photo: PropTypes.string,
   userActions: PropTypes.object,
-  potentialActions: PropTypes.object,
   location: PropTypes.object,
 };

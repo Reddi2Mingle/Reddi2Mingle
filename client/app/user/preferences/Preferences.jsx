@@ -6,7 +6,7 @@ import * as UserActions from '../UserActions';
 import MaleButton from './MaleButton';
 import FemaleButton from './FemaleButton';
 
-export default class Preferences extends Component {
+class Preferences extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +17,11 @@ export default class Preferences extends Component {
       preferenceFemale: false,
       preferenceActive: false,
     };
+  }
+
+  componentWillMount() {
+    const { potentialActions, userActions, redditId } = this.props;
+    potentialActions.fetchPotentials(redditId);
   }
 
   setOption(selection) {
@@ -59,10 +64,10 @@ export default class Preferences extends Component {
       this.state.preferenceActive = true; // manually toggle back to true
     } else if (this.state.preferenceMale) {
       preference = 'man';
-      this.state.preferenceActive = true; 
+      this.state.preferenceActive = true;
     } else if (this.state.preferenceFemale) {
       preference = 'woman';
-      this.state.preferenceActive = true; 
+      this.state.preferenceActive = true;
     }
 
     axios.post('/api/userInfo/addPreference', {
@@ -101,7 +106,7 @@ export default class Preferences extends Component {
             />
           </div>
           <h2>
-            Looking for a
+            Looking for
           </h2>
           <div className="preferences-options">
             <MaleButton
@@ -114,7 +119,7 @@ export default class Preferences extends Component {
             />
           </div>
         </div>
-        <br/> 
+        <br />
         <button onClick={this.submitAction.bind(this)}>
           <h2> Submit </h2>
         </button>
@@ -126,10 +131,9 @@ export default class Preferences extends Component {
 const mapStateToProps = state => ({
   redditId: state.user.redditId,
 });
-const mapDispatchToProps = (dispatch) => (
-  {
-    userActions: bindActionCreators(UserActions, dispatch),
-  });
+const mapDispatchToProps = (dispatch) => ({
+  userActions: bindActionCreators(UserActions, dispatch),
+});
 
 export default connect(
   mapStateToProps,
@@ -138,6 +142,6 @@ export default connect(
 
 Preferences.PropTypes = {
   redditId: PropTypes.string,
+  potentialActions: PropTypes.object,
+  userActions: PropTypes.object,
 };
-
-
