@@ -25,9 +25,9 @@ export default class MatchMaker extends Component {
       potentialActions,
       index,
       lastPotential,
-      noMatches,
+      noPotentials,
     } = this.props;
-    if (noMatches) {
+    if (noPotentials) {
       return (
         <div>
           <Navbar />
@@ -104,6 +104,6 @@ MatchMaker.propTypes = {
   userActions: PropTypes.object,
   potentialActions: PropTypes.object,
   location: PropTypes.object,
-  noMatches: PropTypes.bool,
+  noPotentials: PropTypes.bool,
   userInfoFetched: PropTypes.bool,
 };
