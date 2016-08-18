@@ -17,7 +17,7 @@ export default class Login extends Component {
       password: password,
     })
 		.then((response) => {
-      console.log(`user logged in ${response}`);
+      console.log(`user logged in ${response.data}`);
 		})
 		.catch((err) => {
 			console.log(`user not logged in ${err}`);

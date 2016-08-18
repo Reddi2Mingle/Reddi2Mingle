@@ -4,7 +4,6 @@ const potentialController = require('../potentialMatch/potentialController');
 const db = require('../../db/config').db;
 const request = require('request');
 
-
 // Request list of user's subscribed subreddits
 const queryUserSubreddits = (redditId) => (
   new Promise((resolve, reject) => {
@@ -43,6 +42,23 @@ const queryAccessToken = (redditId) => (
         reject(err);
       } else {
         console.log(`server/userController.js 97: here is the accessToken ${results[0]['n.accessToken']}`);
+        resolve(results[0]['n.accessToken']);
+      }
+    });
+  })
+);
+
+// Get the user's refresh token
+const queryRefreshToken = (redditId) => (
+  new Promise((resolve, reject) => {
+    db.cypher({
+      query: 'MATCH (n:Person) WHERE n.redditId="104r17" return n.refreshToken;'
+    }, (err, results) => {
+      if (err) {
+        console.log(`server/userController.js 94: issue with retrieving ${err}`);
+        reject(err);
+      } else {
+        console.log(`server/userController.js 97: here is the refreshToken ${results}`);
         resolve(results[0]['n.accessToken']);
       }
     });
@@ -156,6 +172,25 @@ module.exports = {
 
   updatePassword: (req, res) => {
     res.send('testing answer');
+  },
+
+  updateAccessToken: (req, res) => {
+    var username = req.body.username;
+    var password = req.body.password;
+
+    queryRefreshToken(username, password).then((refreshToken) => {
+      console.log('!!!!!!!!!!!!!!!!!!!', refreshToken);
+      request({
+        url: `https://T3zDXS9GxKukbA:TAKMSJzrlZPzTWxK5O3w7OglWA8@ssl.reddit.com/api/v1/access_token?state=uniquestring&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=http://127.0.0.1:3000/auth/reddit/callback&refresh_token=${refreshToken}&grant_type=refresh_token`,
+        method: 'POST',
+      }, (err, response) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(response);
+        }
+      });
+    });
   },
 
   addPreference: (req, res) => {
