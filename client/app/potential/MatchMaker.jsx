@@ -21,12 +21,19 @@ export default class MatchMaker extends Component {
       userId,
       photo,
       common_subreddits,
-      fetchingUser,
+      fetchingPotentials,
       potentialActions,
       index,
       lastPotential,
       noPotentials,
     } = this.props;
+    if (fetchingPotentials) {
+      return (
+        <div className="potential-view">
+          <h2>Hold on, we're grabbing your information...</h2>
+        </div>
+      );
+    }
     if (noPotentials) {
       return (
         <div>
@@ -37,13 +44,6 @@ export default class MatchMaker extends Component {
         </div>
       );
     }
-    // if (fetchingUser) {
-    //   return (
-    //     <div>
-    //       <h2>Grabbing your information...</h2>
-    //     </div>
-    //   );
-    // }
     return (
       <div>
         <Navbar />

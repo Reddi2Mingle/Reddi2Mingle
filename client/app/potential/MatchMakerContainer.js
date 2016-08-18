@@ -10,6 +10,7 @@ const mapStateToProps = state => {
       noPotentials: true,
       userId: state.user.redditId,
       userInfoFetched: state.user.fetched,
+      fetchingPotentials: state.potentials.fetching,
     };
   }
 
