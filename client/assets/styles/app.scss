@@ -65,16 +65,13 @@ button:hover {
   color: black;
 }
 
-// .app { // to be delete later
-//   @include absolute-center;
-//   height: 100vh;
-//   background: black;
-// }
-
 .navigation {
   background-color: black;
   display: flex;
   justify-content: space-between;
+  h2 {
+    font-size: 20px;
+  }
 }
 
 /***** Sign-Up View *****/
@@ -135,6 +132,39 @@ button:hover {
   background-color: rgba(222, 222, 222, .2);
 }
 
+/***** Preferences View *****/
+
+.preferences-view {
+  @include background('/assets/img/holding-hands.jpg');
+  @include absolute-center;
+  align-content: center;
+}
+
+.preferences-container {
+  @include absolute-center;
+  padding: 50px;
+  border: 3px solid white;
+  width: 600px;
+  height: 400px; 
+  margin-top: 20px;
+}
+
+.preferences-options {
+  display: flex;
+  flex-direction: row;
+  img {
+    width: 150px;
+    height: auto;
+  }
+  span {
+    background-color: rgba(255, 255, 255, 0.2); 
+    padding: 30px 30px 100px 30px;
+    margin: 10px 30px 30px 30px;
+  }
+  .active, span:hover {
+    background-color: $accentColor;
+  }
+}
 /***** Potentials View *****/
 
 .potential-view { // will need to change for different background later
