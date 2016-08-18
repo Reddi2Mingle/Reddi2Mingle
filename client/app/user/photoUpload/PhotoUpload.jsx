@@ -34,7 +34,7 @@ export default class PhotoUpload extends Component {
             </h2>
           </Dropzone>
           <div>
-            <button onClick={this.submitAction}>
+            <button onClick={this.submitAction.bind(this)}>
               <h2> Submit Photo </h2>
             </button>
           </div>

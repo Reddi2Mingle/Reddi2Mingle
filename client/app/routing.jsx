@@ -18,8 +18,8 @@ export default () => (
     <Route path="/createPassword" component={CreatePasswordContainer} />
     <Route path="/login" component={requireAuthorization(LoginContainer)} />
     <Route path="/matches" component={requireAuthorization(MatchesContainer)} />
-    <Route path="/photoUpload" component={PhotoUploadContainer} />
-    <Route path="/preferences" component={Preferences} />
-    <Route path="/profile" component={Profile} />
+    <Route path="/photoUpload" component={requireAuthorization(PhotoUploadContainer)} />
+    <Route path="/preferences" component={requireAuthorization(Preferences)} />
+    <Route path="/profile" component={requireAuthorization(Profile)} />
   </Router>
 );

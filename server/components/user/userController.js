@@ -140,7 +140,6 @@ const createUserSubreddits = (redditId) => {
 };
 
 module.exports = {
-
   createNewUser: (profile, accessToken, refreshToken) => {
     db.cypher({
       query: `MERGE (user:Person { redditId: {redditId} }) 
@@ -213,8 +212,8 @@ module.exports = {
 
   addPhoto: (req, res) => {
     db.cypher({
-      query: `MATCH (user:Person) 
-                WHERE user.redditId = "${req.body.redditId}"
+      query: `MATCH (user:Person)
+                WHERE user.redditId = "${req.body.redditId}" 
               SET user.photo = "${req.body.photo}"
               RETURN user`,
     }, (err, results) => {
