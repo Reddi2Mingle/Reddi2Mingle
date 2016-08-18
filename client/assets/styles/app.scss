@@ -143,6 +143,10 @@ button:hover {
   align-content: space-around;
 }
 
+.photo-drop-container {
+  @include absolute-center;
+}
+
 .dropzone {
   margin-top: 20px;
   padding: 50px; 
