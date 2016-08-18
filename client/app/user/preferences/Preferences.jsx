@@ -34,18 +34,15 @@ export default class Preferences extends Component {
     if (selection === 'preferenceFemale') {
       this.setState({
         preferenceFemale: !this.state.preferenceFemale,
-        preferenceActive: this.state.preferenceFemale,
       });
     } else if (selection === 'preferenceMale') {
       this.setState({
         preferenceMale: !this.state.preferenceMale,
-        preferenceActive: this.state.preferenceMale,
       });
     }
   }
 
   submitAction(event) {
-    console.log('submitAction function accessed --- ', this.state);
     let gender = '';
     let preference = '';
 
@@ -62,26 +59,26 @@ export default class Preferences extends Component {
       this.state.preferenceActive = true; // manually toggle back to true
     } else if (this.state.preferenceMale) {
       preference = 'man';
+      this.state.preferenceActive = true; 
     } else if (this.state.preferenceFemale) {
       preference = 'woman';
+      this.state.preferenceActive = true; 
     }
 
     axios.post('/api/userInfo/addPreference', {
-      redditId: JSON.stringify(this.props.redditId),
+      redditId: this.props.redditId,
       gender,
       preference,
     })
     .then((response) => {
-      console.log('Add preferences was successful', response);
+      if (this.state.genderActive && this.state.preferenceActive) {
+        event.preventDefault();
+        this.props.history.push(`/photoUpload?redditId=${this.props.redditId}`);
+      }
     })
     .catch((err) => {
       console.log('Add preferences error', err);
     });
-
-    if (this.state.genderActive === true && this.state.preferenceActive === true) {
-      event.preventDefault();
-      this.props.history.push(`/photoUpload?redditId=${this.props.redditId}`);
-    }
   }
 
   render() {
