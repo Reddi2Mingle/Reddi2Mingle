@@ -1,5 +1,4 @@
 import React, { PropTypes, Component } from 'react';
-import { Link } from 'react-router';
 import Match from './Match';
 import Navbar from '../stateless/Navigation';
 

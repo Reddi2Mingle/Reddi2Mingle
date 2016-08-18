@@ -46,6 +46,9 @@ export default (state = initialState, action) => {
     case 'FETCH_USER_REJECTED': {
       return { ...state, fetching: false, fetched: false, error: action.payload };
     }
+    case 'LOGOUT_USER': {
+      return { ...state, isAuthenticated: false };
+    }
     default:
       return state;
   }

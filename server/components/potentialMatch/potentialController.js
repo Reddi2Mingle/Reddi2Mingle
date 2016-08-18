@@ -1,14 +1,16 @@
 'use strict';
 
 const neo4j = require('neo4j');
-// const db = require('../../db/config').db;
-const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
+const db = require('../../db/config').db;
 
 module.exports = {
 
   createPotentials: (redditId) => {
     db.cypher({
-      query: 'MATCH (user:Person)-[r:FOLLOWS]->(s: Subreddit)<-[:FOLLOWS]-(potential:Person) WHERE user.redditId = {redditId} MERGE (user)<-[:POTENTIAL]->(potential) RETURN user, potential, s;',
+      query: 'MATCH (user:Person)-[r:FOLLOWS]->(s: Subreddit)<-[:FOLLOWS]-(potential:Person) \
+              WHERE user.redditId = {redditId} \
+              MERGE (user)<-[:POTENTIAL]->(potential) \
+              RETURN user, potential, s;',
       params: {
         redditId,
       },
@@ -22,7 +24,6 @@ module.exports = {
   },
 
   queryPotentials: (req, res) => {
-
     const redditId = req.query.redditId;
     db.cypher({
       query: `MATCH (user:Person)
@@ -30,7 +31,13 @@ module.exports = {
       <-[:FOLLOWS]-(potential:Person) 
       WHERE user.redditId="${redditId}"
       AND NOT (user)-[:INTEREST]->(potential)
+<<<<<<< cd29bb46c0a0053aeaf68503f192d2576cee2fe9
       RETURN potential,user,s LIMIT 10;`,
+=======
+      RETURN potential,user,s 
+      ORDER BY s.subscribers 
+      LIMIT 2;`,
+>>>>>>> Add logout button
     }, (err, potentials) => {
       if (err) {
         console.log('issue with: ', err);

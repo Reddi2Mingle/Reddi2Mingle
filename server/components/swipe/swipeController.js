@@ -7,7 +7,6 @@ module.exports = {
     const user = req.body.redditId;
     const potential = req.body.potentialId;
     const swipe = req.body.swipe;
-    console.log('req.body',req.body,'user:',user,'potential',potential,'swipe',swipe);
 
     // check potentialid's response to user.
     // Swipe will either be [r: INTEREST {SWIPE: 'yes' || 'no'} ]
@@ -99,22 +98,22 @@ module.exports = {
     //   }
     // ]
   },
-    showMatches: (req, res) => {
-    // params: redditId
-      const r = req.query;
-      const user = r.redditId;
+  showMatches: (req, res) => {
+  // params: redditId
+    const r = req.query;
+    const user = r.redditId;
 
-      db.cypher({
-        query: `MATCH (user:Person {redditId: "${user}"})-[r:MATCH]-(matched:Person) RETURN matched`,
-      }, (err, matched) => {
-        if (err) {
-          console.log('Error in finding potential interest for user:', err);
-          res.send([]);
-        } else {
-          matched = matched.map(v => (v.matched.properties));
-          console.log('matched TRYING TO MATCH TRYING TO MATCH: ', matched);
-          res.send(matched);
-        }
-      });
-    },
+    db.cypher({
+      query: `MATCH (user:Person {redditId: "${user}"})-[r:MATCH]-(matched:Person) RETURN matched`,
+    }, (err, matched) => {
+      if (err) {
+        console.log('Error in finding potential interest for user:', err);
+        res.send([]);
+      } else {
+        matched = matched.map(v => (v.matched.properties));
+        console.log('matched TRYING TO MATCH TRYING TO MATCH: ', matched);
+        res.send(matched);
+      }
+    });
+  },
 };

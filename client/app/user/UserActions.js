@@ -23,6 +23,13 @@ export function fetchUser(redditId) {
   };
 }
 
+export function logout() {
+  localStorage.removeItem('token');
+  return {
+    type: 'LOGOUT_USER',
+  };
+}
+
 export function handleImageUpload(file) {
   const upload = request.post(CLOUDINARY_UPLOAD_URL)
                         .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
