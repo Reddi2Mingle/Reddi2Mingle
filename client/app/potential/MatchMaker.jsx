@@ -32,7 +32,7 @@ export default class MatchMaker extends Component {
         <div>
           <Navbar />
           <div className="potential-view">
-            <h2>Oh no! You're out of potential matches.</h2>
+            <h2>Oh no! You're out of potentials. Please check back in a bit.</h2>
           </div>
         </div>
       );

@@ -10,7 +10,17 @@ export default class Matches extends Component {
   }
 
   render() {
-    const { matches } = this.props;
+    const { matches, noMatches } = this.props;
+    if (noMatches) {
+      return (
+        <div>
+          <Navbar />
+          <div className="matches-view">
+            <h2>No Matches found! Better start swiping :) </h2>
+          </div>
+        </div>
+      );
+    }
     return (
       <div>
         <Navbar />
@@ -37,4 +47,5 @@ Matches.propTypes = {
   }).isRequired),
   matchesActions: PropTypes.object.isRequired,
   userId: PropTypes.string.isRequired,
+  noMatches: PropTypes.bool,
 };
