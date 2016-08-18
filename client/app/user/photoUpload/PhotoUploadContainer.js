@@ -6,8 +6,9 @@ import * as PotentialActions from '../../potential/PotentialActions';
 
 const mapStateToProps = (state) => (
   {
+    redditId: state.user.redditId,
     username: state.user.username,
-    picUrl: state.user.picUrl,
+    photo: state.user.photo,
   }
 );
 

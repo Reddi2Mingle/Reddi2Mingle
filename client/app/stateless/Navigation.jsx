@@ -6,8 +6,8 @@ import * as UserActions from '../user/UserActions';
 
 const NavBar = ({ userActions }) => (
   <div className="navigation" style={{ backgroundColor: 'black' }}>
-    <Link to="/signup">
-      <h2> signup </h2>
+    <Link to="/profile">
+      <h2> Profile </h2>
     </Link>
     <Link to="/createPassword">
       <h2> createPassword </h2>

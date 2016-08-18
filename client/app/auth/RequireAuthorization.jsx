@@ -22,7 +22,7 @@ export default (Component) => {
       return (
         <div>
           {this.props.isAuthenticated === true
-              ? <Component />
+              ? <Component history={this.props.history} />
               : null
           }
         </div>

@@ -37,7 +37,7 @@ export default class MatchMaker extends Component {
         </div>
       );
     }
-    // } else if (fetchingUser) {
+    // if (fetchingUser) {
     //   return (
     //     <div>
     //       <h2>Grabbing your information...</h2>
