@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import MaleButton from './MaleButton';
 import FemaleButton from './FemaleButton';
 
@@ -31,24 +32,32 @@ export default class Preferences extends Component {
     }
     if (selection === 'preferenceFemale') {
       this.setState({
-        preferenceFemale: true,
-        preferenceMale: false,
-        preferenceActive: true,
+        preferenceFemale: !this.state.preferenceFemale,
+        preferenceActive: this.state.preferenceFemale,
       });
     } else if (selection === 'preferenceMale') {
       this.setState({
-        preferenceFemale: false,
-        preferenceMale: true,
-        preferenceActive: true,
+        preferenceMale: !this.state.preferenceMale,
+        preferenceActive: this.state.preferenceMale,
       });
     }
   }
 
   submitAction(event) {
+    const gender = '';
+    const preference = '';
     if (this.state.genderActive === true && this.state.preferenceActive === true) {
       event.preventDefault();
       this.props.history.push('/photoUpload');
     }
+    // if (this.state.genderFemale) {
+         
+    // }
+    // axios.post('/api/userInfo/addPreference', {
+    //   redditId: JSON.stringify(this.props.redditID),
+    //   gender: JSON.stringify(potentialId),
+    //   swipe: JSON.stringify(swipe),
+    // })
   }
 
   render() {
