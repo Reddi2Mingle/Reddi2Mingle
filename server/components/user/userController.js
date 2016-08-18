@@ -177,6 +177,11 @@ module.exports = {
     });
   },
 
+  updatePassword: (req, res) => {
+    console.log('testing answer!!!!!!!!!!!!!');
+    res.send('testing answer');
+  },
+
   addPreference: (req, res) => {
     const gender = req.body.gender;
     const preference = req.body.preference;
