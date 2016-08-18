@@ -28,12 +28,10 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    userActions: bindActionCreators(UserActions, dispatch),
-    potentialActions: bindActionCreators(PotentialActions, dispatch),
-  }
-);
+const mapDispatchToProps = (dispatch) => ({
+  userActions: bindActionCreators(UserActions, dispatch),
+  potentialActions: bindActionCreators(PotentialActions, dispatch),
+});
 
 const MatchMakerContainer = connect(
   mapStateToProps,

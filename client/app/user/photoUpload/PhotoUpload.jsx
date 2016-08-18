@@ -4,31 +4,18 @@ import axios from 'axios';
 
 export default class PhotoUpload extends Component {
 
-  componentWillMount() {
-    const { potentialActions, userActions, location: { query } } = this.props;
-    const redditId = query.redditId;
-    localStorage.setItem('token', redditId);
-    potentialActions.fetchPotentials(redditId);
-    userActions.fetchUser(redditId);
-  }
-
   submitAction(event) {
-    const { photo, location: { query } } = this.props;
+    const { photo, redditId } = this.props;
     event.preventDefault();
-    console.log('photo: ', photo);
     axios.post('/api/userInfo/addPhoto', {
-      redditId: query.redditId,
+      redditId,
       photo,
     });
     this.props.history.push('/');
   }
 
-  saveToken(redditId) {
-    localStorage.setItem('token', redditId);
-  }
-
   render() {
-    const { name, photo, userActions } = this.props;
+    const { userActions } = this.props;
     return (
       <div className="photo-drop-view">
         <h1> Show Off Your Best Shot </h1>
@@ -62,6 +49,6 @@ PhotoUpload.propTypes = {
   name: PropTypes.string,
   photo: PropTypes.string,
   userActions: PropTypes.object,
-  potentialActions: PropTypes.object,
   location: PropTypes.object,
+  history: PropTypes.array,
 };

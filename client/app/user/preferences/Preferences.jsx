@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import * as UserActions from '../UserActions';
+import * as PotentialActions from '../../potential/PotentialActions';
 import MaleButton from './MaleButton';
 import FemaleButton from './FemaleButton';
 
-export default class Preferences extends Component {
+class Preferences extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       genderMale: false,
       genderFemale: false,
@@ -43,6 +45,7 @@ export default class Preferences extends Component {
   }
 
   submitAction(event) {
+    const { potentialActions, redditId } = this.props;
     let gender = '';
     let preference = '';
 
@@ -59,26 +62,27 @@ export default class Preferences extends Component {
       this.state.preferenceActive = true; // manually toggle back to true
     } else if (this.state.preferenceMale) {
       preference = 'man';
-      this.state.preferenceActive = true; 
+      this.state.preferenceActive = true;
     } else if (this.state.preferenceFemale) {
       preference = 'woman';
-      this.state.preferenceActive = true; 
+      this.state.preferenceActive = true;
     }
 
-    axios.post('/api/userInfo/addPreference', {
-      redditId: this.props.redditId,
-      gender,
-      preference,
-    })
-    .then((response) => {
-      if (this.state.genderActive && this.state.preferenceActive) {
+    if (this.state.genderActive && this.state.preferenceActive) {
+      axios.post('/api/userInfo/addPreference', {
+        redditId,
+        gender,
+        preference,
+      })
+      .then(() => {
         event.preventDefault();
-        this.props.history.push(`/photoUpload?redditId=${this.props.redditId}`);
-      }
-    })
-    .catch((err) => {
-      console.log('Add preferences error', err);
-    });
+        potentialActions.fetchPotentials(redditId);
+        this.props.history.push('/photoUpload');
+      })
+      .catch((err) => {
+        console.log('Add preferences error', err);
+      });
+    }
   }
 
   render() {
@@ -101,7 +105,7 @@ export default class Preferences extends Component {
             />
           </div>
           <h2>
-            Looking for a
+            Looking for
           </h2>
           <div className="preferences-options">
             <MaleButton
@@ -114,7 +118,7 @@ export default class Preferences extends Component {
             />
           </div>
         </div>
-        <br/> 
+        <br />
         <button onClick={this.submitAction.bind(this)}>
           <h2> Submit </h2>
         </button>
@@ -126,10 +130,11 @@ export default class Preferences extends Component {
 const mapStateToProps = state => ({
   redditId: state.user.redditId,
 });
-const mapDispatchToProps = (dispatch) => (
-  {
-    userActions: bindActionCreators(UserActions, dispatch),
-  });
+
+const mapDispatchToProps = (dispatch) => ({
+  userActions: bindActionCreators(UserActions, dispatch),
+  potentialActions: bindActionCreators(PotentialActions, dispatch),
+});
 
 export default connect(
   mapStateToProps,
@@ -138,6 +143,7 @@ export default connect(
 
 Preferences.PropTypes = {
   redditId: PropTypes.string,
+  potentialActions: PropTypes.object,
+  userActions: PropTypes.object,
+  history: PropTypes.array,
 };
-
-

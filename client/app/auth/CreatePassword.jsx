@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
 export default class CreatePassword extends Component {
 
-  componentWillMount() {
-    const { userId, userActions } = this.props;
+  componentDidMount() {
+    const { userActions, location: { query } } = this.props;
+    const redditId = query.redditId;
+    localStorage.setItem('token', redditId);
+    userActions.fetchUser(redditId);
   }
 
   createPassword(event) {
     event.preventDefault();
-    var message = ReactDOM.findDOMNode(this.refs.newPassword).value;
+    const message = ReactDOM.findDOMNode(this.refs.newPassword).value;
     axios.post('/api/userInfo/updatePassword', {
       password: message,
     })
-    .then((response) => {
-      console.log(`password updated successfully: ${message}`);
-      this.props.history.push('/photoUpload');
+    .then(() => {
+      this.props.history.push('/preferences');
     })
     .catch((err) => {
       console.log(`password not updated: ${err}`);
@@ -36,8 +38,14 @@ export default class CreatePassword extends Component {
             }}
           >Continue</button>
         </div>
-			</div>
+      </div>
     );
   }
 }
 
+CreatePassword.propTypes = {
+  userId: PropTypes.string,
+  userActions: PropTypes.object,
+  location: PropTypes.object,
+  history: PropTypes.array,
+};

@@ -25,6 +25,6 @@ module.exports = {
     //   will redirect the user to the home page.
 
   login: (req, res) => {
-    res.redirect(`/photoUpload?redditId=${req.user.id}`);
+    res.redirect(`/createPassword?redditId=${req.user.id}`);
   },
 };

@@ -15,11 +15,11 @@ export default () => (
   <Router history={browserHistory}>
     <Route path="/" component={requireAuthorization(MatchMakerContainer)} />
     <Route path="/signup" component={Signup} />
-    <Route path="/createPassword" component={requireAuthorization(CreatePasswordContainer)} />
+    <Route path="/createPassword" component={CreatePasswordContainer} />
     <Route path="/login" component={requireAuthorization(LoginContainer)} />
     <Route path="/matches" component={requireAuthorization(MatchesContainer)} />
-    <Route path="/photoUpload" component={PhotoUploadContainer} />
-    <Route path="/preferences" component={Preferences} />
-    <Route path="/profile" component={Profile} />
+    <Route path="/photoUpload" component={requireAuthorization(PhotoUploadContainer)} />
+    <Route path="/preferences" component={requireAuthorization(Preferences)} />
+    <Route path="/profile" component={requireAuthorization(Profile)} />
   </Router>
 );

@@ -4,17 +4,14 @@ import axios from 'axios';
 
 export default class Login extends Component {
 
-  componentWillMount() {
-		const { userId } = this.props;
-  }
-
   sendCredentials(event) {
+    const { userId } = this.props;
     event.preventDefault();
-    var username = ReactDOM.findDOMNode(this.refs.username).value;
-    var password = ReactDOM.findDOMNode(this.refs.password).value;
+    const username = ReactDOM.findDOMNode(this.refs.username).value;
+    const password = ReactDOM.findDOMNode(this.refs.password).value;
     axios.post('/api/userInfo/loginCredentials', {
-      username: username,
-      password: password,
+      username,
+      password,
     })
 		.then((response) => {
       console.log(`user logged in ${response.data}`);
@@ -26,7 +23,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="potential-view">
         <h1>username</h1>
         <textarea ref="username" />
         <h1>password</h1>
