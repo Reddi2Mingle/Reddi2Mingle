@@ -1,7 +1,7 @@
 const bluebird = require('bluebird');
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
-const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
+const db = require('../../db/config').db;
 const request = require('request');
 
 const matches = [

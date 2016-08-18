@@ -1,8 +1,6 @@
 const path = require('path');
 const authRouter = require('../components/auth/authRouter');
-// const authController = require('../components/auth/authController');
 const userRouter = require('../components/user/userRouter');
-const userController = require('../components/user/userController');
 const potentialRouter = require('../components/potentialMatch/potentialRouter');
 const swipeRouter = require('../components/swipe/swipeRouter');
 
