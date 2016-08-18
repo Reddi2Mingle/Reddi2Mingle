@@ -47,7 +47,7 @@ export default (state = initialState, action) => {
       return { ...state, fetching: false, fetched: false, error: action.payload };
     }
     case 'LOGOUT_USER': {
-      return { ...state, isAuthenticated: false };
+      return { ...state, isAuthenticated: false, fetched: false };
     }
     default:
       return state;

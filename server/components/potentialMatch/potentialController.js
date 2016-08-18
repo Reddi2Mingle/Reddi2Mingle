@@ -31,13 +31,9 @@ module.exports = {
       <-[:FOLLOWS]-(potential:Person) 
       WHERE user.redditId="${redditId}"
       AND NOT (user)-[:INTEREST]->(potential)
-<<<<<<< cd29bb46c0a0053aeaf68503f192d2576cee2fe9
-      RETURN potential,user,s LIMIT 10;`,
-=======
       RETURN potential,user,s 
       ORDER BY s.subscribers 
-      LIMIT 2;`,
->>>>>>> Add logout button
+      LIMIT 10;`,
     }, (err, potentials) => {
       if (err) {
         console.log('issue with: ', err);
