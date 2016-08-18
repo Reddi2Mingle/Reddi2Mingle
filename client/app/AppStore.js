@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
@@ -14,4 +14,9 @@ const reducer = combineReducers({
   matches,
 });
 
-export default createStore(reducer, middleware);
+export default createStore(
+  reducer,
+  compose(
+    middleware,
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  ));

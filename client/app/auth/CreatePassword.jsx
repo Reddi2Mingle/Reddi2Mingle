@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default class CreatePassword extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     const { userActions, location: { query } } = this.props;
     const redditId = query.redditId;
     localStorage.setItem('token', redditId);

@@ -1,4 +1,3 @@
-const bluebird = require('bluebird');
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
 const db = require('../../db/config').db;
@@ -9,11 +8,8 @@ const queryUserSubreddits = (redditId) => (
   new Promise((resolve, reject) => {
     db.cypher({
       query: `MATCH (user:Person)-[r:FOLLOWS]->(subreddit) 
-              WHERE user.redditId={redditId} 
+                WHERE user.redditId="${redditId}" 
               RETURN subreddit;`,
-      params: {
-        redditId,
-      },
     }, (err, subreddits) => {
       if (err) {
         console.log('server/userController.js 74: error');
@@ -31,11 +27,8 @@ const queryAccessToken = (redditId) => (
   new Promise((resolve, reject) => {
     db.cypher({
       query: `MATCH (n:Person) 
-              WHERE n.redditId={redditId} 
+                WHERE n.redditId="${redditId}" 
               RETURN n.accessToken;`,
-      params: {
-        redditId,
-      },
     }, (err, results) => {
       if (err) {
         console.log(`server/userController.js 94: issue with retrieving ${err}`);
@@ -52,7 +45,9 @@ const queryAccessToken = (redditId) => (
 const queryRefreshToken = (redditId) => (
   new Promise((resolve, reject) => {
     db.cypher({
-      query: 'MATCH (n:Person) WHERE n.redditId="104r17" return n.refreshToken;'
+      query: `MATCH (n:Person) 
+                WHERE n.redditId="104r17" 
+              RETURN n.refreshToken;`,
     }, (err, results) => {
       if (err) {
         console.log(`server/userController.js 94: issue with retrieving ${err}`);
@@ -80,7 +75,10 @@ const createUserSubreddits = (redditId) => {
     }, (err, response) => {
       // Create array of the subreddits
       const rawData = JSON.parse(response.body).data.children;
-      const subredditList = rawData.map(item => ({name: item.data.display_name, subscribers: item.data.subscribers}));
+      const subredditList = rawData.map(item => ({
+        name: item.data.display_name,
+        subscribers: item.data.subscribers,
+      }));
 
       // Build cypher query to save new subreddits to database
       var mergeArray = [];
@@ -88,8 +86,8 @@ const createUserSubreddits = (redditId) => {
 
       subredditList.forEach((item, index) => {
         mergeArray.push(` MERGE (${item.name}:Subreddit { name: '${item.name}' }) 
-          ON CREATE SET ${item.name}.subscribers = ${item.subscribers} 
-          ON MATCH SET ${item.name}.subscribers = ${item.subscribers} `)
+                            ON CREATE SET ${item.name}.subscribers = ${item.subscribers} 
+                            ON MATCH SET ${item.name}.subscribers = ${item.subscribers} `);
          // Example of result from above line:
          // "MERGE (sanfrancisco:Subreddit { name: 'sanfrancisco', subscribers: 108}) MERGE ... "
         returnArray.push(`${item.name}, `);
@@ -121,17 +119,17 @@ const createUserSubreddits = (redditId) => {
           query: saveSubreddits,
       }, (err, results) => {
         if (err) {
-          console.log(`server/userController.js 150: issue with adding ${results}: ${err}`);
+          console.log(`server/userController.js: issue with adding ${results}: ${err}`);
         } else {
-          console.log(`server/userController.js 152: subreddits saved to database, results: ${results}`);
+          console.log(`server/userController.js: subreddits saved to database, results: ${results}`);
           // Save the follow relationships for (user)->(subreddits) to the database
           db.cypher({
               query: saveFollows,
           }, (err, results) => {
             if (err) {
-              console.log(`server/userController.js 158: issue with adding ${results}: ${err}`);
+              console.log(`server/userController.js: issue with adding ${results}: ${err}`);
             } else {
-              console.log(`server/userController.js 160: subreddit relationships saved to database, results:  ${results}`);
+              console.log(`server/userController.js: subreddit relationships saved to database, results:  ${results}`);
               potentialController.createPotentials(redditId);
             }
           });
@@ -145,14 +143,14 @@ module.exports = {
 
   createNewUser: (profile, accessToken, refreshToken) => {
     db.cypher({
-      query: 'MERGE (user:Person { redditId: {redditId} }) \
-              ON CREATE SET user.name = {username} \
-              ON CREATE SET user.redditId = {redditId} \
-              ON CREATE SET user.refreshToken = {refreshToken} \
-              ON CREATE SET user.accessToken = {accessToken} \
-              ON CREATE SET user.photo = {photo} \
-              ON MATCH SET user.accessToken = {accessToken} \
-              RETURN user;',
+      query: `MERGE (user:Person { redditId: {redditId} }) 
+                ON CREATE SET user.name = {username} 
+                ON CREATE SET user.redditId = {redditId} 
+                ON CREATE SET user.refreshToken = {refreshToken} 
+                ON CREATE SET user.accessToken = {accessToken} 
+                ON CREATE SET user.photo = {photo} 
+                ON MATCH SET user.accessToken = {accessToken} 
+              RETURN user;`,
       params: {
         username: profile.name,
         redditId: profile.id,
@@ -162,9 +160,9 @@ module.exports = {
       },
     }, (err, results) => {
       if (err) {
-        console.log(`server/userController.js 193: issue with adding ${profile.name}: ${err}`);
+        console.log(`server/userController.js: issue with adding ${profile.name}: ${err}`);
       } else {
-        console.log(`server/userController.js 195: user is actually saved to database, results: ${results}`);
+        console.log(`server/userController.js: user is actually saved to database, results: ${results}`);
         createUserSubreddits(profile.id);
       }
     });
@@ -175,8 +173,8 @@ module.exports = {
   },
 
   updateAccessToken: (req, res) => {
-    var username = req.body.username;
-    var password = req.body.password;
+    const username = req.body.username;
+    const password = req.body.password;
 
     queryRefreshToken(username, password).then((refreshToken) => {
       console.log('!!!!!!!!!!!!!!!!!!!', refreshToken);
@@ -200,15 +198,15 @@ module.exports = {
 
     db.cypher({
       query: `MERGE (user:Person {redditId: "${redditId}"})
-      ON MATCH SET user.gender = "${gender}"
-      ON MATCH SET user.preference = "${preference}"
-      RETURN user;`,
+                ON MATCH SET user.gender = "${gender}"
+                ON MATCH SET user.preference = "${preference}"
+              RETURN user;`,
     }, (err, results) => {
       if (err) {
         console.log(`server/userController.js: issue with updating preference and gender, err ${err}`);
       } else {
-        console.log(`server/userController.js: gender and prefernce added sucessfully`);
-        res.send(200);
+        console.log('server/userController.js: gender and prefernce added sucessfully');
+        res.send(results);
       }
     });
   },
@@ -216,7 +214,7 @@ module.exports = {
   addPhoto: (req, res) => {
     db.cypher({
       query: `MATCH (user:Person) 
-              WHERE user.redditId = "${req.body.redditId}"
+                WHERE user.redditId = "${req.body.redditId}"
               SET user.photo = "${req.body.photo}"
               RETURN user`,
     }, (err, results) => {
@@ -235,13 +233,13 @@ module.exports = {
       // Query database for the user's name, photo, etc.
       db.cypher({
         query: `MATCH (user:Person) 
-                WHERE user.redditId=${redditId} 
+                WHERE user.redditId="${redditId}"
                 RETURN user;`,
       }, (err, results) => {
         if (err) {
-          console.log(`server/userController.js 222: issue with retrieving, err: ${err}`);
+          console.log(`server/userController.js: issue with retrieving, err: ${err}`);
         } else {
-          console.log(`server/userController.js 224: results: ${results}`);
+          console.log(`server/userController.js: results: ${results}`);
           var aggregateInfo = results[0].user.properties;
           aggregateInfo.subreddits = subreddits;
           res.send(aggregateInfo);
@@ -254,13 +252,13 @@ module.exports = {
   queryRefreshToken: (redditId) => {
     db.cypher({
       query: `MATCH (n:Person) 
-              WHERE n.redditId=${redditId} 
+              WHERE n.redditId="${redditId}" 
               RETURN n.refreshToken;`,
     }, (err, results) => {
       if (err) {
-        console.log(`server/userController.js 243: issue with retrieving, err: ${err}`);
+        console.log(`server/userController.js: issue with retrieving, err: ${err}`);
       } else {
-        console.log(`server/userController.js 245: here is the accessToken: ${results}`);
+        console.log(`server/userController.js: here is the accessToken: ${results}`);
       }
     });
   },
