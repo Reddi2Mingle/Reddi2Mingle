@@ -27,17 +27,25 @@ export default class CreatePassword extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Create a new password for Reddi2Mingle</h1>
-        <h6>(please don't use your Reddit password)</h6>
-        <div>
-          <textarea ref="newPassword" />
-          <button
+      <div className="password-view">
+        <div className="password-content">
+          <h1>Create a new password for Reddi2Mingle</h1>
+          <h2> But let's get creative </h2>
+          <p className="white">(aka, please don't use your Reddit password)</p>
+          <div>
+            <input text="text" ref="newPassword" />
+            <button
+              onClick={e => {
+                this.createPassword(e);
+              }}
+            ><h2>Continue</h2></button>
+          </div>
+        </div>
+        <button
             onClick={e => {
               this.createPassword(e);
             }}
-          >Continue</button>
-        </div>
+          ><h2>Continue</h2></button>
       </div>
     );
   }

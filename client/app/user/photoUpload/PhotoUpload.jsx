@@ -19,7 +19,7 @@ export default class PhotoUpload extends Component {
     return (
       <div className="photo-drop-view">
         <h1> Show Off Your Best Shot </h1>
-        <div>
+        <div className="photo-drop-container">
           <Dropzone
             onDrop={(files) => {
               userActions.handleImageUpload(files[0]);
@@ -33,11 +33,10 @@ export default class PhotoUpload extends Component {
               Drag and drop your favorite selfie here
             </h2>
           </Dropzone>
-          <div>
-            <button onClick={this.submitAction.bind(this)}>
-              <h2> Submit Photo </h2>
-            </button>
-          </div>
+          <br />
+          <button onClick={this.submitAction.bind(this)}>
+            <h2> Submit Photo </h2>
+          </button>
         </div>
       </div>
     );

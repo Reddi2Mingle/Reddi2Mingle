@@ -39,7 +39,7 @@ a {
   text-decoration: none;
 }
 
-button {
+button, input {
   border: 2px solid white;
   background: none;
   padding: 10px 30px;
@@ -107,12 +107,44 @@ button:hover {
   align-items: center;
 }
 
+/***** Create Password View *****/
+
+.password-view {
+  @include background('/assets/img/typing.jpg');
+  @include absolute-center;
+  input {
+    @include font-default;
+    @extend .white;
+    width: 50%;
+    margin-right: 20px;
+    font-family: $font;
+    font-size: 16px;
+    text-align: center;
+  }
+}
+
+.password-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  height: 25vh;
+  div {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
 /***** Photo-Drop View *****/
 
 .photo-drop-view {
   @include background('/assets/img/shooting-photo.jpg');
   @include absolute-center;
   align-content: space-around;
+}
+
+.photo-drop-container {
+  @include absolute-center;
 }
 
 .dropzone {
