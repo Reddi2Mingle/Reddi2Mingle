@@ -83,7 +83,7 @@ export default class Preferences extends Component {
             />
           </div>
         </div>
-        <br />
+        <br/> 
         <button onClick={this.submitAction.bind(this)}>
           <h2> Submit </h2>
         </button>
