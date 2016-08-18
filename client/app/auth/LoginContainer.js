@@ -1,19 +1,19 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CreatePassword from './CreatePassword.jsx';
+import Login from './Login.jsx';
 import * as UserActions from '../user/UserActions';
 
 const mapStateToProps = state => (
-  { userId: state.user.redditId }
+	{ userId: state.user.redditId }
 );
 
 const mapDispatchToProps = (dispatch) => (
-  { userActions: bindActionCreators(UserActions, dispatch) }
+	{ userActions: bindActionCreators(UserActions, dispatch) }
 );
 
-const CreatePasswordContainer = connect(
+const CreateLoginContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(CreatePassword);
+)(Login);
 
-export default CreatePasswordContainer;
+export default CreateLoginContainer;

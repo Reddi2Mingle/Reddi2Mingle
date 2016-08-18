@@ -9,8 +9,8 @@ const NavBar = ({ userActions }) => (
     <Link to="/profile">
       <h2> Profile </h2>
     </Link>
-    <Link to="/createPassword">
-      <h2> createPassword </h2>
+    <Link to="/login">
+      <h2> login </h2>
     </Link>
     <Link to="/profile">
       <h2> profile </h2>
