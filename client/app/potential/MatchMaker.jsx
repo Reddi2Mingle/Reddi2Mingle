@@ -30,7 +30,8 @@ export default class MatchMaker extends Component {
     if (fetchingPotentials) {
       return (
         <div className="potential-view">
-          <h2>Hold on, we're grabbing your information...</h2>
+          <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
+          <h2>Hold on, we're getting you ready to mingle</h2>
         </div>
       );
     }

@@ -19,18 +19,16 @@ function requestPotentials() {
 }
 
 export function fetchPotentials(userId) {
-  console.log('Fetching potentials! userId:', userId);
   return dispatch => {
     dispatch(requestPotentials());
     dispatch(resetIndex());
     axios.get(`/api/potentials?redditId=${userId}`)
-      .then((response) => {
-        console.log('fetchPotentials response.data: ', response.data);
-        dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });
-      })
-      .catch((err) => {
-        dispatch({ type: 'FETCH_POTENTIALS_REJECTED', payload: err });
-      });
+    .then((response) => {
+      dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });
+    })
+    .catch((err) => {
+      dispatch({ type: 'FETCH_POTENTIALS_REJECTED', payload: err });
+    });
   };
 }
 
