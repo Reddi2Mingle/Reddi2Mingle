@@ -155,7 +155,6 @@ module.exports = {
   },
 
   updatePassword: (req, res) => {
-    console.log('testing answer!!!!!!!!!!!!!');
     res.send('testing answer');
   },
 
