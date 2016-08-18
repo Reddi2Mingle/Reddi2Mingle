@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
     case 'FETCH_POTENTIALS': {
       return {
         ...state,
-        feching: true,
+        fetching: true,
       };
     }
     case 'FETCH_POTENTIALS_FULFILLED': {
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
       };
     }
     case 'FETCH_POTENTIALS_REJECTED': {
-      return { ...state, fetching: false, error: action.payload };
+      return { ...state, fetching: false, fetched: false, error: action.payload };
     }
     default:
       return state;

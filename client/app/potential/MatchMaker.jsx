@@ -21,29 +21,30 @@ export default class MatchMaker extends Component {
       userId,
       photo,
       common_subreddits,
-      fetchingUser,
+      fetchingPotentials,
       potentialActions,
       index,
       lastPotential,
-      noMatches,
+      noPotentials,
     } = this.props;
-    if (noMatches) {
+    if (fetchingPotentials) {
+      return (
+        <div className="potential-view">
+          <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
+          <h2>Hold on, we're getting you ready to mingle</h2>
+        </div>
+      );
+    }
+    if (noPotentials) {
       return (
         <div>
           <Navbar />
           <div className="potential-view">
-            <h2>Oh no! You're out of potential matches.</h2>
+            <h2>Oh no! You're out of potentials. Please check back in a bit.</h2>
           </div>
         </div>
       );
     }
-    // if (fetchingUser) {
-    //   return (
-    //     <div>
-    //       <h2>Grabbing your information...</h2>
-    //     </div>
-    //   );
-    // }
     return (
       <div>
         <Navbar />
@@ -104,6 +105,6 @@ MatchMaker.propTypes = {
   userActions: PropTypes.object,
   potentialActions: PropTypes.object,
   location: PropTypes.object,
-  noMatches: PropTypes.bool,
+  noPotentials: PropTypes.bool,
   userInfoFetched: PropTypes.bool,
 };

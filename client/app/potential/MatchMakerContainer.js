@@ -7,9 +7,10 @@ import * as PotentialActions from './PotentialActions';
 const mapStateToProps = state => {
   if (state.potentials.people.length === 0) {
     return {
-      noMatches: true,
+      noPotentials: true,
       userId: state.user.redditId,
       userInfoFetched: state.user.fetched,
+      fetchingPotentials: state.potentials.fetching,
     };
   }
 
