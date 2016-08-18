@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
+import axios from 'axios';
 
 export default class PhotoUpload extends Component {
 
@@ -12,7 +13,13 @@ export default class PhotoUpload extends Component {
   }
 
   submitAction(event) {
+    const { photo, location: { query } } = this.props;
     event.preventDefault();
+    console.log('photo: ', photo);
+    axios.post('/api/userInfo/addPhoto', {
+      redditId: query.redditId,
+      photo,
+    });
     this.props.history.push('/');
   }
 
@@ -21,7 +28,7 @@ export default class PhotoUpload extends Component {
   }
 
   render() {
-    const { name, picUrl, userActions } = this.props;
+    const { name, photo, userActions } = this.props;
     return (
       <div className="photo-drop-view">
         <h1> Show Off Your Best Shot </h1>
@@ -41,7 +48,7 @@ export default class PhotoUpload extends Component {
           </Dropzone>
           <div>
             <button onClick={this.submitAction.bind(this)}>
-              <h2> Redirect to MatchMaker </h2>
+              <h2> Submit Photo </h2>
             </button>
           </div>
         </div>
@@ -51,8 +58,9 @@ export default class PhotoUpload extends Component {
 }
 
 PhotoUpload.propTypes = {
+  redditId: PropTypes.string,
   name: PropTypes.string,
-  picUrl: PropTypes.string,
+  photo: PropTypes.string,
   userActions: PropTypes.object,
   potentialActions: PropTypes.object,
   location: PropTypes.object,

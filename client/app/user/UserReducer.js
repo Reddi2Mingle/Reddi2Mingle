@@ -37,7 +37,6 @@ export default (state = initialState, action) => {
         redditId: action.payload.redditId,
         name: action.payload.name,
         photo: action.payload.photo,
-        matches: action.payload.matches,
         fetching: false,
         fetched: true,
         isAuthenticated: true,
