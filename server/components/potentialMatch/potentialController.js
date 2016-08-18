@@ -1,7 +1,8 @@
 'use strict';
 
 const neo4j = require('neo4j');
-const db = require('../../db/config').db;
+// const db = require('../../db/config').db;
+const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 
 module.exports = {
 
@@ -15,7 +16,7 @@ module.exports = {
       if (err) {
         console.log('issue with: ', err);
       } else {
-        console.log('list of potentials', results);
+        console.log('list of potentials');
       }
     });
   },
@@ -29,7 +30,7 @@ module.exports = {
       <-[:FOLLOWS]-(potential:Person) 
       WHERE user.redditId="${redditId}"
       AND NOT (user)-[:INTEREST]->(potential)
-      RETURN potential,user,s LIMIT 2;`,
+      RETURN potential,user,s LIMIT 10;`,
     }, (err, potentials) => {
       if (err) {
         console.log('issue with: ', err);

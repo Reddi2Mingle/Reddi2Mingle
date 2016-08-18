@@ -177,6 +177,31 @@ module.exports = {
     });
   },
 
+  updatePassword: (req, res) => {
+    console.log('testing answer!!!!!!!!!!!!!');
+    res.send('testing answer');
+  },
+
+  addPreference: (req, res) => {
+    const gender = req.body.gender;
+    const preference = req.body.preference;
+    const redditId = req.body.redditId;
+
+    db.cypher({
+      query: `MATCH (user:Person) WHERE user.redditId=${redditId}
+      ON MATCH SET user.gender = ${gender}
+      ON MATCH SET user.preference = ${preference}
+      RETURN user;'`
+    }, (err, results) => {
+      if (err) {
+        console.log(`server/userController.js: issue with updating preference and gender, err ${err}`)
+      } else {
+        console.log(`server/userController.js: gender and prefernce added sucessfully`);
+        res.send(200);
+      }
+    });
+  },
+
   queryUserInfo: (req, res) => {
     const redditId = req.query.redditId;
     // var subreddits = [];

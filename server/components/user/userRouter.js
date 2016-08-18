@@ -5,5 +5,6 @@ const userController = require('./userController');
 // Define API routes to /userInfo
 
 userRouter.get('/', userController.queryUserInfo);
+userRouter.post('/updatePassword', userController.updatePassword);
 
 module.exports = userRouter;

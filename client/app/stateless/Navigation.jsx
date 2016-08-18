@@ -8,8 +8,8 @@ export default class NavBar extends Component {
         <Link to="/signup">
           <h2> signup </h2>
         </Link>
-        <Link to="/photoUpload">
-          <h2> photo upload </h2>
+        <Link to="/createPassword">
+          <h2> createPassword </h2>
         </Link>
         <Link to="/profile">
           <h2> profile </h2>
