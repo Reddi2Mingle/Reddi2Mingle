@@ -39,7 +39,7 @@ a {
   text-decoration: none;
 }
 
-button {
+button, input {
   border: 2px solid white;
   background: none;
   padding: 10px 30px;
@@ -105,6 +105,16 @@ button:hover {
   display: flex;
   flex-flow: column nowrap; 
   align-items: center;
+}
+
+/***** Create Password View *****/
+
+.password-view {
+  @include background('/assets/img/typing.jpg');
+  @include absolute-center;
+  input {
+    width: 40%;
+  }
 }
 
 /***** Photo-Drop View *****/
