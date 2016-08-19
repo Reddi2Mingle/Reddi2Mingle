@@ -317,10 +317,17 @@ button:hover {
 
 /***** Profile View *****/
 
+.profile-view {
+  @include background('/assets/img/fireworks.jpg');
+  display: flex;
+  flex-direction: row;
+}
+
 .profile-image {
-    position:relative;
-    width:400px;
-    height:auto;
+  position:relative;
+  width:400px;
+  height:auto;
+  border: 15px solid white;
 }
 .profile-image img {
     width:100%;
@@ -328,18 +335,16 @@ button:hover {
 }
 
 .profile-image:after {
-    @extend h2;
-    content:'Update your profile';
-    color: #fff;
+    content: url(/assets/img/camera.png);
+    text-align: center;
     position: absolute;
-    width: 100%; height: 100%;
-    top: 0; 
-    left: 0;
-    background: rgba(0,0,0,0.6);
+    width: 100%; height: 50%;
+    top: 50%; left: 0;
+    background: rgba(255, 255, 255,0.6);
     opacity: 0;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
 }
 .profile-image:hover:after {
-    opacity:1;
+    opacity: 1;
 }
