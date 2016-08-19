@@ -40,7 +40,7 @@ module.exports = {
         console.log('issue with: ', err);
         res.send([]);
       } else {
-        // console.log('potentials:',potentials);
+        console.log('potentials:', potentials);
         const arrayOfPotentials = [];
         const finalPotentials = [];
 

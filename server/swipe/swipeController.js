@@ -100,19 +100,24 @@ module.exports = {
   },
   showMatches: (req, res) => {
   // params: redditId
-    const r = req.query;
-    const user = r.redditId;
+    const redditId = req.query.redditId;
 
     db.cypher({
-      query: `MATCH (user:Person {redditId: "${user}"})-[r:MATCH]-(matched:Person) RETURN matched`,
-    }, (err, matched) => {
+      query: `MATCH (user:Person {redditId: "${redditId}"})-[r:MATCH]-(matched:Person) 
+              MATCH (user)-[:FOLLOWS]->(sub:Subreddit)<-[:FOLLOWS]-(matched)
+              RETURN matched, sub;`,
+    }, (err, results) => {
       if (err) {
         console.log('Error in finding potential interest for user:', err);
         res.send([]);
       } else {
-        matched = matched.map(v => (v.matched.properties));
-        console.log('matched TRYING TO MATCH TRYING TO MATCH: ', matched);
-        res.send(matched);
+        // console.log('Results of showMatches query, results[0]: ', results[0]);
+        // console.log('results: ', results);
+        for (const result of results) {
+          console.log(result);
+        }
+        // const mappedResults = results.map(v => (v.results.properties));
+        res.send(results);
       }
     });
   },
