@@ -25,7 +25,7 @@ export default class PhotoUpload extends Component {
             <img style={{ width: 500 }} src={photo} alt="profile" />
             <br />
             <button onClick={this.submitAction.bind(this)}>
-              <h2> Submit Photo </h2>
+              <h2> I'm Ready To Mingle </h2>
             </button>
           </div>
         </div>
