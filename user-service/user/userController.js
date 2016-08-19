@@ -125,7 +125,7 @@ const createUserSubreddits = (redditId) => {
 };
 
 module.exports = {
-
+  //once authenticated, create new user in neo4j. once successful, create new user in sql
   createNewUser: (req, res) => {
     console.log('create New User in user service');
 
@@ -204,4 +204,39 @@ module.exports = {
       }
     });
   },
+  addPreference: (req, res) => {
+    const gender = req.body.gender;
+    const preference = req.body.preference;
+    const redditId = req.body.redditId;
+
+    db.cypher({
+      query: `MERGE (user:Person {redditId: "${redditId}"})
+                ON MATCH SET user.gender = "${gender}"
+                ON MATCH SET user.preference = "${preference}"
+              RETURN user;`,
+    }, (err, results) => {
+      if (err) {
+        console.log(`server/userController.js: issue with updating preference and gender, err ${err}`);
+      } else {
+        console.log('server/userController.js: gender and prefernce added sucessfully');
+        res.send(results);
+      }
+    });
+  },
+  
+  addPhoto: (req, res) => {
+    db.cypher({
+      query: `MATCH (user:Person)
+                WHERE user.redditId = "${req.body.redditId}" 
+              SET user.photo = "${req.body.photo}"
+              RETURN user`,
+    }, (err, results) => {
+      if (err) {
+        console.log(`server/userController.js: issue with updating photo, err ${err}`);
+      } else {
+        res.send(results);
+      }
+    });
+  },
+
 };

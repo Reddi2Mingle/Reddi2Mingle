@@ -3,6 +3,7 @@ const potentialController = require('../potentialMatch/potentialController');
 const db = require('../db/neo4jconfig').db;
 const request = require('request');
 
+
 // Request list of user's subscribed subreddits
 const queryUserSubreddits = (redditId) => (
   new Promise((resolve, reject) => {
@@ -141,34 +142,6 @@ const createUserSubreddits = (redditId) => {
 
 module.exports = {
 
-  createNewUser: (profile, accessToken, refreshToken) => {
-    db.cypher({
-      query: `MERGE (user:Person { redditId: {redditId} }) 
-                ON CREATE SET user.name = {username} 
-                ON CREATE SET user.redditId = {redditId} 
-                ON CREATE SET user.refreshToken = {refreshToken} 
-                ON CREATE SET user.accessToken = {accessToken} 
-                ON CREATE SET user.photo = {photo} 
-                ON MATCH SET user.accessToken = {accessToken} 
-              RETURN user;`,
-      params: {
-        username: profile.name,
-        redditId: profile.id,
-        accessToken,
-        refreshToken,
-        photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
-      },
-    }, (err, results) => {
-      if (err) {
-        console.log(`server/userController.js: issue with adding ${profile.name}: ${err}`);
-      } else {
-        console.log(`server/userController.js: user is actually saved to database, results: ${results}`);
-        createUserSubreddits(profile.id);
-        
-      }
-    });
-  },
-
   updatePassword: (req, res) => {
     res.send('testing answer');
   },
@@ -178,7 +151,7 @@ module.exports = {
     const password = req.body.password;
 
     queryRefreshToken(username, password).then((refreshToken) => {
-     
+      console.log('!!!!!!!!!!!!!!!!!!!', refreshToken);
       request({
         url: `https://T3zDXS9GxKukbA:TAKMSJzrlZPzTWxK5O3w7OglWA8@ssl.reddit.com/api/v1/access_token?state=uniquestring&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=http://127.0.0.1:3000/auth/reddit/callback&refresh_token=${refreshToken}&grant_type=refresh_token`,
         method: 'POST',

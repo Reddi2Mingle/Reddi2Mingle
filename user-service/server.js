@@ -5,6 +5,7 @@ const routers = require('./helpers/routes');
 // require('./helpers/seed');
 // require('./helpers/seedCreation');
 require('./db/sqlconfig');
+
 // Invoke middleware function on app to 'use' all the middleware functions
 middleware(app);
 

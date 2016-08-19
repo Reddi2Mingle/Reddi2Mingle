@@ -1,10 +1,15 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('heroku_bc34dd4371107d4', 'bd77d9f718d486', '21120e85', {
-  host: 'us-cdbr-iron-east-04.cleardb.net',
+// const sequelize = new Sequelize('heroku_bc34dd4371107d4', 'bd77d9f718d486', '21120e85', {
+//   host: 'us-cdbr-iron-east-04.cleardb.net',
+//   dialect: 'mysql',
+//   pool: {
+//     maxIdleTime: 10000000000,
+//     max: 5,
+//     min: 0
+//   },
+// });
+const sequelize = new Sequelize('reddi2mingle', 'root', '', {
   dialect: 'mysql',
-  pool: {
-    maxIdleTime: 10000000000,
-  },
 });
 
 // Table models
