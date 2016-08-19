@@ -47,19 +47,17 @@ const queryAccessToken = (redditId) => (
 );
 
 // Get the user's refresh token
-const queryRefreshToken = (redditId) => (
+const queryRefreshToken = (username) => (
   new Promise((resolve, reject) => {
-    db.cypher({
-      query: 'MATCH (user:Person) WHERE user.redditId="104r17" return user.refreshToken;'
-    }, (err, results) => {
-      if (err) {
-        console.log(`server/userController.js 94: issue with retrieving ${err}`);
-        reject(err);
+    dbSql.Users.find({where: {name: username}}).then((userData) => {
+      if (userData === undefined || userData === null) {
+        console.log('error with finding user');
       } else {
-        console.log(`server/userController.js 97: here is the refreshToken ${results[0]['user.refreshToken']}`);
-        resolve(results[0]['user.refreshToken']);
+        var user = userData.dataValues;
+        resolve(user.refreshToken);
       }
-    });
+    })
+
   })
 );
 
@@ -197,7 +195,6 @@ module.exports = {
     });
   },
 
-<<<<<<< 0c1be3ceb40b589d2dbaf1e14a5fc8157ce8e721:user-service/user/userController.js
   queryUserInfo: (req, res) => {
     const redditId = req.query.redditId;
     // var subreddits = [];
@@ -211,14 +208,18 @@ module.exports = {
           redditId,
         },
       }, (err, results) => {
-=======
-  sequelize.findOrCreate({
-    where: {redditId: profile.id, 
-    username: profile.name,
-    refreshToken: }})
-  .then((data) => {
-    
-  })
+        if (err) {
+          console.log(`server/userController.js 222: issue with retrieving, err: ${err}`);
+        } else {
+          console.log(`server/userController.js 224: results: ${results}`);
+          var aggregateInfo = results[0].user.properties;
+          aggregateInfo.subreddits = subreddits;
+
+          res.send(aggregateInfo);
+        }
+      });
+    });
+  },
 
   updatePassword: (req, res) => {
     res.send('testing answer');
@@ -232,41 +233,22 @@ module.exports = {
       request({
         url: `https://T3zDXS9GxKukbA:TAKMSJzrlZPzTWxK5O3w7OglWA8@ssl.reddit.com/api/v1/access_token?state=uniquestring&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=http://127.0.0.1:3000/auth/reddit/callback&refresh_token=${refreshToken}&grant_type=refresh_token`,
         method: 'POST',
-      }, (err, response) => {
->>>>>>> commit before rebase (no material changes):server/components/user/userController.js
+      }, (err, results) => {
         if (err) {
           console.log(`server/userController.js 222: issue with retrieving, err: ${err}`);
         } else {
-<<<<<<< 0c1be3ceb40b589d2dbaf1e14a5fc8157ce8e721:user-service/user/userController.js
-          console.log(`server/userController.js 224: results: ${results}`);
-          var aggregateInfo = results[0].user.properties;
-          aggregateInfo.subreddits = subreddits;
-
-          res.send(aggregateInfo);
-=======
-          // UPDATE THIS SECTION TO WRITE ACCESS CODE TO MYSQL
-          res.send(JSON.parse(response.body).access_token);
->>>>>>> commit before rebase (no material changes):server/components/user/userController.js
+          // console.log(`server/userController.js 224: results: ${results}`);
+          var newAccessToken = JSON.parse(results.body).access_token;
+          dbSql.Users.find({where: {name: username}}).then((task) => {
+            task.update({accessToken: newAccessToken}).then((data2) => {
+              res.send('accessToken updated in MySQL');
+            })
+          })
         }
       });
     });
   },
 
-  // Query database for Reddit refreshToken
-  queryRefreshToken: (redditId) => {
-    db.cypher({
-      query: 'MATCH (n:Person) WHERE n.redditId={redditId} return n.refreshToken;',
-      params: {
-        redditId,
-      },
-    }, (err, results) => {
-      if (err) {
-        console.log(`server/userController.js 243: issue with retrieving, err: ${err}`);
-      } else {
-        console.log(`server/userController.js 245: here is the accessToken: ${results}`);
-      }
-    });
-  },
   addPreference: (req, res) => {
     const gender = req.body.gender;
     const preference = req.body.preference;
