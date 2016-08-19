@@ -29,9 +29,12 @@ export default class MatchMaker extends Component {
     } = this.props;
     if (fetchingPotentials) {
       return (
-        <div className="potential-view">
-          <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
-          <h2>Hold on, we're getting you ready to mingle</h2>
+        <div>
+          <Navbar />
+          <div className="potential-view">
+            <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
+            <h2>Hold on, we're getting you ready to mingle</h2>
+          </div>
         </div>
       );
     }

@@ -16,73 +16,70 @@ module.exports = {
     // Potential's response check
     db.cypher({
       query: `MATCH (potential:Person {redditId: ${potential}})-[r:INTEREST]->
-      (user:Person {redditId: ${user}})
-      RETURN r;`,
+                (user:Person {redditId: ${user}})
+              RETURN r;`,
     }, (err, potentialswipe) => {
       if (err) {
         console.log('Error in finding potential interest for user');
-      } else {
-        console.log('potentialswipe', potentialswipe);
+      } else if (potentialswipe.length === 0) {
         // if there is no existing INTEREST relationship, create one way user->
         // INTEREST {LIKES:yes||no}->potential relationship
-        if (potentialswipe.length === 0) {
-          console.log('relationship does not yet exist. Creating now.');
-          db.cypher({
-            query: `MATCH (user:Person { redditId: ${user} })
-            MATCH (potential:Person { redditId: ${potential} })
-            CREATE UNIQUE (user)-[r:INTEREST {LIKE: ${swipe}}]->(potential)
-            RETURN r;`,
-          }, (error, relationship) => {
-            if (error) {
-              console.log('Error in creating swipe response relationship:', err);
-            } else {
-              console.log('Interest relationship was created/returned:', relationship);
-              res.send(relationship);
-              // Here's an example of the relationship created from the second query: r
-              // [
-              //   {
-              //     "r": {
-              //       "_id": 87,
-              //       "type": "INTEREST",
-              //       "properties": {
-              //         "LIKE": "yes"
-              //       },
-              //       "_fromId": 73,
-              //       "_toId": 65
-              //     }
-              //   }
-              // ]
-            }
-          });
+        console.log('relationship does not yet exist. Creating now.');
+        db.cypher({
+          query: `MATCH (user:Person { redditId: ${user} })
+                  MATCH (potential:Person { redditId: ${potential} })
+                    CREATE UNIQUE (user)-[r:INTEREST {LIKE: ${swipe}}]->(potential)
+                  RETURN r;`,
+        }, (error, relationship) => {
+          if (error) {
+            console.log('Error in creating swipe response relationship:', err);
+          } else {
+            console.log('Interest relationship was created/returned:', relationship);
+            res.send(relationship);
+            // Here's an example of the relationship created from the second query: r
+            // [
+            //   {
+            //     "r": {
+            //       "_id": 87,
+            //       "type": "INTEREST",
+            //       "properties": {
+            //         "LIKE": "yes"
+            //       },
+            //       "_fromId": 73,
+            //       "_toId": 65
+            //     }
+            //   }
+            // ]
+          }
+        });
         // otherwise, if there is an existing INTEREST relationship,
         // check what potential selected (could be yes||no)
         // erase existing POTENTIAL and INTEREST relationships, then
         // if potential selected yes, create match.  if potential selected no, create relationship
          // potential has already responded
-        } else {
-          const u2swipe = potentialswipe[0].r.properties.LIKE;
+      } else {
+        const u2swipe = potentialswipe[0].r.properties.LIKE;
 
-          const matched = u2swipe === 'yes' && swipe === '"yes"';
-          const rel = matched ? 'MATCH' : 'NEVER';
+        const matched = u2swipe === 'yes' && swipe === '"yes"';
+        const rel = matched ? 'MATCH' : 'NEVER';
 
-          // erase relationships and replace with two-way relationship to indicate they MATCHed
-          // or will NEVER match
-          db.cypher({
-            query: `MATCH (user:Person { redditId: ${user} })-
-              [r:INTEREST|POTENTIAL]-(potential:Person {redditId: ${potential}})
-              DELETE r
-              MERGE (user)-[f: ${rel}]-(potential)
-              RETURN f;`,
-          }, (error, relationshipMatchOrNever) => {
-            if (err) {
-              console.log('Error in liking response:', err);
-            } else {
-              console.log('Interest relationship was deleted. Created new:',
-                relationshipMatchOrNever);
-              res.send(relationshipMatchOrNever);
-            }
-          });
-        }
+        // erase relationships and replace with two-way relationship to indicate they MATCHed
+        // or will NEVER match
+        db.cypher({
+          query: `MATCH (user:Person { redditId: ${user} })-
+                    [r:INTEREST|POTENTIAL]-(potential:Person {redditId: ${potential}})
+                  DELETE r
+                  MERGE (user)-[f: ${rel}]-(potential)
+                  RETURN f;`,
+        }, (error, relationshipMatchOrNever) => {
+          if (err) {
+            console.log('Error in liking response:', err);
+          } else {
+            console.log('Interest relationship was deleted. Created new:',
+              relationshipMatchOrNever);
+            res.send(relationshipMatchOrNever);
+          }
+        });
       }
     });
     // Example response for 'MATCH' match
@@ -111,14 +108,31 @@ module.exports = {
         console.log('Error in finding potential interest for user:', err);
         res.send([]);
       } else {
-        // console.log('Results of showMatches query, results[0]: ', results[0]);
-        // console.log('results: ', results);
-        for (const result of results) {
-          console.log(result);
+        // first we have to sift through the results returned, because it returns
+        // an array containing objects for each subreddit and person
+        var mappedResults = {};
+        for (var result of results) {
+          var person = result.matched.properties;
+          var sub = result.sub.properties;
+          if (mappedResults[person.name]) {
+            mappedResults[person.name].common_subbredits.push(sub.name);
+          } else {
+            mappedResults[person.name] = {
+              name: person.name,
+              photo: person.photo,
+              redditId: person.redditId,
+              common_subbredits: [sub.name],
+            };
+          }
         }
-        // const mappedResults = results.map(v => (v.results.properties));
-        res.send(results);
+        // Next, we build an array to send to the client
+        var resultsArr = [];
+        for (var key in mappedResults) {
+          resultsArr.push(mappedResults[key]);
+        }
+        res.send(resultsArr);
       }
     });
   },
 };
+

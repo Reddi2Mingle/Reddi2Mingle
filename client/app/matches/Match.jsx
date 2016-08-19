@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Match = ({ name, photo }) => (
+const Match = ({ name, photo, common_subbredits }) => (
   <div className="match-card">
     <img src={photo} className="small-profile-image" />
     <div className="match-info">
@@ -10,7 +10,9 @@ const Match = ({ name, photo }) => (
         <span className="heart-text"> r/ </span>
         <div className="small-subreddit-list">
           <ul>
-
+            {common_subbredits.map(sub => (
+              <li>{sub}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -24,6 +26,7 @@ const Match = ({ name, photo }) => (
 Match.propTypes = {
   name: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
+  common_subbredits: PropTypes.array,
 };
 
 export default Match;

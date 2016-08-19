@@ -3,7 +3,6 @@ const potentialController = require('../potentialMatch/potentialController');
 const db = require('../db/neo4jconfig').db;
 const request = require('request');
 
-
 // Request list of user's subscribed subreddits
 const queryUserSubreddits = (redditId) => (
   new Promise((resolve, reject) => {
