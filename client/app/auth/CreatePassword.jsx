@@ -41,11 +41,6 @@ export default class CreatePassword extends Component {
             ><h2>Continue</h2></button>
           </div>
         </div>
-        <button
-            onClick={e => {
-              this.createPassword(e);
-            }}
-          ><h2>Continue</h2></button>
       </div>
     );
   }
