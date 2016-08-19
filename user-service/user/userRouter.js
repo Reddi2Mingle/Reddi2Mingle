@@ -6,8 +6,9 @@ const userController = require('./userController');
 userRouter.post('/createUser', userController.createNewUser);
 // userRouter.get('/', userController.queryUserInfo);
 // userRouter.post('/updatePassword', userController.updatePassword);
-// userRouter.post('/addPreference', userController.addPreference);
+userRouter.post('/addPreference', userController.addPreference);
 // userRouter.post('/addPhoto', userController.addPhoto);
-userRouter.post('/loginCredentials', userController.updateAccessToken);
+userRouter.post('/updateAccessToken', userController.updateAccessToken);
+userRouter.post('/updatePassword', userController.updatePassword);
 
 module.exports = userRouter;
