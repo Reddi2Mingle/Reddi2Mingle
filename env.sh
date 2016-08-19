@@ -1,0 +1,3 @@
+export REDDIT_KEY = 'T3zDXS9GxKukbA';
+export REDDIT_SECRET = 'TAKMSJzrlZPzTWxK5O3w7OglWA8';
+

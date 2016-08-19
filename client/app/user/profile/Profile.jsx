@@ -6,24 +6,24 @@ const Profile = ({ name, photo }) => (
   <div>
     <Navbar />
     <div className="potential-view">
-      <div className="potential-card">
+      <div className="profile-image">
         <img
           src={photo}
-          className="full-profile-image"
           alt="Redditor"
         />
-        <div className="potential-info">
-          <h3>{name}</h3>
-          <div className="potential-more-info">
-            <i className="material-icons md-48 orange">favorite</i>
-            <span className="heart-text"> r/ </span>
-            <ul className="subreddit-list">
-              
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
+    <div className="potential-info">
+      <h3>{name}</h3>
+      <div className="potential-more-info">
+        <i className="material-icons md-48 orange">favorite</i>
+        <span className="heart-text"> r/ </span>
+        <ul className="subreddit-list">
+          
+        </ul>
+      </div>
+    </div>
+    <button> <h2> Change your profile picture </h2> </button>
   </div>
 );
 
