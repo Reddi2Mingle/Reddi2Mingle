@@ -1,25 +1,19 @@
 const app = require('express')();
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
 const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
-require('./auth/passport');
 // require('./helpers/seed');
 // require('./helpers/seedCreation');
-require('./db/neo4jconfig');
+require('./db/sqlconfig');
 
 // Invoke middleware function on app to 'use' all the middleware functions
 middleware(app);
 
 // Invoke routers function on app to provide access to all routes defined
-io.on('connection', (socket) => {
-  routers(socket, io, app);
-});
+routers(app);
 
 // App now listening on port 80
-server.listen(process.env.PORT_APP, (err) => {
+server.listen(3001, (err) => {
   err ? console.log(`server/server.js 19: server error: ${err}`) :
-  console.log(`Server listening on ${process.env.PORT_APP}`);
+  console.log('Server listening on 3001');
 });
-
-module.exports = io;

@@ -1,5 +1,5 @@
 const neo4j = require('neo4j');
-const db = require('../../db/config').db;
+const db = require('../db/neo4jconfig').db;
 
 module.exports = {
   likeResponse: (req, res) => {
