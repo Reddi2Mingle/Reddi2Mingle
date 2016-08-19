@@ -69,6 +69,7 @@ button:hover {
   background-color: black;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   h2 {
     font-size: 20px;
   }
@@ -200,10 +201,9 @@ button:hover {
 /***** Potentials View *****/
 
 .potential-view { // will need to change for different background later
+  @include background('/assets/img/new-york.jpg');
   @include absolute-center;
   background-color: #1a1a1a;
-  height: 100vh;
-  width: 100vw;
 }
 
 .potential-card {
@@ -280,9 +280,7 @@ button:hover {
 }
 
 .matches-view { // will need to change for different background later
-  background-color: #1a1a1a;
-  height: 100vh;
-  width: 100vw;
+  @include background('/assets/img/los-angeles.jpg');
   display: flex;
   align-items: space-around;
   justify-content: center;

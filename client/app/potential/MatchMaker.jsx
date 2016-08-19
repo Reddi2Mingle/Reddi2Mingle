@@ -60,11 +60,13 @@ export default class MatchMaker extends Component {
               <div className="potential-more-info">
                 <i className="material-icons md-48 orange">favorite</i>
                 <span className="heart-text"> r/ </span>
-                <ul className="subreddit-list">
-                  {common_subreddits.map(sub => (
-                    <span>{sub}</span>
-                  ))}
-                </ul>
+                <div className="subreddit-list">
+                  <ul>
+                    {common_subreddits.map(sub => (
+                      <span>{sub}</span>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
 
