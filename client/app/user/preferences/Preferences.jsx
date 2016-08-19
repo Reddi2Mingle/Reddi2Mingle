@@ -74,7 +74,7 @@ class Preferences extends Component {
         gender,
         preference,
       })
-      .then(() => {
+      .then((response) => {
         event.preventDefault();
         potentialActions.fetchPotentials(redditId);
         this.props.history.push('/photoUpload');

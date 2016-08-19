@@ -142,7 +142,20 @@ const createUserSubreddits = (redditId) => {
 module.exports = {
 
   updatePassword: (req, res) => {
-    res.send('testing answer');
+    request({
+      url: 'http://localhost:3001/api/user-sql/updatePassword',
+      method: 'POST',
+      form: {
+        redditId: req.body.redditId,
+        password: req.body.password,
+      },
+    }, (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send('password updated successfully')
+      }
+    });
   },
 
   updateAccessToken: (req, res) => {
@@ -168,18 +181,19 @@ module.exports = {
     const gender = req.body.gender;
     const preference = req.body.preference;
     const redditId = req.body.redditId;
-
-    db.cypher({
-      query: `MERGE (user:Person {redditId: "${redditId}"})
-                ON MATCH SET user.gender = "${gender}"
-                ON MATCH SET user.preference = "${preference}"
-              RETURN user;`,
-    }, (err, results) => {
+    request({
+      url: 'http://localhost:3001/api/user-sql/addPreference',
+      method: 'POST',
+      form: {
+        redditId: redditId,
+        gender: gender,
+        preference: preference,
+      },
+    }, (err, response) => {
       if (err) {
-        console.log(`server/userController.js: issue with updating preference and gender, err ${err}`);
+        console.log(err);
       } else {
-        console.log('server/userController.js: gender and prefernce added sucessfully');
-        res.send(results);
+        res.send('preferences updated successfully')
       }
     });
   },

@@ -205,10 +205,10 @@ module.exports = {
   },
 
   updatePassword: (req, res) => {
-    var username = req.body.username;
+    var redditId = req.body.redditId;
     var password = req.body.password;
-
-    dbSql.Users.find({where: {name: username}}).then((task) => {
+    console.log('2349087123!!!!!!!!!', req.body)
+    dbSql.Users.find({where: {redditId: redditId}}).then((task) => {
       task.update({password: password}).then((data2) => {
         res.send('password updated in MySQL');
       });
@@ -243,7 +243,6 @@ module.exports = {
     const gender = req.body.gender;
     const preference = req.body.preference;
     const redditId = req.body.redditId;
-
     db.cypher({
       query: `MERGE (user:Person {redditId: "${redditId}"})
                 ON MATCH SET user.gender = "${gender}"

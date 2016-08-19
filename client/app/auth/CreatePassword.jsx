@@ -12,9 +12,12 @@ export default class CreatePassword extends Component {
   }
 
   createPassword(event) {
+    const { location: { query } } = this.props;
+    const redditId = query.redditId;
     event.preventDefault();
     const message = ReactDOM.findDOMNode(this.refs.newPassword).value;
     axios.post('/api/userInfo/updatePassword', {
+      redditId,
       password: message,
     })
     .then(() => {
