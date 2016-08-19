@@ -1,3 +1,4 @@
 node_modules
 reddit_api_Practice
 env.sh
+.DS_Store
