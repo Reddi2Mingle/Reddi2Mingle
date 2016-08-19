@@ -1,7 +1,7 @@
 'use strict';
 
 const neo4j = require('neo4j');
-const db = require('../../db/config').db;
+const db = require('../db/neo4jconfig').db;
 
 module.exports = {
 
@@ -25,6 +25,7 @@ module.exports = {
 
   queryPotentials: (req, res) => {
     const redditId = req.query.redditId;
+    console.log('redditId:',redditId)
     db.cypher({
       query: `MATCH (user:Person)
       -[f:FOLLOWS]->(s:Subreddit)

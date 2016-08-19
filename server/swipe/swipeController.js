@@ -1,10 +1,5 @@
 const neo4j = require('neo4j');
-<<<<<<< 13758e14544663182040470cf9d3f5744a86c0a1
-const db = require('../../db/config').db;
-=======
-
-const db = new neo4j.GraphDatabase('http://neo4j:neo4j@localhost:7474');
->>>>>>> Get ready to deploy
+const db = require('../db/neo4jconfig').db;
 
 module.exports = {
   likeResponse: (req, res) => {

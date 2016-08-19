@@ -1,10 +1,10 @@
 const path = require('path');
-const authRouter = require('../auth/authRouter');
-// const authController = require('../user-service/auth/authController');
-const userRouter = require('../user/userRouter');
-const userController = require('../user/userController');
-const potentialRouter = require('../potentialMatch/potentialRouter');
-const swipeRouter = require('../swipe/swipeRouter');
+const authRouter = require('../components/auth/authRouter');
+// const authController = require('../components/auth/authController');
+const userRouter = require('../components/user/userRouter');
+const userController = require('../components/user/userController');
+const potentialRouter = require('../components/potentialMatch/potentialRouter');
+const swipeRouter = require('../components/swipe/swipeRouter');
 
 module.exports = (socket, io, app) => {
   app.use('/auth', authRouter);

@@ -1,6 +1,6 @@
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
-const db = require('../../db/config').db;
+const db = require('../db/neo4jconfig').db;
 const request = require('request');
 
 // Request list of user's subscribed subreddits
@@ -140,6 +140,7 @@ const createUserSubreddits = (redditId) => {
 };
 
 module.exports = {
+
   createNewUser: (profile, accessToken, refreshToken) => {
     db.cypher({
       query: `MERGE (user:Person { redditId: {redditId} }) 
@@ -163,6 +164,7 @@ module.exports = {
       } else {
         console.log(`server/userController.js: user is actually saved to database, results: ${results}`);
         createUserSubreddits(profile.id);
+        
       }
     });
   },
@@ -176,7 +178,7 @@ module.exports = {
     const password = req.body.password;
 
     queryRefreshToken(username, password).then((refreshToken) => {
-      console.log('!!!!!!!!!!!!!!!!!!!', refreshToken);
+     
       request({
         url: `https://T3zDXS9GxKukbA:TAKMSJzrlZPzTWxK5O3w7OglWA8@ssl.reddit.com/api/v1/access_token?state=uniquestring&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=http://127.0.0.1:3000/auth/reddit/callback&refresh_token=${refreshToken}&grant_type=refresh_token`,
         method: 'POST',

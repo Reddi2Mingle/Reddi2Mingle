@@ -7,6 +7,7 @@
     "start": "webpack -p && nodemon -L server/server.js",
     "watch": "webpack --progress --colors --watch",
     "server": "nodemon server/server.js",
+    "u-server": "nodemon user-service/server.js",
     "build": "webpack-dev-server --inline --hot --content-base client/build/",
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch"
@@ -80,7 +81,7 @@
     "redux-promise-middleware": "^3.3.2",
     "redux-thunk": "^2.1.0",
     "request": "^2.74.0",
-    "sequelize": "^3.23.6",
+    "sequelize": "^3.24.0",
     "seraph": "^0.15.2",
     "seraph-model": "^0.9.0",
     "socket.io": "^1.4.8",

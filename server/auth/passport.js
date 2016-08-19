@@ -1,9 +1,9 @@
+const request = require('request');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
-require('../../helpers/api_keys');
+require('../helpers/api_keys');
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
-const redditController = require('../user/userController');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -33,7 +33,15 @@ passport.use(new RedditStrategy({
 },
   (accessToken, refreshToken, profile, done) => {
     // Direct reddit controller to save user to database
-    redditController.createNewUser(profile, accessToken, refreshToken);
+    request({
+      method: 'POST',
+      url: 'http://localhost:3001/api/user-sql/createUser',
+      form: {
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        profile: profile,
+      }
+    });
     // Authentication finished
     done(null, profile);
   }
