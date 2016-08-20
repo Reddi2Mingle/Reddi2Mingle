@@ -12,8 +12,8 @@ middleware(app);
 // Invoke routers function on app to provide access to all routes defined
 routers(app);
 
-// App now listening on port 80
-server.listen(3001, (err) => {
+// App now listening on port 81
+server.listen(`${process.env.PORT_USER}`, (err) => {
   err ? console.log(`server/server.js 19: server error: ${err}`) :
-  console.log('Server listening on 3001');
+  console.log(`Server listening on ${process.env.PORT_USER}`);
 });

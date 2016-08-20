@@ -151,9 +151,8 @@ module.exports = {
     const password = req.body.password;
 
     queryRefreshToken(username, password).then((refreshToken) => {
-      console.log('!!!!!!!!!!!!!!!!!!!', refreshToken);
       request({
-        url: `https://T3zDXS9GxKukbA:TAKMSJzrlZPzTWxK5O3w7OglWA8@ssl.reddit.com/api/v1/access_token?state=uniquestring&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=http://127.0.0.1:3000/auth/reddit/callback&refresh_token=${refreshToken}&grant_type=refresh_token`,
+        url: `https://T3zDXS9GxKukbA:TAKMSJzrlZPzTWxK5O3w7OglWA8@ssl.reddit.com/api/v1/access_token?state=uniquestring&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=http://127.0.0.1:${process.env.PORT_APP}/auth/reddit/callback&refresh_token=${refreshToken}&grant_type=refresh_token`,
         method: 'POST',
       }, (err, response) => {
         if (err) {

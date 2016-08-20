@@ -6,6 +6,7 @@ node_modules
 
 # Api Keys
 api_keys.js
+.env
 
 # Miscellaneous
 .DS_Store

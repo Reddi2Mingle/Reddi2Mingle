@@ -6,7 +6,7 @@ import Routes from './app/routing';
 import Store from './app/AppStore';
 import './assets/styles/app.scss';
 
-const socket = io('http://localhost:3000');
+const socket = io(`http://localhost:${process.env.PORT_APP}`);
 
 const Entry = () => (
   <Provider store={Store}>
