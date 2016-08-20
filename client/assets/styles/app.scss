@@ -314,3 +314,68 @@ button:hover {
   margin-top: 10px;
   margin-left: 40px;
 }
+
+/***** Profile View *****/
+
+.profile-view {
+  @include background('/assets/img/fireworks.jpg');
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-image {
+  position:relative;
+  width:400px;
+  height:auto;
+  border: 15px solid white;
+}
+.profile-image img {
+    width:100%;
+    vertical-align:top;
+}
+
+.profile-image:after {
+    content: url(/assets/img/camera.png);
+    text-align: center;
+    position: absolute;
+    width: 100%; height: 50%;
+    top: 50%; left: 0;
+    background: rgba(255, 255, 255,0.6);
+    opacity: 0;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+.profile-image:hover:after {
+    opacity: 1;
+}
+
+.change-photo {
+  margin-top: 20px;
+  padding: 50px; 
+  text-align: center;
+  border: 5px dashed $accentColor;
+  width: 60%;
+  height: 20%;
+
+}
+
+.change-photo:hover {
+  @extend .change-photo;
+  background-color: rgba(239, 97, 36, .2);
+}
+
+.submit-photo {
+  @extend button;
+  border: 2px solid black;
+  margin-top: 20px;
+  h2 {
+    color: black; 
+  }
+}
+
+.submit-photo:hover {
+  border: 2px solid white;
+  h2 {
+    color: white;
+  } 
+}
