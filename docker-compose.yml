@@ -30,7 +30,7 @@ services:
     volumes:
       - ./docker:/docker-entrypoint-initdb.d
       # - $HOME/neo4j/data:/data \
-    # command: /docker-entrypoint.sh neo4j
+    # command: /docker-entrypoint.sh mysql
     environment: 
      - MYSQL_ROOT_PASSWORD=""
      - MYSQL_User="root"

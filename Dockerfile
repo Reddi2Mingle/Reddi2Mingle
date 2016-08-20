@@ -14,8 +14,7 @@ COPY . /usr/src/app/
 RUN npm install -gq nodemon \ 
   && npm install -qqq \
   && npm install -gq webpack \
-  && npm install -gq mocha \
-  && npm rebuild node-sass
+  && npm install -gq mocha 
 
 # Expose port 80 (http) 
 EXPOSE 80
