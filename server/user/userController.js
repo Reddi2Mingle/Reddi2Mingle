@@ -32,10 +32,9 @@ const queryAccessToken = (redditId) => (
               RETURN n.accessToken;`,
     }, (err, results) => {
       if (err) {
-        console.log(`server/userController.js 94: issue with retrieving ${err}`);
+        console.log(`server/userController.js: issue with retrieving ${err}`);
         reject(err);
       } else {
-        console.log(`server/userController.js 97: here is the accessToken ${results[0]['n.accessToken']}`);
         resolve(results[0]['n.accessToken']);
       }
     });
@@ -51,10 +50,9 @@ const queryRefreshToken = (redditId) => (
               RETURN n.refreshToken;`,
     }, (err, results) => {
       if (err) {
-        console.log(`server/userController.js 94: issue with retrieving ${err}`);
+        console.log(`server/userController.js: issue with retrieving ${err}`);
         reject(err);
       } else {
-        console.log(`server/userController.js 97: here is the refreshToken ${results}`);
         resolve(results[0]['n.accessToken']);
       }
     });

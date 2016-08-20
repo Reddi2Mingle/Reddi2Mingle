@@ -23,6 +23,22 @@ export function fetchUser(redditId) {
   };
 }
 
+export function userLogin(username, password) {
+  return dispatch => {
+    // axios.post('/api/userInfo/loginCredentials', {
+    //   username,
+    //   password,
+    // })
+    axios.get(`/api/userInfo?redditId=j8636`) // this is not how it will be done
+    .then((response) => {
+      dispatch({ type: 'USER_LOGIN_FULFILLED', payload: response.data });
+    })
+    .catch((err) => {
+      console.log(`user not logged in ${err}`);
+    });
+  };
+}
+
 export function logout() {
   localStorage.removeItem('token');
   return {
