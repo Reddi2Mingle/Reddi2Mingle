@@ -25,22 +25,29 @@ module.exports = {
 
   queryPotentials: (req, res) => {
     const redditId = req.query.redditId;
-    console.log('redditId:',redditId)
+    console.log('redditId:', redditId);
     db.cypher({
       query: `MATCH (user:Person)
       -[f:FOLLOWS]->(s:Subreddit)
-      <-[:FOLLOWS]-(potential:Person) 
+      <-[:FOLLOWS]-(potential:Person)
       WHERE user.redditId="${redditId}"
       AND NOT (user)-[:INTEREST]->(potential)
-      RETURN potential,user,s 
-      ORDER BY s.subscribers 
+      AND NOT (user)-[:NEVER]-(potential)
+      AND NOT (user)-[:MATCH]-(potential)
+      RETURN potential,user,s
+      ORDER BY s.subscribers
       LIMIT 10;`,
+      // query: `MATCH (user:Person)<-[p:POTENTIAL]->(potential:Person)
+      //           WHERE user.redditId="${redditId}"
+      //         MATCH (user)-[uf:FOLLOWS]->(s:Subreddit)<-[pf:FOLLOWS]-(potential)
+      //         RETURN potential,user,s
+      //         LIMIT 10;`,
     }, (err, potentials) => {
       if (err) {
         console.log('issue with: ', err);
         res.send([]);
       } else {
-        // console.log('potentials:',potentials);
+        console.log('potentials:', potentials);
         const arrayOfPotentials = [];
         const finalPotentials = [];
 

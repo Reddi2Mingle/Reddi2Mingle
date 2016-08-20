@@ -1,7 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import io from 'socket.io-client';
 import Navbar from '../stateless/Navigation';
 import RejectButton from './RejectButton';
 import InterestButton from './InterestButton';
+
+const socket = io('http://localhost:3000');
+
 
 export default class MatchMaker extends Component {
 
@@ -10,6 +14,7 @@ export default class MatchMaker extends Component {
     // const token = localStorage.getItem('token');
     if (!userInfoFetched) {
       userActions.fetchUser(userId);
+      socket.emit('save my id', userId);
     }
     potentialActions.fetchPotentials(userId);
   }
@@ -29,9 +34,12 @@ export default class MatchMaker extends Component {
     } = this.props;
     if (fetchingPotentials) {
       return (
-        <div className="potential-view">
-          <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
-          <h2>Hold on, we're getting you ready to mingle</h2>
+        <div>
+          <Navbar />
+          <div className="potential-view">
+            <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
+            <h2>Hold on, we're getting you ready to mingle</h2>
+          </div>
         </div>
       );
     }

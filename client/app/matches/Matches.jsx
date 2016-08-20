@@ -29,7 +29,7 @@ export default class Matches extends Component {
             <Match
               name={match.name}
               photo={match.photo}
-              subreddits={match.subreddits}
+              common_subbredits={match.common_subbredits}
             />
           ))}
         </div>
@@ -43,7 +43,7 @@ Matches.propTypes = {
     name: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
     messageUrl: PropTypes.string.isRequired,
-    subreddits: PropTypes.array.isRequired,
+    common_subbredits: PropTypes.array.isRequired,
   }).isRequired),
   matchesActions: PropTypes.object.isRequired,
   userId: PropTypes.string.isRequired,
