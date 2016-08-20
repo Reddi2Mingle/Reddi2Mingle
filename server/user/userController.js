@@ -1,6 +1,7 @@
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
-const db = require('../db/neo4jconfig').db;
+// const db = require('../db/neo4jconfig').db;
+const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 const request = require('request');
 
 // Request list of user's subscribed subreddits
@@ -229,6 +230,7 @@ module.exports = {
           console.log(`server/userController.js: results: ${results}`);
           var aggregateInfo = results[0].user.properties;
           aggregateInfo.subreddits = subreddits;
+          console.log('fetch user info query', aggregateInfo);
           res.send(aggregateInfo);
         }
       });

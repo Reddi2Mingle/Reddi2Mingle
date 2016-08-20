@@ -76,7 +76,7 @@ class Preferences extends Component {
       })
       .then((response) => {
         event.preventDefault();
-        potentialActions.fetchPotentials(redditId);
+        // potentialActions.fetchPotentials(redditId);
         this.props.history.push('/photoUpload');
       })
       .catch((err) => {

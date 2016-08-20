@@ -149,10 +149,11 @@ module.exports = {
     const profile =  req.body.profile;
 
     db.cypher({
-      query: 'MERGE (user:Person { redditId: {redditId} }) \
+      query: `MERGE (user:Person { redditId: {redditId} }) \
               ON CREATE SET user.name = {username} \
               ON CREATE SET user.redditId = {redditId} \
-              RETURN user;',
+              ON CREATE SET user.photo = "" \
+              RETURN user;`,
       params: {
         username: profile.name,
         redditId: profile.id,
