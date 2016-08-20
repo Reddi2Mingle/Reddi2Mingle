@@ -1,8 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import Modal from 'boron/OutlineModal';
+import Dropzone from 'react-dropzone';
+import Modal from 'boron/WaveModal';
 import Navbar from '../../stateless/Navigation';
-// import changePhotoModal from '../../stateless/Modals';
+import axios from 'axios';
+
+// Individual styles for the modal, modal content, and backdrop
+const modalStyle = {
+  width: '50%',
+};
+
+const backdropStyle = {
+  backgroundColor: 'black',
+};
+
+const contentStyle = {
+  backgroundColor: 'white',
+  height: '100%',
+  textAlign: 'right',
+  paddingBottom: '50px',
+};
+
 
 class Profile extends Component {
   constructor(props) {
@@ -34,7 +52,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { name, photo } = this.props;
+    const { userActions, name, photo } = this.props;
     return (
       <div>
         <Navbar />
@@ -46,10 +64,6 @@ class Profile extends Component {
                 alt="Redditor"
               />
             </div>
-            <Modal ref="modal" keyboard={this.callback}>
-                <h2>I am a dialog</h2>
-                <button onClick={this.hideModal.bind(this)}>Close</button>
-            </Modal>
             <div className="potential-more-info">
               <i className="material-icons md-48 orange">favorite</i>
               <span className="heart-text"> r/ </span>
@@ -70,6 +84,22 @@ class Profile extends Component {
             
           </div>
         </div>
+        <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle} keyboard={this.callback}>
+          <i className="material-icons md-48 orange" onClick={this.hideModal.bind(this)}>clear</i>
+          <div className="photo-drop-container">
+            <Dropzone
+              onDrop={(files) => {
+                userActions.handleImageUpload(files[0]);
+              }}
+              multiple={false}
+              accept="image/*"
+              className="change-photo"
+              activeClassName="dropzone-active"
+            >
+              <h2 className="black"> Took a new selfie? Update your profile photo here </h2>
+            </Dropzone>
+          </div>
+        </Modal>
       </div>
     );
   }

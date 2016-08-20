@@ -348,3 +348,19 @@ button:hover {
 .profile-image:hover:after {
     opacity: 1;
 }
+
+.change-photo {
+  margin-top: 20px;
+  padding: 50px; 
+  text-align: center;
+  border: 5px dashed $accentColor;
+  width: 500px;
+  height: 100px;
+
+}
+
+.change-photo:hover {
+  @extend .change-photo;
+  background-color: rgba(239, 97, 36, .2);
+}
+
