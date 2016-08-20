@@ -2,7 +2,8 @@ const bluebird = require('bluebird');
 const neo4j = require('neo4j');
 const sequelize = require('sequelize');
 const dbSql = require('../db/sqlconfig');
-const db = new neo4j.GraphDatabase('http://app55234389-2DSvfe:UxlI4yKGxG8cueLnV1ca@app552343892dsvfe.sb10.stations.graphenedb.com:24789');
+// const db = new neo4j.GraphDatabase('http://app55234389-2DSvfe:UxlI4yKGxG8cueLnV1ca@app552343892dsvfe.sb10.stations.graphenedb.com:24789');
+const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 const request = require('request');
 
 const queryUserSubreddits = (redditId) => (
@@ -41,6 +42,20 @@ const queryAccessToken = (redditId) => (
       } else {
         console.log(`server/userController.js 97: here is the accessToken ${results[0]['n.accessToken']}`);
         resolve(results[0]['n.accessToken']);
+      }
+    });
+  })
+);
+
+// Get the user's refresh token
+const queryRefreshToken = (username) => (
+  new Promise((resolve, reject) => {
+    dbSql.Users.find({where: {name: username}}).then((userData) => {
+      if (userData === undefined || userData === null) {
+        reject('error with finding user');
+      } else {
+        var user = userData.dataValues;
+        resolve(user.refreshToken);
       }
     });
   })
@@ -134,10 +149,11 @@ module.exports = {
     const profile =  req.body.profile;
 
     db.cypher({
-      query: 'MERGE (user:Person { redditId: {redditId} }) \
+      query: `MERGE (user:Person { redditId: {redditId} }) \
               ON CREATE SET user.name = {username} \
               ON CREATE SET user.redditId = {redditId} \
-              RETURN user;',
+              ON CREATE SET user.photo = "" \
+              RETURN user;`,
       params: {
         username: profile.name,
         redditId: profile.id,
@@ -189,26 +205,45 @@ module.exports = {
     });
   },
 
-  // Query database for Reddit refreshToken
-  queryRefreshToken: (redditId) => {
-    db.cypher({
-      query: 'MATCH (n:Person) WHERE n.redditId={redditId} return n.refreshToken;',
-      params: {
-        redditId,
-      },
-    }, (err, results) => {
-      if (err) {
-        console.log(`server/userController.js 243: issue with retrieving, err: ${err}`);
-      } else {
-        console.log(`server/userController.js 245: here is the accessToken: ${results}`);
-      }
+  updatePassword: (req, res) => {
+    var redditId = req.body.redditId;
+    var password = req.body.password;
+    console.log('2349087123!!!!!!!!!', req.body)
+    dbSql.Users.find({where: {redditId: redditId}}).then((task) => {
+      task.update({password: password}).then((data2) => {
+        res.send('password updated in MySQL');
+      });
     });
   },
+
+  updateAccessToken: (req, res) => {
+    var username = req.body.username;
+    var password = req.body.password;
+
+    queryRefreshToken(username, password).then((refreshToken) => {
+      request({
+        url: `https://T3zDXS9GxKukbA:TAKMSJzrlZPzTWxK5O3w7OglWA8@ssl.reddit.com/api/v1/access_token?state=uniquestring&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=http://127.0.0.1:3000/auth/reddit/callback&refresh_token=${refreshToken}&grant_type=refresh_token`,
+        method: 'POST',
+      }, (err, results) => {
+        if (err) {
+          console.log(`server/userController.js 222: issue with retrieving, err: ${err}`);
+        } else {
+          // console.log(`server/userController.js 224: results: ${results}`);
+          var newAccessToken = JSON.parse(results.body).access_token;
+          dbSql.Users.find({where: {name: username}}).then((task) => {
+            task.update({accessToken: newAccessToken}).then((data2) => {
+              res.send('accessToken updated in MySQL');
+            });
+          });
+        }
+      });
+    });
+  },
+
   addPreference: (req, res) => {
     const gender = req.body.gender;
     const preference = req.body.preference;
     const redditId = req.body.redditId;
-
     db.cypher({
       query: `MERGE (user:Person {redditId: "${redditId}"})
                 ON MATCH SET user.gender = "${gender}"
@@ -216,14 +251,18 @@ module.exports = {
               RETURN user;`,
     }, (err, results) => {
       if (err) {
-        console.log(`server/userController.js: issue with updating preference and gender, err ${err}`);
+        console.log(`server/userController.js: error with updating preference and gender ${err}`);
       } else {
         console.log('server/userController.js: gender and prefernce added sucessfully');
-        res.send(results);
+        dbSql.Users.find({where: {redditId: redditId}}).then((task) => {
+          task.update({gender: gender, preference: preference}).then((data2) => {
+            res.send('preferences updated in MySQL');
+          });
+        });
       }
     });
   },
-  
+
   addPhoto: (req, res) => {
     db.cypher({
       query: `MATCH (user:Person)
