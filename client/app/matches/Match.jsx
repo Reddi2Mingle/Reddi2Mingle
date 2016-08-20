@@ -11,7 +11,7 @@ const Match = ({ name, photo, common_subbredits }) => (
         <div className="small-subreddit-list">
           <ul>
             {common_subbredits.map(sub => (
-              <li>{sub}</li>
+              <span>{sub}</span>
             ))}
           </ul>
         </div>

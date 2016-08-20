@@ -4,17 +4,12 @@ const io = require('socket.io')(server);
 const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
 require('./auth/passport');
+require('./db/neo4jconfig');
 // require('./helpers/seed');
 // require('./helpers/seedCreation');
-require('./db/neo4jconfig');
 
-// Invoke middleware function on app to 'use' all the middleware functions
 middleware(app);
-
-// Invoke routers function on app to provide access to all routes defined
-io.on('connection', (socket) => {
-  routers(socket, io, app);
-});
+routers(app);
 
 // App now listening on port 80
 server.listen(process.env.PORT_APP, (err) => {
