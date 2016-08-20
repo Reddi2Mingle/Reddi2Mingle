@@ -16,7 +16,7 @@ export default () => (
     <Route path="/" component={requireAuthorization(MatchMakerContainer)} />
     <Route path="/signup" component={Signup} />
     <Route path="/createPassword" component={CreatePasswordContainer} />
-    <Route path="/login" component={requireAuthorization(LoginContainer)} />
+    <Route path="/login" component={LoginContainer} />
     <Route path="/matches" component={requireAuthorization(MatchesContainer)} />
     <Route path="/photoUpload" component={requireAuthorization(PhotoUploadContainer)} />
     <Route path="/preferences" component={requireAuthorization(Preferences)} />

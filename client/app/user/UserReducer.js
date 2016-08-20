@@ -45,6 +45,17 @@ export default (state = initialState, action) => {
     case 'FETCH_USER_REJECTED': {
       return { ...state, fetching: false, fetched: false, error: action.payload };
     }
+    case 'USER_LOGIN_FULFILLED': {
+      return {
+        ...state,
+        redditId: action.payload.redditId,
+        name: action.payload.name,
+        photo: action.payload.photo,
+        fetching: false,
+        fetched: true,
+        isAuthenticated: true,
+      };
+    }
     case 'LOGOUT_USER': {
       return { ...state, isAuthenticated: false, fetched: false };
     }

@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 
 export default class Login extends Component {
 
+  componentWillUpdate() {
+    this.props.history.push('/');
+  }
+
   sendCredentials(event) {
-    const { userId } = this.props;
+    const { userActions } = this.props;
     event.preventDefault();
     const username = ReactDOM.findDOMNode(this.refs.username).value;
     const password = ReactDOM.findDOMNode(this.refs.password).value;
-    axios.post('/api/userInfo/loginCredentials', {
-      username,
-      password,
-    })
-		.then((response) => {
-      console.log(`user logged in ${response.data}`);
-		})
-		.catch((err) => {
-			console.log(`user not logged in ${err}`);
-		});
+    userActions.userLogin(username, password);
   }
 
   render() {
@@ -37,3 +31,10 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  userActions: PropTypes.object,
+  history: PropTypes.object,
+  redditId: PropTypes.string,
+};
+
