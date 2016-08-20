@@ -4,7 +4,8 @@
   "description": "#How to start this application 1. `npm install` 2. `npm run server` (one tab) 3. `npm run watch` (another tab)",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -p && nodemon -L server/server.js",
+    "start": "webpack -p && node -L server/server.js",
+    "start:dev": "webpack && nodemon server/server.js && nodemon user-service/server.js && node ./node_modules/node-sass/scripts/install.js",
     "watch": "webpack --progress --colors --watch",
     "server": "nodemon server/server.js",
     "u-server": "nodemon user-service/server.js",

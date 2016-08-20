@@ -2,7 +2,8 @@ const bluebird = require('bluebird');
 const neo4j = require('neo4j');
 const sequelize = require('sequelize');
 const dbSql = require('../db/sqlconfig');
-const db = new neo4j.GraphDatabase('http://app55234389-2DSvfe:UxlI4yKGxG8cueLnV1ca@app552343892dsvfe.sb10.stations.graphenedb.com:24789');
+// const db = new neo4j.GraphDatabase('http://app55234389-2DSvfe:UxlI4yKGxG8cueLnV1ca@app552343892dsvfe.sb10.stations.graphenedb.com:24789');
+const db = new neo4j.GraphDatabase('neo4j:cake@neo4j:7475');
 const request = require('request');
 
 const queryUserSubreddits = (redditId) => (
@@ -127,7 +128,6 @@ const createUserSubreddits = (redditId) => {
 module.exports = {
   //once authenticated, create new user in neo4j. once successful, create new user in sql
   createNewUser: (req, res) => {
-    console.log('create New User in user service');
 
     const accessToken = req.body.accessToken;
     const refreshToken = req.body.refreshToken;

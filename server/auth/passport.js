@@ -29,13 +29,13 @@ passport.deserializeUser((id, done) => {
 passport.use(new RedditStrategy({
   clientID: REDDIT_CONSUMER_KEY,
   clientSecret: REDDIT_CONSUMER_SECRET,
-  callbackURL: 'http://127.0.0.1:3000/auth/reddit/callback',
+  callbackURL: 'http://127.0.0.1:80/auth/reddit/callback',
 },
   (accessToken, refreshToken, profile, done) => {
     // Direct reddit controller to save user to database
     request({
       method: 'POST',
-      url: 'http://localhost:3001/api/user-sql/createUser',
+      url: 'mysql/api/user-sql/createUser',
       form: {
         accessToken: accessToken,
         refreshToken: refreshToken,
