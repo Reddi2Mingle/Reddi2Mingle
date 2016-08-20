@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Dropzone from 'react-dropzone';
 import Modal from 'boron/WaveModal';
+import * as UserActions from '../UserActions';
+import * as PotentialActions from '../../potential/PotentialActions';
 import Navbar from '../../stateless/Navigation';
 import axios from 'axios';
 
@@ -38,16 +41,23 @@ class Profile extends Component {
     this.setState({
       changePhotoClicked: !this.state.changePhotoClicked,
     });
-    // console.log('toggleModal changing state', this.state.changePhotoClicked);
-    // if (this.state.changePhotoClicked) {
-    //   console.log('modal showing accessed');
-    //   this.refs.modal.show();
-    // }
   }
 
   hideModal() {
     this.setState({
       changePhotoClicked: !this.state.changePhotoClicked,
+    });
+  }
+
+  submitPhoto() {
+    const { photo, redditId } = this.props;
+    axios.post('/api/userInfo/addPhoto', {
+      redditId,
+      photo,
+    })
+    .then((response) => {
+      console.log('photo submitted!', response);
+      this.hideModal();
     });
   }
 
@@ -81,10 +91,14 @@ class Profile extends Component {
           <span style={{ flex: 0.1 }}> </span>
           <div style={{ padding: '20px' }}>
             <h2>{name}</h2>
-            
           </div>
         </div>
-        <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle} keyboard={this.callback}>
+        <Modal ref="modal"
+          modalStyle={modalStyle}
+          backdropStyle={backdropStyle}
+          contentStyle={contentStyle}
+          keyboard={this.callback}
+        >
           <i className="material-icons md-48 orange" onClick={this.hideModal.bind(this)}>clear</i>
           <div className="photo-drop-container">
             <Dropzone
@@ -94,10 +108,10 @@ class Profile extends Component {
               multiple={false}
               accept="image/*"
               className="change-photo"
-              activeClassName="dropzone-active"
-            >
-              <h2 className="black"> Took a new selfie? Update your profile photo here </h2>
+              thumbnail            >
+              <h2 className="black"> Took a new selfie? Drop your new profile photo here </h2>
             </Dropzone>
+            <button className="submit-photo" onClick={this.submitPhoto.bind(this)}> <h2> Submit Photo </h2> </button> 
           </div>
         </Modal>
       </div>
@@ -106,17 +120,26 @@ class Profile extends Component {
 };
 
 const mapStateToProps = state => ({
+  redditId: state.user.redditId,
   name: state.user.name,
   photo: state.user.photo,
   // subreddits: state.user.name,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  userActions: bindActionCreators(UserActions, dispatch),
+  potentialActions: bindActionCreators(PotentialActions, dispatch),
+});
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Profile);
 
 Profile.propTypes = {
+  redditId: PropTypes.string,
   name: PropTypes.string,
   photo: PropTypes.string,
   subreddits: PropTypes.array,
+  userActions: PropTypes.object,
 };

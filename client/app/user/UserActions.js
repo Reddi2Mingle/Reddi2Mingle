@@ -31,6 +31,7 @@ export function logout() {
 }
 
 export function handleImageUpload(file) {
+  console.log('handleImageUpload accessed', file);
   const upload = request.post(CLOUDINARY_UPLOAD_URL)
                         .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
                         .field('file', file);
@@ -45,3 +46,4 @@ export function handleImageUpload(file) {
     });
   };
 }
+

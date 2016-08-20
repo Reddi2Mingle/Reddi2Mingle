@@ -354,8 +354,8 @@ button:hover {
   padding: 50px; 
   text-align: center;
   border: 5px dashed $accentColor;
-  width: 500px;
-  height: 100px;
+  width: 60%;
+  height: 20%;
 
 }
 
@@ -364,3 +364,15 @@ button:hover {
   background-color: rgba(239, 97, 36, .2);
 }
 
+.submit-photo {
+  @extend button;
+  border: 2px solid black;
+  margin-top: 20px;
+  h2 {
+    color: black; 
+  }
+}
+
+.submit-photo:hover {
+  color: white;
+}
