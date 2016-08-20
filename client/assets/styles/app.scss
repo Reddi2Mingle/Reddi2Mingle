@@ -338,8 +338,9 @@ button:hover {
     content: url(/assets/img/camera.png);
     text-align: center;
     position: absolute;
-    width: 100%; height: 50%;
-    top: 50%; left: 0;
+    width: 100%; height: -150px;
+    top: 150px; left: 0;
+    // vertical-align: -50%;
     background: rgba(255, 255, 255,0.6);
     opacity: 0;
     transition: all 0.5s;
