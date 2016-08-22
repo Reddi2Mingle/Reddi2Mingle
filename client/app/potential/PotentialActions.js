@@ -59,7 +59,6 @@ export function handleSwipe(userId, potentialId, swipe, index, lastPotential, po
     } else {
       dispatch(incrementIndex());
     }
-    
     if (swipe === 'yes' && potentialObj.interested === true) {
       dispatch({
         type: 'PUSH_MATCH',
