@@ -9,7 +9,8 @@ const initialState = {
       name: '',
       photo: '',
       common_subreddits: ['', '', ''],
-      interested: true,
+      interested: false,
+      match: false,
     },
   ],
 };

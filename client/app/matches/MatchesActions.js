@@ -14,3 +14,9 @@ export function fetchMatches(userId) {
       });
   };
 }
+
+export function updateMatches() {
+  return (dispatch, getState) => {
+    const match = getState().
+  }
+}

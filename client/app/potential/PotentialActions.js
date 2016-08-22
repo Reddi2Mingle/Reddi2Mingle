@@ -32,6 +32,19 @@ export function fetchPotentials(userId) {
   };
 }
 
+export function handleSwipe(userId, potentialId, swipe, index, lastPotential) {
+  return dispatch => {
+    if (index === lastPotential) {
+      dispatch(fetchPotentials(userId));
+    } else {
+      dispatch(incrementIndex());
+    }
+    sendSwipe(userId, potentialId, swipe);
+  };
+  // if (interested) 
+    // push into matches reducer
+}
+
 function sendSwipe(userId, potentialId, swipe) {
   axios.post('/api/swipe', {
     redditId: JSON.stringify(userId),
@@ -44,17 +57,4 @@ function sendSwipe(userId, potentialId, swipe) {
   .catch((err) => {
     console.log('sendSwipe error', err);
   });
-}
-
-export function handleSwipe(userId, potentialId, swipe, index, lastPotential) {
-  return dispatch => {
-    if (index === lastPotential) {
-      dispatch(fetchPotentials(userId));
-    } else {
-      dispatch(incrementIndex());
-    }
-    sendSwipe(userId, potentialId, swipe);
-  };
-  // if (interested) 
-    // push into matches reducer
 }
