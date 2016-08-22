@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 
-const InterestButton = ({ handleSwipe, userId, potentialId, index, lastPotential }) => (
+const InterestButton = ({ handleSwipe, userId, potentialId, index, lastPotential, potentialObj }) => (
   <div>
     <button
       onClick={e => {
         e.preventDefault();
-        handleSwipe(userId, potentialId, 'yes', index, lastPotential);
+        handleSwipe(userId, potentialId, 'yes', index, lastPotential, potentialObj);
       }}
     >
       <img
@@ -23,6 +23,7 @@ InterestButton.propTypes = {
   potentialId: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   lastPotential: PropTypes.number.isRequired,
+  potentialObj: PropTypes.object.isRequired,
 };
 
 export default InterestButton;

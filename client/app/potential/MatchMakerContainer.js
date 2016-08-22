@@ -25,6 +25,7 @@ const mapStateToProps = state => {
     userInfoFetched: state.user.fetched,
     index: state.potentials.index,
     lastPotential: state.potentials.people.length - 1,
+    potentialObj: state.potentials.people[state.potentials.index],
   };
 };
 

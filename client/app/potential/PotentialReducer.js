@@ -10,7 +10,6 @@ const initialState = {
       photo: '',
       common_subreddits: ['', '', ''],
       interested: false,
-      match: false,
     },
   ],
 };

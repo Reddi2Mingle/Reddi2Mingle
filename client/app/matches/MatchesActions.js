@@ -15,8 +15,11 @@ export function fetchMatches(userId) {
   };
 }
 
-export function updateMatches() {
-  return (dispatch, getState) => {
-    const match = getState().
-  }
-}
+// export function updateMatches() {
+//   return (dispatch, getState) => {
+//     const match = getState().potentials.people[state.potentials.index].match;
+//     if (match) {
+      
+//     }
+//   }
+// }

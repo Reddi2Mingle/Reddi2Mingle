@@ -18,6 +18,12 @@ function requestPotentials() {
   };
 }
 
+function newMatchCreated() {
+  return {
+    type: 'NEW_MATCH_CREATED',
+  };
+}
+
 export function fetchPotentials(userId) {
   return dispatch => {
     dispatch(requestPotentials());
@@ -30,19 +36,6 @@ export function fetchPotentials(userId) {
       dispatch({ type: 'FETCH_POTENTIALS_REJECTED', payload: err });
     });
   };
-}
-
-export function handleSwipe(userId, potentialId, swipe, index, lastPotential) {
-  return dispatch => {
-    if (index === lastPotential) {
-      dispatch(fetchPotentials(userId));
-    } else {
-      dispatch(incrementIndex());
-    }
-    sendSwipe(userId, potentialId, swipe);
-  };
-  // if (interested) 
-    // push into matches reducer
 }
 
 function sendSwipe(userId, potentialId, swipe) {
@@ -58,3 +51,23 @@ function sendSwipe(userId, potentialId, swipe) {
     console.log('sendSwipe error', err);
   });
 }
+
+export function handleSwipe(userId, potentialId, swipe, index, lastPotential, potentialObj) {
+  return dispatch => {
+    if (index === lastPotential) {
+      dispatch(fetchPotentials(userId));
+    } else {
+      dispatch(incrementIndex());
+    }
+    sendSwipe(userId, potentialId, swipe);
+    if (swipe === 'yes' && potentialObj.interested === true) {
+      dispatch({
+        type: 'PUSH_MATCH',
+        payload: potentialObj,
+      });
+    }
+  };
+}
+
+
+

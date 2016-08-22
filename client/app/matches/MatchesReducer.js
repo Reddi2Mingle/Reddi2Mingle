@@ -13,6 +13,9 @@ export default (state = initialState, action) => {
     case 'FETCH_MATCHES_FULFILLED': {
       return action.payload;
     }
+    case 'PUSH_MATCH': {
+      return [...state, action.payload];
+    }
     default:
       return state;
   }

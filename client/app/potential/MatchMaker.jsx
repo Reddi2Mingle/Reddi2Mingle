@@ -33,6 +33,7 @@ export default class MatchMaker extends Component {
       index,
       lastPotential,
       noPotentials,
+      potentialObj,
     } = this.props;
     if (fetchingPotentials) {
       return (
@@ -94,6 +95,7 @@ export default class MatchMaker extends Component {
                 potentialId={potentialId}
                 index={index}
                 lastPotential={lastPotential}
+                potentialObj={potentialObj}
               />
             </div>
             <button
@@ -127,4 +129,5 @@ MatchMaker.propTypes = {
   location: PropTypes.object,
   noPotentials: PropTypes.bool,
   userInfoFetched: PropTypes.bool,
+  potentialObj: PropTypes.object,
 };
