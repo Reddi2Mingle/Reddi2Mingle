@@ -17,16 +17,20 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="potential-view">
-        <h1>username</h1>
-        <textarea ref="username" />
-        <h1>password</h1>
-        <textarea ref="password" />
+      <div className="login-view">
+        <div className="login-content">
+          <h1>username:</h1>
+          <input ref="username" />
+        </div>
+        <div className="login-content">
+          <h1>password: </h1>
+          <input ref="password" />
+        </div>
         <button
           onClick={e => {
             this.sendCredentials(e);
           }}
-        >Continue</button>
+        ><h2>Continue</h2></button>
       </div>
     );
   }
