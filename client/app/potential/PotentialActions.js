@@ -55,4 +55,6 @@ export function handleSwipe(userId, potentialId, swipe, index, lastPotential) {
     }
     sendSwipe(userId, potentialId, swipe);
   };
+  // if (interested) 
+    // push into matches reducer
 }

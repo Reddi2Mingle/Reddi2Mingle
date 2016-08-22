@@ -77,7 +77,7 @@ class Profile extends Component {
             <div className="potential-more-info">
               <i className="material-icons md-48 orange">favorite</i>
               <span className="heart-text"> r/ </span>
-              <div className="subreddit-list white">
+              <div className="subreddit-list">
                 <ul>
                   <span> AskReddit </span>
                   <span> IamA </span>

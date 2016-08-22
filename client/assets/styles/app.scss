@@ -379,3 +379,10 @@ button:hover {
     color: white;
   } 
 }
+
+.my-subreddits { 
+  @extend .subreddit-list; 
+  span {
+    color: white;
+  }
+}
