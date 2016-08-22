@@ -17,7 +17,7 @@ export default () => (
           </a>
         </button>
         <button>
-          <a href="auth/reddit">
+          <a href="login">
             Log in with existing account
           </a>
         </button>

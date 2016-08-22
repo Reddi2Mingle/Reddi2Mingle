@@ -41,21 +41,17 @@ const queryAccessToken = (redditId) => (
   })
 );
 
-// Get the user's refresh token
-const queryRefreshToken = (redditId) => (
-  new Promise((resolve, reject) => {
-    db.cypher({
-      query: `MATCH (n:Person) 
-                WHERE n.redditId="104r17" 
-              RETURN n.refreshToken;`,
-    }, (err, results) => {
-      if (err) {
-        console.log(`server/userController.js: issue with retrieving ${err}`);
-        reject(err);
-      } else {
-        resolve(results[0]['n.accessToken']);
-      }
-    });
+queryUserInfo = (redditId) => (
+  // Request userInfo from database
+  request({
+    url: `http://localhost:3001/api/user-sql/userInfo?${redditId}`,
+    method: 'GET',
+  }, (err, response) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send('username and password match');
+    }
   })
 );
 
@@ -157,22 +153,45 @@ module.exports = {
     });
   },
 
-  updateAccessToken: (req, res) => {
+  queryUserInfo: (req, res) => {
+    const redditId = req.body.redditId;
+    queryUserInfo(redditId);
+  },
+
+  // THIS SECTION NEEDS TO BE COMPLETED
+  loginCredentials: (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
 
-    queryRefreshToken(username, password).then((refreshToken) => {
-      console.log('!!!!!!!!!!!!!!!!!!!', refreshToken);
-      request({
-        url: `https://T3zDXS9GxKukbA:TAKMSJzrlZPzTWxK5O3w7OglWA8@ssl.reddit.com/api/v1/access_token?state=uniquestring&scope=identity&client_id=T3zDXS9GxKukbA&redirect_uri=http://127.0.0.1:3000/auth/reddit/callback&refresh_token=${refreshToken}&grant_type=refresh_token`,
-        method: 'POST',
-      }, (err, response) => {
-        if (err) {
-          console.log(err);
+    request({
+      url: 'http://localhost:3001/api/user-sql/loginCredentials',
+      method: 'POST',
+      form: {
+        username: username,
+        password: password,
+      },
+    }, (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        // This is the point where I can add in Passport authentication before proceeding
+        // Respond with the redditId, username and photo
+        if (response.statusCode === 401) {
+          res.status(401).send('invalid password');
         } else {
-          res.send(response);
+          // Send off request to update the user's token
+          request({
+            url: 'http://localhost:3001/api/user-sql/updateAccessToken',
+            method: 'POST',
+            form: {
+              username: username,
+              password: password,
+            },
+          });
+          // Send the redditId, username and photo to the client
+          res.send(response.body);
         }
-      });
+      }
     });
   },
 
@@ -212,41 +231,4 @@ module.exports = {
     });
   },
 
-  queryUserInfo: (req, res) => {
-    const redditId = req.query.redditId;
-    // First query database for subreddit connections
-    queryUserSubreddits(redditId).then((subreddits) => {
-      // Query database for the user's name, photo, etc.
-      db.cypher({
-        query: `MATCH (user:Person) 
-                WHERE user.redditId="${redditId}"
-                RETURN user;`,
-      }, (err, results) => {
-        if (err) {
-          console.log(`server/userController.js: issue with retrieving, err: ${err}`);
-        } else {
-          console.log(`server/userController.js: results: ${results}`);
-          var aggregateInfo = results[0].user.properties;
-          aggregateInfo.subreddits = subreddits;
-          console.log('fetch user info query', aggregateInfo);
-          res.send(aggregateInfo);
-        }
-      });
-    });
-  },
-
-  // Query database for Reddit refreshToken
-  queryRefreshToken: (redditId) => {
-    db.cypher({
-      query: `MATCH (n:Person) 
-              WHERE n.redditId="${redditId}" 
-              RETURN n.refreshToken;`,
-    }, (err, results) => {
-      if (err) {
-        console.log(`server/userController.js: issue with retrieving, err: ${err}`);
-      } else {
-        console.log(`server/userController.js: here is the accessToken: ${results}`);
-      }
-    });
-  },
 };

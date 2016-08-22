@@ -7,6 +7,6 @@ userRouter.get('/', userController.queryUserInfo);
 userRouter.post('/updatePassword', userController.updatePassword);
 userRouter.post('/addPreference', userController.addPreference);
 userRouter.post('/addPhoto', userController.addPhoto);
-userRouter.post('/loginCredentials', userController.updateAccessToken);
+userRouter.post('/loginCredentials', userController.loginCredentials);
 
 module.exports = userRouter;
