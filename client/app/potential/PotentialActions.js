@@ -59,13 +59,14 @@ export function handleSwipe(userId, potentialId, swipe, index, lastPotential, po
     } else {
       dispatch(incrementIndex());
     }
-    sendSwipe(userId, potentialId, swipe);
+    
     if (swipe === 'yes' && potentialObj.interested === true) {
       dispatch({
         type: 'PUSH_MATCH',
         payload: potentialObj,
       });
     }
+    sendSwipe(userId, potentialId, swipe);
   };
 }
 
