@@ -5,6 +5,7 @@ import RejectButton from './RejectButton';
 import InterestButton from './InterestButton';
 import { socket } from '../socket';
 
+const socket = io();
 
 export default class MatchMaker extends Component {
 

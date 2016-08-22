@@ -18,3 +18,4 @@ RUN npm install -gq nodemon \
 
 # Expose port 80 (http) 
 EXPOSE 80
+EXPOSE 81

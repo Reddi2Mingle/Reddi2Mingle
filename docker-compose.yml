@@ -8,20 +8,45 @@ services:
       - .:/usr/src/app
     depends_on:
       - neo4j
-    command: npm start
+    command: npm run start:dev
     environment:
       - REDDIT_KEY=$REDDIT_KEY
       - REDDIT_SECRET=$REDDIT_SECRET
       - PORT=80
       - DEBUG=0
+services:
+  web:
+    image: users
+    ports:
+      - "81:81"
+    volumes:
+      - ./user-service:/usr/src/users
+    depends_on:
+      - neo4j
+      - mysql
+    # command: npm run start:dev
+    environment:
+      - PORT=81
+      - DEBUG=0
   neo4j:
     image: neo4j
-    volumes:
-      - ./docker:/docker-entrypoint-initdb.d
-      # - $HOME/neo4j/data:/data \
-    # command: /docker-entrypoint.sh neo4j
+    volumes: 
+      - $HOME/neo4j/data:/neo4jdata
     environment: 
-     - NEO4J_AUTH=neo4j/neo4j
+      - NEO4J_AUTH=neo4j/neo4j
     ports:
-      - "7475:7474"
-     
+      - "7474:7474"
+
+  mysql:
+    image: mysql
+    volumes: 
+      - $HOME/mysql/data:/mysqldata
+    environment:  
+      - MYSQL_DATABASE=reddi2mingle
+      - MYSQL_ROOT_PASSWORD=root
+     #move pw outside of docker compose file
+    ports:
+      - "3306:3306"
+
+
+
