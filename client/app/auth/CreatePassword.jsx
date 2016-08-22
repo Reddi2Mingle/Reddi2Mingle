@@ -16,16 +16,18 @@ export default class CreatePassword extends Component {
     const redditId = query.redditId;
     event.preventDefault();
     const message = ReactDOM.findDOMNode(this.refs.newPassword).value;
-    axios.post('/api/userInfo/updatePassword', {
-      redditId,
-      password: message,
-    })
-    .then(() => {
-      this.props.history.push('/preferences');
-    })
-    .catch((err) => {
-      console.log(`password not updated: ${err}`);
-    });
+    if ( message.length >= 8 ) {    
+      axios.post('/api/userInfo/updatePassword', {
+        redditId,
+        password: message,
+      })
+      .then(() => {
+        this.props.history.push('/preferences');
+      })
+      .catch((err) => {
+        console.log(`password not updated: ${err}`);
+      });
+    }
   }
 
   render() {
@@ -36,13 +38,14 @@ export default class CreatePassword extends Component {
           <h2> But let's get creative </h2>
           <p className="white">(aka, please don't use your Reddit password)</p>
           <div>
-            <input text="text" ref="newPassword" />
+            <input type="password" text="text" ref="newPassword" />
             <button
               onClick={e => {
                 this.createPassword(e);
               }}
             ><h2>Continue</h2></button>
           </div>
+          <p className="white">password must be at least 8 characters long</p>
         </div>
       </div>
     );

@@ -179,6 +179,22 @@ module.exports = {
     });
   },
 
+  loginCredentials: (req, res) => {
+    var username = req.body.username;
+    var password = req.body.password;
+
+    dbSql.Users.findAll({ where: { name: username, password: password } }).then(function(data) {
+      if (data.length) {
+        var redditId = data[0].dataValues.redditId;
+        var name = data[0].dataValues.name;
+        var photo = data[0].dataValues.photo;
+        res.send({ redditId: redditId, name: name, photo: photo });
+      } else {
+        res.status(401).send('invalid username or password');
+      }
+    });
+  },
+
   queryUserInfo: (req, res) => {
     const redditId = req.query.redditId;
     // var subreddits = [];
@@ -208,7 +224,6 @@ module.exports = {
   updatePassword: (req, res) => {
     var redditId = req.body.redditId;
     var password = req.body.password;
-    console.log('2349087123!!!!!!!!!', req.body)
     dbSql.Users.find({where: {redditId: redditId}}).then((task) => {
       task.update({password: password}).then((data2) => {
         res.send('password updated in MySQL');
