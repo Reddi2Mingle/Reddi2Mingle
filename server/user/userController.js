@@ -3,6 +3,7 @@ const potentialController = require('../potentialMatch/potentialController');
 // const db = require('../db/neo4jconfig').db;
 const db = new neo4j.GraphDatabase('http://neo4j:cake@localhost:7474');
 const request = require('request');
+require('../helpers/api_keys');
 
 // Request list of user's subscribed subreddits
 const queryUserSubreddits = (redditId) => (
@@ -44,7 +45,7 @@ const queryAccessToken = (redditId) => (
 queryUserInfo = (redditId) => (
   // Request userInfo from database
   request({
-    url: `http://localhost:3001/api/user-sql/userInfo?${redditId}`,
+    url: `http://localhost:${process.env.PORT_USER}/api/user-sql/userInfo?${redditId}`,
     method: 'GET',
   }, (err, response) => {
     if (err) {
@@ -138,7 +139,7 @@ module.exports = {
 
   updatePassword: (req, res) => {
     request({
-      url: 'http://localhost:3001/api/user-sql/updatePassword',
+      url: `http://localhost:${process.env.PORT_USER}/api/user-sql/updatePassword`,
       method: 'POST',
       form: {
         redditId: req.body.redditId,
@@ -148,7 +149,7 @@ module.exports = {
       if (err) {
         console.log(err);
       } else {
-        res.send('password updated successfully')
+        res.send('password updated successfully');
       }
     });
   },
@@ -164,7 +165,7 @@ module.exports = {
     const password = req.body.password;
 
     request({
-      url: 'http://localhost:3001/api/user-sql/loginCredentials',
+      url: `http://localhost:${process.env.PORT_USER}/api/user-sql/loginCredentials`,
       method: 'POST',
       form: {
         username: username,
@@ -181,7 +182,7 @@ module.exports = {
         } else {
           // Send off request to update the user's token
           request({
-            url: 'http://localhost:3001/api/user-sql/updateAccessToken',
+            url: `http://localhost:${process.env.PORT_USER}/api/user-sql/updateAccessToken`,
             method: 'POST',
             form: {
               username: username,
@@ -200,7 +201,7 @@ module.exports = {
     const preference = req.body.preference;
     const redditId = req.body.redditId;
     request({
-      url: 'http://localhost:3001/api/user-sql/addPreference',
+      url: `http://localhost:${process.env.PORT_USER}/api/user-sql/addPreference`,
       method: 'POST',
       form: {
         redditId: redditId,
@@ -211,7 +212,7 @@ module.exports = {
       if (err) {
         console.log(err);
       } else {
-        res.send('preferences updated successfully')
+        res.send('preferences updated successfully');
       }
     });
   },
