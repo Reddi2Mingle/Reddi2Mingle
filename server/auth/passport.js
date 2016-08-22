@@ -1,9 +1,9 @@
 const request = require('request');
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
-require('../helpers/api_keys');
 const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
+require('../helpers/api_keys');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -29,13 +29,13 @@ passport.deserializeUser((id, done) => {
 passport.use(new RedditStrategy({
   clientID: REDDIT_CONSUMER_KEY,
   clientSecret: REDDIT_CONSUMER_SECRET,
-  callbackURL: 'http://127.0.0.1:3000/auth/reddit/callback',
+  callbackURL: `http://127.0.0.1:${process.env.PORT_APP}/auth/reddit/callback`,
 },
   (accessToken, refreshToken, profile, done) => {
     // Direct reddit controller to save user to database
     request({
       method: 'POST',
-      url: 'http://localhost:3001/api/user-sql/createUser',
+      url: `http://localhost:${process.env.PORT_USER}/api/user-sql/createUser`,
       form: {
         accessToken: accessToken,
         refreshToken: refreshToken,
