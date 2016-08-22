@@ -80,7 +80,6 @@ export default class MatchMaker extends Component {
                 </div>
               </div>
             </div>
-
             <div className="swipe">
               <RejectButton
                 handleSwipe={potentialActions.handleSwipe}
@@ -106,7 +105,6 @@ export default class MatchMaker extends Component {
             >
               Send ping
             </button>
-
           </div>
         </div>
       </div>
