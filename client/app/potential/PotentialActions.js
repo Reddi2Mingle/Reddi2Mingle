@@ -38,9 +38,9 @@ export function fetchPotentials(userId) {
   };
 }
 
-function sendSwipe(userId, potentialId, swipe) {
+function sendSwipe(redditId, potentialId, swipe) {
   axios.post('/api/swipe', {
-    redditId: userId,
+    redditId,
     potentialId,
     swipe,
   })

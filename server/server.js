@@ -1,11 +1,15 @@
 const app = require('express')();
-const server = require('http').Server(app);
+const http = require('http');
+
+http.globalAgent.maxSockets = 1;
+const server = http.Server(app);
 const io = require('socket.io')(server);
 const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
 require('./auth/passport');
 require('./db/neo4jconfig');
 // require('./helpers/seedCreation.js');
+
 
 middleware(app);
 routers(app);
