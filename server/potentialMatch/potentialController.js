@@ -11,9 +11,12 @@ module.exports = {
       query: 'MATCH (user:Person)-[r:FOLLOWS]->(s: Subreddit)<-[:FOLLOWS]-(potential:Person) \
               WHERE user.redditId = {redditId} \
               AND ( user.gender=potential.preference OR potential.preference="both" ) \
-              AND user.preference=potential.gender \
-              MERGE (user)<-[:POTENTIAL]->(potential) \
-              RETURN user, potential, s;',
+              AND ( CASE user.preference \
+              WHEN "man" THEN potential.gender="man" \
+              WHEN "woman" THEN potential.gender="woman" \
+              WHEN "both" THEN potential.gender="man" OR potential.gender="woman"\
+              END) \
+              MERGE (user)<-[:POTENTIAL]->(potential);',
       params: {
         redditId,
       },
