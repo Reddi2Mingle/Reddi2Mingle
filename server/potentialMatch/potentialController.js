@@ -28,7 +28,7 @@ module.exports = {
 
   queryPotentials: (req, res) => {
     const redditId = req.query.redditId;
-    const limit = 10;
+    const limit = 5;
     db.cypher({
       // query: `MATCH (user:Person)
       //         -[f:FOLLOWS]->(s:Subreddit)

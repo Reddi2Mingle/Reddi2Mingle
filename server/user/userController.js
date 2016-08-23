@@ -2,7 +2,6 @@ const db = require('../db/neo4jconfig').db;
 const request = require('request');
 require('../helpers/api_keys');
 
-
 module.exports = {
 
   updatePassword: (req, res) => {
