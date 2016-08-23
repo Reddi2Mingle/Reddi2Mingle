@@ -1,40 +1,52 @@
 import React, { Component, PropTypes } from 'react';
-import io from 'socket.io-client';
 import Navbar from '../stateless/Navigation';
 import RejectButton from './RejectButton';
 import InterestButton from './InterestButton';
+import { socket } from '../socket';
 
-const socket = io();
-socket.on('get somethingUnique', () => {
-  console.log('Im hacking you!');
-});
 
 export default class MatchMaker extends Component {
 
   componentWillMount() {
-    const { potentialActions, userActions, matchesActions, userInfoFetched, userId } = this.props;
-    // const token = localStorage.getItem('token');
-    if (!userInfoFetched) {
-      userActions.fetchUser(userId);
-      socket.emit('save my id', userId);
+    const redditId = localStorage.getItem('token');
+    const {
+      potentialActions,
+      userActions,
+      matchesActions,
+      user,
+      matchesFetched,
+      potentialsFetched,
+    } = this.props;
+
+    // if this is the first time loading the app, fetch all userInfo, potentials, and matches
+    if (!user.fetched) {
+      userActions.fetchUser(redditId);
+      socket.emit('save my id', redditId);
     }
-    potentialActions.fetchPotentials(userId);
-    matchesActions.fetchMatches(userId);
+    if (!potentialsFetched) {
+      potentialActions.fetchPotentials(redditId);
+    }
+    if (!matchesFetched) {
+      matchesActions.fetchMatches(redditId);
+    }
   }
+
+  // componentDidMount() {
+  //   const { potentialActions } = this.props;
+  //   socket.on('get new match', (userInfo) => {
+  //     potentialActions.pushMatch(userInfo);
+  //   });
+  // }
 
   render() {
     const {
-      name,
-      potentialId,
-      userId,
-      photo,
-      common_subreddits,
+      user,
+      potential,
       fetchingPotentials,
       potentialActions,
       index,
       lastPotential,
       noPotentials,
-      potentialObj,
     } = this.props;
     if (fetchingPotentials) {
       return (
@@ -63,18 +75,18 @@ export default class MatchMaker extends Component {
         <div className="potential-view">
           <div className="potential-card">
             <img
-              src={photo}
+              src={potential.photo}
               className="full-profile-image"
               alt="Redditor"
             />
             <div className="potential-info">
-              <h3>{name}</h3>
+              <h3>{potential.name}</h3>
               <div className="potential-more-info">
                 <i className="material-icons md-48 orange">favorite</i>
                 <span className="heart-text"> r/ </span>
                 <div className="subreddit-list">
                   <ul>
-                    {common_subreddits.map(sub => (
+                    {potential.common_subreddits.map(sub => (
                       <span>{sub}</span>
                     ))}
                   </ul>
@@ -84,28 +96,21 @@ export default class MatchMaker extends Component {
             <div className="swipe">
               <RejectButton
                 handleSwipe={potentialActions.handleSwipe}
-                userId={userId}
-                potentialId={potentialId}
+                userId={user.redditId}
+                potentialId={potential.redditId}
                 index={index}
                 lastPotential={lastPotential}
               />
               <InterestButton
                 handleSwipe={potentialActions.handleSwipe}
-                userId={userId}
-                potentialId={potentialId}
+                userId={user.redditId}
                 index={index}
                 lastPotential={lastPotential}
-                potentialObj={potentialObj}
+                potential={potential}
+                socket={socket}
+                user={user}
               />
             </div>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                socket.emit('somethingUnique', { senderId: userId, receiverId: '104s92' });
-              }}
-            >
-              Send ping
-            </button>
           </div>
         </div>
       </div>
@@ -114,20 +119,15 @@ export default class MatchMaker extends Component {
 }
 
 MatchMaker.propTypes = {
-  name: PropTypes.string,
-  potentialId: PropTypes.string,
-  userId: PropTypes.string,
-  photo: PropTypes.string,
-  common_subreddits: PropTypes.array,
-  fetchingUser: PropTypes.bool,
-  fetchingPotentials: PropTypes.bool,
-  index: PropTypes.number,
-  lastPotential: PropTypes.number,
+  user: PropTypes.object,
+  potential: PropTypes.object,
   userActions: PropTypes.object,
   potentialActions: PropTypes.object,
-  location: PropTypes.object,
-  noPotentials: PropTypes.bool,
-  userInfoFetched: PropTypes.bool,
-  potentialObj: PropTypes.object,
   matchesActions: PropTypes.object,
+  fetchingPotentials: PropTypes.bool,
+  matchesFetched: PropTypes.bool,
+  potentialsFetched: PropTypes.bool,
+  index: PropTypes.number,
+  lastPotential: PropTypes.number,
+  noPotentials: PropTypes.bool,
 };

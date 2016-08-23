@@ -19,16 +19,18 @@ io.on('connection', (socket) => {
   console.log('SOCKETS --- sockets connected!');
   socket.on('save my id', (redditId) => {
     users[redditId] = socket.id;
-    console.log(`SOCKETS --- Id saved! Your socket.id: ${socket.id}, and your redditId: ${redditId}`);
+    console.log(`SOCKETS --- Id saved! Your socket.id: ${socket.id}, 
+                  and your redditId: ${redditId}`);
     console.log('Heres the cache: ', users);
   });
 
   // Sending ping to Specific user
-  socket.on('somethingUnique', (payload) => {
+  socket.on('send new match', (payload) => {
     const receiverId = payload.receiverId;
-    const senderId = payload.senderId;
+    // const senderId = payload.senderId;
+    const userInfo = payload.userInfo;
     if (users[receiverId]) {
-      socket.broadcast.to(users[receiverId]).emit('get somethingUnique', `You got pinged by ${senderId}`);
+      socket.broadcast.to(users[receiverId]).emit('get new match', userInfo);
     }
   });
 

@@ -1,26 +1,31 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Matches from './Matches';
+import * as UserActions from '../user/UserActions';
+import * as PotentialActions from '../potential/PotentialActions';
 import * as MatchesActions from './MatchesActions';
 
-const mapStateToProps = (state) => {
-  if (state.matches.length === 0) {
+const mapStateToProps = state => {
+  if (state.matches.people.length === 0) {
     return {
       noMatches: true,
-      userId: state.user.redditId,
+      user: state.user,
+      potentialsFetched: state.potentials.fetched,
+      matches: state.matches,
     };
   }
   return {
     matches: state.matches,
-    userId: state.user.redditId,
+    user: state.user,
+    potentialsFetched: state.potentials.fetched,
   };
 };
 
-const mapDispatchToProps = (dispatch) => (
-  {
-    matchesActions: bindActionCreators(MatchesActions, dispatch),
-  }
-);
+const mapDispatchToProps = (dispatch) => ({
+  userActions: bindActionCreators(UserActions, dispatch),
+  potentialActions: bindActionCreators(PotentialActions, dispatch),
+  matchesActions: bindActionCreators(MatchesActions, dispatch),
+});
 
 const MatchesContainer = connect(
   mapStateToProps,

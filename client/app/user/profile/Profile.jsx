@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import Modal from 'boron/WaveModal';
+import axios from 'axios';
 import * as UserActions from '../UserActions';
 import * as PotentialActions from '../../potential/PotentialActions';
+import * as MatchesActions from '../../matches/MatchesActions';
 import Navbar from '../../stateless/Navigation';
-import axios from 'axios';
+import { socket } from '../../socket';
 
 // Individual styles for the modal, modal content, and backdrop
 const modalStyle = {
@@ -33,6 +35,30 @@ class Profile extends Component {
     };
   }
 
+  componentWillMount() {
+    const redditId = localStorage.getItem('token');
+    const {
+      potentialActions,
+      userActions,
+      matchesActions,
+      user,
+      potentialsFetched,
+      matchesFetched,
+    } = this.props;
+
+    // if this is the first time loading the app, fetch all userInfo, potentials, and matches
+    if (!user.fetched) {
+      userActions.fetchUser(redditId);
+      socket.emit('save my id', redditId);
+    }
+    if (!potentialsFetched) {
+      potentialActions.fetchPotentials(redditId);
+    }
+    if (!matchesFetched) {
+      matchesActions.fetchMatches(redditId);
+    }
+  }
+
   componentDidUpdate() {
     this.state.changePhotoClicked ? this.refs.modal.show() : this.refs.modal.hide();
   }
@@ -50,19 +76,18 @@ class Profile extends Component {
   }
 
   submitPhoto() {
-    const { photo, redditId } = this.props;
+    const { user } = this.props;
     axios.post('/api/userInfo/addPhoto', {
-      redditId,
-      photo,
+      redditId: user.redditId,
+      photo: user.photo,
     })
     .then((response) => {
-      console.log('photo submitted!', response);
       this.hideModal();
     });
   }
 
   render() {
-    const { userActions, name, photo } = this.props;
+    const { userActions, user } = this.props;
     return (
       <div>
         <Navbar />
@@ -70,7 +95,7 @@ class Profile extends Component {
           <div style={{ padding: '20px' }}>
             <div className="profile-image" onClick={this.showModal.bind(this)}>
               <img
-                src={photo}
+                src={user.photo}
                 alt="Redditor"
               />
             </div>
@@ -90,7 +115,7 @@ class Profile extends Component {
           </div>
           <span style={{ flex: 0.1 }}> </span>
           <div style={{ padding: '20px' }}>
-            <h2>{name}</h2>
+            <h2>{user.name}</h2>
           </div>
         </div>
         <Modal ref="modal"
@@ -108,27 +133,32 @@ class Profile extends Component {
               multiple={false}
               accept="image/*"
               className="change-photo"
-              thumbnail            >
+              thumbnail
+            >
               <h2 className="black"> Took a new selfie? Drop your new profile photo here </h2>
             </Dropzone>
-            <button className="submit-photo" onClick={this.submitPhoto.bind(this)}> <h2> Submit Photo </h2> </button> 
+            <button
+              className="submit-photo"
+              onClick={this.submitPhoto.bind(this)}
+            > <h2> Submit Photo </h2> </button>
           </div>
         </Modal>
       </div>
     );
   }
-};
+}
 
 const mapStateToProps = state => ({
-  redditId: state.user.redditId,
-  name: state.user.name,
-  photo: state.user.photo,
-  // subreddits: state.user.name,
+  user: state.user,
+  potentialsFetched: state.potentials.fetched,
+  matchesFetched: state.matches.fetched,
+  // subreddits: state.user.subreddits,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   userActions: bindActionCreators(UserActions, dispatch),
   potentialActions: bindActionCreators(PotentialActions, dispatch),
+  matchesActions: bindActionCreators(MatchesActions, dispatch),
 });
 
 export default connect(
@@ -137,9 +167,11 @@ export default connect(
 )(Profile);
 
 Profile.propTypes = {
-  redditId: PropTypes.string,
-  name: PropTypes.string,
-  photo: PropTypes.string,
-  subreddits: PropTypes.array,
+  user: PropTypes.object,
+  potentialsFetched: PropTypes.bool,
+  matchesFetched: PropTypes.bool,
+  matches: PropTypes.object,
   userActions: PropTypes.object,
+  potentialActions: PropTypes.object,
+  matchesActions: PropTypes.object,
 };

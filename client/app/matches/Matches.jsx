@@ -1,12 +1,32 @@
 import React, { PropTypes, Component } from 'react';
 import Match from './Match';
 import Navbar from '../stateless/Navigation';
+import { socket } from '../socket';
 
 export default class Matches extends Component {
 
   componentWillMount() {
-    const { matchesActions, userId } = this.props;
-    matchesActions.fetchMatches(userId);
+    const redditId = localStorage.getItem('token');
+    const {
+      potentialActions,
+      userActions,
+      matchesActions,
+      user,
+      potentialsFetched,
+      matches,
+    } = this.props;
+
+    // if this is the first time loading the app, fetch all userInfo, potentials, and matches
+    if (!user.fetched) {
+      userActions.fetchUser(redditId);
+      socket.emit('save my id', redditId);
+    }
+    if (!potentialsFetched) {
+      potentialActions.fetchPotentials(redditId);
+    }
+    if (!matches.fetched) {
+      matchesActions.fetchMatches(redditId);
+    }
   }
 
   render() {
@@ -25,11 +45,11 @@ export default class Matches extends Component {
       <div>
         <Navbar />
         <div className="matches-view">
-          {matches.map((match) => (
+          {matches.people.map(match => (
             <Match
               name={match.name}
               photo={match.photo}
-              common_subbredits={match.common_subbredits}
+              common_subreddits={match.common_subreddits}
             />
           ))}
         </div>
@@ -39,13 +59,11 @@ export default class Matches extends Component {
 }
 
 Matches.propTypes = {
-  matches: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    photo: PropTypes.string.isRequired,
-    messageUrl: PropTypes.string.isRequired,
-    common_subbredits: PropTypes.array.isRequired,
-  }).isRequired),
-  matchesActions: PropTypes.object.isRequired,
-  userId: PropTypes.string.isRequired,
+  user: PropTypes.object,
+  potentialsFetched: PropTypes.bool,
+  matches: PropTypes.object,
+  userActions: PropTypes.object,
+  potentialActions: PropTypes.object,
+  matchesActions: PropTypes.object,
   noMatches: PropTypes.bool,
 };
