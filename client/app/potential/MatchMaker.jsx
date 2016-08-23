@@ -12,13 +12,14 @@ socket.on('get somethingUnique', () => {
 export default class MatchMaker extends Component {
 
   componentWillMount() {
-    const { potentialActions, userActions, userInfoFetched, userId } = this.props;
+    const { potentialActions, userActions, matchesActions, userInfoFetched, userId } = this.props;
     // const token = localStorage.getItem('token');
     if (!userInfoFetched) {
       userActions.fetchUser(userId);
       socket.emit('save my id', userId);
     }
     potentialActions.fetchPotentials(userId);
+    matchesActions.fetchMatches(userId);
   }
 
   render() {
@@ -33,6 +34,7 @@ export default class MatchMaker extends Component {
       index,
       lastPotential,
       noPotentials,
+      potentialObj,
     } = this.props;
     if (fetchingPotentials) {
       return (
@@ -79,7 +81,6 @@ export default class MatchMaker extends Component {
                 </div>
               </div>
             </div>
-
             <div className="swipe">
               <RejectButton
                 handleSwipe={potentialActions.handleSwipe}
@@ -94,6 +95,7 @@ export default class MatchMaker extends Component {
                 potentialId={potentialId}
                 index={index}
                 lastPotential={lastPotential}
+                potentialObj={potentialObj}
               />
             </div>
             <button
@@ -104,7 +106,6 @@ export default class MatchMaker extends Component {
             >
               Send ping
             </button>
-
           </div>
         </div>
       </div>
@@ -127,4 +128,6 @@ MatchMaker.propTypes = {
   location: PropTypes.object,
   noPotentials: PropTypes.bool,
   userInfoFetched: PropTypes.bool,
+  potentialObj: PropTypes.object,
+  matchesActions: PropTypes.object,
 };

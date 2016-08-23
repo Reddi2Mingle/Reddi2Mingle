@@ -18,6 +18,12 @@ function requestPotentials() {
   };
 }
 
+function newMatchCreated() {
+  return {
+    type: 'NEW_MATCH_CREATED',
+  };
+}
+
 export function fetchPotentials(userId) {
   return dispatch => {
     dispatch(requestPotentials());
@@ -34,9 +40,9 @@ export function fetchPotentials(userId) {
 
 function sendSwipe(userId, potentialId, swipe) {
   axios.post('/api/swipe', {
-    redditId: JSON.stringify(userId),
-    potentialId: JSON.stringify(potentialId),
-    swipe: JSON.stringify(swipe),
+    redditId: userId,
+    potentialId,
+    swipe,
   })
   .then((response) => {
     console.log('sendSwipe response is:', response);
@@ -46,13 +52,22 @@ function sendSwipe(userId, potentialId, swipe) {
   });
 }
 
-export function handleSwipe(userId, potentialId, swipe, index, lastPotential) {
+export function handleSwipe(userId, potentialId, swipe, index, lastPotential, potentialObj) {
   return dispatch => {
     if (index === lastPotential) {
       dispatch(fetchPotentials(userId));
     } else {
       dispatch(incrementIndex());
     }
+    if (swipe === 'yes' && potentialObj.interested === true) {
+      dispatch({
+        type: 'PUSH_MATCH',
+        payload: potentialObj,
+      });
+    }
     sendSwipe(userId, potentialId, swipe);
   };
 }
+
+
+
