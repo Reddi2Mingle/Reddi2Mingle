@@ -66,10 +66,8 @@ button:hover {
 }
 
 .navigation {
+  @include position('center', 'space-between');
   background-color: black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   h2 {
     font-size: 20px;
   }
@@ -79,15 +77,12 @@ button:hover {
 
 .signup-view {
   @include background('/assets/img/bonfire.jpg');
-  @include absolute-center;
+  @include position('center', 'center', 'column');
 }
 
 .signup-info {
+  @include position('center', 'space-around', 'column')
   height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-around;
   padding: 75px 0;
     h1 {
       text-transform: uppercase;
@@ -103,6 +98,7 @@ button:hover {
 }
 
 .button-group {
+  
   display: flex;
   flex-flow: column nowrap; 
   align-items: center;
@@ -125,10 +121,7 @@ button:hover {
 }
 
 .password-content {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-direction: column;
+  @include position('center', 'space-around', 'column');
   height: 25vh;
   div {
     display: flex;

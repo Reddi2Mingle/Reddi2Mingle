@@ -16,3 +16,11 @@
   font-size: 1.5em;
   letter-spacing: 0.1em;
 }
+
+@mixin position($align, $justify, $direction, $wrap) { 
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
