@@ -6,6 +6,7 @@ node_modules
 
 # Api Keys
 api_keys.js
+./user-service/helpers/api_keys.js
 
 # Miscellaneous
 .DS_Store

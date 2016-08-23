@@ -4,7 +4,7 @@ const potentialController = require('./potentialController');
 
 // Define API routes to /potentials
 
-potentialRouter.get('/createPotentials', potentialController.createPotentials);
+potentialRouter.post('/createPotentials', potentialController.createPotentials);
 potentialRouter.get('/', potentialController.queryPotentials);
 
 module.exports = potentialRouter;

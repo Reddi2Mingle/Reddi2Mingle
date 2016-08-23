@@ -5,10 +5,13 @@ const db = require('../db/neo4jconfig').db;
 
 module.exports = {
 
-  createPotentials: (redditId) => {
+  createPotentials: (req, res) => {
+    var redditId = req.body.redditId;
     db.cypher({
       query: 'MATCH (user:Person)-[r:FOLLOWS]->(s: Subreddit)<-[:FOLLOWS]-(potential:Person) \
               WHERE user.redditId = {redditId} \
+              AND ( user.gender=potential.preference OR potential.preference="both" ) \
+              AND user.preference=potential.gender \
               MERGE (user)<-[:POTENTIAL]->(potential) \
               RETURN user, potential, s;',
       params: {
@@ -19,6 +22,7 @@ module.exports = {
         console.log('issue with: ', err);
       } else {
         console.log('list of potentials');
+        res.send('potentials created');
       }
     });
   },

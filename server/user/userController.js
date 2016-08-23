@@ -212,6 +212,7 @@ module.exports = {
       if (err) {
         console.log(err);
       } else {
+        console.log('preferences updated successfully', response.body);
         res.send('preferences updated successfully');
       }
     });
