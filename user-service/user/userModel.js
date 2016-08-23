@@ -1,7 +1,7 @@
 const Users = function (sequelize, DataTypes) {
 
   return sequelize.define('Users', {
-    redditId: { type: DataTypes.STRING, unique: true },
+    redditId: { type: DataTypes.STRING },
     name: { type: DataTypes.STRING },
     password: { type: DataTypes.STRING },
     accessToken: { type: DataTypes.STRING },
