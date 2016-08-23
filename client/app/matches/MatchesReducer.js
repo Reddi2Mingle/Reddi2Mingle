@@ -9,6 +9,7 @@ const initialState = [
 ];
 
 export default (state = initialState, action) => {
+  console.log('matches state is', state);
   switch (action.type) {
     case 'FETCH_MATCHES_FULFILLED': {
       return action.payload;

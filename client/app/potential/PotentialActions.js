@@ -40,9 +40,9 @@ export function fetchPotentials(userId) {
 
 function sendSwipe(userId, potentialId, swipe) {
   axios.post('/api/swipe', {
-    redditId: JSON.stringify(userId),
-    potentialId: JSON.stringify(potentialId),
-    swipe: JSON.stringify(swipe),
+    redditId: userId,
+    potentialId,
+    swipe,
   })
   .then((response) => {
     console.log('sendSwipe response is:', response);
