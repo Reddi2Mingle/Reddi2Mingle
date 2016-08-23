@@ -10,18 +10,21 @@ require('./db/neo4jconfig');
 middleware(app);
 routers(app);
 
-var users = {};
+const users = {};
 io.on('connection', (socket) => {
-  console.log('sockets connected!');
+  console.log('SOCKETS --- sockets connected!');
   socket.on('save my id', (redditId) => {
     users[redditId] = socket.id;
-    console.log(`Id saved! Your socket.id: ${socket.id}, and your redditId: ${redditId}`);
+    console.log(`SOCKETS --- Id saved! Your socket.id: ${socket.id}, and your redditId: ${redditId}`);
+    console.log('Heres the cache: ', users);
   });
 
-  // Sending message to Specific user
-  socket.on('send msg', (senderId, receiverId) => {
+  // Sending ping to Specific user
+  socket.on('somethingUnique', (payload) => {
+    const receiverId = payload.receiverId;
+    const senderId = payload.senderId;
     if (users[receiverId]) {
-      socket.broadcast.to(users[receiverId]).emit('get msg', `You got pinged by ${senderId}`);
+      socket.broadcast.to(users[receiverId]).emit('get somethingUnique', `You got pinged by ${senderId}`);
     }
   });
 

@@ -37,10 +37,10 @@ passport.use(new RedditStrategy({
       method: 'POST',
       url: `http://localhost:${process.env.PORT_USER}/api/user-sql/createUser`,
       form: {
-        accessToken: accessToken,
-        refreshToken: refreshToken,
-        profile: profile,
-      }
+        accessToken,
+        refreshToken,
+        profile,
+      },
     });
     // Authentication finished
     done(null, profile);

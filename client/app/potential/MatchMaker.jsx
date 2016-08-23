@@ -4,8 +4,10 @@ import Navbar from '../stateless/Navigation';
 import RejectButton from './RejectButton';
 import InterestButton from './InterestButton';
 
-const socket = io('http://localhost:3000');
-
+const socket = io();
+socket.on('get somethingUnique', () => {
+  console.log('Im hacking you!');
+});
 
 export default class MatchMaker extends Component {
 
@@ -94,6 +96,14 @@ export default class MatchMaker extends Component {
                 lastPotential={lastPotential}
               />
             </div>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                socket.emit('somethingUnique', { senderId: userId, receiverId: '104s92' });
+              }}
+            >
+              Send ping
+            </button>
 
           </div>
         </div>
