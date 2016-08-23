@@ -45,6 +45,7 @@ class Preferences extends Component {
   }
 
   submitAction(event) {
+    event.preventDefault();
     const { potentialActions, redditId } = this.props;
     let gender = '';
     let preference = '';
@@ -75,13 +76,12 @@ class Preferences extends Component {
         preference,
       })
       .then((response) => {
-        event.preventDefault();
-        // potentialActions.fetchPotentials(redditId);
-        this.props.history.push('/photoUpload');
+       // potentialActions.fetchPotentials(redditId);
       })
       .catch((err) => {
         console.log('Add preferences error', err);
       });
+      this.props.history.push('/photoUpload');
     }
   }
 

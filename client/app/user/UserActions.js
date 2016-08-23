@@ -12,10 +12,11 @@ function requestUser() {
 
 export function fetchUser(redditId) {
   return dispatch => {
+    console.log(`redditId in fetchUser: ${redditId}`);
     dispatch(requestUser());
     axios.get(`/api/userInfo?redditId=${redditId}`)
       .then((response) => {
-        dispatch({ type: 'FETCH_USER_FULFILLED', payload: response.data });
+        dispatch({ type: 'FETCH_USER_FULFILLED', payload: JSON.parse(response.data.body) });
       })
       .catch((err) => {
         dispatch({ type: 'FETCH_USER_REJECTED', payload: err });
