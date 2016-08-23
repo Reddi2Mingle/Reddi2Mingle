@@ -12,13 +12,14 @@ socket.on('get somethingUnique', () => {
 export default class MatchMaker extends Component {
 
   componentWillMount() {
-    const { potentialActions, userActions, userInfoFetched, userId } = this.props;
+    const { potentialActions, userActions, matchesActions, userInfoFetched, userId } = this.props;
     // const token = localStorage.getItem('token');
     if (!userInfoFetched) {
       userActions.fetchUser(userId);
       socket.emit('save my id', userId);
     }
     potentialActions.fetchPotentials(userId);
+    matchesActions.fetchMatches(userId);
   }
 
   render() {
@@ -128,4 +129,5 @@ MatchMaker.propTypes = {
   noPotentials: PropTypes.bool,
   userInfoFetched: PropTypes.bool,
   potentialObj: PropTypes.object,
+  matchesActions: PropTypes.object,
 };

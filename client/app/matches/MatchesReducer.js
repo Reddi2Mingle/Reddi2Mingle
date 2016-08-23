@@ -3,7 +3,7 @@ const initialState = [
     redditID: '',
     name: 'Fetching matches...',
     photo: 'https://cdn1.iconfinder.com/data/icons/simple-icons/4096/reddit-4096-black.png',
-    common_subbredits: ['Fetching matches...'],
+    common_subreddits: ['Fetching matches...'],
     messageUrl: '',
   },
 ];
