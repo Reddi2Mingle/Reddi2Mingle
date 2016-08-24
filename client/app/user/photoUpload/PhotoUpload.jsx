@@ -10,8 +10,14 @@ export default class PhotoUpload extends Component {
     axios.post('/api/userInfo/addPhoto', {
       redditId,
       photo,
+    })
+    .then((response) => {
+      console.log(`photo added successfully: ${response}`);
+      this.props.history.push('/');
+    })
+    .catch((err) => {
+      console.log(`photo not added to database: ${err}`);
     });
-    this.props.history.push('/');
   }
 
   render() {
