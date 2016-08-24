@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Motion, StaggeredMotion, spring } from 'react-motion';
 import Navbar from '../stateless/Navigation';
 import RejectButton from './RejectButton';
 import InterestButton from './InterestButton';
@@ -29,6 +30,38 @@ export default class MatchMaker extends Component {
     if (!matchesFetched) {
       matchesActions.fetchMatches(redditId);
     }
+
+    this.state = {
+      yes: false,
+      no: false,
+    };
+  }
+
+  componentWillReceiveProps() {
+    // every time a button is clicked, state will change and animate
+    // this setTimeout will reset the state after one second and bring the card back to center
+    setTimeout(() => { this.setState({
+      yes: false,
+      no: false,
+    });
+    }, 1000);
+  }
+
+  animateComponent(swipe) {
+    if (swipe === 'yes') {
+      this.setState({ yes: true });
+    } else if (swipe === 'no') {
+      this.setState({ no: true });
+    }
+  }
+
+  animateDirection() {
+    if (this.state.yes) {
+      return 2000;
+    } else if (this.state.no) {
+      return -2000;
+    }
+    return 0;
   }
 
   // componentDidMount() {
@@ -73,44 +106,59 @@ export default class MatchMaker extends Component {
       <div>
         <Navbar />
         <div className="potential-view">
-          <div className="potential-card">
-            <img
-              src={potential.photo}
-              className="full-profile-image"
-              alt="Redditor"
-            />
-            <div className="potential-info">
-              <h3>{potential.name}</h3>
-              <div className="potential-more-info">
-                <i className="material-icons md-48 orange">favorite</i>
-                <span className="heart-text"> r/ </span>
-                <div className="subreddit-list">
-                  <ul>
-                    {potential.common_subreddits.map(sub => (
-                      <span>{sub}</span>
-                    ))}
-                  </ul>
+          <Motion
+            defaultStyle={{ x: 0 }}
+            style={{ x: spring(this.animateDirection(),
+              { stiffness: 330, damping: 100, precision: 0.1 }) }}
+          >
+            {({ x }) =>
+              <div
+                className="potential-card"
+                style={{
+                  WebkitTransform: `translate3d(${x}px, 0, 0) rotate(${x}deg)`,
+                  transform: `translate3d(${x}px, 0, 0) rotate(${x}deg)` }}
+              >
+                <img
+                  src={potential.photo}
+                  className="full-profile-image"
+                  alt="Redditor"
+                />
+                <div className="potential-info">
+                  <h3>{potential.name}</h3>
+                  <div className="potential-more-info">
+                    <i className="material-icons md-48 orange">favorite</i>
+                    <span className="heart-text"> r/ </span>
+                    <div className="subreddit-list">
+                      <ul>
+                        {potential.common_subreddits.map(sub => (
+                          <span>{sub}</span>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="swipe">
-              <RejectButton
-                handleSwipe={potentialActions.handleSwipe}
-                userId={user.redditId}
-                potentialId={potential.redditId}
-                index={index}
-                lastPotential={lastPotential}
-              />
-              <InterestButton
-                handleSwipe={potentialActions.handleSwipe}
-                userId={user.redditId}
-                index={index}
-                lastPotential={lastPotential}
-                potential={potential}
-                socket={socket}
-                user={user}
-              />
-            </div>
+            }
+          </Motion>
+          <div className="swipe">
+            <RejectButton
+              handleSwipe={potentialActions.handleSwipe}
+              userId={user.redditId}
+              potentialId={potential.redditId}
+              index={index}
+              lastPotential={lastPotential}
+              animateComponent={this.animateComponent.bind(this, 'no')}
+            />
+            <InterestButton
+              handleSwipe={potentialActions.handleSwipe}
+              userId={user.redditId}
+              index={index}
+              lastPotential={lastPotential}
+              potential={potential}
+              socket={socket}
+              user={user}
+              animateComponent={this.animateComponent.bind(this, 'yes')}
+            />
           </div>
         </div>
       </div>

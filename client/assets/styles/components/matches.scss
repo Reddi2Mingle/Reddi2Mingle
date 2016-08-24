@@ -1,0 +1,36 @@
+.match-card {
+  width: 30%;
+}
+
+.matches-view {
+  @include background('/assets/img/los-angeles.jpg');
+  @include position(space-around, center, row, wrap);
+  padding-top: 100px;
+}
+
+.small-profile-image {
+  border: 15px solid white;
+  flex: 0.75;
+  max-width: 275px;
+  height: auto;
+}
+
+.match-info {
+  background: white;
+  padding: 0px 15px 15px 15px;
+  width: 275px;
+  margin-top: -5px;
+  h3 {
+    padding-bottom: 10px;
+  }
+}
+
+.small-subreddit-list {
+  @extend .subreddit-list;
+  font-size: 0.9em;
+}
+
+.message {
+  margin-top: 10px;
+  margin-left: 40px;
+}

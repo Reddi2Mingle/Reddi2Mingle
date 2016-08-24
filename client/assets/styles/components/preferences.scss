@@ -1,0 +1,31 @@
+.preferences-view {
+  @include background('/assets/img/holding-hands.jpg');
+  @include position(center, center, column);
+  align-content: center;
+}
+
+.preferences-container {
+  @include position(center, center, column);
+  padding: 50px;
+  border: 3px solid white;
+  width: 600px;
+  height: 400px; 
+  margin-top: 20px;
+}
+
+.preferences-options {
+  display: flex;
+  flex-direction: row;
+  img {
+    width: 150px;
+    height: auto;
+  }
+  span {
+    background-color: rgba(255, 255, 255, 0.2); 
+    padding: 30px 30px 100px 30px;
+    margin: 10px 30px 30px 30px;
+  }
+  .active, span:hover {
+    background-color: $accentColor;
+  }
+}
