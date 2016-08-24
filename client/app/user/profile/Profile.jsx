@@ -116,6 +116,14 @@ class Profile extends Component {
           <span style={{ flex: 0.1 }}> </span>
           <div style={{ padding: '20px' }}>
             <h2>{user.name}</h2>
+            <h2>Subreddits: {user.subreddits}</h2>
+            <h2>Trophies: {user.trophyCount}</h2>
+            <h2>Post Karma: {user.postKarma}</h2>
+            <h2>Comment Karma: {user.commentKarma}</h2>
+            <h2>Gold Member: {user.goldMember}</h2>
+            <h2>Your upvotes: {user.receivedUpvotes}</h2>
+            <h2>Times you said yes: {user.deliveredUpvotes}</h2>
+            <h2>Times you said no: {user.deliveredDownvotes}</h2>
           </div>
         </div>
         <Modal ref="modal"
@@ -152,7 +160,6 @@ const mapStateToProps = state => ({
   user: state.user,
   potentialsFetched: state.potentials.fetched,
   matchesFetched: state.matches.fetched,
-  // subreddits: state.user.subreddits,
 });
 
 const mapDispatchToProps = (dispatch) => ({

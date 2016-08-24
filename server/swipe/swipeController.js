@@ -1,12 +1,34 @@
 'use strict';
 
 const db = require('../db/neo4jconfig').db;
+const request = require('request');
 
 module.exports = {
   likeResponse: (req, res) => {
     const user = req.body.redditId;
     const potential = req.body.potentialId;
     const swipe = req.body.swipe;
+
+    // Send the downvote / upvote data to user service
+    // User service will increment the upvote / downvote in MySQL
+    const deliveredUpvotes = swipe === 'yes' ? 1 : 0;
+    const deliveredDownvotes = swipe === 'yes' ? 0 : 1;
+    request({
+      url: `http://localhost:${process.env.PORT_USER}/api/user-sql/saveVotes`,
+      method: 'POST',
+      form: {
+        deliveredUpvotes,
+        deliveredDownvotes,
+        potentialRedditId: potential,
+        userRedditId: user,
+      },
+    }, (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(response);
+      }
+    });
 
     // Check if there is an INTEREST relationship between the user and potential
     db.cypher({
