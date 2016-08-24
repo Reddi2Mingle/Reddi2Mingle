@@ -8,7 +8,7 @@ export default class CreatePassword extends Component {
     const { userActions, location: { query } } = this.props;
     const redditId = query.redditId;
     localStorage.setItem('token', redditId);
-    userActions.fetchUser(redditId);
+    userActions.saveRedditId(redditId);
   }
 
   createPassword(event) {
@@ -22,12 +22,13 @@ export default class CreatePassword extends Component {
         password: message,
       })
       .then(() => {
-        this.props.history.push('/preferences');
+        console.log('password updated');
       })
       .catch((err) => {
         console.log(`password not updated: ${err}`);
       });
     }
+    this.props.history.push('/preferences');
   }
 
   render() {
@@ -38,7 +39,7 @@ export default class CreatePassword extends Component {
           <h2> But let's get creative </h2>
           <p className="white">(aka, please don't use your Reddit password)</p>
           <div>
-            <input type="password" text="text" ref="newPassword" />
+            <input type="password" ref="newPassword" />
             <button
               onClick={e => {
                 this.createPassword(e);

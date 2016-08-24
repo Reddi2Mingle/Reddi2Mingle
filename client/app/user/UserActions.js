@@ -24,6 +24,13 @@ export function fetchUser(redditId) {
   };
 }
 
+export function saveRedditId(redditId) {
+  return {
+    type: 'SAVE_REDDITID',
+    payload: redditId,
+  };
+}
+
 export function userLogin(username, password) {
   return dispatch => {
     axios.post('/api/userInfo/loginCredentials', {

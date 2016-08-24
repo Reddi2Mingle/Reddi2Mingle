@@ -38,6 +38,13 @@ export default (state = initialState, action) => {
         name: action.payload.name,
         photo: action.payload.photo,
         subreddits: action.payload.subreddits,
+        trophyCount: action.payload.trophyCount,
+        postKarma: action.payload.postKarma,
+        commentKarma: action.payload.commentKarma,
+        goldMember: action.payload.goldMember,
+        receivedUpvotes: action.payload.receivedUpvotes,
+        deliveredUpvotes: action.payload.deliveredUpvotes,
+        deliveredDownvotes: action.payload.deliveredDownvotes,
         fetching: false,
         fetched: true,
         isAuthenticated: true,
@@ -59,6 +66,9 @@ export default (state = initialState, action) => {
     }
     case 'LOGOUT_USER': {
       return { ...state, isAuthenticated: false, fetched: false };
+    }
+    case 'SAVE_REDDITID': {
+      return { ...state, redditId: action.payload };
     }
     default:
       return state;

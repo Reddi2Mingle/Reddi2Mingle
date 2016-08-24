@@ -15,6 +15,7 @@ module.exports = {
     }, (err, response) => {
       if (err) {
         console.log(err);
+        res.send(err);
       } else {
         res.send('password updated successfully');
       }
