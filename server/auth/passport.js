@@ -37,7 +37,7 @@ passport.use(new RedditStrategy({
     request({
       method: 'POST',
       // url: `http://10.8.26.223:${process.env.PORT_USER}/api/user-sql/createUser`,
-      url: `http://127.0.0.1:${process.env.PORT_USER}/api/user-sql/createUser`,
+      url: `http://users:${process.env.PORT_USER}/api/user-sql/createUser`,
       form: {
         accessToken,
         refreshToken,

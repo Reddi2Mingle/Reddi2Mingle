@@ -43,7 +43,7 @@ module.exports = {
       query: `MATCH (:Person {redditId: "${redditId}"})<-[:INTEREST]-(potential:Person) 
                 WITH potential
                 LIMIT ${limit}
-              MATCH (potential)-[:FOLLOWS]->(sub:Subreddit)<-[:FOLLOWS]-(:Person {redditId: "${redditId}"})
+                MATCH (potential)-[:FOLLOWS]->(sub:Subreddit)<-[:FOLLOWS]-(:Person {redditId: "${redditId}"})
                 RETURN potential, sub;`,
     }, (err1, interests) => {
       if (err1) {

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import MatchMaker from './MatchMaker.jsx';
+import MatchMaker from './MatchMaker';
 import * as UserActions from '../user/UserActions';
 import * as PotentialActions from './PotentialActions';
 import * as MatchesActions from '../matches/MatchesActions';

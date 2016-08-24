@@ -1,11 +1,7 @@
 const db = require('../db/neo4jconfig').db;
-const request = require('request');
-require('../helpers/api_keys');
-
 const neo4j = require('neo4j');
 const potentialController = require('../potentialMatch/potentialController');
 // const db = require('../db/neo4jconfig').db;
-const db = new neo4j.GraphDatabase('http://neo4j:neo4j@neo4j:7474');
 const request = require('request');
 require('../helpers/api_keys');
 
@@ -129,7 +125,7 @@ module.exports = {
 
   updatePassword: (req, res) => {
     request({
-      url: `http://${process.env.HOST}:${process.env.PORT_USER}/api/user-sql/updatePassword`,
+      url: `http://users:${process.env.PORT_USER}/api/user-sql/updatePassword`,
       method: 'POST',
       form: {
         redditId: req.body.redditId,
@@ -148,7 +144,7 @@ module.exports = {
   queryUserInfo: (req, res) => {
     const redditId = req.query.redditId;
     request({
-      url: `http://${process.env.HOST}:${process.env.PORT_USER}/api/user-sql/userInfo?redditId=${redditId}`,
+      url: `http://users:${process.env.PORT_USER}/api/user-sql/userInfo?redditId=${redditId}`,
       method: 'GET',
     }, (err, response) => {
       if (err) {
@@ -166,7 +162,7 @@ module.exports = {
 
     // Send request to the User Service to verify the username and password match
     request({
-      url: `http://${process.env.HOST}:${process.env.PORT_USER}/api/user-sql/loginCredentials`,
+      url: `http://users:${process.env.PORT_USER}/api/user-sql/loginCredentials`,
       method: 'POST',
       form: {
         username,
@@ -192,7 +188,7 @@ module.exports = {
     const preference = req.body.preference;
     const redditId = req.body.redditId;
     request({
-      url: `http://${process.env.HOST}:${process.env.PORT_USER}/api/user-sql/addPreference`,
+      url: `http://users:81/api/user-sql/addPreference`,
       method: 'POST',
       form: {
         redditId,
