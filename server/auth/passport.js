@@ -13,7 +13,7 @@ require('../helpers/api_keys');
 //   have a database of user records, the complete Reddit profile is
 //   serialized and deserialized.
 passport.serializeUser((user, done) => {
-  // console.log('server/passport.js 18: serialized user', user);
+  console.log('server/passport.js 18: serialized user', user);
   done(null, user.id);
 });
 
@@ -34,6 +34,7 @@ passport.use(new RedditStrategy({
 },
   (accessToken, refreshToken, profile, done) => {
     // Direct reddit controller to save user to database
+    console.log(`inside passport.js, url: users:${process.env.PORT_USER}/api/user-sql/createUser`)
     request({
       method: 'POST',
       // url: `http://10.8.26.223:${process.env.PORT_USER}/api/user-sql/createUser`,
