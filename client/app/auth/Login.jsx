@@ -24,7 +24,7 @@ export default class Login extends Component {
         </div>
         <div className="login-content">
           <h1>password: </h1>
-          <input ref="password" />
+          <input type="password" ref="password" />
         </div>
         <button
           onClick={e => {

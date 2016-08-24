@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const InterestButton = ({ handleSwipe, index, lastPotential, potential, socket, user }) => (
+const InterestButton = ({ handleSwipe, index, lastPotential, potential, socket, user, animateComponent }) => (
   <div>
     <button
       onClick={e => {
@@ -18,6 +18,7 @@ const InterestButton = ({ handleSwipe, index, lastPotential, potential, socket, 
             },
           });
         }
+        animateComponent();
       }}
     >
       <img
@@ -35,6 +36,7 @@ InterestButton.propTypes = {
   lastPotential: PropTypes.number.isRequired,
   potential: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  animateComponent: PropTypes.func.isRequired,
 };
 
 export default InterestButton;

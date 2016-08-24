@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Motion, StaggeredMotion, spring } from 'react-motion';
 import Navbar from '../stateless/Navigation';
 import RejectButton from './RejectButton';
 import InterestButton from './InterestButton';
@@ -29,8 +30,35 @@ export default class MatchMaker extends Component {
     if (!matchesFetched) {
       matchesActions.fetchMatches(redditId);
     }
+
+    this.state = {
+      yes: false,
+      no: false,
+    };
   }
 
+  animateComponent(swipe) {
+    console.log('animateComponent happens');
+    // e.preventDefault();
+    if (swipe === 'yes') {
+      this.setState({ yes: true });
+      console.log('yes state is', this.state.yes);
+    } else if (swipe === 'no') {
+      this.setState({ no: true });
+      console.log('no state is', this.state.no);
+    }
+  }
+
+  animateDirection() {
+    console.log('animateDirection happens');
+    console.log('state is', this.state);
+    if (this.state.yes) {
+      return 2000;
+    } else if (this.state.no) {
+      return -2000;
+    }
+    return 0;
+  }
   // componentDidMount() {
   //   const { potentialActions } = this.props;
   //   socket.on('get new match', (userInfo) => {
@@ -73,26 +101,41 @@ export default class MatchMaker extends Component {
       <div>
         <Navbar />
         <div className="potential-view">
-          <div className="potential-card">
-            <img
-              src={potential.photo}
-              className="full-profile-image"
-              alt="Redditor"
-            />
-            <div className="potential-info">
-              <h3>{potential.name}</h3>
-              <div className="potential-more-info">
-                <i className="material-icons md-48 orange">favorite</i>
-                <span className="heart-text"> r/ </span>
-                <div className="subreddit-list">
-                  <ul>
-                    {potential.common_subreddits.map(sub => (
-                      <span>{sub}</span>
-                    ))}
-                  </ul>
+          <Motion
+            defaultStyle={{ x: 0 }}
+            style={{ x: spring(this.animateDirection(),
+              { stiffness: 330, damping: 100, precision: 0.1 }) }}
+          >
+            {({ x }) =>
+              <div
+                className="potential-card"
+                style={{
+                  WebkitTransform: `translate3d(${x}px, 0, 0) rotate(${x}deg)`,
+                  transform: `translate3d(${x}px, 0, 0) rotate(${x}deg)` }}
+              >
+                <img
+                  src={potential.photo}
+                  className="full-profile-image"
+                  alt="Redditor"
+                />
+                <div className="potential-info">
+                  <h3>{potential.name}</h3>
+                  <div className="potential-more-info">
+                    <i className="material-icons md-48 orange">favorite</i>
+                    <span className="heart-text"> r/ </span>
+                    <div className="subreddit-list">
+                      <ul>
+                        {potential.common_subreddits.map(sub => (
+                          <span>{sub}</span>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            }
+          </Motion>
+          <div>
             <div className="swipe">
               <RejectButton
                 handleSwipe={potentialActions.handleSwipe}
@@ -100,6 +143,7 @@ export default class MatchMaker extends Component {
                 potentialId={potential.redditId}
                 index={index}
                 lastPotential={lastPotential}
+                animateComponent={this.animateComponent.bind(this, 'no')}
               />
               <InterestButton
                 handleSwipe={potentialActions.handleSwipe}
@@ -109,6 +153,7 @@ export default class MatchMaker extends Component {
                 potential={potential}
                 socket={socket}
                 user={user}
+                animateComponent={this.animateComponent.bind(this, 'yes')}
               />
             </div>
           </div>
