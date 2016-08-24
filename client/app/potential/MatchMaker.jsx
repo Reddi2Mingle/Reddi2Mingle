@@ -38,6 +38,8 @@ export default class MatchMaker extends Component {
   }
 
   componentWillReceiveProps() {
+    // every time a button is clicked, state will change and animate
+    // this setTimeout will reset the state after one second and bring the card back to center
     setTimeout(() => { this.setState({
       yes: false,
       no: false,
