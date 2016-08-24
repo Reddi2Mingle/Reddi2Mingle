@@ -37,21 +37,23 @@ export default class MatchMaker extends Component {
     };
   }
 
+  componentWillReceiveProps() {
+    setTimeout(() => { this.setState({
+      yes: false,
+      no: false,
+    });
+    }, 1000);
+  }
+
   animateComponent(swipe) {
-    console.log('animateComponent happens');
-    // e.preventDefault();
     if (swipe === 'yes') {
       this.setState({ yes: true });
-      console.log('yes state is', this.state.yes);
     } else if (swipe === 'no') {
       this.setState({ no: true });
-      console.log('no state is', this.state.no);
     }
   }
 
   animateDirection() {
-    console.log('animateDirection happens');
-    console.log('state is', this.state);
     if (this.state.yes) {
       return 2000;
     } else if (this.state.no) {
@@ -59,6 +61,7 @@ export default class MatchMaker extends Component {
     }
     return 0;
   }
+
   // componentDidMount() {
   //   const { potentialActions } = this.props;
   //   socket.on('get new match', (userInfo) => {
