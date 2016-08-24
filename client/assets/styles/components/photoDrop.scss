@@ -1,0 +1,26 @@
+.photo-drop-view {
+  @include background('/assets/img/shooting-photo.jpg');
+  @include position(center, center, column);
+  align-content: space-around;
+}
+
+.photo-drop-container {
+  @include position(center, center, column);
+}
+
+.dropzone {
+  margin-top: 20px;
+  padding: 50px; 
+  text-align: center;
+  border: 5px dashed white;
+  width: 500px;
+  height: 250px;
+    &-active {
+      background: rbga(255, 255, 255, 0.5);
+    }
+}
+
+.dropzone:hover {
+  @extend .dropzone;
+  background-color: rgba(222, 222, 222, .2);
+}

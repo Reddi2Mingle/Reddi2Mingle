@@ -1,0 +1,70 @@
+.potential-view { 
+  @include background('/assets/img/new-york.jpg');
+  @include position(center, center, column);
+  background-color: #1a1a1a;
+}
+
+.potential-card {
+  width: 30%;
+}
+
+.full-profile-image {
+  border: 15px solid white;
+  flex: 0.75;
+  max-width: 100%;
+  height: auto;
+}
+
+.potential-info {
+  background: white;
+  padding: 0px 15px 15px 15px;
+  width: 100%;
+  margin-top: -5px;
+  h3 {
+    padding-bottom: 10px;
+  }
+}
+
+.potential-more-info {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  i {
+    width: 75px;
+  }
+}
+
+.heart-text {
+  @include font-default;
+  @extend .white;
+  font-family: $font;
+  margin-left: -50px;
+  margin-top: 10px;
+}
+
+.subreddit-list {
+  color: black;
+  width: 100%;
+  margin-left: 20px;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  span {
+    @extend .black;
+    font-family: $font;
+    font-size: 1em;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    padding: 5px 5px;
+  }
+}
+
+.swipe {
+  @extend .potential-card;
+  display: flex;
+  button {
+    width: 235px;
+    margin: 10px;
+  }
+}

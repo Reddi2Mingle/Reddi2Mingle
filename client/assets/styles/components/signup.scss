@@ -1,0 +1,28 @@
+.signup-view {
+  @include background('/assets/img/bonfire.jpg');
+  @include position(center, center, column);
+}
+
+.signup-info {
+  @include position(center, space-around, column)
+  height: 100vh;
+  padding: 75px 0;
+    h1 {
+      text-transform: uppercase;
+      font-weight:300;
+      line-height:1;
+      font-size: 7em;
+      color: white;
+    }
+    button {
+      width: 100%;
+      margin-top: 10px;
+    }
+}
+
+.button-group {
+
+  display: flex;
+  flex-flow: column nowrap; 
+  align-items: center;
+}
