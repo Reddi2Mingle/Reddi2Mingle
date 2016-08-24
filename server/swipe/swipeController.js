@@ -11,6 +11,9 @@ module.exports = {
 
     // Send the downvote / upvote data to user service
     // User service will increment the upvote / downvote in MySQL
+    // When user swipes yes or no, both an upvote and a downvote count are recorded
+    // The upvote and downvote are mutually exclusive (one will be zero and the other equal to 1)
+    // This is being done so that the post request is in a consistent format regardless of decision
     const deliveredUpvotes = swipe === 'yes' ? 1 : 0;
     const deliveredDownvotes = swipe === 'yes' ? 0 : 1;
     request({
