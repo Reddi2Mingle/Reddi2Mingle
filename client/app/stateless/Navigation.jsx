@@ -20,14 +20,6 @@ const NavBar = ({ userActions, user, matches }) => (
         <i className="material-icons md-48 white">favorite_border</i>
       }
     </Link>
-    <button
-      onClick={(e) => {
-        e.preventDefault();
-        userActions.logout();
-      }}
-    >
-      <h2> Logout </h2>
-    </button>
   </div>
 );
 
