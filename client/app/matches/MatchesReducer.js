@@ -1,6 +1,7 @@
 const initialState = {
   fetched: false,
   fetching: false,
+  notification: false,
   people: [{
     redditID: '',
     name: 'Fetching matches...',
@@ -31,6 +32,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         people: [...state.people, action.payload],
+        notification: true,
+      };
+    }
+    case 'RESET_NOTIFICATION': {
+      return {
+        ...state,
+        notification: false,
       };
     }
     default:

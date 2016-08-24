@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import * as UserActions from '../user/UserActions';
 
-const NavBar = ({ userActions, user }) => (
+const NavBar = ({ userActions, user, matches }) => (
   <div className="navigation" style={{ backgroundColor: 'black' }}>
     <Link to="/profile">
       <img src={user.photo} style={{ width: '20px' }} />
@@ -14,7 +14,11 @@ const NavBar = ({ userActions, user }) => (
       <h1 style={{ fontSize: '1.5em' }}> REDDI2MINGLE </h1>
     </Link>
     <Link to="/matches">
-      <i className="material-icons md-48 white">favorite_border</i>
+      {(matches.notification) ?
+        <i className="material-icons md-48 orange">favorite</i>
+        :
+        <i className="material-icons md-48 white">favorite_border</i>
+      }
     </Link>
     <button
       onClick={(e) => {
@@ -29,6 +33,7 @@ const NavBar = ({ userActions, user }) => (
 
 const mapStateToProps = state => ({
   user: state.user,
+  matches: state.matches,
 });
 const mapDispatchToProps = (dispatch) => (
   {
