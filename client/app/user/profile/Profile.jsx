@@ -104,11 +104,9 @@ class Profile extends Component {
               <span className="heart-text"> r/ </span>
               <div className="subreddit-list">
                 <ul>
-                  <span> AskReddit </span>
-                  <span> IamA </span>
-                  <span> technology </span>
-                  <span> ELI5 </span>
-                  <span> hackreactor </span>
+                  {user.subreddits.map(sub => (
+                    <span>{sub}</span>
+                  ))}
                 </ul>
               </div>
             </div>

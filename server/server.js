@@ -1,7 +1,6 @@
 const app = require('express')();
 const http = require('http');
 
-// http.globalAgent.maxSockets = 1;
 const server = http.Server(app);
 const io = require('socket.io')(server);
 const middleware = require('./helpers/middleware');
