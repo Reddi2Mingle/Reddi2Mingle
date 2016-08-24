@@ -43,8 +43,14 @@ passport.use(new RedditStrategy({
         refreshToken,
         profile,
       },
+    }, (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(response.body);
+        // Authentication finished
+        done(null, profile);
+      }
     });
-    // Authentication finished
-    done(null, profile);
   }
 ));

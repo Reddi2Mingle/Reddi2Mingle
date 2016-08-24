@@ -67,6 +67,9 @@ export default (state = initialState, action) => {
     case 'LOGOUT_USER': {
       return { ...state, isAuthenticated: false, fetched: false };
     }
+    case 'SAVE_REDDITID': {
+      return { ...state, redditId: action.payload };
+    }
     default:
       return state;
   }
