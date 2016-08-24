@@ -138,27 +138,25 @@ export default class MatchMaker extends Component {
               </div>
             }
           </Motion>
-          <div>
-            <div className="swipe">
-              <RejectButton
-                handleSwipe={potentialActions.handleSwipe}
-                userId={user.redditId}
-                potentialId={potential.redditId}
-                index={index}
-                lastPotential={lastPotential}
-                animateComponent={this.animateComponent.bind(this, 'no')}
-              />
-              <InterestButton
-                handleSwipe={potentialActions.handleSwipe}
-                userId={user.redditId}
-                index={index}
-                lastPotential={lastPotential}
-                potential={potential}
-                socket={socket}
-                user={user}
-                animateComponent={this.animateComponent.bind(this, 'yes')}
-              />
-            </div>
+          <div className="swipe">
+            <RejectButton
+              handleSwipe={potentialActions.handleSwipe}
+              userId={user.redditId}
+              potentialId={potential.redditId}
+              index={index}
+              lastPotential={lastPotential}
+              animateComponent={this.animateComponent.bind(this, 'no')}
+            />
+            <InterestButton
+              handleSwipe={potentialActions.handleSwipe}
+              userId={user.redditId}
+              index={index}
+              lastPotential={lastPotential}
+              potential={potential}
+              socket={socket}
+              user={user}
+              animateComponent={this.animateComponent.bind(this, 'yes')}
+            />
           </div>
         </div>
       </div>
