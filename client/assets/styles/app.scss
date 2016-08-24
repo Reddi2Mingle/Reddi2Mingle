@@ -66,7 +66,7 @@ button:hover {
 }
 
 .navigation {
-  @include position('center', 'space-between');
+  @include position(center, space-between);
   background-color: black;
   h2 {
     font-size: 20px;
@@ -77,11 +77,11 @@ button:hover {
 
 .signup-view {
   @include background('/assets/img/bonfire.jpg');
-  @include position('center', 'center', 'column');
+  @include position(center, center, column);
 }
 
 .signup-info {
-  @include position('center', 'space-around', 'column')
+  @include position(center, space-around, column)
   height: 100vh;
   padding: 75px 0;
     h1 {
@@ -98,7 +98,7 @@ button:hover {
 }
 
 .button-group {
-  
+
   display: flex;
   flex-flow: column nowrap; 
   align-items: center;
@@ -108,7 +108,7 @@ button:hover {
 
 .password-view {
   @include background('/assets/img/typing.jpg');
-  @include absolute-center;
+  @include position(center, center, column);
   input {
     @include font-default;
     @extend .white;
@@ -121,7 +121,7 @@ button:hover {
 }
 
 .password-content {
-  @include position('center', 'space-around', 'column');
+  @include position(center, space-around, column);
   height: 25vh;
   div {
     display: flex;
@@ -158,12 +158,12 @@ button:hover {
 
 .photo-drop-view {
   @include background('/assets/img/shooting-photo.jpg');
-  @include absolute-center;
+  @include position(center, center, column);
   align-content: space-around;
 }
 
 .photo-drop-container {
-  @include absolute-center;
+  @include position(center, center, column);
 }
 
 .dropzone {
@@ -187,12 +187,12 @@ button:hover {
 
 .preferences-view {
   @include background('/assets/img/holding-hands.jpg');
-  @include absolute-center;
+  @include position(center, center, column);
   align-content: center;
 }
 
 .preferences-container {
-  @include absolute-center;
+  @include position(center, center, column);
   padding: 50px;
   border: 3px solid white;
   width: 600px;
@@ -220,7 +220,7 @@ button:hover {
 
 .potential-view { 
   @include background('/assets/img/new-york.jpg');
-  @include absolute-center;
+  @include position(center, center, column);
   background-color: #1a1a1a;
 }
 
@@ -247,8 +247,8 @@ button:hover {
 
 .potential-more-info {
   display: flex;
-  flex-direction: row;
   justify-content: flex-start;
+  flex-direction: row;
   i {
     width: 75px;
   }
@@ -298,10 +298,7 @@ button:hover {
 
 .matches-view {
   @include background('/assets/img/los-angeles.jpg');
-  display: flex;
-  align-items: space-around;
-  justify-content: center;
-  flex-flow: row wrap;
+  @include position(space-around, center, row, wrap);
   padding-top: 100px;
 }
 
@@ -357,7 +354,6 @@ button:hover {
     position: absolute;
     width: 100%; height: -150px;
     top: 150px; left: 0;
-    // vertical-align: -50%;
     background: rgba(255, 255, 255,0.6);
     opacity: 0;
     transition: all 0.5s;

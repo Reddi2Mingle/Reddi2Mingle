@@ -17,10 +17,9 @@
   letter-spacing: 0.1em;
 }
 
-@mixin position($align, $justify, $direction, $wrap) { 
+@mixin position($align, $justify, $direction: row, $wrap: nowrap) { 
   display: flex;
   align-items: $align;
   justify-content: $justify;
-  flex-direction: $direction;
-  flex-wrap: $wrap;
+  flex-flow: $direction $wrap;
 }
