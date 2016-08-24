@@ -4,11 +4,11 @@
   width: 100vw;
 }
 
-@mixin absolute-center {
+@mixin position($align, $justify, $direction: row, $wrap: nowrap) { 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  align-items: $align;
+  justify-content: $justify;
+  flex-flow: $direction $wrap;
 }
 
 @mixin font-default {
@@ -17,9 +17,3 @@
   letter-spacing: 0.1em;
 }
 
-@mixin position($align, $justify, $direction: row, $wrap: nowrap) { 
-  display: flex;
-  align-items: $align;
-  justify-content: $justify;
-  flex-flow: $direction $wrap;
-}
