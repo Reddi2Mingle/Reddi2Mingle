@@ -1,11 +1,23 @@
 import React, { PropTypes } from 'react';
 
-const InterestButton = ({ handleSwipe, userId, potentialId, index, lastPotential, potentialObj }) => (
+const InterestButton = ({ handleSwipe, index, lastPotential, potential, socket, user }) => (
   <div>
     <button
       onClick={e => {
         e.preventDefault();
-        handleSwipe(userId, potentialId, 'yes', index, lastPotential, potentialObj);
+        handleSwipe(user.redditId, potential.redditId, 'yes', index, lastPotential, potential);
+        if (potential.interested === true) {
+          socket.emit('send new match', {
+            senderId: user.redditId,
+            receiverId: potential.redditId,
+            userInfo: {
+              redditId: user.redditId,
+              name: user.name,
+              photo: user.photo,
+              common_subreddits: potential.common_subreddits,
+            },
+          });
+        }
       }}
     >
       <img
@@ -19,11 +31,10 @@ const InterestButton = ({ handleSwipe, userId, potentialId, index, lastPotential
 
 InterestButton.propTypes = {
   handleSwipe: PropTypes.func.isRequired,
-  userId: PropTypes.string.isRequired,
-  potentialId: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   lastPotential: PropTypes.number.isRequired,
-  potentialObj: PropTypes.object.isRequired,
+  potential: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default InterestButton;

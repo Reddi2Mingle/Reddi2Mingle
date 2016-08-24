@@ -8,25 +8,23 @@ import * as MatchesActions from '../matches/MatchesActions';
 const mapStateToProps = state => {
   if (state.potentials.people.length === 0) {
     return {
+      user: state.user,
+      potential: state.potentials.people[state.potentials.index],
+      matchesFetched: state.matches.fetched,
+      potentialsFetched: state.potentials.fetched,
       noPotentials: true,
-      userId: state.user.redditId,
-      userInfoFetched: state.user.fetched,
       fetchingPotentials: state.potentials.fetching,
     };
   }
 
   return {
-    name: state.potentials.people[state.potentials.index].name,
-    photo: state.potentials.people[state.potentials.index].photo,
-    common_subreddits: state.potentials.people[state.potentials.index].common_subreddits,
-    potentialId: state.potentials.people[state.potentials.index].redditId,
-    userId: state.user.redditId,
-    fetchingUser: state.user.fetching,
+    user: state.user,
+    potential: state.potentials.people[state.potentials.index],
+    matchesFetched: state.matches.fetched,
+    potentialsFetched: state.potentials.fetched,
     fetchingPotentials: state.potentials.fetching,
-    userInfoFetched: state.user.fetched,
     index: state.potentials.index,
     lastPotential: state.potentials.people.length - 1,
-    potentialObj: state.potentials.people[state.potentials.index],
   };
 };
 

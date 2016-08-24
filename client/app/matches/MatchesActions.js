@@ -1,8 +1,15 @@
 import axios from 'axios';
 
+function initiateFetchMatches() {
+  return {
+    type: 'FETCH_MATCHES',
+  };
+}
+
 export function fetchMatches(userId) {
   console.log('Fetching matches!');
   return dispatch => {
+    dispatch(initiateFetchMatches());
     axios.get(`/api/swipe/matches?redditId=${userId}`)
       .then((response) => {
         console.log(`fetchMatches response.data: ${response.data}`);
@@ -14,12 +21,3 @@ export function fetchMatches(userId) {
       });
   };
 }
-
-// export function updateMatches() {
-//   return (dispatch, getState) => {
-//     const match = getState().potentials.people[state.potentials.index].match;
-//     if (match) {
-      
-//     }
-//   }
-// }

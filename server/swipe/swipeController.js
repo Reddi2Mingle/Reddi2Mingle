@@ -69,24 +69,24 @@ module.exports = {
       } else {
         // first we have to sift through the results returned, because it returns
         // an array containing objects for each subreddit and person
-        var mappedResults = {};
-        for (var result of results) {
-          var person = result.matched.properties;
-          var sub = result.sub.properties;
+        const mappedResults = {};
+        for (let result of results) {
+          let person = result.matched.properties;
+          let sub = result.sub.properties;
           if (mappedResults[person.name]) {
-            mappedResults[person.name].common_subbredits.push(sub.name);
+            mappedResults[person.name].common_subreddits.push(sub.name);
           } else {
             mappedResults[person.name] = {
               name: person.name,
               photo: person.photo,
               redditId: person.redditId,
-              common_subbredits: [sub.name],
+              common_subreddits: [sub.name],
             };
           }
         }
         // Next, we build an array to send to the client
-        var resultsArr = [];
-        for (var key in mappedResults) {
+        const resultsArr = [];
+        for (let key in mappedResults) {
           resultsArr.push(mappedResults[key]);
         }
         res.send(resultsArr);

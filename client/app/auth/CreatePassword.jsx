@@ -7,7 +7,6 @@ export default class CreatePassword extends Component {
   componentDidMount() {
     const { userActions, location: { query } } = this.props;
     const redditId = query.redditId;
-    console.log(`redditId: ${redditId}`);
     localStorage.setItem('token', redditId);
     userActions.fetchUser(redditId);
   }

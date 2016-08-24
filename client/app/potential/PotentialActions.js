@@ -12,7 +12,7 @@ function resetIndex() {
   };
 }
 
-function requestPotentials() {
+function initiateFetchPotentials() {
   return {
     type: 'FETCH_POTENTIALS',
   };
@@ -26,7 +26,7 @@ function newMatchCreated() {
 
 export function fetchPotentials(userId) {
   return dispatch => {
-    dispatch(requestPotentials());
+    dispatch(initiateFetchPotentials());
     dispatch(resetIndex());
     axios.get(`/api/potentials?redditId=${userId}`)
     .then((response) => {
@@ -38,9 +38,9 @@ export function fetchPotentials(userId) {
   };
 }
 
-function sendSwipe(userId, potentialId, swipe) {
+function sendSwipe(redditId, potentialId, swipe) {
   axios.post('/api/swipe', {
-    redditId: userId,
+    redditId,
     potentialId,
     swipe,
   })
@@ -52,18 +52,22 @@ function sendSwipe(userId, potentialId, swipe) {
   });
 }
 
-export function handleSwipe(userId, potentialId, swipe, index, lastPotential, potentialObj) {
+export function pushMatch(match) {
+  return {
+    type: 'PUSH_MATCH',
+    payload: match,
+  };
+}
+
+export function handleSwipe(userId, potentialId, swipe, index, lastPotential, potential) {
   return dispatch => {
     if (index === lastPotential) {
       dispatch(fetchPotentials(userId));
     } else {
       dispatch(incrementIndex());
     }
-    if (swipe === 'yes' && potentialObj.interested === true) {
-      dispatch({
-        type: 'PUSH_MATCH',
-        payload: potentialObj,
-      });
+    if (swipe === 'yes' && potential.interested === true) {
+      dispatch(pushMatch(potential));
     }
     sendSwipe(userId, potentialId, swipe);
   };
