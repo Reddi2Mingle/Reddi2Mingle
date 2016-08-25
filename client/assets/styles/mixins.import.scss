@@ -11,13 +11,6 @@
   flex-flow: $direction $wrap;
 }
 
-@mixin font-default {
-  font-weight: 300;
-  font-size: 1.5em;
-  letter-spacing: 0.1em;
-}
-
-
 @mixin font($font-family, $size, $color, $weight: 400) {
   font-family: $font-family;
   font-size: $size;
