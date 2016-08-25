@@ -125,7 +125,18 @@ class Profile extends Component {
             <h2>Times you said yes: {user.deliveredUpvotes}</h2>
             <h2>Times you said no: {user.deliveredDownvotes}</h2>
           </div>
+          <div>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                userActions.logout();
+              }}
+            >
+              <h2> Logout </h2>
+            </button>
+          </div>
         </div>
+
         <Modal ref="modal"
           modalStyle={modalStyle}
           backdropStyle={backdropStyle}

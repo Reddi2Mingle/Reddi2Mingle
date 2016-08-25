@@ -3,7 +3,7 @@
 }
 
 .matches-view {
-  @include background('/assets/img/los-angeles.jpg');
+  @include background('/assets/img/new-york.jpg');
   @include position(space-around, center, row, wrap);
   padding-top: 100px;
 }

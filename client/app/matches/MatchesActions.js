@@ -21,3 +21,9 @@ export function fetchMatches(userId) {
       });
   };
 }
+
+export function resetNotification() {
+  return {
+    type: 'RESET_NOTIFICATION',
+  };
+}

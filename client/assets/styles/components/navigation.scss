@@ -1,0 +1,18 @@
+.navigation {
+  @include position(center, space-between);
+  background-color: black;
+  h2 {
+    font-size: 20px;
+  }
+}
+
+.match-notification {
+  @include position(center, center);
+  width: 75px
+}
+
+.match-count {
+  @extend .white;
+  font-size: 0.75em;
+  margin-left: -30px;
+}

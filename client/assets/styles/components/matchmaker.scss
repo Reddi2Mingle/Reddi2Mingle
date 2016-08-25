@@ -1,5 +1,5 @@
 .potential-view { 
-  @include background('/assets/img/new-york.jpg');
+  @include background('/assets/img/los-angeles.jpg');
   @include position(center, center, column);
   background-color: #1a1a1a;
 }

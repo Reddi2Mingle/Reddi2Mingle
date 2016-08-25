@@ -16,6 +16,8 @@ export default class Matches extends Component {
       matches,
     } = this.props;
 
+    matchesActions.resetNotification();
+
     // if this is the first time loading the app, fetch all userInfo, potentials, and matches
     if (!user.fetched) {
       userActions.fetchUser(redditId);
