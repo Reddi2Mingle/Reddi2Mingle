@@ -12,10 +12,6 @@ class NavBar extends Component {
       user,
       matches,
     } = this.props;
-    // let matchesIcon;
-    // if (matches.notification) {
-    //   matchesIcon = 
-    // }
     return (
       <div className="navigation" style={{ backgroundColor: 'black' }}>
         <Link to="/profile">
