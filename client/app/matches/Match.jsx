@@ -2,7 +2,9 @@ import React, { PropTypes } from 'react';
 
 const Match = ({ name, photo, common_subreddits }) => (
   <div className="match-card">
+    <div className="small-profile-wrapper"> 
     <img src={photo} className="small-profile-image" />
+    </div>
     <div className="match-info">
       <h3>{name}</h3>
       <div className="potential-more-info">
