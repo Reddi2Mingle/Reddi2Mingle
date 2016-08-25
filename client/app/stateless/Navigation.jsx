@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
 import * as UserActions from '../user/UserActions';
 
-const NavBar = ({ user, matches, userActions }) => (
+const NavBar = ({ user, matches }) => (
   <div className="navigation" style={{ backgroundColor: 'black' }}>
     <Link to="/profile">
       <img src={user.photo} style={{ width: '20px' }} />
@@ -31,9 +31,7 @@ const mapStateToProps = state => ({
   matches: state.matches,
 });
 
-const mapDispatchToProps = dispatch => ({
-  userActions: bindActionCreators(UserActions, dispatch),
-});
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(
   mapStateToProps,
