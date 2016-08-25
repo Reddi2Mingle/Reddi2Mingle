@@ -4,6 +4,11 @@
   background-color: #1a1a1a;
 }
 
+.potential-container {
+  display: flex;
+  @include position(center, center, column);
+}
+
 .potential-card {
   width: 30%;
 }
@@ -63,6 +68,7 @@
 .swipe {
   @extend .potential-card;
   display: flex;
+  justify-content: center;
   button {
     width: 235px;
     margin: 10px;

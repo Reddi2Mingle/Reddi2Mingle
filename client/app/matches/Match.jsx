@@ -18,7 +18,7 @@ const Match = ({ name, photo, common_subreddits }) => (
       </div>
     </div>
     <button className="message">
-      <a href="http://www.google.com">  Direct Message </a>
+      <a href={`https://www.reddit.com/message/compose/?to=${name}`} target="_blank" rel="noopener noreferrer">  Direct Message </a>
     </button>
   </div>
 );

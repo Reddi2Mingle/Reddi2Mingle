@@ -33,6 +33,17 @@ export default class Matches extends Component {
 
   render() {
     const { matches, noMatches } = this.props;
+    if (matches.fetching) {
+      return (
+        <div>
+          <Navbar />
+          <div className="matches-view">
+            <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
+            <h2>Hold on, we're getting you ready to mingle</h2>
+          </div>
+        </div>
+      );
+    }
     if (noMatches) {
       return (
         <div>
