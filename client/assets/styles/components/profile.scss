@@ -32,7 +32,7 @@
 }
 
 .profile-image {
-  position:relative;
+  position: relative;
   width:400px;
   height:auto;
   border: 15px solid white;
@@ -43,19 +43,19 @@
 }
 
 .profile-image:after {
-    content: url(/assets/img/camera.png);
-    text-align: center;
-    position: absolute;
-    width: 100%; height: -150px;
-    top: 130px; left: 0;
-    background: rgba(255, 255, 255,0.6);
-    opacity: 0;
-    transition: all 0.5s;
-    -webkit-transition: all 0.5s;
+  content: url(/assets/img/camera.png);
+  text-align: center;
+  position: absolute;
+  width: 100%; 
+  bottom: 0; left: 0;
+  background: rgba(255, 255, 255,0.6);
+  opacity: 0;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
 }
 
 .profile-image:hover:after {
-    opacity: 1;
+  opacity: 1;
 }
 
 .change-photo {
@@ -97,14 +97,19 @@
   float: left;
   width: 30px;
   align-self: flex-start;
+  position: relative;
 }
 
 .heart-r {
   @include font($defaultFont, 1.5em, white);
+  position: absolute;
+  top: 10px;
+  left: 12px; 
 }
 
 .my-subreddits { 
   width: 100%;
+  padding: 0 20px;
   ul {
     display: flex;
     flex-wrap: wrap;

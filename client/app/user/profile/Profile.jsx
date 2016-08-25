@@ -140,11 +140,8 @@ class Profile extends Component {
                   <h1>{user.trophyCount}</h1>
                 </div>
               </div>
-              <div className="profile-row">
-                <div className="column">
-                  <h2>Post</h2>
-                  <h2>Karma</h2>
-                </div>
+              <div className="column">
+                <h2>Post Karma</h2>
                 <div className="profile-row">
                   <i className="material-icons md-48 white">format_quote</i>
                   <h1>{user.postKarma}</h1>
