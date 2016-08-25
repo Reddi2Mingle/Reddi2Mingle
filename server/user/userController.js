@@ -208,8 +208,9 @@ module.exports = {
   addPhoto: (req, res) => {
     const redditId = req.body.redditId;
     const photo = req.body.photo;
+    console.log('add photo on url:',`http://users:${process.env.PORT_USER}/api/user-sql/addPhoto`)
     request({
-      url: `http://localhost:${process.env.PORT_USER}/api/user-sql/addPhoto`,
+      url: `http://users:${process.env.PORT_USER}/api/user-sql/addPhoto`,
       method: 'POST',
       form: {
         redditId,
@@ -217,7 +218,7 @@ module.exports = {
       },
     }, (err, response) => {
       if (err) {
-        console.log(err);
+        console.log('photo error:',err);
       } else {
         console.log('photo updated successfully', response.body);
         res.send('photo updated successfully');

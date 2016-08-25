@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    image: reddi2mingle
+    image: christinechou/web
     ports:
       - "80:80"
     volumes:
@@ -17,7 +17,7 @@ services:
       - DEBUG=0
   users:
     build: ../user-service
-    image: users
+    image: christinechou/users
     links: 
       - mysql
       - neo4j
