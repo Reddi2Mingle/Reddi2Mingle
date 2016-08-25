@@ -10,3 +10,6 @@ api_keys.js
 
 # Miscellaneous
 .DS_Store
+
+.env
+reddit-key-pair-us-west

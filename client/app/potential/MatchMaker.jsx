@@ -5,7 +5,6 @@ import RejectButton from './RejectButton';
 import InterestButton from './InterestButton';
 import { socket } from '../socket';
 
-
 export default class MatchMaker extends Component {
 
   componentWillMount() {
@@ -64,12 +63,6 @@ export default class MatchMaker extends Component {
     return 0;
   }
 
-  // componentDidMount() {
-  //   const { potentialActions } = this.props;
-  //   socket.on('get new match', (userInfo) => {
-  //     potentialActions.pushMatch(userInfo);
-  //   });
-  // }
 
   render() {
     const {

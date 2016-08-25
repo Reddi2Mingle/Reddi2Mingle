@@ -1,4 +1,5 @@
 node_modules
 reddit_api_Practice
-env.sh
+.env
 .DS_Store
+reddit-key-pair-us-west

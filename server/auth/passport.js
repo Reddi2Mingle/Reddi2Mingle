@@ -5,6 +5,8 @@ const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
 require('../helpers/api_keys');
 
+console.log(REDDIT_CONSUMER_KEY,'!!!!!',REDDIT_CONSUMER_SECRET, 'callback to reddit:',`${process.env.HOST}:${process.env.PORT_APP}/auth/reddit/callback`)
+
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -13,7 +15,7 @@ require('../helpers/api_keys');
 //   have a database of user records, the complete Reddit profile is
 //   serialized and deserialized.
 passport.serializeUser((user, done) => {
-  // console.log('server/passport.js 18: serialized user', user);
+  console.log('server/passport.js 18: serialized user', user);
   done(null, user.id);
 });
 
@@ -29,15 +31,16 @@ passport.deserializeUser((id, done) => {
 passport.use(new RedditStrategy({
   clientID: REDDIT_CONSUMER_KEY,
   clientSecret: REDDIT_CONSUMER_SECRET,
-  callbackURL: `http://127.0.0.1:${process.env.PORT_APP}/auth/reddit/callback`,
+  callbackURL: `http://${process.env.HOST}:${process.env.PORT_APP}/auth/reddit/callback`,
   // callbackURL: `http://10.8.26.223:${process.env.PORT_APP}/auth/reddit/callback`,
 },
   (accessToken, refreshToken, profile, done) => {
     // Direct reddit controller to save user to database
+    console.log(`inside passport.js, url: users:${process.env.PORT_USER}/api/user-sql/createUser`)
     request({
       method: 'POST',
-      url: `http://localhost:${process.env.PORT_USER}/api/user-sql/createUser`,
       // url: `http://10.8.26.223:${process.env.PORT_USER}/api/user-sql/createUser`,
+      url: `http://users:${process.env.PORT_USER}/api/user-sql/createUser`,
       form: {
         accessToken,
         refreshToken,
@@ -45,7 +48,7 @@ passport.use(new RedditStrategy({
       },
     }, (err, response) => {
       if (err) {
-        console.log(err);
+        console.log('ERROR IN PASSPORT',err);
       } else {
         console.log(response.body);
         // Authentication finished

@@ -6,6 +6,7 @@ module.exports = {
 
   createPotentials: (req, res) => {
     const redditId = req.body.redditId;
+    console.log('potentials about to be created in web. user:',redditId);
     db.cypher({
       query: `MATCH (user:Person)-[r:FOLLOWS]->(s: Subreddit)<-[:FOLLOWS]-(potential:Person) 
               WHERE user.redditId = "${redditId}" 
@@ -43,7 +44,7 @@ module.exports = {
       query: `MATCH (:Person {redditId: "${redditId}"})<-[:INTEREST]-(potential:Person) 
                 WITH potential
                 LIMIT ${limit}
-              MATCH (potential)-[:FOLLOWS]->(sub:Subreddit)<-[:FOLLOWS]-(:Person {redditId: "${redditId}"})
+                MATCH (potential)-[:FOLLOWS]->(sub:Subreddit)<-[:FOLLOWS]-(:Person {redditId: "${redditId}"})
                 RETURN potential, sub;`,
     }, (err1, interests) => {
       if (err1) {
