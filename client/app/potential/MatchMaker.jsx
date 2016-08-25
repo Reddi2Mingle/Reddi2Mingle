@@ -9,7 +9,6 @@ import { socket } from '../socket';
 export default class MatchMaker extends Component {
 
   componentWillMount() {
-    const redditId = localStorage.getItem('token');
     const {
       potentialActions,
       userActions,
@@ -18,7 +17,7 @@ export default class MatchMaker extends Component {
       matchesFetched,
       potentialsFetched,
     } = this.props;
-
+    const redditId = localStorage.getItem('token') || user.redditId;
     // if this is the first time loading the app, fetch all userInfo, potentials, and matches
     if (!user.fetched) {
       userActions.fetchUser(redditId);
