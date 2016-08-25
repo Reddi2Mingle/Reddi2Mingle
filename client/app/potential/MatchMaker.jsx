@@ -105,60 +105,60 @@ export default class MatchMaker extends Component {
       <div>
         <Navbar />
         <div className="potential-view">
-          <Motion
-            defaultStyle={{ x: 0 }}
-            style={{ x: spring(this.animateDirection(),
-              { stiffness: 330, damping: 100, precision: 0.1 }) }}
-          >
-            {({ x }) =>
-              <div
-                className="potential-card"
-                style={{
-                  WebkitTransform: `translate3d(${x}px, 0, 0) rotate(${x}deg)`,
-                  transform: `translate3d(${x}px, 0, 0) rotate(${x}deg)` }}
-              >
-                <img
-                  src={potential.photo}
-                  className="full-profile-image"
-                  alt="Redditor"
-                />
-                <div className="potential-info">
-                  <h3>{potential.name}</h3>
-                  <div className="potential-more-info">
-                    <i className="material-icons md-48 orange">favorite</i>
-                    <span className="heart-text"> r/ </span>
-                    <div className="subreddit-list">
-                      <ul>
-                        {potential.common_subreddits.map(sub => (
-                          <span>{sub}</span>
-                        ))}
-                      </ul>
+            <Motion
+              defaultStyle={{ x: 0 }}
+              style={{ x: spring(this.animateDirection(),
+                { stiffness: 330, damping: 100, precision: 0.1 }) }}
+            >
+              {({ x }) =>
+                <div
+                  className="potential-card"
+                  style={{
+                    WebkitTransform: `translate3d(${x}px, 0, 0) rotate(${x}deg)`,
+                    transform: `translate3d(${x}px, 0, 0) rotate(${x}deg)` }}
+                >
+                  <img
+                    src={potential.photo}
+                    className="full-profile-image"
+                    alt="Redditor"
+                  />
+                  <div className="potential-info">
+                    <h3>{potential.name}</h3>
+                    <div className="potential-more-info">
+                      <i className="material-icons md-48 orange">favorite</i>
+                      <span className="heart-text"> r/ </span>
+                      <div className="subreddit-list">
+                        <ul>
+                          {potential.common_subreddits.map(sub => (
+                            <span>{sub}</span>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            }
-          </Motion>
-          <div className="swipe">
-            <RejectButton
-              handleSwipe={potentialActions.handleSwipe}
-              userId={user.redditId}
-              potentialId={potential.redditId}
-              index={index}
-              lastPotential={lastPotential}
-              animateComponent={this.animateComponent.bind(this, 'no')}
-            />
-            <InterestButton
-              handleSwipe={potentialActions.handleSwipe}
-              userId={user.redditId}
-              index={index}
-              lastPotential={lastPotential}
-              potential={potential}
-              socket={socket}
-              user={user}
-              animateComponent={this.animateComponent.bind(this, 'yes')}
-            />
-          </div>
+              }
+            </Motion>
+            <div className="swipe">
+              <RejectButton
+                handleSwipe={potentialActions.handleSwipe}
+                userId={user.redditId}
+                potentialId={potential.redditId}
+                index={index}
+                lastPotential={lastPotential}
+                animateComponent={this.animateComponent.bind(this, 'no')}
+              />
+              <InterestButton
+                handleSwipe={potentialActions.handleSwipe}
+                userId={user.redditId}
+                index={index}
+                lastPotential={lastPotential}
+                potential={potential}
+                socket={socket}
+                user={user}
+                animateComponent={this.animateComponent.bind(this, 'yes')}
+              />
+            </div>
         </div>
       </div>
     );
