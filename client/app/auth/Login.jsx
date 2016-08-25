@@ -3,13 +3,6 @@ import ReactDOM from 'react-dom';
 
 export default class Login extends Component {
 
-  // componentWillUpdate() {
-  //   const { user } = this.props;
-  //   if (user.isAuthenticated) {
-  //     this.props.history.push('/');
-  //   }
-  // }
-
   componentDidUpdate() {
     const { user } = this.props;
     if (user.isAuthenticated) {
