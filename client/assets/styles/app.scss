@@ -4,6 +4,12 @@
 
 /***** App-wide Styles *****/
 
+*, 
+*:before, 
+*:after {
+  box-sizing: border-box;
+}
+
 h1 {
   font-family: $accentFont;
   font-size: 3em;
@@ -64,8 +70,6 @@ button:hover {
 .black {
   color: black;
 }
-
-
 
 /***** Individual Components *****/
 @import './components/navigation.scss';
