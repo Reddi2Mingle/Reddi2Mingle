@@ -40,7 +40,7 @@
 }
 
 .heart-text {
-  @include font($defaultFont, 1em, white);
+  @include font($defaultFont, 1.5em, white);
   margin-left: -50px;
   margin-top: 10px;
 }
