@@ -116,7 +116,7 @@ class Profile extends Component {
             </div>
           </div>
           <div className="profile-right">
-            <div className="profile-header">
+            <div className="profile-section-lg">
               <div className="profile-row">
                 <i className="material-icons md-48 white">face</i>
                 <h1>{user.name}</h1>
@@ -132,7 +132,7 @@ class Profile extends Component {
                 </button>
               </div>
             </div>
-            <div className="profile-section">
+            <div className="profile-section-med">
               <div className="column">
                 <h2>Trophies</h2>
                 <div className="profile-row">
@@ -158,14 +158,15 @@ class Profile extends Component {
                 </div>
               </div>
             </div>
-            <div className="profile-section">
+            <div className="profile-section-sm">
               <div className="profile-row">
                 <div className="column">
-                  <h2>Reddi2Mingle</h2>
-                  <h2>Upvotes</h2>
+                  <h2># of People</h2>
+                  <h2>Who Think</h2>
+                  <h2>You're Hot</h2>
                 </div>
                 <div className="profile-row">
-                  <i className="material-icons md-48 white">thumb_up</i>
+                  <i className="material-icons md-48 white">whatshot</i>
                   <h1>{user.receivedUpvotes}</h1>
                 </div>
               </div>
@@ -175,9 +176,8 @@ class Profile extends Component {
                   <h2> Stats </h2>
                 </div>
                 <div className="profile-row">
-                  <div className="column">
-                    <i className="material-icons md-48 white">keyboard_arrow_up</i>
-                    <i className="material-icons md-48 white">keyboard_arrow_down</i>
+                  <div>
+                    <i className="material-icons md-48 white">thumbs_up_down</i>
                   </div>
                   <div className="column">
                     <h1> {user.deliveredUpvotes} </h1>

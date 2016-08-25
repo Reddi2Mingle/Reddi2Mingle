@@ -21,14 +21,19 @@
   }
 }
 
-.profile-header {
+.profile-section-lg {
   @include position(center, space-between, row);
   margin: 20px;
 }
 
-.profile-section {
-  @extend .profile-header;
+.profile-section-med {
+  @extend .profile-section-lg;
   width: 70%;
+}
+
+.profile-section-sm {
+  @extend .profile-section-lg;
+  width: 60%;
 }
 
 .profile-image {
