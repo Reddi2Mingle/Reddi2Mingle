@@ -46,7 +46,7 @@ passport.use(new RedditStrategy({
       },
     }, (err, response) => {
       if (err) {
-        console.log(err);
+        console.log('ERROR IN PASSPORT',err);
       } else {
         console.log(response.body);
         // Authentication finished

@@ -12,3 +12,4 @@ api_keys.js
 .DS_Store
 
 .env
+reddit-key-pair-us-west

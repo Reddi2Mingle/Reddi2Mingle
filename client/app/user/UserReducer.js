@@ -73,7 +73,6 @@ export default (state = initialState, action) => {
         redditId: action.payload,
         isAuthenticated: true,
       };
-    }
     default:
       return state;
   }
