@@ -114,25 +114,70 @@ class Profile extends Component {
             </div>
           </div>
           <span style={{ flex: 0.1 }}> </span>
-          <div style={{ padding: '20px' }}>
-            <h2>{user.name}</h2>
-            <h2>Trophies: {user.trophyCount}</h2>
-            <h2>Post Karma: {user.postKarma}</h2>
-            <h2>Comment Karma: {user.commentKarma}</h2>
-            <h2>Gold Member: {user.goldMember}</h2>
-            <h2>Your upvotes: {user.receivedUpvotes}</h2>
-            <h2>Times you said yes: {user.deliveredUpvotes}</h2>
-            <h2>Times you said no: {user.deliveredDownvotes}</h2>
-          </div>
-          <div>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                userActions.logout();
-              }}
-            >
-              <h2> Logout </h2>
-            </button>
+          <div className="profile-right">
+            <div className="profile-header">
+              <div className="profile-row">
+                <i className="material-icons md-48 white">face</i>
+                <h2>{user.name}</h2>
+              </div>
+              <div>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    userActions.logout();
+                  }}
+                >
+                  <h2> Logout </h2>
+                </button>
+              </div>
+            </div>
+            <div className="profile-header">
+              <div className="profile-column">
+                <h2>Trophies</h2>
+                <div className="profile-row">
+                  <i className="material-icons md-48 white">star</i>
+                  <h1>{user.trophyCount}</h1>
+                </div>
+              </div>
+              <div className="profile-column">
+                <h2>Post Karma</h2>
+                <div className="profile-row">
+                  <i className="material-icons md-48 white">star</i>
+                  <h1>{user.postKarma}</h1>
+                </div>
+              </div>
+              <div className="profile-column">
+                <h2>Comment Karma</h2>
+                <div className="profile-row">
+                  <i className="material-icons md-48 white">star</i>
+                  <h1>{user.commentKarma}</h1>
+                </div>
+              </div>
+            </div>
+            <div className="profile-header">
+              <div className="profile-column">
+                <h2>Your Reddi2Mingle Upvotes</h2>
+                <div className="profile-row">
+                  <i className="material-icons md-48 white">thumb_up</i>
+                  <h1>{user.receivedUpvotes}</h1>
+                </div>
+              </div>
+              <div className="profile-row">
+                <div>
+                  <h2> Your Swipe Stats </h2>
+                </div>
+                <div className="profile-row">
+                  <div className="profile-column">
+                    <i className="material-icons md-48 white">keyboard_arrow_up</i>
+                    <i className="material-icons md-48 white">keyboard_arrow_down</i>
+                  </div>
+                  <div className="profile-column">
+                    <h2> {user.deliveredUpvotes} </h2>
+                    <h2> {user.deliveredDownvotes} </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

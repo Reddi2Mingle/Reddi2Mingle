@@ -8,15 +8,32 @@
   width: 30%;
 }
 
+.profile-right {
+  width: 70%;
+}
+
+.profile-row {
+  @include position(center, center, row);
+}
+
+.profile-header {
+  @include position(center, space-between, row);
+  margin: 20px;
+}
+
+.profile-column {
+  @include position(center, center, column);
+}
+
 .profile-image {
   position:relative;
   width:400px;
   height:auto;
   border: 15px solid white;
-}
-.profile-image img {
+  img {
     width:100%;
     vertical-align:top;
+  }
 }
 
 .profile-image:after {
@@ -24,12 +41,13 @@
     text-align: center;
     position: absolute;
     width: 100%; height: -150px;
-    top: 150px; left: 0;
+    top: 130px; left: 0;
     background: rgba(255, 255, 255,0.6);
     opacity: 0;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
 }
+
 .profile-image:hover:after {
     opacity: 1;
 }
