@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import * as UserActions from '../user/UserActions';
 
 const NavBar = ({ user, matches }) => (
-  <div className="navigation">
+  <div className="navigation grid--large">
     <div>
       <Link to="/profile">
         <div className="navigation-profile">

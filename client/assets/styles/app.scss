@@ -1,13 +1,21 @@
+// @import '../../../node_modules/cutestrap/dist/css/cutestrap.css';
 @import "reset.import.scss";
 @import "variables.import.scss";
 @import "mixins.import.scss";
+@import "grid.import.scss";
 
 /***** App-wide Styles *****/
 
-*, 
-*:before, 
-*:after {
-  box-sizing: border-box;
+*,
+:before,
+:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.flex { 
+  flex: 1;
 }
 
 h1 {
