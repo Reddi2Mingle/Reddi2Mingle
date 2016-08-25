@@ -70,8 +70,9 @@ export default (state = initialState, action) => {
     case 'SAVE_REDDITID': {
       return {
         ...state,
+        redditId: action.payload,
         isAuthenticated: true,
-        redditId: action.payload };
+      };
     }
     default:
       return state;

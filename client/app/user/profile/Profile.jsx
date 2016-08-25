@@ -81,7 +81,7 @@ class Profile extends Component {
       redditId: user.redditId,
       photo: user.photo,
     })
-    .then((response) => {
+    .then(response => {
       this.hideModal();
     });
   }
@@ -104,11 +104,9 @@ class Profile extends Component {
               <span className="heart-text"> r/ </span>
               <div className="subreddit-list">
                 <ul>
-                  <span> AskReddit </span>
-                  <span> IamA </span>
-                  <span> technology </span>
-                  <span> ELI5 </span>
-                  <span> hackreactor </span>
+                  {user.subreddits.map(sub => (
+                    <span>{sub}</span>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -116,7 +114,6 @@ class Profile extends Component {
           <span style={{ flex: 0.1 }}> </span>
           <div style={{ padding: '20px' }}>
             <h2>{user.name}</h2>
-            <h2>Subreddits: {user.subreddits}</h2>
             <h2>Trophies: {user.trophyCount}</h2>
             <h2>Post Karma: {user.postKarma}</h2>
             <h2>Comment Karma: {user.commentKarma}</h2>
