@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
-import * as UserActions from '../user/UserActions';
+// import { bindActionCreators } from 'redux';
+// import * as UserActions from '../user/UserActions';
 
 const NavBar = ({ user, matches }) => (
   <div className="navigation">

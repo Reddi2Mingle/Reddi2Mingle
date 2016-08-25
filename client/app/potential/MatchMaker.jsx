@@ -17,6 +17,11 @@ export default class MatchMaker extends Component {
       potentialsFetched,
     } = this.props;
     const redditId = localStorage.getItem('token') || user.redditId;
+
+    // if the user came through the login page, we set the token here
+    if (localStorage.getItem('token') === undefined) {
+      localStorage.setItem('token', user.redditId);
+    }
     // if this is the first time loading the app, fetch all userInfo, potentials, and matches
     if (!user.fetched) {
       userActions.fetchUser(redditId);
@@ -43,7 +48,7 @@ export default class MatchMaker extends Component {
         yes: false,
         no: false,
       });
-    }, 1000);
+    }, 400);
   }
 
   animateComponent(swipe) {
@@ -62,7 +67,6 @@ export default class MatchMaker extends Component {
     }
     return 0;
   }
-
 
   render() {
     const {

@@ -3,8 +3,18 @@ import ReactDOM from 'react-dom';
 
 export default class Login extends Component {
 
-  componentWillUpdate() {
-    this.props.history.push('/');
+  // componentWillUpdate() {
+  //   const { user } = this.props;
+  //   if (user.isAuthenticated) {
+  //     this.props.history.push('/');
+  //   }
+  // }
+
+  componentDidUpdate() {
+    const { user } = this.props;
+    if (user.isAuthenticated) {
+      this.props.history.push('/');
+    }
   }
 
   sendCredentials(event) {
@@ -16,6 +26,16 @@ export default class Login extends Component {
   }
 
   render() {
+    const { user } = this.props;
+    if (user.loggingIn) {
+      return (
+        <div className="login-view">
+          <div className="login-content">
+            <h2>Loading... I hope you're ready to mingle!</h2>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className="login-view">
         <div className="login-content">
@@ -39,6 +59,6 @@ export default class Login extends Component {
 Login.propTypes = {
   userActions: PropTypes.object,
   history: PropTypes.object,
-  redditId: PropTypes.string,
+  user: PropTypes.object,
 };
 
