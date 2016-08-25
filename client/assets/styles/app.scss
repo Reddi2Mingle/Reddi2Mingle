@@ -19,37 +19,27 @@
 }
 
 h1 {
-  font-family: $accentFont;
-  font-size: 3em;
-  color: white;
+  @include font($accentFont, 3em, white);
 }
 
 h2 {
-  @include font-default;
-  font-family: $defaultFont;
+  @include font($defaultFont, 1.5em, white);
   text-transform: uppercase;
-  color: white;
 }
 
 
 h3 {
-  @include font-default;
-  font-family: $defaultFont;
+  @include font($defaultFont, 1.5em, black);
   text-transform: uppercase;
-  color: black;
 }
 
 p {
-  @include font-default;
-  font-family: $defaultFont;
-  color: black;
+  @include font($defaultFont, 1.5em, black)
 }
 
 a {
-  @include font-default;
-  font-family: $defaultFont;
+  @include font($defaultFont, 1.5em, white)
   text-transform: uppercase;
-  color: white;
   text-decoration: none;
 }
 
