@@ -125,7 +125,7 @@ module.exports = {
 
   updatePassword: (req, res) => {
     request({
-      url: `http://users:${process.env.PORT_USER}/api/user-sql/updatePassword`,
+      url: `http://${process.env.USERS}:${process.env.PORT_USER}/api/user-sql/updatePassword`,
       method: 'POST',
       form: {
         redditId: req.body.redditId,
@@ -144,7 +144,7 @@ module.exports = {
   queryUserInfo: (req, res) => {
     const redditId = req.query.redditId;
     request({
-      url: `http://users:${process.env.PORT_USER}/api/user-sql/userInfo?redditId=${redditId}`,
+      url: `http://${process.env.USERS}:${process.env.PORT_USER}/api/user-sql/userInfo?redditId=${redditId}`,
       method: 'GET',
     }, (err, response) => {
       if (err) {
@@ -162,7 +162,7 @@ module.exports = {
 
     // Send request to the User Service to verify the username and password match
     request({
-      url: `http://users:${process.env.PORT_USER}/api/user-sql/loginCredentials`,
+      url: `http://${process.env.USERS}:${process.env.PORT_USER}/api/user-sql/loginCredentials`,
       method: 'POST',
       form: {
         username,
@@ -188,7 +188,7 @@ module.exports = {
     const preference = req.body.preference;
     const redditId = req.body.redditId;
     request({
-      url: `http://users:81/api/user-sql/addPreference`,
+      url: `http://${process.env.USERS}:81/api/user-sql/addPreference`,
       method: 'POST',
       form: {
         redditId,
@@ -208,9 +208,9 @@ module.exports = {
   addPhoto: (req, res) => {
     const redditId = req.body.redditId;
     const photo = req.body.photo;
-    console.log('add photo on url:',`http://users:${process.env.PORT_USER}/api/user-sql/addPhoto`)
+    console.log('add photo on url:',`http://${process.env.USERS}:${process.env.PORT_USER}/api/user-sql/addPhoto`)
     request({
-      url: `http://users:${process.env.PORT_USER}/api/user-sql/addPhoto`,
+      url: `http://${process.env.USERS}:${process.env.PORT_USER}/api/user-sql/addPhoto`,
       method: 'POST',
       form: {
         redditId,

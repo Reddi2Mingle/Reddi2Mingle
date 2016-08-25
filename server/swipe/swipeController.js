@@ -17,7 +17,7 @@ module.exports = {
     const deliveredUpvotes = swipe === 'yes' ? 1 : 0;
     const deliveredDownvotes = swipe === 'yes' ? 0 : 1;
     request({
-      url: `http://localhost:${process.env.PORT_USER}/api/user-sql/saveVotes`,
+      url: `http://${process.env.HOST}:${process.env.PORT_USER}/api/user-sql/saveVotes`,
       method: 'POST',
       form: {
         deliveredUpvotes,
