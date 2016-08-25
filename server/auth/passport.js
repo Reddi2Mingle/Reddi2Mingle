@@ -5,6 +5,8 @@ const REDDIT_CONSUMER_KEY = process.env.REDDIT_KEY;
 const REDDIT_CONSUMER_SECRET = process.env.REDDIT_SECRET;
 require('../helpers/api_keys');
 
+console.log(REDDIT_CONSUMER_KEY,'!!!!!',REDDIT_CONSUMER_SECRET, 'callback to reddit:',`${process.env.HOST}:${process.env.PORT_APP}/auth/reddit/callback`)
+
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
 //   serialize users into and deserialize users out of the session.  Typically,
@@ -29,7 +31,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new RedditStrategy({
   clientID: REDDIT_CONSUMER_KEY,
   clientSecret: REDDIT_CONSUMER_SECRET,
-  callbackURL: `http://127.0.0.1:${process.env.PORT_APP}/auth/reddit/callback`,
+  callbackURL: `http://${process.env.HOST}:${process.env.PORT_APP}/auth/reddit/callback`,
   // callbackURL: `http://10.8.26.223:${process.env.PORT_APP}/auth/reddit/callback`,
 },
   (accessToken, refreshToken, profile, done) => {
