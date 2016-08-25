@@ -38,8 +38,8 @@ export function userLogin(username, password) {
       password,
     })
     .then((response) => {
-      console.log('response from the validation', response);
-      dispatch({ type: 'FETCH_USER_FULFILLED', payload: response.data });
+      console.log('response from the validation', typeof response.data, response.data);
+      dispatch({ type: 'USER_LOGIN_FULFILLED', payload: { redditId: response.data } });
     })
     .catch((err) => {
       dispatch({ type: 'FETCH_USER_REJECTED', payload: err });

@@ -54,20 +54,10 @@ module.exports = {
         console.log(err);
       } else {
         // This is the point where we can add in Passport authentication before proceeding
-        // Respond with the redditId, username and photo
         if (response.statusCode === 401) {
           res.status(401).send('invalid password');
         } else {
-          // Send off request to update the user's token
-          request({
-            url: `http://localhost:${process.env.PORT_USER}/api/user-sql/updateAccessToken`,
-            method: 'POST',
-            form: {
-              username,
-              password,
-            },
-          });
-          // Send the redditId, username and photo to the client
+          // Send the redditId as the success message to client
           res.send(response.body);
         }
       }

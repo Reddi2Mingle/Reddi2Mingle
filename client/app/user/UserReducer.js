@@ -60,7 +60,7 @@ export default (state = initialState, action) => {
         name: action.payload.name,
         photo: action.payload.photo,
         fetching: false,
-        fetched: true,
+        fetched: false,
         isAuthenticated: true,
       };
     }
