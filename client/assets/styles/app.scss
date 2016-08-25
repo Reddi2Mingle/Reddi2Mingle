@@ -65,15 +65,10 @@ button:hover {
   color: black;
 }
 
-.navigation {
-  @include position(center, space-between);
-  background-color: black;
-  h2 {
-    font-size: 20px;
-  }
-}
+
 
 /***** Individual Components *****/
+@import './components/navigation.scss';
 @import './components/signup.scss';
 @import './components/createPassword.scss';
 @import './components/login.scss';
