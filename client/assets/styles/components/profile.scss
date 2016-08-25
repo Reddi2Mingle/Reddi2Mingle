@@ -9,11 +9,16 @@
 }
 
 .profile-right {
+  display: flex;
+  flex-direction: column;
   width: 70%;
 }
 
 .profile-row {
-  @include position(center, center, row);
+  @extend .row;
+  i {
+    padding: 0 20px 0 10px;
+  }
 }
 
 .profile-header {
@@ -21,8 +26,9 @@
   margin: 20px;
 }
 
-.profile-column {
-  @include position(center, center, column);
+.profile-section {
+  @extend .profile-header;
+  width: 70%;
 }
 
 .profile-image {
@@ -82,8 +88,22 @@
   } 
 }
 
+.profile-subreddits {
+  @include position(center, flex-start, row);
+  padding: 20px;
+}
+
+.heart {
+  float: left;
+  width: 30px;
+  align-self: flex-start;
+}
+
+.heart-r {
+  @include font($defaultFont, 1.5em, white);
+}
+
 .my-subreddits { 
-  margin-left: 50px;
   width: 100%;
   ul {
     display: flex;

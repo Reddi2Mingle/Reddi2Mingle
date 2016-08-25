@@ -92,7 +92,7 @@ class Profile extends Component {
       <div>
         <Navbar />
         <div className="profile-view">
-          <div className="profile-left"> 
+          <div className="profile-left">
             <div style={{ padding: '20px' }}>
               <div className="profile-image" onClick={this.showModal.bind(this)}>
                 <img
@@ -100,9 +100,11 @@ class Profile extends Component {
                   alt="Redditor"
                 />
               </div>
-              <div className="potential-more-info">
-                <i className="material-icons md-48 orange">favorite</i>
-                <span className="heart-text"> r/ </span>
+              <div className="profile-subreddits">
+                <div className="heart">
+                  <i className="material-icons md-48 orange">favorite</i>
+                  <span className="heart-r"> r/ </span>
+                </div>
                 <div className="my-subreddits">
                   <ul>
                     {user.subreddits.map(sub => (
@@ -113,12 +115,11 @@ class Profile extends Component {
               </div>
             </div>
           </div>
-          <span style={{ flex: 0.1 }}> </span>
           <div className="profile-right">
             <div className="profile-header">
               <div className="profile-row">
                 <i className="material-icons md-48 white">face</i>
-                <h2>{user.name}</h2>
+                <h1>{user.name}</h1>
               </div>
               <div>
                 <button
@@ -131,32 +132,41 @@ class Profile extends Component {
                 </button>
               </div>
             </div>
-            <div className="profile-header">
-              <div className="profile-column">
+            <div className="profile-section">
+              <div className="column">
                 <h2>Trophies</h2>
                 <div className="profile-row">
                   <i className="material-icons md-48 white">star</i>
                   <h1>{user.trophyCount}</h1>
                 </div>
               </div>
-              <div className="profile-column">
-                <h2>Post Karma</h2>
+              <div className="profile-row">
+                <div className="column">
+                  <h2>Post</h2>
+                  <h2>Karma</h2>
+                </div>
                 <div className="profile-row">
-                  <i className="material-icons md-48 white">star</i>
+                  <i className="material-icons md-48 white">format_quote</i>
                   <h1>{user.postKarma}</h1>
                 </div>
               </div>
-              <div className="profile-column">
-                <h2>Comment Karma</h2>
+              <div className="profile-row">
+                <div className="column">
+                  <h2>Comment</h2>
+                  <h2>Karma</h2>
+                </div>
                 <div className="profile-row">
-                  <i className="material-icons md-48 white">star</i>
+                  <i className="material-icons md-48 white">comment</i>
                   <h1>{user.commentKarma}</h1>
                 </div>
               </div>
             </div>
-            <div className="profile-header">
-              <div className="profile-column">
-                <h2>Your Reddi2Mingle Upvotes</h2>
+            <div className="profile-section">
+              <div className="profile-row">
+                <div className="column">
+                  <h2>Reddi2Mingle</h2>
+                  <h2>Upvotes</h2>
+                </div>
                 <div className="profile-row">
                   <i className="material-icons md-48 white">thumb_up</i>
                   <h1>{user.receivedUpvotes}</h1>
@@ -164,16 +174,17 @@ class Profile extends Component {
               </div>
               <div className="profile-row">
                 <div>
-                  <h2> Your Swipe Stats </h2>
+                  <h2> Swipe </h2>
+                  <h2> Stats </h2>
                 </div>
                 <div className="profile-row">
-                  <div className="profile-column">
+                  <div className="column">
                     <i className="material-icons md-48 white">keyboard_arrow_up</i>
                     <i className="material-icons md-48 white">keyboard_arrow_down</i>
                   </div>
-                  <div className="profile-column">
-                    <h2> {user.deliveredUpvotes} </h2>
-                    <h2> {user.deliveredDownvotes} </h2>
+                  <div className="column">
+                    <h1> {user.deliveredUpvotes} </h1>
+                    <h1> {user.deliveredDownvotes} </h1>
                   </div>
                 </div>
               </div>

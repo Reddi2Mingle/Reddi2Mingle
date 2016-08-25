@@ -6,7 +6,7 @@ import * as UserActions from '../user/UserActions';
 
 const NavBar = ({ user, matches }) => (
   <div className="navigation">
-    <div className="navigation-profile">
+    <div>
       <Link to="/profile">
         <div className="navigation-profile">
           <img src={user.photo} />

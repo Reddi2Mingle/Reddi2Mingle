@@ -69,6 +69,14 @@ button:hover {
   color: black;
 }
 
+.column {
+  @include position(center, center, column);
+}
+
+.row {
+  @include position(center, center, row);
+}
+
 /***** Individual Components *****/
 @import './components/navigation.scss';
 @import './components/signup.scss';
