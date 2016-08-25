@@ -4,6 +4,10 @@
   flex-direction: row;
 }
 
+.profile-left {
+  width: 30%;
+}
+
 .profile-image {
   position:relative;
   width:400px;
@@ -61,8 +65,14 @@
 }
 
 .my-subreddits { 
-  @extend .subreddit-list; 
+  margin-left: 50px;
+  width: 100%;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  } 
   span {
-    color: white;
+    @include font($defaultFont, 1.2em, white, 300);
+    padding: 5px 5px;
   }
 }

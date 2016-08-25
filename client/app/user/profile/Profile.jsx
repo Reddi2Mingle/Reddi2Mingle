@@ -92,22 +92,24 @@ class Profile extends Component {
       <div>
         <Navbar />
         <div className="profile-view">
-          <div style={{ padding: '20px' }}>
-            <div className="profile-image" onClick={this.showModal.bind(this)}>
-              <img
-                src={user.photo}
-                alt="Redditor"
-              />
-            </div>
-            <div className="potential-more-info">
-              <i className="material-icons md-48 orange">favorite</i>
-              <span className="heart-text"> r/ </span>
-              <div className="subreddit-list">
-                <ul>
-                  {user.subreddits.map(sub => (
-                    <span>{sub}</span>
-                  ))}
-                </ul>
+          <div className="profile-left"> 
+            <div style={{ padding: '20px' }}>
+              <div className="profile-image" onClick={this.showModal.bind(this)}>
+                <img
+                  src={user.photo}
+                  alt="Redditor"
+                />
+              </div>
+              <div className="potential-more-info">
+                <i className="material-icons md-48 orange">favorite</i>
+                <span className="heart-text"> r/ </span>
+                <div className="my-subreddits">
+                  <ul>
+                    {user.subreddits.map(sub => (
+                      <span>{sub}</span>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
