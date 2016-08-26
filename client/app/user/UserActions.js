@@ -44,8 +44,7 @@ export function userLogin(username, password) {
       username,
       password,
     })
-    .then((response) => {
-      console.log('response from the validation', typeof response.data, response.data);
+    .then(response => {
       dispatch({ type: 'USER_LOGIN_FULFILLED', payload: { redditId: response.data } });
     })
     .catch((err) => {
