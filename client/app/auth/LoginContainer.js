@@ -6,7 +6,7 @@ import * as UserActions from '../user/UserActions';
 // We pass in redditId so that componentWillUpdate will recognize a state change
 // and run this.props.history.push('/')
 const mapStateToProps = state => ({
-  redditId: state.user.redditId,
+  user: state.user,
 });
 
 const mapDispatchToProps = (dispatch) => ({
