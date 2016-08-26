@@ -24,6 +24,15 @@ Tinder for Redditors
 
 <hr>
 
+<hr>
+## Architecture
+### High Level Architecture
+![](http://imgur.com/a/nBLis.png)
+
+### Application Flow
+![](http://imgur.com/a/3nAg7.png)
+
+
 ## Usage
 
 Use your reddit account to sign up for the application. Set your preferences and gender to start meeting others with common interests 
@@ -40,16 +49,23 @@ Use your reddit account to sign up for the application. Set your preferences and
 - MySQL 
 
 ## API
-##### Public End Points
+
+##### Client
 |Purpose|URL|Query String|Method|Body|
-|---|---|---|---|---|
+|---|---|---|:---:|---|
 |Sign-Up|/signup|   |
 |Login|/login|   |
+|Create Password|/createPassword|   |
 |Set Preferences|/preferences|   |
-|Upload Photo|/photo||
+|Upload Photo|/photoUpload||
 |Match with Users|/matchmaker|
 |User Profile|/profile||
 |Matches|/matches||
+
+
+##### Server
+|Purpose|URL|Query String|Method|Body|
+|---|---|---|:---:|---|
 |Authorization|/auth| ? |GET| - |
 |Authorization|/auth/reddit| ? |GET| - |
 |Authorization|/auth/reddit/callback| ? |GET| - |
@@ -57,11 +73,22 @@ Use your reddit account to sign up for the application. Set your preferences and
 |Update Password|/api/userInfo/updatePassword|   | POST |
 |Save Preferences|/api/userInfo/addPreference|   | POST |
 |Save Photo URL|/api/userInfo/addPhoto|   | POST |
-|Update Password|/api/userInfo/loginCredentials|   | POST |
+|Verify Login|/api/userInfo/loginCredentials|   | POST |
 |Receive Potentials|/api/potentials|   | GET | - |
 |Create Potentials|/api/potentials/createPotentials|   | POST |
 |Save Swipe Decision|/api/swipe|   |  POST |
 |Get Matches|/api/swipe/matches|   |  GET | - |
+
+
+|API Call|Response
+|---|---|
+|/api/userInfo|{ id, redditId, name, photo, gender, preference, deliveredDownvotes, deliveredUpvotes, receivedDownvotes, receivedUpvotes, commentKarma, postKarma, trophyCount, subreddits: [] }|
+|Login|/login|   |
+|Set Preferences|/preferences|   |
+|Upload photo|/photo|[]|
+|Match with Users|/matchmaker|[potentials]|
+|User Profile|/profile|[userObj]|
+|Matches|/matches|[solutionObj...]|
 
 
 
