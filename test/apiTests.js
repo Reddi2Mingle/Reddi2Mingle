@@ -66,18 +66,12 @@ describe('Reddi2Mingle', () => {
     describe('/api/userInfo/updatePassword', () => {
       it('sends back a 200 (OK)', done => {
         request(app)
-          .get('/api/userInfo/updatePassword')
-          .query({ redditId: 'j8636' })
-          .end((err, res) => {
-            if (err) {
-              return done(err);
-            }
-            var retrieved = JSON.parse(res.body.body);
-            expect(retrieved.password).to.equal(undefined);
-            expect(retrieved.accessToken).to.equal(undefined);
-            expect(retrieved.refreshToken).to.equal(undefined);
-            done();
-          });
+          .post('/api/userInfo/updatePassword')
+          .send({
+            redditId: 'j8636',
+            password: 'blablabla',
+          })
+          .expect(200, done);
       });
     });
   });
