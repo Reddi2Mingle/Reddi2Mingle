@@ -35,7 +35,7 @@ services:
     volumes: 
       - $HOME/neo4j/data:/neo4jdata
     environment: 
-      - NEO4J_AUTH=neo4j/cake
+      - NEO4J_AUTH=$NEO4JUSERPW
     ports:
       - "7474:7474"
 
@@ -45,7 +45,7 @@ services:
       - $HOME/mysql/data:/mysqldata
     environment:  
       - MYSQL_DATABASE=reddi2mingle
-      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_ROOT_PASSWORD=$MYSQL_PW
      #move pw outside of docker compose file
     ports:
       - "3306:3306"
