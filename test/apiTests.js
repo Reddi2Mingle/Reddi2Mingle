@@ -55,9 +55,9 @@ describe('Reddi2Mingle', () => {
               return done(err);
             }
             var retrieved = JSON.parse(res.body.body);
-            expect(retrieved.password).to.equal(undefined);
-            expect(retrieved.accessToken).to.equal(undefined);
-            expect(retrieved.refreshToken).to.equal(undefined);
+            expect(retrieved.password).to.be.undefined;
+            expect(retrieved.accessToken).to.be.undefined;
+            expect(retrieved.refreshToken).to.be.undefined;
             done();
           });
       });
@@ -66,16 +66,106 @@ describe('Reddi2Mingle', () => {
     describe('/api/userInfo/updatePassword', () => {
       it('sends back a 200 (OK)', done => {
         request(app)
-          .get('/api/userInfo/updatePassword')
+          .post('/api/userInfo/updatePassword')
+          .send({
+            redditId: 'j8636',
+            password: 'blablabla',
+          })
+          .expect(200, done);
+      });
+    });
+
+    describe('/api/userInfo/addPreference', () => {
+      it('sends back a 200 (OK)', done => {
+        request(app)
+          .post('/api/userInfo/addPreference')
+          .send({
+            redditId: 'j8636',
+            gender: 'male',
+            preference: 'women',
+          })
+          .expect(200, done);
+      });
+    });
+
+    describe('/api/userInfo/addPhoto', () => {
+      it('sends back a 200 (OK)', done => {
+        request(app)
+          .post('/api/userInfo/addPhoto')
+          .send({
+            redditId: 'j8636',
+            photo: 'https://res.cloudinary.com/dkzcwlehr/image/upload/v1472163373/IMG_3513_gmtken.jpg',
+          })
+          .expect(200, done);
+      });
+    });
+
+    // describe('/api/userInfo/loginCredentials', () => {
+    //   it('sends back redditId', done => {
+    //     request(app)
+    //       .post('/api/userInfo/loginCredentials')
+    //       .send({
+    //         username: 'toiletthedestroyer',
+    //         password: 'blablabla',
+    //       })
+    //       .end((err, res) => {
+    //         if (err) {
+    //           return done(err);
+    //         }
+    //         var retrieved = JSON.parse(res.body.body);
+    //         expect(retrieved.redditId).to.equal('j8636');
+    //         done();
+    //       });
+    //   });
+    // });
+
+    // add in additonal checks on the potential properties
+    describe('/api/potentials', () => {
+      it('returns an array', done => {
+        request(app)
+          .get('/api/potentials')
           .query({ redditId: 'j8636' })
           .end((err, res) => {
             if (err) {
               return done(err);
             }
-            var retrieved = JSON.parse(res.body.body);
-            expect(retrieved.password).to.equal(undefined);
-            expect(retrieved.accessToken).to.equal(undefined);
-            expect(retrieved.refreshToken).to.equal(undefined);
+            var retrieved = res.body;
+            expect(retrieved).to.be.a('array');
+            done();
+          });
+      });
+    });
+
+    // // this will polute my database right now
+    // describe('/api/swipe', () => {
+    //   it('returns an array', done => {
+    //     request(app)
+    //       .post('/api/swipe')
+    //       .send({
+    //         redditId: 'j8636',
+    //         potentialId: '104s92',
+    //         swipe: 'yes',
+    //       })
+    //       .expect(200, done);
+    //   });
+    // });
+
+    describe('/api/potentials/matches', () => {
+      it('returns an array with properties: name, photo, redditId, common_subreddits', done => {
+        request(app)
+          .get('/api/swipe/matches')
+          .query({ redditId: 'j8636' })
+          .end((err, res) => {
+            if (err) {
+              return done(err);
+            }
+            var retrieved = res.body;
+            expect(retrieved).to.be.a('array');
+            expect(retrieved[0]).to.have.property('name');
+            expect(retrieved[0]).to.have.property('photo');
+            expect(retrieved[0]).to.have.property('redditId');
+            expect(retrieved[0]).to.have.property('common_subreddits');
+            expect(retrieved[0].common_subreddits).to.be.a('array');
             done();
           });
       });
