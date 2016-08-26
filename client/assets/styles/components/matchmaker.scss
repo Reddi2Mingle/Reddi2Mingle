@@ -1,15 +1,15 @@
-.potential-view { 
+.matchmaker-view { 
   @include background('/assets/img/los-angeles.jpg');
   @include position(center, center, column);
   background-color: #1a1a1a;
 }
 
-.potential-container {
+.matchmaker-container {
   display: flex;
   @include position(center, center, column);
 }
 
-.potential-card {
+.matchmaker-card {
   width: 30%;
 }
 
@@ -20,7 +20,7 @@
   height: auto;
 }
 
-.potential-info {
+.matchmaker-info {
   background: white;
   padding: 0px 15px 15px 15px;
   width: 100%;
@@ -30,7 +30,7 @@
   }
 }
 
-.potential-more-info {
+.matchmaker-more-info {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
@@ -40,9 +40,7 @@
 }
 
 .heart-text {
-  @include font-default;
-  @extend .white;
-  font-family: $font;
+  @include font($defaultFont, 1.5em, white);
   margin-left: -50px;
   margin-top: 10px;
 }
@@ -56,21 +54,17 @@
     flex-wrap: wrap;
   }
   span {
-    @extend .black;
-    font-family: $font;
-    font-size: 1em;
-    font-weight: 300;
-    letter-spacing: 0.1em;
+    @include font($defaultFont, 1em, black);
     padding: 5px 5px;
   }
 }
 
 .swipe {
-  @extend .potential-card;
+  @extend .matchmaker-card;
   display: flex;
   justify-content: center;
   button {
-    width: 235px;
+    width: 204px;
     margin: 10px;
   }
 }

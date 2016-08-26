@@ -78,7 +78,7 @@ export default class MatchMaker extends Component {
       return (
         <div>
           <Navbar />
-          <div className="potential-view">
+          <div className="matchmaker-view">
             <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
             <h2>Hold on, we're getting you ready to mingle</h2>
           </div>
@@ -89,8 +89,9 @@ export default class MatchMaker extends Component {
       return (
         <div>
           <Navbar />
-          <div className="potential-view">
-            <h2>Oh no! You're out of potentials. Please check back in a bit.</h2>
+          <div className="matchmaker-view">
+            <h2>Oh no! We don't have anyone for you to mingle with.</h2>
+            <h2>Please check back in a bit.</h2>
           </div>
         </div>
       );
@@ -98,8 +99,8 @@ export default class MatchMaker extends Component {
     return (
       <div>
         <Navbar />
-        <div className="potential-view">
-          <div className="potential-container">
+        <div className="matchmaker-view">
+          <div className="matchmaker-container">
             <Motion
               defaultStyle={{ x: 0 }}
               style={{ x: spring(this.animateDirection(),
@@ -107,7 +108,7 @@ export default class MatchMaker extends Component {
             >
               {({ x }) =>
                 <div
-                  className="potential-card"
+                  className="matchmaker-card"
                   style={{
                     WebkitTransform: `translate3d(${x}px, 0, 0) rotate(${x}deg)`,
                     transform: `translate3d(${x}px, 0, 0) rotate(${x}deg)` }}
@@ -117,9 +118,9 @@ export default class MatchMaker extends Component {
                     className="full-profile-image"
                     alt="Redditor"
                   />
-                  <div className="potential-info">
+                  <div className="matchmaker-info">
                     <h3>{potential.name}</h3>
-                    <div className="potential-more-info">
+                    <div className="matchmaker-more-info">
                       <i className="material-icons md-48 orange">favorite</i>
                       <span className="heart-text"> r/ </span>
                       <div className="subreddit-list">

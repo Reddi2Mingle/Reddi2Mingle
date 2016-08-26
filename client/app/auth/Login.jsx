@@ -23,7 +23,7 @@ export default class Login extends Component {
           <input ref="username" />
         </div>
         <div className="login-content">
-          <h1>password: </h1>
+          <h1>password:</h1>
           <input type="password" ref="password" />
         </div>
         <button

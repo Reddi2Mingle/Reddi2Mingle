@@ -92,45 +92,98 @@ class Profile extends Component {
       <div>
         <Navbar />
         <div className="profile-view">
-          <div style={{ padding: '20px' }}>
-            <div className="profile-image" onClick={this.showModal.bind(this)}>
-              <img
-                src={user.photo}
-                alt="Redditor"
-              />
-            </div>
-            <div className="potential-more-info">
-              <i className="material-icons md-48 orange">favorite</i>
-              <span className="heart-text"> r/ </span>
-              <div className="subreddit-list">
-                <ul>
-                  {user.subreddits.map(sub => (
-                    <span>{sub}</span>
-                  ))}
-                </ul>
+          <div className="profile-left">
+            <div style={{ padding: '20px' }}>
+              <div className="profile-image" onClick={this.showModal.bind(this)}>
+                <img
+                  src={user.photo}
+                  alt="Redditor"
+                />
+              </div>
+              <div className="profile-subreddits">
+                <div className="heart">
+                  <i className="material-icons md-48 orange">favorite</i>
+                  <span className="heart-r"> r/ </span>
+                </div>
+                <div className="my-subreddits">
+                  <ul>
+                    {user.subreddits.map(sub => (
+                      <span>{sub}</span>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-          <span style={{ flex: 0.1 }}> </span>
-          <div style={{ padding: '20px' }}>
-            <h2>{user.name}</h2>
-            <h2>Trophies: {user.trophyCount}</h2>
-            <h2>Post Karma: {user.postKarma}</h2>
-            <h2>Comment Karma: {user.commentKarma}</h2>
-            <h2>Gold Member: {user.goldMember}</h2>
-            <h2>Your upvotes: {user.receivedUpvotes}</h2>
-            <h2>Times you said yes: {user.deliveredUpvotes}</h2>
-            <h2>Times you said no: {user.deliveredDownvotes}</h2>
-          </div>
-          <div>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                userActions.logout();
-              }}
-            >
-              <h2> Logout </h2>
-            </button>
+          <div className="profile-right">
+            <div className="profile-section-lg">
+              <div className="profile-row">
+                <i className="material-icons md-48 white">face</i>
+                <h1>{user.name}</h1>
+              </div>
+              <div>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    userActions.logout();
+                  }}
+                >
+                  <h2> Logout </h2>
+                </button>
+              </div>
+            </div>
+            <div className="profile-section-med">
+              <div className="column">
+                <h2>Trophies</h2>
+                <div className="profile-row">
+                  <i className="material-icons md-48 white">star</i>
+                  <h1>{user.trophyCount}</h1>
+                </div>
+              </div>
+              <div className="column">
+                <h2>Post Karma</h2>
+                <div className="profile-row">
+                  <i className="material-icons md-48 white">format_quote</i>
+                  <h1>{user.postKarma}</h1>
+                </div>
+              </div>
+              <div className="profile-row">
+                <div className="column">
+                  <h2>Comment</h2>
+                  <h2>Karma</h2>
+                </div>
+                <div className="profile-row">
+                  <i className="material-icons md-48 white">comment</i>
+                  <h1>{user.commentKarma}</h1>
+                </div>
+              </div>
+            </div>
+            <div className="profile-section-sm">
+              <div className="profile-row">
+                <div className="column">
+                  <h2># of People</h2>
+                  <h2>Who Think</h2>
+                  <h2>You're Hot</h2>
+                </div>
+                <div style={{marginLeft: '20px'}}>
+                  <h1>{user.receivedUpvotes}</h1>
+                </div>
+              </div>
+              <div className="profile-row">
+                <div className="column">
+                  <h2> Swipe </h2>
+                  <h2> Stats </h2>
+                </div>
+                <div className="column">
+                  <i className="material-icons md-48 white">thumb_up</i>
+                  <i className="material-icons md-48 white">thumb_down</i>
+                </div>
+                <div className="column">
+                  <h1> {user.deliveredUpvotes} </h1>
+                  <h1> {user.deliveredDownvotes} </h1>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

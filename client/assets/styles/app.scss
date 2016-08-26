@@ -1,47 +1,45 @@
+// @import '../../../node_modules/cutestrap/dist/css/cutestrap.css';
 @import "reset.import.scss";
 @import "variables.import.scss";
 @import "mixins.import.scss";
+@import "grid.import.scss";
 
 /***** App-wide Styles *****/
 
-*, 
-*:before, 
-*:after {
-  box-sizing: border-box;
+*,
+:before,
+:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.flex { 
+  flex: 1;
 }
 
 h1 {
-  font-family: $accentFont;
-  font-size: 3em;
-  color: white;
+  @include font($accentFont, 3em, white);
 }
 
 h2 {
-  @include font-default;
-  font-family: $font;
+  @include font($defaultFont, 1.5em, white);
   text-transform: uppercase;
-  color: white;
 }
 
 
 h3 {
-  @include font-default;
-  font-family: $font;
+  @include font($defaultFont, 1.5em, black);
   text-transform: uppercase;
-  color: black;
 }
 
 p {
-  @include font-default;
-  font-family: $font;
-  color: black;
+  @include font($defaultFont, 1.5em, black)
 }
 
 a {
-  @include font-default;
-  font-family: $font;
+  @include font($defaultFont, 1.5em, white)
   text-transform: uppercase;
-  color: white;
   text-decoration: none;
 }
 
@@ -49,10 +47,15 @@ button, input {
   border: 2px solid white;
   background: none;
   padding: 10px 30px;
+  min-height: 50px;
 }
 
 button:hover {
   background-color: $accentColor;
+}
+
+.material-icons.md-30 { 
+  font-size: 30px; 
 }
 
 .material-icons.md-48 { 
@@ -69,6 +72,14 @@ button:hover {
 
 .black {
   color: black;
+}
+
+.column {
+  @include position(center, center, column);
+}
+
+.row {
+  @include position(center, center, row);
 }
 
 /***** Individual Components *****/
