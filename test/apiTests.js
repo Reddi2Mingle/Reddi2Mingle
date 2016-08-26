@@ -1,25 +1,3 @@
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
-
-// const server = require('../server/server');
-
-// const should = chai.should();
-// chai.use(chaiHttp);
-
-
-// describe('Potentials', () => {
-//   describe('GET /api/potentials', done => {
-//     chai.request(server)
-//       .get('/api/potentials')
-//       .query({ redditId: 'j8636' })
-//       .end((err, res) => {
-//         res.should.have.status(200);
-//         res.should.be.a('array');
-//         res.body.length.should.be.eql(0);
-//         done();
-//       });
-//   });
-// });
 const chai = require('chai');
 const request = require('supertest');
 const keys = require('../server/helpers/api_keys');
@@ -47,7 +25,19 @@ describe('Reddi2Mingle', () => {
         request(app)
           .get('/api/userInfo/')
           .query({ redditId: 'j8636' })
-          .expect(200, done);
+          .end((err, res) => {
+            if (err) {
+              return done(err);
+            }
+            var retrieved = JSON.parse(res.body.body);
+            expect(retrieved.name).to.equal('toiletthedestroyer');
+            expect(retrieved.redditId).to.equal('j8636');
+            expect(retrieved.photo).to.be.a('string');
+            expect(retrieved.gender).to.be.a('string');
+            expect(retrieved.preference).to.be.a('string');
+            expect(retrieved.subreddits).to.be.a('array');
+            done();
+          });
       });
     });
 
