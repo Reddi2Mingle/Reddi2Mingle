@@ -31,7 +31,7 @@ describe('Reddi2Mingle', () => {
   beforeEach(done => {
     app = server.listen(3000, (err) => {
       err ? console.log(`Error connecting the server: ${err}`) :
-      console.log(`Server listening on ${process.env.PORT_APP}`);
+      console.log(`Server listening on 3000`);
       done();
     });
   });
@@ -42,8 +42,8 @@ describe('Reddi2Mingle', () => {
   describe('api', () => {
     describe('/api/userInfo', () => {
       it('responds with a 200 (OK)', done => {
-        request(server)
-          .get('/api/userInfo')
+        request(app)
+          .get('/api/userInfo/')
           .expect(200, done);
       });
     });
