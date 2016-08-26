@@ -23,7 +23,8 @@ export default class Login extends Component {
     if (user.loggingIn) {
       return (
         <div className="login-view">
-          <div className="login-content">
+          <div className="column">
+            <img src="../../../assets/img/heart.gif" alt="beating heart gif" />
             <h2>Loading... I hope you're ready to mingle!</h2>
           </div>
         </div>
