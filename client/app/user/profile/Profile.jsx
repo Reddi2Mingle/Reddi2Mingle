@@ -165,24 +165,22 @@ class Profile extends Component {
                   <h2>Who Think</h2>
                   <h2>You're Hot</h2>
                 </div>
-                <div className="profile-row">
-                  <i className="material-icons md-48 white">whatshot</i>
+                <div style={{marginLeft: '20px'}}>
                   <h1>{user.receivedUpvotes}</h1>
                 </div>
               </div>
               <div className="profile-row">
-                <div>
+                <div className="column">
                   <h2> Swipe </h2>
                   <h2> Stats </h2>
                 </div>
-                <div className="profile-row">
-                  <div>
-                    <i className="material-icons md-48 white">thumbs_up_down</i>
-                  </div>
-                  <div className="column">
-                    <h1> {user.deliveredUpvotes} </h1>
-                    <h1> {user.deliveredDownvotes} </h1>
-                  </div>
+                <div className="column">
+                  <i className="material-icons md-48 white">thumb_up</i>
+                  <i className="material-icons md-48 white">thumb_down</i>
+                </div>
+                <div className="column">
+                  <h1> {user.deliveredUpvotes} </h1>
+                  <h1> {user.deliveredDownvotes} </h1>
                 </div>
               </div>
             </div>

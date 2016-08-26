@@ -90,7 +90,8 @@ export default class MatchMaker extends Component {
         <div>
           <Navbar />
           <div className="matchmaker-view">
-            <h2>Oh no! You're out of potentials. Please check back in a bit.</h2>
+            <h2>Oh no! We don't have anyone for you to mingle with.</h2>
+            <h2>Please check back in a bit.</h2>
           </div>
         </div>
       );
