@@ -7,6 +7,20 @@ const keys = require('../helpers/api_keys');
 
 module.exports = {
 
+  queryUserInfo: (req, res) => {
+    const redditId = req.query.redditId;
+    request({
+      url: `http://${keys.USERS}:${keys.PORT_USER}/api/user-sql/userInfo?redditId=${redditId}`,
+      method: 'GET',
+    }, (err, response) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(response);
+      }
+    });
+  },
+
   updatePassword: (req, res) => {
     request({
       url: `http://${keys.USERS}:${keys.PORT_USER}/api/user-sql/updatePassword`,
@@ -21,20 +35,6 @@ module.exports = {
         res.send(err);
       } else {
         res.send('password updated successfully');
-      }
-    });
-  },
-
-  queryUserInfo: (req, res) => {
-    const redditId = req.query.redditId;
-    request({
-      url: `http://${keys.USERS}:${keys.PORT_USER}/api/user-sql/userInfo?redditId=${redditId}`,
-      method: 'GET',
-    }, (err, response) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(response);
       }
     });
   },

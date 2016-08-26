@@ -5,7 +5,6 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
-// const keys = require('./helpers/api_keys');
 require('./auth/passport');
 require('./db/neo4jconfig');
 // require('./helpers/seedCreation.js');

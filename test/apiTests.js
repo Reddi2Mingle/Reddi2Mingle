@@ -22,16 +22,18 @@
 // });
 const chai = require('chai');
 const request = require('supertest');
+const keys = require('../server/helpers/api_keys');
 const server = require('../server/server.js');
+
 const expect = chai.expect;
 const nock = require('nock');
 
 describe('Reddi2Mingle', () => {
   var app;
   beforeEach(done => {
-    app = server.listen(3000, (err) => {
+    app = server.listen(keys.PORT_APP, err => {
       err ? console.log(`Error connecting the server: ${err}`) :
-      console.log(`Server listening on 3000`);
+      console.log(`Server listening on ${keys.PORT_APP}`);
       done();
     });
   });
@@ -44,6 +46,7 @@ describe('Reddi2Mingle', () => {
       it('responds with a 200 (OK)', done => {
         request(app)
           .get('/api/userInfo/')
+          .query({ redditId: 'j8636' })
           .expect(200, done);
       });
     });
