@@ -5,11 +5,9 @@ const server = http.Server(app);
 const io = require('socket.io')(server);
 const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
-const keys = require('./helpers/api_keys');
 require('./auth/passport');
 require('./db/neo4jconfig');
 // require('./helpers/seedCreation.js');
-
 
 middleware(app);
 routers(app);
@@ -40,10 +38,5 @@ io.on('connection', (socket) => {
   });
 });
 
-// App now listening on port 80
-server.listen(keys.PORT_APP, (err) => {
-  err ? console.log(`server/server.js 19: server error: ${err}`) :
-  console.log(`Server listening on ${keys.PORT_APP}`);
-});
 
-module.exports = io;
+module.exports = server;
