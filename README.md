@@ -53,13 +53,16 @@ Use your reddit account to sign up for the application. Set your preferences and
 |Authorization|/auth| ? |GET| - |
 |Authorization|/auth/reddit| ? |GET| - |
 |Authorization|/auth/reddit/callback| ? |GET| - |
-|Get User Info|/api/userInfo| ?redditId= | GET | 
+|Get User Info|/api/userInfo| ?redditId= | GET | - |
 |Update Password|/api/userInfo/updatePassword|   | POST |
-|Add Preferences to DB|/api/userInfo/addPreference|   | POST |
-|Add Photo to DB|/api/userInfo/addPhoto|   | POST |
+|Save Preferences|/api/userInfo/addPreference|   | POST |
+|Save Photo URL|/api/userInfo/addPhoto|   | POST |
 |Update Password|/api/userInfo/loginCredentials|   | POST |
-|Receive Potential|/api/potentials|   |
-|Handle Swipe|/api/swipe|   |
+|Receive Potentials|/api/potentials|   | GET | - |
+|Create Potentials|/api/potentials/createPotentials|   | POST |
+|Save Swipe Decision|/api/swipe|   |  POST |
+|Get Matches|/api/swipe/matches|   |  GET | - |
+
 
 
 
