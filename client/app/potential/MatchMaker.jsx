@@ -117,11 +117,13 @@ export default class MatchMaker extends Component {
                     WebkitTransform: `translate3d(${x}px, 0, 0) rotate(${x}deg)`,
                     transform: `translate3d(${x}px, 0, 0) rotate(${x}deg)` }}
                 >
+                <div className="small-profile-wrapper">
                   <img
                     src={potential.photo}
-                    className="full-profile-image"
+                    className="small-profile-image"
                     alt="Redditor"
                   />
+                </div>
                   <div className="matchmaker-info">
                     <h3>{potential.name}</h3>
                     <div className="matchmaker-more-info">
