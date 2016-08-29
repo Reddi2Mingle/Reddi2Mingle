@@ -54,7 +54,7 @@ export function userLogin(username, password) {
 }
 
 export function logout() {
-  localStorage.removeItem('token');
+  sessionStorage.removeItem('redditId');
   return {
     type: 'LOGOUT_USER',
   };

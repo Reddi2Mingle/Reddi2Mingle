@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token');
+const token = sessionStorage.getItem('redditId');
 let initialState;
 
 if (token) {

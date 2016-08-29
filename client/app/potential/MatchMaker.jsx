@@ -16,11 +16,11 @@ export default class MatchMaker extends Component {
       matchesFetched,
       potentialsFetched,
     } = this.props;
-    const redditId = localStorage.getItem('token') || user.redditId;
+    const redditId = sessionStorage.getItem('redditId') || user.redditId;
 
     // if the user came through the login page, we set the token here
-    if (localStorage.getItem('token') === null) {
-      localStorage.setItem('token', user.redditId);
+    if (sessionStorage.getItem('redditId') === null) {
+      sessionStorage.setItem('redditId', user.redditId);
     }
     // if this is the first time loading the app, fetch all userInfo, potentials, and matches
     if (!user.fetched) {
