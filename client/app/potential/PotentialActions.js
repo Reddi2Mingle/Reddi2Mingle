@@ -29,27 +29,13 @@ export function fetchPotentials(userId) {
     dispatch(initiateFetchPotentials());
     dispatch(resetIndex());
     axios.get(`/api/potentials?redditId=${userId}`)
-    .then((response) => {
+    .then(response => {
       dispatch({ type: 'FETCH_POTENTIALS_FULFILLED', payload: response.data });
     })
-    .catch((err) => {
+    .catch(err => {
       dispatch({ type: 'FETCH_POTENTIALS_REJECTED', payload: err });
     });
   };
-}
-
-function sendSwipe(redditId, potentialId, swipe) {
-  axios.post('/api/swipe', {
-    redditId,
-    potentialId,
-    swipe,
-  })
-  .then((response) => {
-    console.log('sendSwipe response is:', response);
-  })
-  .catch((err) => {
-    console.log('sendSwipe error', err);
-  });
 }
 
 export function pushMatch(match) {
@@ -59,17 +45,26 @@ export function pushMatch(match) {
   };
 }
 
-export function handleSwipe(userId, potentialId, swipe, index, lastPotential, potential) {
+export function handleSwipe(redditId, potentialId, swipe, index, lastPotential, potential) {
   return dispatch => {
-    if (index === lastPotential) {
-      dispatch(fetchPotentials(userId));
-    } else {
-      dispatch(incrementIndex());
-    }
     if (swipe === 'yes' && potential.interested === true) {
       dispatch(pushMatch(potential));
     }
-    sendSwipe(userId, potentialId, swipe);
+    axios.post('/api/swipe', {
+      redditId,
+      potentialId,
+      swipe,
+    })
+    .then(() => {
+      if (index === lastPotential) {
+        dispatch(fetchPotentials(redditId));
+      } else {
+        dispatch(incrementIndex());
+      }
+    })
+    .catch(err => {
+      console.log('sendSwipe error', err);
+    });
   };
 }
 

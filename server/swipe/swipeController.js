@@ -2,6 +2,7 @@
 
 const db = require('../db/neo4jconfig').db;
 const request = require('request');
+const keys = require('../helpers/api_keys');
 
 module.exports = {
   likeResponse: (req, res) => {
@@ -17,7 +18,7 @@ module.exports = {
     const deliveredUpvotes = swipe === 'yes' ? 1 : 0;
     const deliveredDownvotes = swipe === 'yes' ? 0 : 1;
     request({
-      url: `http://${process.env.HOST}:${process.env.PORT_USER}/api/user-sql/saveVotes`,
+      url: `http://${keys.HOST}:${keys.PORT_USER}/api/user-sql/saveVotes`,
       method: 'POST',
       form: {
         deliveredUpvotes,
@@ -66,7 +67,7 @@ module.exports = {
           query: `MATCH (user:Person { redditId: "${user}" })-
                     [i:INTEREST]-(potential:Person {redditId: "${potential}"})
                   DELETE i
-                  MERGE (user)-[f: ${rel}]-(potential)
+                  MERGE (user)<-[f: ${rel}]->(potential)
                   RETURN f;`,
         }, (error, relationshipMatchOrNever) => {
           if (err) {
