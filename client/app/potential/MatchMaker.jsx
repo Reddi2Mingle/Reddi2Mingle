@@ -123,7 +123,7 @@ export default class MatchMaker extends Component {
                     className="small-profile-image"
                     alt="Redditor"
                   />
-                </div>
+                  </div>
                   <div className="matchmaker-info">
                     <h3>{potential.name}</h3>
                     <div className="matchmaker-more-info">
