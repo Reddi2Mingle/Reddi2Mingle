@@ -15,10 +15,23 @@ services:
       - REDDIT_SECRET=$REDDIT_SECRET
       - PORT=80
       - DEBUG=0
+  postgres:
+    image: postgres
+    volumes: 
+      - $HOME/postgres/data:/postgresdata
+    environment:  
+      - POSTGRES_DB=reddi
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=cake
+     #move pw outside of docker compose file
+    ports:
+      - "5432:5432"
+
   users:
     build: ../user-service
     image: christinechou/users
     links: 
+      - postgres
       - mysql
       - neo4j
     ports:
@@ -45,7 +58,7 @@ services:
       - $HOME/mysql/data:/mysqldata
     environment:  
       - MYSQL_DATABASE=reddi2mingle
-      - MYSQL_ROOT_PASSWORD=$MYSQL_PW
+      - MYSQL_ROOT_PASSWORD=root
      #move pw outside of docker compose file
     ports:
       - "3306:3306"
