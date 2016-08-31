@@ -7,7 +7,6 @@ const middleware = require('./helpers/middleware');
 const routers = require('./helpers/routes');
 require('./auth/passport');
 require('./db/neo4jconfig');
-// require('./helpers/seedCreation');
 
 middleware(app);
 routers(app);
