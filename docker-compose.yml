@@ -9,7 +9,7 @@ services:
     links:
       - neo4j
       - users
-    command: npm run start:dev
+    command:  npm start
     environment:
       - REDDIT_KEY=$REDDIT_KEY
       - REDDIT_SECRET=$REDDIT_SECRET
@@ -19,11 +19,11 @@ services:
     image: postgres
     volumes: 
       - $HOME/postgres/data:/postgresdata
+      - docker:/docker-entrypoint-initdb.d/
     environment:  
       - POSTGRES_DB=reddi
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=cake
-     #move pw outside of docker compose file
     ports:
       - "5432:5432"
 
@@ -32,11 +32,10 @@ services:
     image: christinechou/users
     links: 
       - postgres
-      - mysql
       - neo4j
     ports:
       - "81:81"
-    command: npm run start:dev
+    command: npm start
     volumes:
       - ../user-service:/usr/src/users
     # command: npm run start:dev
@@ -51,17 +50,6 @@ services:
       - NEO4J_AUTH=$NEO4JUSERPW
     ports:
       - "7474:7474"
-
-  mysql:
-    image: mysql
-    volumes: 
-      - $HOME/mysql/data:/mysqldata
-    environment:  
-      - MYSQL_DATABASE=reddi2mingle
-      - MYSQL_ROOT_PASSWORD=root
-     #move pw outside of docker compose file
-    ports:
-      - "3306:3306"
 
 
 
