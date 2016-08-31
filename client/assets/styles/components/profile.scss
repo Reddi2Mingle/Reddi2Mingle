@@ -38,7 +38,7 @@
 
 .profile-image {
   position: relative;
-  width:400px;
+  width: 100%;
   height:auto;
   border: 15px solid white;
   img {
@@ -122,5 +122,34 @@
   span {
     @include font($defaultFont, 1.2em, white, 300);
     padding: 5px 5px;
+  }
+}
+
+
+/***** Responsive Adjustments *****/
+
+@media (max-width: $screen-sm-max) {
+  .profile-view { 
+    flex-direction: column;
+  }
+  .profile-left {
+    max-width: 100%;
+  }
+  .profile-subreddits {
+    max-width: 100%;
+    &:nth-child(n+5) { display: none; }
+  }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .profile-view { 
+    flex-direction: column;
+  }
+  .profile-left {
+    max-width: 100%;
+  }
+  .profile-subreddits {
+    max-width: 100%;
+    &:nth-child(n+5) { display: none; }
   }
 }

@@ -7,8 +7,17 @@ $accentColor: #EF6124;
 $accentFont: 'Crushed', cursive;
 $defaultFont: 'Open Sans', sans-serif;
 
+
+/* ----- RESPONSIVE Variables ----- */
+$screen-sm-max: 600px;
+$screen-md-min: 601px;
+$screen-md-max: 960px;
+$screen-lg-min: 961px;
+$screen-lg-max: 1200px;
+
 /* ----- Z-Indexes ----- */
 
 $zindex-top:         10;
 $zindex-top-higher:  100;
 $zindex-top-highest: 1000;
+

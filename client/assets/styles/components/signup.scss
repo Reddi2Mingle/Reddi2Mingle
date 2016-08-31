@@ -8,11 +8,9 @@
   height: 100vh;
   padding: 75px 0;
     h1 {
+      @include font($accentFont, 7rem, white, 300);
       text-transform: uppercase;
-      font-weight:300;
-      line-height:1;
-      font-size: 7em;
-      color: white;
+      line-height: 1;
     }
     button {
       width: 100%;
@@ -21,8 +19,19 @@
 }
 
 .button-group {
+  @include position(center, center, column, nowrap);
+}
 
-  display: flex;
-  flex-flow: column nowrap; 
-  align-items: center;
+/***** Responsive Adjustments *****/
+
+@media (max-width: $screen-sm-max) {
+  .signup-info h1 { font-size: 4rem; }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .signup-info h1 { font-size: 5rem; }
+}
+
+@media (min-width: $screen-lg-min) {
+  .signup-info h1 { font-size: 6rem; }
 }

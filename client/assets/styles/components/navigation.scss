@@ -34,3 +34,13 @@
   font-size: 0.75em;
   margin-left: -30px;
 }
+
+/***** Responsive Adjustments *****/
+
+@media (max-width: $screen-sm-max) {
+  .navigation { flex-direction: column; }
+}
+
+@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+  .navigation { flex-direction: column; }
+}
