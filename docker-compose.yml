@@ -9,7 +9,7 @@ services:
     links:
       - neo4j
       - users
-    command:  npm run start:dev
+    command:  npm start
     environment:
       - REDDIT_KEY=$REDDIT_KEY
       - REDDIT_SECRET=$REDDIT_SECRET
