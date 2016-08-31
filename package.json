@@ -64,7 +64,6 @@
     "express": "^4.14.0",
     "express-session": "^1.14.0",
     "morgan": "^1.7.0",
-    "mysql": "^2.11.1",
     "neo4j": "^2.0.0-RC2",
     "neo4j-driver": "^1.0.2",
     "neo4j-js": "0.0.8",
@@ -87,7 +86,12 @@
     "socket.io": "^1.4.8",
     "socket.io-client": "^1.4.8",
     "superagent": "^2.2.0",
-    "webpack-merge": "^0.14.1"
+    "webpack-merge": "^0.14.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-merge": "^0.14.1",
+    "webpack-validator": "^2.2.7"
   },
   "directories": {
     "test": "test"
