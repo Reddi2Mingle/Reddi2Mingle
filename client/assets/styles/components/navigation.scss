@@ -3,11 +3,11 @@
   background-color: black;
   width: 100%;
   h1 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     margin-left: -100px;
   }
   h2 {
-    font-size: 0.75em;
+    font-size: 0.75rem;
   }
 }
 
@@ -38,9 +38,25 @@
 /***** Responsive Adjustments *****/
 
 @media (max-width: $screen-sm-max) {
-  .navigation { flex-direction: column; }
+  .navigation { 
+    @include position(flex-end, flex-start, column, wrap);
+    h1 {
+      font-size: 1rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
 }
 
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-  .navigation { flex-direction: column; }
+  .navigation { 
+    @include position(flex-end, flex-start, column, wrap);
+    h1 {
+      font-size: 1rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
 }
