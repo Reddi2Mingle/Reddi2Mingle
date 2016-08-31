@@ -87,26 +87,16 @@ button:hover {
   h1 { font-size: 2rem; }
   h2, h3, h4, p { font-size: 1rem; }
   a { font-size: 1rem; }
-  // .recentNotes .noteCard {
-  //   max-width: 100%;
-  //   &:nth-child(n+5) { display: none; }
-  // }
 }
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
   h1 { font-size: 2.5rem; }
   h2, h3, h4, p { font-size: 1rem; }
   a { font-size: 1rem; }
-  // .recentNotes .noteCard {
-  //   &:nth-child(n+7) { display: none; }
-  // }
 }
 @media (min-width: $screen-lg-min) {
   h1 { font-size: 3rem; }
   h2, h3, h4, p { font-size: 1.2rem; }
   a { font-size: 1rem; }
-  // .recentNotes .noteCard {
-  //   &:nth-child(n+9) { display: none; }
-  // }
 }
 
 /***** Individual Components *****/
