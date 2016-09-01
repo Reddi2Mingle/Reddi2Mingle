@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "#How to start this application 1. `npm install` 2. `npm run server` (one tab) 3. `npm run watch` (another tab)",
   "main": "index.js",
-  "scripts": {
-
+  "scripts": {g
     "start": "webpack -p && node server",
     "start:dev": "webpack -p && nodemon -L server",
     "watch": "webpack --progress --colors --watch",
@@ -77,6 +76,7 @@
     "react-motion": "^0.4.4",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
+    "redis": "^2.6.2",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
     "redux-promise-middleware": "^3.3.2",
