@@ -38,7 +38,7 @@ function loggingIn() {
 
 export function userLogin(username, password) {
   return dispatch => {
-    dispatch(loggingIn());
+    dispatch(requestUser());
     axios.post('/api/userInfo/loginCredentials', {
       username,
       password,
@@ -46,7 +46,7 @@ export function userLogin(username, password) {
     .then(response => {
       dispatch({ type: 'USER_LOGIN_FULFILLED', payload: { redditId: response.data } });
     })
-    .catch((err) => {
+    .catch(err => {
       dispatch({ type: 'FETCH_USER_REJECTED', payload: err });
     });
   };

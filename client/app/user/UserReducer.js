@@ -28,10 +28,16 @@ if (token) {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_PIC_URL': {
-      return { ...state, photo: action.payload };
+      return {
+        ...state,
+        photo: action.payload,
+      };
     }
     case 'FETCH_USER': {
-      return { ...state, fetching: true };
+      return {
+        ...state,
+        fetching: true,
+      };
     }
     case 'FETCH_USER_FULFILLED': {
       return {
@@ -53,10 +59,18 @@ export default (state = initialState, action) => {
       };
     }
     case 'FETCH_USER_REJECTED': {
-      return { ...state, fetching: false, fetched: false, error: action.payload };
+      return {
+        ...state,
+        fetching: false,
+        fetched: false,
+        error: action.payload.response.data,
+      };
     }
     case 'LOGGING_IN': {
-      return { ...state, loggingIn: true };
+      return {
+        ...state,
+        loggingIn: true,
+      };
     }
     case 'USER_LOGIN_FULFILLED': {
       return {
@@ -68,10 +82,15 @@ export default (state = initialState, action) => {
         fetched: false,
         isAuthenticated: true,
         loggingIn: false,
+        error: false,
       };
     }
     case 'LOGOUT_USER': {
-      return { ...state, isAuthenticated: false, fetched: false };
+      return {
+        ...state,
+        isAuthenticated: false,
+        fetched: false,
+      };
     }
     case 'SAVE_REDDITID': {
       return {

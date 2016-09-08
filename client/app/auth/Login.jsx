@@ -20,7 +20,7 @@ export default class Login extends Component {
 
   render() {
     const { user } = this.props;
-    if (user.loggingIn) {
+    if (user.fetching) {
       return (
         <div className="login-view">
           <div className="column">
@@ -32,6 +32,12 @@ export default class Login extends Component {
     }
     return (
       <div className="login-view">
+        <img
+          src="../../../assets/img/reddit.png"
+          alt="Reddit Logo"
+          style={{ width: 150, height: 150 }}
+        />
+        <h1>REDDI2MINGLE?</h1>
         <div className="login-content">
           <h1>username:</h1>
           <input ref="username" />
@@ -40,6 +46,7 @@ export default class Login extends Component {
           <h1>password:</h1>
           <input type="password" ref="password" />
         </div>
+        {user.error ? <div> <h2>{user.error}</h2> </div> : <div />}
         <button
           onClick={e => {
             this.sendCredentials(e);
@@ -55,4 +62,3 @@ Login.propTypes = {
   history: PropTypes.object,
   user: PropTypes.object,
 };
-
