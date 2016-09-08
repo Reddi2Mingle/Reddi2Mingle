@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-export default (Component) => {
+export default Component => {
   class AuthenticatedComponent extends React.Component {
 
     componentWillMount() {
@@ -30,7 +30,7 @@ export default (Component) => {
     }
   }
 
-  const mapStateToProps = (state) => ({
+  const mapStateToProps = state => ({
     isAuthenticated: state.user.isAuthenticated,
   });
 

@@ -108,7 +108,7 @@ class Profile extends Component {
                 <div className="my-subreddits">
                   <ul>
                     {user.subreddits.map(sub => (
-                      <span>{sub}</span>
+                      <span key={sub.id}>{sub}</span>
                     ))}
                   </ul>
                 </div>

@@ -63,6 +63,7 @@ export default class Matches extends Component {
               name={match.name}
               photo={match.photo}
               common_subreddits={match.common_subreddits}
+              key={match.id}
             />
           ))}
         </div>

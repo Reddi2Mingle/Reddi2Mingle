@@ -117,12 +117,12 @@ export default class MatchMaker extends Component {
                     WebkitTransform: `translate3d(${x}px, 0, 0) rotate(${x}deg)`,
                     transform: `translate3d(${x}px, 0, 0) rotate(${x}deg)` }}
                 >
-                <div className="small-profile-wrapper">
-                  <img
-                    src={potential.photo}
-                    className="small-profile-image"
-                    alt="Redditor"
-                  />
+                  <div className="small-profile-wrapper">
+                    <img
+                      src={potential.photo}
+                      className="small-profile-image"
+                      alt="Redditor"
+                    />
                   </div>
                   <div className="matchmaker-info">
                     <h3>{potential.name}</h3>
@@ -132,7 +132,7 @@ export default class MatchMaker extends Component {
                       <div className="subreddit-list">
                         <ul>
                           {potential.common_subreddits.map(sub => (
-                            <span>{sub}</span>
+                            <span key={sub.id}>{sub}</span>
                           ))}
                         </ul>
                       </div>

@@ -78,8 +78,6 @@
     "react-router": "^2.6.1",
     "redis": "^2.6.2",
     "redux": "^3.5.2",
-    "redux-logger": "^2.6.1",
-    "redux-promise-middleware": "^3.3.2",
     "redux-thunk": "^2.1.0",
     "request": "^2.74.0",
     "sequelize": "^3.24.0",

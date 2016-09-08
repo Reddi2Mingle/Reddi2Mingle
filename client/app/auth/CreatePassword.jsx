@@ -21,14 +21,10 @@ export default class CreatePassword extends Component {
         redditId,
         password: message,
       })
-      .then(() => {
-        console.log('password updated');
-      })
-      .catch((err) => {
-        console.log(`password not updated: ${err}`);
-      });
+      .then(() => {})
+      .catch(() => {});
+      this.props.history.push('/preferences');
     }
-    this.props.history.push('/preferences');
   }
 
   render() {
@@ -36,8 +32,6 @@ export default class CreatePassword extends Component {
       <div className="password-view">
         <div className="password-content">
           <h1>Create a new password for Reddi2Mingle</h1>
-          <h2> But let's get creative </h2>
-          <p className="white">(aka, please don't use your Reddit password)</p>
           <div>
             <input type="password" ref="newPassword" />
             <button

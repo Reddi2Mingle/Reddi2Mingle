@@ -18,12 +18,6 @@ function initiateFetchPotentials() {
   };
 }
 
-function newMatchCreated() {
-  return {
-    type: 'NEW_MATCH_CREATED',
-  };
-}
-
 export function fetchPotentials(userId) {
   return dispatch => {
     dispatch(initiateFetchPotentials());
@@ -62,9 +56,7 @@ export function handleSwipe(redditId, potentialId, swipe, index, lastPotential, 
         dispatch(incrementIndex());
       }
     })
-    .catch(err => {
-      console.log('sendSwipe error', err);
-    });
+    .catch(() => {});
   };
 }
 
