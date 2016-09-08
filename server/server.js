@@ -12,8 +12,9 @@ require('./db/neo4jconfig');
 middleware(app);
 routers(app);
 
-// const users = {};
-const client = redis.createClient();
+const client = redis.createClient({
+  host: 'redis',
+});
 client.on('error', err => {
   console.log(`Error with redis ${err}`);
 });
