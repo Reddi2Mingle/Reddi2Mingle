@@ -30,12 +30,6 @@ export function saveRedditId(redditId) {
   };
 }
 
-function loggingIn() {
-  return {
-    type: 'LOGGING_IN',
-  };
-}
-
 export function userLogin(username, password) {
   return dispatch => {
     dispatch(requestUser());

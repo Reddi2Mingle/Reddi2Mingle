@@ -8,7 +8,6 @@ if (token) {
     photo: '',
     fetching: false,
     fetched: false,
-    loggingIn: false,
     isAuthenticated: true,
     error: null,
   };
@@ -19,7 +18,6 @@ if (token) {
     photo: '',
     fetching: false,
     fetched: false,
-    loggingIn: false,
     isAuthenticated: false,
     error: null,
   };
@@ -66,12 +64,6 @@ export default (state = initialState, action) => {
         error: action.payload.response.data,
       };
     }
-    case 'LOGGING_IN': {
-      return {
-        ...state,
-        loggingIn: true,
-      };
-    }
     case 'USER_LOGIN_FULFILLED': {
       return {
         ...state,
@@ -81,7 +73,6 @@ export default (state = initialState, action) => {
         fetching: false,
         fetched: false,
         isAuthenticated: true,
-        loggingIn: false,
         error: false,
       };
     }
