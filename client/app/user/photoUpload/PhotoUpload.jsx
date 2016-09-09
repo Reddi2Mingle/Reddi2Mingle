@@ -11,18 +11,14 @@ export default class PhotoUpload extends Component {
       redditId,
       photo,
     })
-    .then((response) => {
-      console.log(`photo added successfully: ${response}`);
+    .then(() => {
       this.props.history.push('/');
     })
-    .catch((err) => {
-      console.log(`photo not added to database: ${err}`);
-    });
+    .catch(() => {});
   }
 
   render() {
     const { userActions, photo } = this.props;
-    console.log('photo prop is', photo);
     if (photo.length > 2) {
       return (
         <div className="photo-drop-view">
@@ -42,7 +38,7 @@ export default class PhotoUpload extends Component {
         <h1> Show Off Your Best Shot </h1>
         <div className="photo-drop-container">
           <Dropzone
-            onDrop={(files) => {
+            onDrop={files => {
               userActions.handleImageUpload(files[0]);
             }}
             multiple={false}

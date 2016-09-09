@@ -1,26 +1,24 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-// import { bindActionCreators } from 'redux';
-// import * as UserActions from '../user/UserActions';
 
 const NavBar = ({ user, matches }) => (
   <div className="navigation">
     <div>
-      <Link to="/profile">
+      <Link to="/profile" activeClassName="activeLink">
         <div className="navigation-profile">
-          <img src={user.photo} />
+          <img src={user.photo} alt="profile" />
           <h2> {user.name} </h2>
         </div>
       </Link>
     </div>
     <div>
-      <Link to="/">
+      <Link to="/" activeClassName="activeLink">
         <h1 style={{ fontSize: '1.5em' }}> REDDI2MINGLE </h1>
       </Link>
     </div>
     <div>
-      <Link to="/matches">
+      <Link to="/matches" activeClassName="activeLink">
         {(matches.notification) ?
           <div className="match-notification">
             <i className="material-icons md-48 orange">favorite</i>

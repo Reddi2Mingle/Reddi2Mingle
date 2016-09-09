@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token');
+const token = sessionStorage.getItem('redditId');
 let initialState;
 
 if (token) {
@@ -8,7 +8,6 @@ if (token) {
     photo: '',
     fetching: false,
     fetched: false,
-    loggingIn: false,
     isAuthenticated: true,
     error: null,
   };
@@ -19,7 +18,6 @@ if (token) {
     photo: '',
     fetching: false,
     fetched: false,
-    loggingIn: false,
     isAuthenticated: false,
     error: null,
   };
@@ -28,10 +26,16 @@ if (token) {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'UPDATE_PIC_URL': {
-      return { ...state, photo: action.payload };
+      return {
+        ...state,
+        photo: action.payload,
+      };
     }
     case 'FETCH_USER': {
-      return { ...state, fetching: true };
+      return {
+        ...state,
+        fetching: true,
+      };
     }
     case 'FETCH_USER_FULFILLED': {
       return {
@@ -53,10 +57,12 @@ export default (state = initialState, action) => {
       };
     }
     case 'FETCH_USER_REJECTED': {
-      return { ...state, fetching: false, fetched: false, error: action.payload };
-    }
-    case 'LOGGING_IN': {
-      return { ...state, loggingIn: true };
+      return {
+        ...state,
+        fetching: false,
+        fetched: false,
+        error: action.payload.response.data,
+      };
     }
     case 'USER_LOGIN_FULFILLED': {
       return {
@@ -67,11 +73,15 @@ export default (state = initialState, action) => {
         fetching: false,
         fetched: false,
         isAuthenticated: true,
-        loggingIn: false,
+        error: false,
       };
     }
     case 'LOGOUT_USER': {
-      return { ...state, isAuthenticated: false, fetched: false };
+      return {
+        ...state,
+        isAuthenticated: false,
+        fetched: false,
+      };
     }
     case 'SAVE_REDDITID': {
       return {

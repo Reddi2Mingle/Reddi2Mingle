@@ -12,13 +12,12 @@ function requestUser() {
 
 export function fetchUser(redditId) {
   return dispatch => {
-    console.log(`redditId in fetchUser: ${redditId}`);
     dispatch(requestUser());
     axios.get(`/api/userInfo?redditId=${redditId}`)
-      .then((response) => {
+      .then(response => {
         dispatch({ type: 'FETCH_USER_FULFILLED', payload: JSON.parse(response.data.body) });
       })
-      .catch((err) => {
+      .catch(err => {
         dispatch({ type: 'FETCH_USER_REJECTED', payload: err });
       });
   };
@@ -31,15 +30,9 @@ export function saveRedditId(redditId) {
   };
 }
 
-function loggingIn() {
-  return {
-    type: 'LOGGING_IN',
-  };
-}
-
 export function userLogin(username, password) {
   return dispatch => {
-    dispatch(loggingIn());
+    dispatch(requestUser());
     axios.post('/api/userInfo/loginCredentials', {
       username,
       password,
@@ -47,14 +40,14 @@ export function userLogin(username, password) {
     .then(response => {
       dispatch({ type: 'USER_LOGIN_FULFILLED', payload: { redditId: response.data } });
     })
-    .catch((err) => {
+    .catch(err => {
       dispatch({ type: 'FETCH_USER_REJECTED', payload: err });
     });
   };
 }
 
 export function logout() {
-  localStorage.removeItem('token');
+  sessionStorage.removeItem('redditId');
   return {
     type: 'LOGOUT_USER',
   };

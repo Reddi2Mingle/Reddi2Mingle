@@ -9,7 +9,8 @@ services:
     links:
       - neo4j
       - users
-    command:  npm start
+      - redis
+    command: npm run start
     environment:
       - REDDIT_KEY=$REDDIT_KEY
       - REDDIT_SECRET=$REDDIT_SECRET
@@ -25,6 +26,10 @@ services:
       - POSTGRES_PASSWORD=cake
     ports:
       - "5432:5432"
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
 
   users:
     build: ../user-service
@@ -34,7 +39,7 @@ services:
       - neo4j
     ports:
       - "81:81"
-    command: npm start
+    command: npm run start
     volumes:
       - ../user-service:/usr/src/users
     # command: npm run start:dev

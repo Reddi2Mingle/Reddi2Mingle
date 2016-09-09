@@ -28,14 +28,12 @@ passport.use(new RedditStrategy({
   clientID: keys.REDDIT_KEY,
   clientSecret: keys.REDDIT_SECRET,
   callbackURL: `http://${keys.REDDITCALLBACKHOST}:${keys.PORT_APP}/auth/reddit/callback`,
-  // callbackURL: `http://10.8.26.223:${process.env.PORT_APP}/auth/reddit/callback`,
 },
   (accessToken, refreshToken, profile, done) => {
     // Direct reddit controller to save user to database
     console.log(`inside passport.js, url: users:${keys.PORT_USER}/api/user-sql/createUser`);
     request({
       method: 'POST',
-      // url: `http://10.8.26.223:${process.env.PORT_USER}/api/user-sql/createUser`,
       url: `http://${keys.USERS}:${keys.PORT_USER}/api/user-sql/createUser`,
       form: {
         accessToken,

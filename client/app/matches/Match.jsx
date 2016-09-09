@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const Match = ({ name, photo, common_subreddits }) => (
   <div className="match-card">
-    <div className="small-profile-wrapper"> 
+    <div className="small-profile-wrapper">
     <img src={photo} className="small-profile-image" />
     </div>
     <div className="match-info">
@@ -13,7 +13,7 @@ const Match = ({ name, photo, common_subreddits }) => (
         <div className="small-subreddit-list">
           <ul>
             {common_subreddits.map(sub => (
-              <span>{sub}</span>
+              <span key={sub.id}>{sub}</span>
             ))}
           </ul>
         </div>

@@ -1,5 +1,6 @@
 const app = require('express')();
 const http = require('http');
+const redis = require('redis');
 
 const server = http.Server(app);
 const io = require('socket.io')(server);
@@ -11,29 +12,32 @@ require('./db/neo4jconfig');
 middleware(app);
 routers(app);
 
-const users = {};
-io.on('connection', (socket) => {
-  console.log('SOCKETS --- sockets connected!');
-  socket.on('save my id', (redditId) => {
-    users[redditId] = socket.id;
-    console.log(`SOCKETS --- Id saved! Your socket.id: ${socket.id}, 
-                  and your redditId: ${redditId}`);
-    console.log('Heres the cache: ', users);
+const client = redis.createClient({
+  host: 'redis',
+});
+client.on('error', err => {
+  console.log(`Error with redis ${err}`);
+});
+
+io.on('connection', socket => {
+  socket.on('save my id', redditId => {
+    client.set(redditId, socket.id, redis.print);
+    client.keys('*', (err, replies) => {
+      client.mget(replies, redis.print);
+    });
   });
 
   // Sending ping to Specific user
-  socket.on('send new match', (payload) => {
+  socket.on('send new match', payload => {
     const receiverId = payload.receiverId;
-    // const senderId = payload.senderId;
     const userInfo = payload.userInfo;
-    if (users[receiverId]) {
-      socket.broadcast.to(users[receiverId]).emit('get new match', userInfo);
+    if (client.get(receiverId)) {
+      socket.broadcast.to(client.get(receiverId)).emit('get new match', userInfo);
     }
   });
 
-  // Remove user from our storage object when they disconnect
-  socket.on('disconnect', (redditId) => {
-    delete users[redditId];
+  socket.on('disconnect', disconnection => {
+    console.log(`diconnecting sockets`);
   });
 });
 

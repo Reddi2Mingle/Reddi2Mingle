@@ -16,11 +16,11 @@ export default class MatchMaker extends Component {
       matchesFetched,
       potentialsFetched,
     } = this.props;
-    const redditId = localStorage.getItem('token') || user.redditId;
+    const redditId = sessionStorage.getItem('redditId') || user.redditId;
 
     // if the user came through the login page, we set the token here
-    if (localStorage.getItem('token') === null) {
-      localStorage.setItem('token', user.redditId);
+    if (sessionStorage.getItem('redditId') === null) {
+      sessionStorage.setItem('redditId', user.redditId);
     }
     // if this is the first time loading the app, fetch all userInfo, potentials, and matches
     if (!user.fetched) {
@@ -117,13 +117,13 @@ export default class MatchMaker extends Component {
                     WebkitTransform: `translate3d(${x}px, 0, 0) rotate(${x}deg)`,
                     transform: `translate3d(${x}px, 0, 0) rotate(${x}deg)` }}
                 >
-                <div className="small-profile-wrapper">
-                  <img
-                    src={potential.photo}
-                    className="small-profile-image"
-                    alt="Redditor"
-                  />
-                </div>
+                  <div className="small-profile-wrapper">
+                    <img
+                      src={potential.photo}
+                      className="small-profile-image"
+                      alt="Redditor"
+                    />
+                  </div>
                   <div className="matchmaker-info">
                     <h3>{potential.name}</h3>
                     <div className="matchmaker-more-info">
@@ -132,7 +132,7 @@ export default class MatchMaker extends Component {
                       <div className="subreddit-list">
                         <ul>
                           {potential.common_subreddits.map(sub => (
-                            <span>{sub}</span>
+                            <span key={sub.id}>{sub}</span>
                           ))}
                         </ul>
                       </div>

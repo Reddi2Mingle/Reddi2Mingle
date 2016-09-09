@@ -36,7 +36,7 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    const redditId = localStorage.getItem('token');
+    const redditId = sessionStorage.getItem('token');
     const {
       potentialActions,
       userActions,
@@ -108,7 +108,7 @@ class Profile extends Component {
                 <div className="my-subreddits">
                   <ul>
                     {user.subreddits.map(sub => (
-                      <span>{sub}</span>
+                      <span key={sub.id}>{sub}</span>
                     ))}
                   </ul>
                 </div>

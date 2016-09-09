@@ -28,7 +28,7 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   userActions: bindActionCreators(UserActions, dispatch),
   potentialActions: bindActionCreators(PotentialActions, dispatch),
   matchesActions: bindActionCreators(MatchesActions, dispatch),

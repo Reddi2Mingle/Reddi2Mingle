@@ -7,16 +7,13 @@ function initiateFetchMatches() {
 }
 
 export function fetchMatches(userId) {
-  console.log('Fetching matches!');
   return dispatch => {
     dispatch(initiateFetchMatches());
     axios.get(`/api/swipe/matches?redditId=${userId}`)
-      .then((response) => {
-        console.log(`fetchMatches response.data: ${response.data}`);
+      .then(response => {
         dispatch({ type: 'FETCH_MATCHES_FULFILLED', payload: response.data });
       })
-      .catch((err) => {
-        console.log('error fetching matches!');
+      .catch(err => {
         dispatch({ type: 'FETCH_MATCHES_REJECTED', payload: err });
       });
   };

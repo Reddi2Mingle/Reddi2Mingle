@@ -6,7 +6,7 @@ import { socket } from '../socket';
 export default class Matches extends Component {
 
   componentWillMount() {
-    const redditId = localStorage.getItem('token');
+    const redditId = sessionStorage.getItem('redditId');
     const {
       potentialActions,
       userActions,
@@ -63,6 +63,7 @@ export default class Matches extends Component {
               name={match.name}
               photo={match.photo}
               common_subreddits={match.common_subreddits}
+              key={match.id}
             />
           ))}
         </div>
