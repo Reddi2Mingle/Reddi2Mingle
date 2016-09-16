@@ -27,7 +27,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new RedditStrategy({
   clientID: keys.REDDIT_KEY,
   clientSecret: keys.REDDIT_SECRET,
-  callbackURL: `http://${keys.REDDITCALLBACKHOST}:${keys.PORT_APP}/auth/reddit/callback`,
+  callbackURL: `http://www.reddi2mingle.com/auth/reddit/callback`,
 },
   (accessToken, refreshToken, profile, done) => {
     // Direct reddit controller to save user to database

@@ -13,13 +13,19 @@
       line-height: 1;
     }
     button {
+      @include font($defaultFont, 1rem, white);
       width: 100%;
       margin-top: 10px;
+      text-transform: uppercase;
+      cursor: pointer;
     }
 }
 
 .button-group {
   @include position(center, center, column, nowrap);
+  form {
+    width: 100%;
+  }
 }
 
 /***** Responsive Adjustments *****/
