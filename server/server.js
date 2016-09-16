@@ -1,6 +1,6 @@
 const app = require('express')();
 const http = require('http');
-const redis = require('redis');
+const redisNpm = require('redis');
 
 const server = http.Server(app);
 const io = require('socket.io')(server);
@@ -12,7 +12,7 @@ require('./db/neo4jconfig');
 middleware(app);
 routers(app);
 
-const client = redis.createClient({
+const client = redisNpm.createClient({
   host: 'redis',
 });
 client.on('error', err => {
@@ -21,9 +21,9 @@ client.on('error', err => {
 
 io.on('connection', socket => {
   socket.on('save my id', redditId => {
-    client.set(redditId, socket.id, redis.print);
+    client.set(redditId, socket.id, redisNpm.print);
     client.keys('*', (err, replies) => {
-      client.mget(replies, redis.print);
+      client.mget(replies, redisNpm.print);
     });
   });
 
@@ -37,7 +37,7 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', disconnection => {
-    console.log(`diconnecting sockets`);
+    console.log(`disconnecting sockets`);
   });
 });
 

@@ -11,16 +11,16 @@ export default () => (
       <h1>REDDI2MINGLE?</h1>
       <span style={{ flex: 1 }} />
       <div className="button-group">
-        <button>
-          <a href="auth/reddit">
+        <form action="http://www.reddi2mingle.com/auth/reddit" method="GET">
+          <button>
             Sign up with Reddit
-          </a>
-        </button>
-        <button>
-          <a href="login">
-            Log in with existing account
-          </a>
-        </button>
+          </button>
+        </form>
+        <form action="http://www.reddi2mingle.com/login" method="GET">
+          <button>
+              Log in with existing account
+          </button>
+        </form>
       </div>
     </div>
   </div>
