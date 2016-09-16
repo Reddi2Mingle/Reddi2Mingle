@@ -10,7 +10,7 @@ services:
       - neo4j
       - users
       - redis
-    command: npm run start
+    command: npm start
     environment:
       - REDDIT_KEY=$REDDIT_KEY
       - REDDIT_SECRET=$REDDIT_SECRET
@@ -39,7 +39,7 @@ services:
       - neo4j
     ports:
       - "81:81"
-    command: npm run start
+    command: npm start
     volumes:
       - ../user-service:/usr/src/users
     # command: npm run start:dev
