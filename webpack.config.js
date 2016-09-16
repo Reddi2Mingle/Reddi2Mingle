@@ -1,6 +1,7 @@
 const path = require('path');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
+const webpack = require('webpack');
 
 const parts = require('./libs/parts');
 
@@ -41,6 +42,18 @@ const common = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: true,
+      },
+    }),
+  ],
 };
 
 process.env.BABEL_ENV = TARGET;

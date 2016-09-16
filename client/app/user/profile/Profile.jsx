@@ -36,7 +36,7 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    const redditId = sessionStorage.getItem('token');
+    const redditId = sessionStorage.getItem('redditId');
     const {
       potentialActions,
       userActions,
